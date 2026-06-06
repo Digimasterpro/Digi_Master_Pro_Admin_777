@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -989,10 +990,22 @@
     <li><a href="#services" data-es="Servicios" data-en="Services">Servicios</a></li>
     <li><a href="#precios" data-es="Precios" data-en="Pricing">Precios</a></li>
     <li><a href="#reviews" data-es="Reseñas" data-en="Reviews">Reseñas</a></li>
+    <li><a href="#nfc" data-es="NFC" data-en="NFC">NFC 📲</a></li>
     <li><a href="#portfolio" data-es="Trabajos" data-en="Work">Trabajos</a></li>
     <li><a href="#about" data-es="Nosotros" data-en="About Us">Nosotros</a></li>
     <li><a href="#contact" data-es="Contacto" data-en="Contact">Contacto</a></li>
   </ul>
+  <!-- Global currency switcher -->
+  <div style="display:inline-flex;align-items:center;gap:0;background:rgba(255,255,255,0.05);border:1px solid rgba(45,156,219,0.25);border-radius:20px;padding:3px;margin-right:8px;">
+    <button id="g-btn-usd" onclick="globalSetCurrency('usd')"
+      style="padding:5px 14px;border-radius:17px;border:none;background:#2D9CDB;color:#fff;font-family:'DM Sans',sans-serif;font-weight:700;font-size:11px;cursor:pointer;transition:.25s;letter-spacing:.04em;">
+      🇺🇸 USD
+    </button>
+    <button id="g-btn-cop" onclick="globalSetCurrency('cop')"
+      style="padding:5px 14px;border-radius:17px;border:none;background:transparent;color:rgba(255,255,255,0.45);font-family:'DM Sans',sans-serif;font-weight:700;font-size:11px;cursor:pointer;transition:.25s;letter-spacing:.04em;">
+      🇨🇴 COP
+    </button>
+  </div>
   <div class="lang-switch">
     <button class="lang-btn active" onclick="setLang('es')" id="btn-es">ES</button>
     <span class="lang-sep">|</span>
@@ -1012,6 +1025,7 @@
     <li><a href="#services" onclick="closeMenu()" data-es="Servicios" data-en="Services">Servicios</a></li>
     <li><a href="#precios" onclick="closeMenu()" data-es="Precios" data-en="Pricing">Precios</a></li>
     <li><a href="#reviews" onclick="closeMenu()" data-es="Reseñas" data-en="Reviews">Reseñas</a></li>
+    <li><a href="#nfc" onclick="closeMenu()" data-es="NFC" data-en="NFC">NFC 📲</a></li>
     <li><a href="#portfolio" onclick="closeMenu()" data-es="Trabajos" data-en="Work">Trabajos</a></li>
     <li><a href="#about" onclick="closeMenu()" data-es="Nosotros" data-en="About Us">Nosotros</a></li>
     <li><a href="#contact" onclick="closeMenu()" data-es="Contacto" data-en="Contact">Contacto</a></li>
@@ -1405,53 +1419,61 @@
   <div id="panel-extra" style="max-width:1000px;margin:0 auto;display:none;">
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;margin-bottom:40px;">
       <!-- Cada servicio extra -->
-      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(45,156,219,0.12);border-radius:16px;padding:24px 20px;transition:.3s;" onmouseover="this.style.borderColor='#2D9CDB';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(45,156,219,0.12)';this.style.transform='translateY(0)'">
+      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(45,156,219,0.12);border-radius:16px;padding:24px 20px;transition:.3s;display:flex;flex-direction:column;" onmouseover="this.style.borderColor='#2D9CDB';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(45,156,219,0.12)';this.style.transform='translateY(0)'">
         <div style="font-size:28px;margin-bottom:10px;">🏢</div>
         <h4 style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:8px;color:#fff;">Creación Empresa en Google</h4>
         <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:16px;">Google My Business, Maps, reseñas activas y configuración inicial.</p>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#2D9CDB;">$160</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#2D9CDB;margin-bottom:16px;">$160</div>
+        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Creaci%C3%B3n%20Empresa%20en%20Google%20a%20160%20USD" target="_blank" rel="noopener" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:10px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:.04em;transition:.2s;margin-top:auto;" onmouseover="this.style.background='#2D9CDB';this.style.color='#fff'" onmouseout="this.style.background='rgba(45,156,219,0.12)';this.style.color='#56CCF2'">Lo quiero →</a>
       </div>
-      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(45,156,219,0.12);border-radius:16px;padding:24px 20px;transition:.3s;" onmouseover="this.style.borderColor='#2D9CDB';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(45,156,219,0.12)';this.style.transform='translateY(0)'">
+      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(45,156,219,0.12);border-radius:16px;padding:24px 20px;transition:.3s;display:flex;flex-direction:column;" onmouseover="this.style.borderColor='#2D9CDB';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(45,156,219,0.12)';this.style.transform='translateY(0)'">
         <div style="font-size:28px;margin-bottom:10px;">🔄</div>
         <h4 style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:8px;color:#fff;">Mantenimiento Landing Page</h4>
         <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:16px;">Actualizaciones WordPress, plugins, caché e imágenes.</p>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#2D9CDB;">$125</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#2D9CDB;margin-bottom:16px;">$125</div>
+        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Mantenimiento%20Landing%20Page%20a%20125%20USD" target="_blank" rel="noopener" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:10px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:.04em;transition:.2s;margin-top:auto;" onmouseover="this.style.background='#2D9CDB';this.style.color='#fff'" onmouseout="this.style.background='rgba(45,156,219,0.12)';this.style.color='#56CCF2'">Lo quiero →</a>
       </div>
-      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(45,156,219,0.12);border-radius:16px;padding:24px 20px;transition:.3s;" onmouseover="this.style.borderColor='#2D9CDB';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(45,156,219,0.12)';this.style.transform='translateY(0)'">
+      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(45,156,219,0.12);border-radius:16px;padding:24px 20px;transition:.3s;display:flex;flex-direction:column;" onmouseover="this.style.borderColor='#2D9CDB';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(45,156,219,0.12)';this.style.transform='translateY(0)'">
         <div style="font-size:28px;margin-bottom:10px;">🔍</div>
         <h4 style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:8px;color:#fff;">SEO Completo</h4>
         <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:16px;">Auditoría, optimización, palabras clave, SEO On-Page y local.</p>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#2D9CDB;">$299</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#2D9CDB;margin-bottom:16px;">$299</div>
+        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20SEO%20Completo%20a%20299%20USD" target="_blank" rel="noopener" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:10px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:.04em;transition:.2s;margin-top:auto;" onmouseover="this.style.background='#2D9CDB';this.style.color='#fff'" onmouseout="this.style.background='rgba(45,156,219,0.12)';this.style.color='#56CCF2'">Lo quiero →</a>
       </div>
-      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(45,156,219,0.12);border-radius:16px;padding:24px 20px;transition:.3s;" onmouseover="this.style.borderColor='#2D9CDB';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(45,156,219,0.12)';this.style.transform='translateY(0)'">
+      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(45,156,219,0.12);border-radius:16px;padding:24px 20px;transition:.3s;display:flex;flex-direction:column;" onmouseover="this.style.borderColor='#2D9CDB';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(45,156,219,0.12)';this.style.transform='translateY(0)'">
         <div style="font-size:28px;margin-bottom:10px;">🔧</div>
         <h4 style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:8px;color:#fff;">Actualizaciones Web Site</h4>
         <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:16px;">Contenido, diseños de temporada, productos y ofertas.</p>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#2D9CDB;">$55</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#2D9CDB;margin-bottom:16px;">$55</div>
+        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Actualizaciones%20Web%20Site%20a%2055%20USD" target="_blank" rel="noopener" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:10px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:.04em;transition:.2s;margin-top:auto;" onmouseover="this.style.background='#2D9CDB';this.style.color='#fff'" onmouseout="this.style.background='rgba(45,156,219,0.12)';this.style.color='#56CCF2'">Lo quiero →</a>
       </div>
-      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(45,156,219,0.12);border-radius:16px;padding:24px 20px;transition:.3s;" onmouseover="this.style.borderColor='#2D9CDB';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(45,156,219,0.12)';this.style.transform='translateY(0)'">
+      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(45,156,219,0.12);border-radius:16px;padding:24px 20px;transition:.3s;display:flex;flex-direction:column;" onmouseover="this.style.borderColor='#2D9CDB';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(45,156,219,0.12)';this.style.transform='translateY(0)'">
         <div style="font-size:28px;margin-bottom:10px;">📈</div>
         <h4 style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:8px;color:#fff;">Impulso de Tráfico</h4>
         <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:16px;">Google Ads, Meta Ads, métricas y reporte trimestral.</p>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#2D9CDB;">$270</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#2D9CDB;margin-bottom:16px;">$270</div>
+        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Impulso%20de%20Tr%C3%A1fico%20a%20270%20USD" target="_blank" rel="noopener" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:10px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:.04em;transition:.2s;margin-top:auto;" onmouseover="this.style.background='#2D9CDB';this.style.color='#fff'" onmouseout="this.style.background='rgba(45,156,219,0.12)';this.style.color='#56CCF2'">Lo quiero →</a>
       </div>
-      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(45,156,219,0.12);border-radius:16px;padding:24px 20px;transition:.3s;" onmouseover="this.style.borderColor='#2D9CDB';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(45,156,219,0.12)';this.style.transform='translateY(0)'">
+      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(45,156,219,0.12);border-radius:16px;padding:24px 20px;transition:.3s;display:flex;flex-direction:column;" onmouseover="this.style.borderColor='#2D9CDB';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(45,156,219,0.12)';this.style.transform='translateY(0)'">
         <div style="font-size:28px;margin-bottom:10px;">⚙️</div>
         <h4 style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:8px;color:#fff;">Integraciones Web Site</h4>
         <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:16px;">HTML/CSS, redes sociales, canales publicitarios y plataformas.</p>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#2D9CDB;">$80</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#2D9CDB;margin-bottom:16px;">$80</div>
+        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Integraciones%20Web%20Site%20a%2080%20USD" target="_blank" rel="noopener" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:10px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:.04em;transition:.2s;margin-top:auto;" onmouseover="this.style.background='#2D9CDB';this.style.color='#fff'" onmouseout="this.style.background='rgba(45,156,219,0.12)';this.style.color='#56CCF2'">Lo quiero →</a>
       </div>
-      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(45,156,219,0.12);border-radius:16px;padding:24px 20px;transition:.3s;" onmouseover="this.style.borderColor='#2D9CDB';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(45,156,219,0.12)';this.style.transform='translateY(0)'">
+      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(45,156,219,0.12);border-radius:16px;padding:24px 20px;transition:.3s;display:flex;flex-direction:column;" onmouseover="this.style.borderColor='#2D9CDB';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(45,156,219,0.12)';this.style.transform='translateY(0)'">
         <div style="font-size:28px;margin-bottom:10px;">📧</div>
         <h4 style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:8px;color:#fff;">Correo Corporativo</h4>
         <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:16px;">Email profesional, Google Workspace o Microsoft 365, firmas HTML.</p>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#2D9CDB;">$110</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#2D9CDB;margin-bottom:16px;">$110</div>
+        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Correo%20Corporativo%20a%20110%20USD" target="_blank" rel="noopener" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:10px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:.04em;transition:.2s;margin-top:auto;" onmouseover="this.style.background='#2D9CDB';this.style.color='#fff'" onmouseout="this.style.background='rgba(45,156,219,0.12)';this.style.color='#56CCF2'">Lo quiero →</a>
       </div>
-      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(45,156,219,0.12);border-radius:16px;padding:24px 20px;transition:.3s;" onmouseover="this.style.borderColor='#2D9CDB';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(45,156,219,0.12)';this.style.transform='translateY(0)'">
+      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(45,156,219,0.12);border-radius:16px;padding:24px 20px;transition:.3s;display:flex;flex-direction:column;" onmouseover="this.style.borderColor='#2D9CDB';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(45,156,219,0.12)';this.style.transform='translateY(0)'">
         <div style="font-size:28px;margin-bottom:10px;">🤖</div>
         <h4 style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:8px;color:#fff;">Bot WhatsApp 24/7</h4>
         <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:16px;">Respuestas automáticas, catálogo, etiquetado y enrutamiento a humano.</p>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#2D9CDB;">$260</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#2D9CDB;margin-bottom:16px;">$260</div>
+        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Bot%20WhatsApp%2024%2F7%20a%20260%20USD" target="_blank" rel="noopener" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:10px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:.04em;transition:.2s;margin-top:auto;" onmouseover="this.style.background='#2D9CDB';this.style.color='#fff'" onmouseout="this.style.background='rgba(45,156,219,0.12)';this.style.color='#56CCF2'">Lo quiero →</a>
       </div>
     </div>
 
@@ -1585,6 +1607,199 @@ function showTab(tab) {
   </div>
 
 </section>
+
+<hr class="glowline">
+
+<!-- NFC SECTION -->
+<section id="nfc" style="padding:100px 5%;background:transparent;overflow:hidden;">
+
+  <div style="text-align:center;margin-bottom:48px;">
+    <span class="section-tag reveal">Publicidad Inteligente</span>
+    <h2 class="section-title reveal" style="margin-bottom:16px;">TECNOLOGÍA <span>NFC</span> PARA TU MARCA</h2>
+    <p class="section-desc reveal" style="margin:0 auto 32px;max-width:600px;">Conecta el mundo físico con el digital en un toque. Tus clientes escanean y llegan directo a tu WhatsApp, Google o perfil — sin apps, sin fricción.</p>
+  </div>
+
+  <!-- NFC Carousel -->
+  <div style="position:relative;max-width:1100px;margin:0 auto 64px;overflow:hidden;">
+    <!-- Fade edges -->
+    <div style="position:absolute;left:0;top:0;bottom:0;width:80px;background:linear-gradient(to right,#050505,transparent);z-index:2;pointer-events:none;"></div>
+    <div style="position:absolute;right:0;top:0;bottom:0;width:80px;background:linear-gradient(to left,#050505,transparent);z-index:2;pointer-events:none;"></div>
+
+    <div id="nfc-track" style="display:flex;gap:24px;transition:transform .55s cubic-bezier(.25,.46,.45,.94);will-change:transform;">
+
+      <!-- CARD 1: Manilla NFC -->
+      <div class="nfc-slide" style="flex:0 0 calc(33.333% - 16px);background:rgba(255,255,255,0.03);border:1px solid rgba(45,156,219,0.15);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .3s,box-shadow .3s;"
+        onmouseover="this.style.borderColor='rgba(45,156,219,0.5)';this.style.boxShadow='0 12px 40px rgba(45,156,219,0.14)'"
+        onmouseout="this.style.borderColor='rgba(45,156,219,0.15)';this.style.boxShadow='none'">
+        <div style="position:relative;aspect-ratio:4/3;overflow:hidden;background:#0a0a0a;">
+          <img src="https://i.ibb.co/xtwRvsb4/IMG-0405.png" alt="Manilla NFC"
+            style="width:100%;height:100%;object-fit:cover;transition:.5s;"
+            onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+          <div style="position:absolute;top:12px;left:12px;background:#2D9CDB;color:#fff;font-size:10px;font-weight:700;letter-spacing:.1em;padding:4px 12px;border-radius:20px;">NFC</div>
+        </div>
+        <div style="padding:24px;display:flex;flex-direction:column;flex:1;">
+          <h3 style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;margin-bottom:6px;color:#fff;">Manilla NFC</h3>
+          <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:20px;flex:1;">Accesorio inteligente que conecta en un toque a tu perfil, reseñas o WhatsApp. Ideal para vendedores y eventos.</p>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+            <div>
+              <div class="price-tag" data-usd="30" data-cop="124500" style="font-family:'Bebas Neue',sans-serif;font-size:38px;color:#fff;line-height:1;">$30 <span class="price-currency" style="font-size:16px;color:#2D9CDB;">USD</span></div>
+              <div style="font-size:11px;color:rgba(255,255,255,0.3);margin-top:2px;">📦 Envío gratis Cartagena</div>
+            </div>
+            <a href="https://wa.me/573186471571?text=Hola%2C%20quiero%20pedir%20una%20Manilla%20NFC%20a%2030%20USD.%20%C2%BFTienen%20disponibilidad%3F" target="_blank" rel="noopener"
+              style="display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;padding:11px 18px;border-radius:10px;font-weight:700;font-size:12px;text-decoration:none;transition:.2s;white-space:nowrap;"
+              onmouseover="this.style.background='#1ebe5d'" onmouseout="this.style.background='#25D366'">
+              <svg width="15" height="15" viewBox="0 0 32 32" fill="#fff"><path d="M16 0C7.164 0 0 7.163 0 16c0 2.822.737 5.469 2.027 7.773L0 32l8.469-2.004A15.93 15.93 0 0 0 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm7.27 21.455c-.398-.2-2.355-1.162-2.72-1.294-.365-.133-.631-.2-.897.2-.265.398-1.029 1.294-1.262 1.56-.232.265-.465.298-.863.1-.398-.2-1.681-.62-3.2-1.977-1.183-1.057-1.981-2.362-2.213-2.76-.232-.398-.025-.613.175-.811.18-.178.398-.465.597-.697.2-.232.265-.398.398-.664.133-.265.067-.497-.033-.697-.1-.2-.897-2.162-1.229-2.96-.324-.778-.653-.672-.897-.685-.232-.012-.497-.015-.763-.015-.265 0-.697.1-1.063.497-.365.398-1.395 1.362-1.395 3.322s1.428 3.853 1.628 4.119c.2.265 2.81 4.29 6.808 6.019.952.41 1.694.655 2.273.839.955.304 1.825.261 2.513.158.767-.114 2.355-.963 2.687-1.893.332-.93.332-1.727.232-1.893-.1-.166-.365-.265-.763-.465z"/></svg>
+              Pedir ahora
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 2: Tarjeta NFC Personalizada -->
+      <div class="nfc-slide" style="flex:0 0 calc(33.333% - 16px);background:rgba(255,255,255,0.03);border:1px solid #2D9CDB;border-radius:20px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .3s,box-shadow .3s;box-shadow:0 0 30px rgba(45,156,219,0.1);">
+        <div style="position:relative;aspect-ratio:4/3;overflow:hidden;background:#0a0a0a;">
+          <img src="https://i.ibb.co/S7mTTMth/IMG-0414.png" alt="Tarjeta NFC Personalizada"
+            style="width:100%;height:100%;object-fit:cover;transition:.5s;"
+            onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+          <div style="position:absolute;top:12px;left:12px;background:#2D9CDB;color:#fff;font-size:10px;font-weight:700;letter-spacing:.1em;padding:4px 12px;border-radius:20px;">NFC</div>
+          <div style="position:absolute;top:12px;right:12px;background:rgba(5,5,5,0.85);color:#56CCF2;font-size:10px;font-weight:700;padding:4px 10px;border-radius:20px;">⭐ Popular</div>
+        </div>
+        <div style="padding:24px;display:flex;flex-direction:column;flex:1;">
+          <h3 style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;margin-bottom:6px;color:#fff;">Tarjeta NFC Personalizada</h3>
+          <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:20px;flex:1;">Tu tarjeta de presentación inteligente. Un toque y tus clientes ven todo tu perfil. Con logo, colores y datos personalizados.</p>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+            <div>
+              <div class="price-tag" data-usd="22" data-cop="91300" style="font-family:'Bebas Neue',sans-serif;font-size:38px;color:#fff;line-height:1;">$22 <span class="price-currency" style="font-size:16px;color:#2D9CDB;">USD</span></div>
+              <div style="font-size:11px;color:rgba(255,255,255,0.3);margin-top:2px;">📦 Envío gratis Cartagena</div>
+            </div>
+            <a href="https://wa.me/573186471571?text=Hola%2C%20quiero%20pedir%20una%20Tarjeta%20NFC%20Personalizada%20a%2022%20USD.%20%C2%BFTienen%20disponibilidad%3F" target="_blank" rel="noopener"
+              style="display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;padding:11px 18px;border-radius:10px;font-weight:700;font-size:12px;text-decoration:none;transition:.2s;white-space:nowrap;"
+              onmouseover="this.style.background='#1ebe5d'" onmouseout="this.style.background='#25D366'">
+              <svg width="15" height="15" viewBox="0 0 32 32" fill="#fff"><path d="M16 0C7.164 0 0 7.163 0 16c0 2.822.737 5.469 2.027 7.773L0 32l8.469-2.004A15.93 15.93 0 0 0 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm7.27 21.455c-.398-.2-2.355-1.162-2.72-1.294-.365-.133-.631-.2-.897.2-.265.398-1.029 1.294-1.262 1.56-.232.265-.465.298-.863.1-.398-.2-1.681-.62-3.2-1.977-1.183-1.057-1.981-2.362-2.213-2.76-.232-.398-.025-.613.175-.811.18-.178.398-.465.597-.697.2-.232.265-.398.398-.664.133-.265.067-.497-.033-.697-.1-.2-.897-2.162-1.229-2.96-.324-.778-.653-.672-.897-.685-.232-.012-.497-.015-.763-.015-.265 0-.697.1-1.063.497-.365.398-1.395 1.362-1.395 3.322s1.428 3.853 1.628 4.119c.2.265 2.81 4.29 6.808 6.019.952.41 1.694.655 2.273.839.955.304 1.825.261 2.513.158.767-.114 2.355-.963 2.687-1.893.332-.93.332-1.727.232-1.893-.1-.166-.365-.265-.763-.465z"/></svg>
+              Pedir ahora
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 3: Tarjeta TripAdvisor NFC -->
+      <div class="nfc-slide" style="flex:0 0 calc(33.333% - 16px);background:rgba(255,255,255,0.03);border:1px solid rgba(45,156,219,0.15);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .3s,box-shadow .3s;"
+        onmouseover="this.style.borderColor='rgba(45,156,219,0.5)';this.style.boxShadow='0 12px 40px rgba(45,156,219,0.14)'"
+        onmouseout="this.style.borderColor='rgba(45,156,219,0.15)';this.style.boxShadow='none'">
+        <div style="position:relative;aspect-ratio:4/3;overflow:hidden;background:#0a0a0a;">
+          <img src="https://i.ibb.co/vCP5tC0V/IMG-0424.png" alt="Tarjeta TripAdvisor NFC"
+            style="width:100%;height:100%;object-fit:cover;transition:.5s;"
+            onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+          <div style="position:absolute;top:12px;left:12px;background:#2D9CDB;color:#fff;font-size:10px;font-weight:700;letter-spacing:.1em;padding:4px 12px;border-radius:20px;">NFC</div>
+        </div>
+        <div style="padding:24px;display:flex;flex-direction:column;flex:1;">
+          <h3 style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;margin-bottom:6px;color:#fff;">Tarjeta NFC TripAdvisor</h3>
+          <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:20px;flex:1;">Más reseñas en TripAdvisor sin esfuerzo. Perfecta para restaurantes, hoteles y negocios turísticos.</p>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+            <div>
+              <div class="price-tag" data-usd="20" data-cop="83000" style="font-family:'Bebas Neue',sans-serif;font-size:38px;color:#fff;line-height:1;">$20 <span class="price-currency" style="font-size:16px;color:#2D9CDB;">USD</span></div>
+              <div style="font-size:11px;color:rgba(255,255,255,0.3);margin-top:2px;">📦 Envío gratis Cartagena</div>
+            </div>
+            <a href="https://wa.me/573186471571?text=Hola%2C%20quiero%20pedir%20una%20Tarjeta%20NFC%20TripAdvisor%20a%2020%20USD.%20%C2%BFTienen%20disponibilidad%3F" target="_blank" rel="noopener"
+              style="display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;padding:11px 18px;border-radius:10px;font-weight:700;font-size:12px;text-decoration:none;transition:.2s;white-space:nowrap;"
+              onmouseover="this.style.background='#1ebe5d'" onmouseout="this.style.background='#25D366'">
+              <svg width="15" height="15" viewBox="0 0 32 32" fill="#fff"><path d="M16 0C7.164 0 0 7.163 0 16c0 2.822.737 5.469 2.027 7.773L0 32l8.469-2.004A15.93 15.93 0 0 0 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm7.27 21.455c-.398-.2-2.355-1.162-2.72-1.294-.365-.133-.631-.2-.897.2-.265.398-1.029 1.294-1.262 1.56-.232.265-.465.298-.863.1-.398-.2-1.681-.62-3.2-1.977-1.183-1.057-1.981-2.362-2.213-2.76-.232-.398-.025-.613.175-.811.18-.178.398-.465.597-.697.2-.232.265-.398.398-.664.133-.265.067-.497-.033-.697-.1-.2-.897-2.162-1.229-2.96-.324-.778-.653-.672-.897-.685-.232-.012-.497-.015-.763-.015-.265 0-.697.1-1.063.497-.365.398-1.395 1.362-1.395 3.322s1.428 3.853 1.628 4.119c.2.265 2.81 4.29 6.808 6.019.952.41 1.694.655 2.273.839.955.304 1.825.261 2.513.158.767-.114 2.355-.963 2.687-1.893.332-.93.332-1.727.232-1.893-.1-.166-.365-.265-.763-.465z"/></svg>
+              Pedir ahora
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end nfc-track -->
+
+    <!-- Carousel nav dots -->
+    <div style="display:flex;justify-content:center;gap:8px;margin-top:28px;" id="nfc-dots">
+      <button class="nfc-dot" onclick="nfcGoTo(0)" style="width:24px;height:8px;border-radius:4px;background:#2D9CDB;border:none;cursor:pointer;transition:.3s;padding:0;"></button>
+      <button class="nfc-dot" onclick="nfcGoTo(1)" style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.2);border:none;cursor:pointer;transition:.3s;padding:0;"></button>
+      <button class="nfc-dot" onclick="nfcGoTo(2)" style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.2);border:none;cursor:pointer;transition:.3s;padding:0;"></button>
+    </div>
+    <!-- Arrows -->
+    <div style="display:flex;justify-content:center;gap:12px;margin-top:16px;">
+      <button onclick="nfcPrev()" style="width:40px;height:40px;border-radius:50%;border:1px solid rgba(45,156,219,0.3);background:rgba(5,5,5,0.6);color:#fff;cursor:pointer;font-size:16px;transition:.2s;" onmouseover="this.style.borderColor='#2D9CDB';this.style.color='#2D9CDB'" onmouseout="this.style.borderColor='rgba(45,156,219,0.3)';this.style.color='#fff'">&#8592;</button>
+      <button onclick="nfcNext()" style="width:40px;height:40px;border-radius:50%;border:1px solid rgba(45,156,219,0.3);background:rgba(5,5,5,0.6);color:#fff;cursor:pointer;font-size:16px;transition:.2s;" onmouseover="this.style.borderColor='#2D9CDB';this.style.color='#2D9CDB'" onmouseout="this.style.borderColor='rgba(45,156,219,0.3)';this.style.color='#fff'">&#8594;</button>
+    </div>
+  </div>
+
+  <!-- Shipping banner -->
+  <div style="max-width:700px;margin:0 auto;background:linear-gradient(135deg,rgba(45,156,219,0.08),rgba(86,204,242,0.04));border:1px solid rgba(45,156,219,0.2);border-radius:14px;padding:20px 28px;display:flex;align-items:center;justify-content:center;gap:32px;flex-wrap:wrap;text-align:center;">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <span style="font-size:22px;">🚚</span>
+      <div><div style="font-size:13px;font-weight:700;color:#fff;">Envío a todo Colombia</div><div style="font-size:11px;color:rgba(255,255,255,0.45);">Costo según destino</div></div>
+    </div>
+    <div style="width:1px;height:36px;background:rgba(45,156,219,0.2);"></div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <span style="font-size:22px;">🎁</span>
+      <div><div style="font-size:13px;font-weight:700;color:#56CCF2;">Cartagena — Envío GRATIS</div><div style="font-size:11px;color:rgba(255,255,255,0.45);">Entrega directa sin costo</div></div>
+    </div>
+    <div style="width:1px;height:36px;background:rgba(45,156,219,0.2);"></div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <span style="font-size:22px;">⚡</span>
+      <div><div style="font-size:13px;font-weight:700;color:#fff;">Activación incluida</div><div style="font-size:11px;color:rgba(255,255,255,0.45);">Configuramos el NFC por ti</div></div>
+    </div>
+  </div>
+
+</section>
+
+<script>
+/* ══ NFC CAROUSEL ══ */
+(function(){
+  const track = document.getElementById('nfc-track');
+  if(!track) return;
+  const slides = track.querySelectorAll('.nfc-slide');
+  const dots = document.querySelectorAll('.nfc-dot');
+  let current = 0;
+  let autoTimer;
+
+  function getVisible() {
+    return window.innerWidth <= 768 ? 1 : window.innerWidth <= 1024 ? 2 : 3;
+  }
+
+  function updateSlideWidth() {
+    const vis = getVisible();
+    slides.forEach(s => {
+      s.style.flex = '0 0 calc(' + (100/vis) + '% - ' + (24*(vis-1)/vis) + 'px)';
+    });
+  }
+
+  function goTo(idx) {
+    const vis = getVisible();
+    const max = Math.max(0, slides.length - vis);
+    current = Math.max(0, Math.min(idx, max));
+    const slideW = slides[0].getBoundingClientRect().width + 24;
+    track.style.transform = 'translateX(-' + (current * slideW) + 'px)';
+    dots.forEach((d, i) => {
+      d.style.width = i === current ? '24px' : '8px';
+      d.style.borderRadius = i === current ? '4px' : '50%';
+      d.style.background = i === current ? '#2D9CDB' : 'rgba(255,255,255,0.2)';
+    });
+  }
+
+  window.nfcGoTo = goTo;
+  window.nfcNext = function(){ goTo(current + 1); resetAuto(); };
+  window.nfcPrev = function(){ const vis = getVisible(); goTo(current === 0 ? slides.length - vis : current - 1); resetAuto(); };
+
+  function resetAuto(){ clearInterval(autoTimer); autoTimer = setInterval(() => { const vis = getVisible(); goTo(current >= slides.length - vis ? 0 : current + 1); }, 4000); }
+
+  updateSlideWidth();
+  goTo(0);
+  resetAuto();
+  window.addEventListener('resize', () => { updateSlideWidth(); goTo(0); });
+
+  // Touch swipe
+  let tx = 0;
+  track.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, {passive:true});
+  track.addEventListener('touchend', e => {
+    const diff = tx - e.changedTouches[0].clientX;
+    if(Math.abs(diff) > 40) diff > 0 ? nfcNext() : nfcPrev();
+  }, {passive:true});
+})();
+</script>
+
 <hr class="glowline">
 <!-- PORTFOLIO -->
 <section id="portfolio">
