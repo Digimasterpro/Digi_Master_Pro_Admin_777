@@ -89,7 +89,7 @@
     --border: rgba(255,255,255,0.07);
   }
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
+  html{scroll-behavior:auto}
   body{background:var(--black);color:var(--white);font-family:'DM Sans',sans-serif;overflow-x:hidden;position:relative}
 
   /* NAV */
@@ -252,7 +252,6 @@
   .services-track{
     display:flex;gap:20px;
     transition:transform .6s cubic-bezier(.25,.46,.45,.94);
-    will-change:transform;
   }
   .service-card{
     background:rgba(5,5,5,0.3);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
@@ -662,6 +661,41 @@
   .trustindex-wrap{min-height:300px;margin-bottom:24px}
   .reviews-fallback{margin-top:0}
 
+  /* ── Unified utilities float (right, above WA) ── */
+  .utils-float{
+    position:fixed;bottom:96px;right:28px;z-index:100000;
+    width:56px;
+    display:flex;flex-direction:column;align-items:center;gap:0;
+    background:rgba(10,10,10,0.88);
+    border:1px solid rgba(45,156,219,0.3);
+    border-radius:28px;
+    padding:8px 0;
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    box-shadow:0 4px 24px rgba(0,0,0,0.45);
+  }
+  .currency-float-btn{
+    width:48px;padding:6px 0;
+    border:none;cursor:pointer;background:transparent;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;
+    transition:.2s;border-radius:16px;
+    color:rgba(255,255,255,0.35);
+    font-family:'DM Sans',sans-serif;
+  }
+  .currency-float-btn .cf-symbol{font-size:14px;font-weight:800;line-height:1;}
+  .currency-float-btn .cf-label{font-size:9px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;}
+  .currency-float-btn.active{color:#fff;background:rgba(45,156,219,0.22);}
+  .currency-float-btn:hover{color:#56CCF2;background:rgba(45,156,219,0.12);}
+  .lang-float-btn{
+    width:48px;height:32px;border-radius:16px;border:none;
+    cursor:pointer;background:transparent;
+    display:flex;align-items:center;justify-content:center;
+    transition:.2s;padding:0;opacity:.4;
+  }
+  .lang-float-btn img{width:24px;height:17px;border-radius:3px;display:block;}
+  .lang-float-btn.active{opacity:1;background:rgba(45,156,219,0.2);}
+  .lang-float-btn:hover{opacity:1;}
+  .uf-sep{width:30px;height:1px;background:rgba(255,255,255,0.1);margin:4px 0;}
+
   /* WhatsApp float */
   .wa-float{
     position:fixed;bottom:28px;right:28px;z-index:100000;
@@ -680,16 +714,16 @@
   @keyframes waPulse{0%{transform:scale(1);opacity:.8}70%{transform:scale(1.55);opacity:0}100%{opacity:0}}
 
 
-  /* Lang switcher */
-  .lang-switch{display:flex;gap:2px;align-items:center;margin-left:16px;}
+  .lang-switch{display:flex;gap:2px;align-items:center;margin-left:8px;}
   .lang-btn{
     background:none;border:none;cursor:pointer;
-    font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;
-    letter-spacing:.08em;color:rgba(255,255,255,0.4);
-    padding:4px 6px;transition:.2s;border-radius:4px;
+    padding:4px 6px;transition:.2s;border-radius:6px;
+    opacity:.45;
+    display:flex;align-items:center;
   }
-  .lang-btn.active,.lang-btn:hover{color:var(--blue);}
-  .lang-sep{color:rgba(255,255,255,0.2);font-size:11px;user-select:none;}
+  .lang-btn.active{opacity:1;background:rgba(255,255,255,0.1);}
+  .lang-btn:hover{opacity:1;}
+  .lang-sep{color:rgba(255,255,255,0.15);font-size:14px;user-select:none;margin:0 -2px;}
 
   /* ── BRANDS CAROUSEL ── */
   .brands-section{
@@ -787,10 +821,10 @@
   ═══════════════════════════════════════ */
 
   /* Canvas de partículas fijo */
-  #particles-canvas{position:fixed;inset:0;z-index:999;pointer-events:none;opacity:1;mix-blend-mode:screen;}
+  #particles-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:1;}
 
   /* Todo el contenido por encima del canvas */
-  nav,section,footer,.stats-bar{position:relative;z-index:1000}
+  nav,section,footer,.stats-bar,.brands-section{position:relative;z-index:1}
 
   /* Cursor trail */
   .cursor-trail{
@@ -947,7 +981,7 @@
   @keyframes introProgress{0%{width:0}100%{width:100%}}
   /* Mobile stability: animated background, no side scroll */
   @media(max-width:768px){
-    html,body{width:100%;max-width:100%;overflow-x:hidden;}
+    html,body{width:100%;max-width:100%;overflow-x:hidden;overscroll-behavior-y:auto;}
     body{touch-action:pan-y;}
     section,nav,footer,.mobile-menu{max-width:100%;overflow-x:clip;}
     .stats-bar{display:flex;flex-direction:row!important;align-items:flex-start;justify-content:space-between;gap:0;max-width:100%;overflow:hidden;padding:28px 8px;}
@@ -955,7 +989,7 @@
     .stat-num{font-size:clamp(30px,11vw,44px);white-space:nowrap;}
     .stat-label{font-size:clamp(8px,2.45vw,11px);line-height:1.25;margin-top:6px;letter-spacing:0;overflow-wrap:normal;}
     .stat-label{display:block;}
-    #particles-canvas{display:block!important;opacity:.55;}
+    #particles-canvas{display:none!important;}
     .cursor-trail,.cursor-glow{display:none!important;}
     .reveal,.reveal-left,.reveal-right{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease;}
     .reveal-left,.reveal-right{transform:translateY(18px);}
@@ -970,8 +1004,19 @@
     .btn-primary:hover,.service-card:hover,.portfolio-item:hover,.btn-wa-cta:hover,.wa-float:hover{transform:none!important;}
     .btn-wa-cta{max-width:100%;padding:16px 24px;}
     .wa-float{position:fixed!important;right:16px;bottom:16px;z-index:10001;width:56px;height:56px;display:flex!important;}
+    .lang-float{right:16px;bottom:84px;}
+    .currency-float{left:16px;bottom:16px;}
   }
-  /* Prevent scroll during intro */
+  @media(max-width:560px){
+    .form-row-2col{grid-template-columns:1fr!important;}
+    #contact form input,#contact form select,#contact form textarea{font-size:16px!important;}
+  }
+  /* Prevent iOS zoom on inputs */
+  input,select,textarea{font-size:16px;}
+  /* Prevent content overflow in form */
+  #contact{overflow:hidden;}
+
+  /* Prevent scroll: body.intro-active */
   body.intro-active{overflow:hidden;}
 </style>
 </head>
@@ -1011,22 +1056,6 @@
     <li><a href="#about" data-es="Nosotros" data-en="About Us">Nosotros</a></li>
     <li><a href="#contact" data-es="Contacto" data-en="Contact">Contacto</a></li>
   </ul>
-  <!-- Global currency switcher -->
-  <div style="display:inline-flex;align-items:center;gap:0;background:rgba(255,255,255,0.05);border:1px solid rgba(45,156,219,0.25);border-radius:20px;padding:3px;margin-right:8px;">
-    <button id="g-btn-usd" onclick="globalSetCurrency('usd')"
-      style="padding:5px 14px;border-radius:17px;border:none;background:#2D9CDB;color:#fff;font-family:'DM Sans',sans-serif;font-weight:700;font-size:11px;cursor:pointer;transition:.25s;letter-spacing:.04em;">
-      🇺🇸 USD
-    </button>
-    <button id="g-btn-cop" onclick="globalSetCurrency('cop')"
-      style="padding:5px 14px;border-radius:17px;border:none;background:transparent;color:rgba(255,255,255,0.45);font-family:'DM Sans',sans-serif;font-weight:700;font-size:11px;cursor:pointer;transition:.25s;letter-spacing:.04em;">
-      🇨🇴 COP
-    </button>
-  </div>
-  <div class="lang-switch">
-    <button class="lang-btn active" onclick="setLang('es')" id="btn-es">ES</button>
-    <span class="lang-sep">|</span>
-    <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
-  </div>
   <a href="#cta" class="nav-cta" data-es="Hablemos ✦" data-en="Let's Talk ✦">Hablemos ✦</a>
   <button class="hamburger" onclick="openMenu()" aria-label="Menu">
     <span></span><span></span><span></span>
@@ -1993,7 +2022,7 @@ function globalSetCurrency(currency) {
   <div style="max-width:680px;margin:0 auto;background:rgba(255,255,255,0.03);border:1px solid rgba(45,156,219,0.15);border-radius:20px;padding:48px 40px;backdrop-filter:blur(12px);">
     <form action="https://formspree.io/f/digimasterpro777@gmail.com" method="POST" id="contactForm" style="display:flex;flex-direction:column;gap:20px;">
 
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;" class="form-row-2col">
         <div style="display:flex;flex-direction:column;gap:8px;">
           <label style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,0.6);">Nombre *</label>
           <input type="text" name="nombre" required placeholder="Tu nombre completo"
@@ -2141,6 +2170,20 @@ function globalSetCurrency(currency) {
   function openMenu(){const m=document.getElementById('mobileMenu');if(m)m.classList.add('open')}
   function closeMenu(){const m=document.getElementById('mobileMenu');if(m)m.classList.remove('open')}
 
+  /* ── Smooth scroll via JS (evita el lag del CSS scroll-behavior) ── */
+  document.addEventListener('click', function(e) {
+    const a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    const id = a.getAttribute('href');
+    if (!id || id === '#') return;
+    const target = document.querySelector(id);
+    if (!target) return;
+    e.preventDefault();
+    // Close mobile menu if open
+    closeMenu();
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
   // Portfolio filter
   document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', function(){
@@ -2254,6 +2297,30 @@ function globalSetCurrency(currency) {
 
 </script>
 
+<!-- Unified utilities float (moneda + idioma) -->
+<div class="utils-float" aria-label="Utilidades">
+  <!-- Moneda -->
+  <button class="currency-float-btn active" id="g-btn-usd" onclick="globalSetCurrency('usd')" aria-label="USD">
+    <span class="cf-symbol">$</span>
+    <span class="cf-label">USD</span>
+  </button>
+  <div class="uf-sep"></div>
+  <button class="currency-float-btn" id="g-btn-cop" onclick="globalSetCurrency('cop')" aria-label="COP">
+    <span class="cf-symbol">$</span>
+    <span class="cf-label">COP</span>
+  </button>
+  <!-- Divisor mayor -->
+  <div class="uf-sep" style="margin:6px 0;background:rgba(45,156,219,0.25);"></div>
+  <!-- Idioma -->
+  <button class="lang-float-btn active" onclick="setLang('es');syncLangFloat('es')" id="lang-float-es" aria-label="Español">
+    <img src="https://flagcdn.com/w40/co.png" width="24" height="17" alt="Colombia" style="border-radius:3px;">
+  </button>
+  <div class="uf-sep"></div>
+  <button class="lang-float-btn" onclick="setLang('en');syncLangFloat('en')" id="lang-float-en" aria-label="English">
+    <img src="https://flagcdn.com/w40/us.png" width="24" height="17" alt="USA" style="border-radius:3px;">
+  </button>
+</div>
+
 <!-- WhatsApp Float -->
 <a href="https://wa.me/573186471571" target="_blank" rel="noopener" class="wa-float" aria-label="WhatsApp">
   <span class="wa-pulse"></span>
@@ -2264,12 +2331,21 @@ function globalSetCurrency(currency) {
 
 
 <script>
+function syncLangFloat(lang) {
+  var floatEs = document.getElementById('lang-float-es');
+  var floatEn = document.getElementById('lang-float-en');
+  if(floatEs) floatEs.classList.toggle('active', lang === 'es');
+  if(floatEn) floatEn.classList.toggle('active', lang === 'en');
+}
+
 function setLang(lang) {
-  // Update buttons
+  // Update nav buttons
   const btnEs = document.getElementById('btn-es');
   const btnEn = document.getElementById('btn-en');
   if(btnEs) btnEs.classList.toggle('active', lang === 'es');
   if(btnEn) btnEn.classList.toggle('active', lang === 'en');
+  // Sync float bubble
+  syncLangFloat(lang);
   // Update html lang attribute
   document.documentElement.lang = lang;
   // Translate all elements with data-es / data-en
@@ -2295,6 +2371,7 @@ function setLang(lang) {
 (function(){
   const saved = localStorage.getItem('lang');
   if(saved && saved !== 'es') setLang(saved);
+  else syncLangFloat('es');
 })();
 </script>
 
