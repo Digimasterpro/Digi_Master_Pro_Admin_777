@@ -604,6 +604,56 @@
   .lang-btn.active,.lang-btn:hover{color:var(--blue);}
   .lang-sep{color:rgba(255,255,255,0.2);font-size:11px;user-select:none;}
 
+  /* ── BRANDS CAROUSEL ── */
+  .brands-section{
+    padding:40px 0;
+    border-top:1px solid rgba(45,156,219,0.1);
+    border-bottom:1px solid rgba(45,156,219,0.1);
+    background:rgba(5,5,5,0.5);
+    overflow:hidden;
+    position:relative;z-index:1000;
+  }
+  .brands-label{
+    text-align:center;font-size:11px;font-weight:700;letter-spacing:.18em;
+    text-transform:uppercase;color:rgba(255,255,255,0.25);
+    margin-bottom:28px;
+  }
+  .brands-track-wrap{
+    position:relative;overflow:hidden;
+  }
+  .brands-fade{
+    position:absolute;top:0;bottom:0;width:120px;z-index:2;pointer-events:none;
+  }
+  .brands-fade-left{left:0;background:linear-gradient(to right,rgba(5,5,5,1) 0%,rgba(5,5,5,0) 100%)}
+  .brands-fade-right{right:0;background:linear-gradient(to left,rgba(5,5,5,1) 0%,rgba(5,5,5,0) 100%)}
+  .brands-track{
+    display:flex;align-items:center;gap:0;
+    width:max-content;
+    animation:brandsScroll 28s linear infinite;
+  }
+  .brands-track:hover{animation-play-state:paused}
+  @keyframes brandsScroll{
+    0%{transform:translateX(0)}
+    100%{transform:translateX(-50%)}
+  }
+  .brand-item{
+    display:flex;align-items:center;justify-content:center;
+    padding:0 36px;
+    height:64px;flex-shrink:0;
+    border-right:1px solid rgba(255,255,255,0.06);
+    transition:.3s;
+  }
+  .brand-item:hover{background:rgba(45,156,219,0.05)}
+  .brand-item img{
+    height:40px;width:auto;max-width:120px;
+    object-fit:contain;
+    filter:none;
+    opacity:.7;
+    transition:.3s;
+  }
+  .brand-item:hover img{opacity:1;transform:scale(1.06)}
+
+  /* ── END BRANDS ── */
   /* RESPONSIVE */
   @media(max-width:1024px){
     /* services carousel responsive handled via JS */
@@ -927,6 +977,48 @@
   <div class="stat reveal reveal-delay-3"><div class="stat-num">100%</div><div class="stat-label" data-es="Comprometidos con tu éxito" data-en="Committed to your success">Comprometidos con tu éxito</div></div>
 </div>
 
+<!-- BRANDS CAROUSEL -->
+<div class="brands-section reveal">
+  <p class="brands-label" data-es="Marcas que confían en nosotros" data-en="Brands that trust us">Marcas que confían en nosotros</p>
+  <div class="brands-track-wrap">
+    <div class="brands-fade brands-fade-left"></div>
+    <div class="brands-fade brands-fade-right"></div>
+    <div class="brands-track">
+      <div class="brand-item"><img src="https://i.ibb.co/nq7KgBbm/Captura-de-pantalla-2026-06-06-065007-removebg-preview.png" alt="Marca 1"></div>
+      <div class="brand-item"><img src="https://i.ibb.co/dxxzkHK/Logo-Tienda-de-Indumentaria-Femenino-Rosa-y-Blanco-1-removebg-preview.png" alt="Marca 2"></div>
+      <div class="brand-item"><img src="https://i.ibb.co/21QzP9R6/Logo-Tienda-de-Indumentaria-Femenino-Rosa-y-Blanco-2-removebg-preview.png" alt="Marca 3"></div>
+      <div class="brand-item"><img src="https://i.ibb.co/QVqTxk0/image-22.png" alt="Marca 4"></div>
+      <div class="brand-item"><img src="https://i.ibb.co/1Y2jc88V/IMG-3707-removebg-preview.png" alt="Marca 5"></div>
+      <div class="brand-item"><img src="https://i.ibb.co/SDFs9yxz/favicon-180x180.png" alt="Marca 6"></div>
+      <div class="brand-item"><img src="https://i.ibb.co/Xx20HBY7/Captura-de-pantalla-2026-02-27-052715-removebg-preview-1.png" alt="Marca 7"></div>
+      <div class="brand-item"><img src="https://i.ibb.co/SX1FM10b/Captura-de-pantalla-2026-02-06-074303-removebg-preview.png" alt="Marca 8"></div>
+      <div class="brand-item"><img src="https://i.ibb.co/VY1HyWPD/unnamed-4-1.png" alt="Marca 9"></div>
+      <div class="brand-item"><img src="https://i.ibb.co/RGV6PcdF/Gemini-Generated-Image-knpgetknpgetknpg-1.png" alt="Marca 10"></div>
+      <div class="brand-item"><img src="https://i.ibb.co/8gDqVBw0/Captura-de-pantalla-2026-05-21-055242-removebg-preview.png" alt="Marca 11"></div>
+      <div class="brand-item"><img src="https://i.ibb.co/QF7vYrFn/Recurso-20re3413khjgfd-VUYVXFBhg-removebg-preview.png" alt="Marca 12"></div>
+      <div class="brand-item"><img src="https://i.ibb.co/Xrf5Vr48/307448779-5429246140499739-3551810560974368651-n-removebg-preview.png" alt="Marca 13"></div>
+      <div class="brand-item"><img src="https://i.ibb.co/hF77MDwv/324249780-1357761718320854-6170841150940039372-n-removebg-preview.png" alt="Marca 14"></div>
+      <div class="brand-item"><img src="https://i.ibb.co/RpkL8J96/image.png" alt="Marca 15"></div>
+      <!-- Duplicate set for seamless infinite loop -->
+      <div class="brand-item"><img src="https://i.ibb.co/nq7KgBbm/Captura-de-pantalla-2026-06-06-065007-removebg-preview.png" alt="Marca 1"></div>
+      <div class="brand-item"><img src="https://i.ibb.co/dxxzkHK/Logo-Tienda-de-Indumentaria-Femenino-Rosa-y-Blanco-1-removebg-preview.png" alt="Marca 2"></div>
+      <div class="brand-item"><img src="https://i.ibb.co/21QzP9R6/Logo-Tienda-de-Indumentaria-Femenino-Rosa-y-Blanco-2-removebg-preview.png" alt="Marca 3"></div>
+      <div class="brand-item"><img src="https://i.ibb.co/QVqTxk0/image-22.png" alt="Marca 4"></div>
+      <div class="brand-item"><img src="https://i.ibb.co/1Y2jc88V/IMG-3707-removebg-preview.png" alt="Marca 5"></div>
+      <div class="brand-item"><img src="https://i.ibb.co/SDFs9yxz/favicon-180x180.png" alt="Marca 6"></div>
+      <div class="brand-item"><img src="https://i.ibb.co/Xx20HBY7/Captura-de-pantalla-2026-02-27-052715-removebg-preview-1.png" alt="Marca 7"></div>
+      <div class="brand-item"><img src="https://i.ibb.co/SX1FM10b/Captura-de-pantalla-2026-02-06-074303-removebg-preview.png" alt="Marca 8"></div>
+      <div class="brand-item"><img src="https://i.ibb.co/VY1HyWPD/unnamed-4-1.png" alt="Marca 9"></div>
+      <div class="brand-item"><img src="https://i.ibb.co/RGV6PcdF/Gemini-Generated-Image-knpgetknpgetknpg-1.png" alt="Marca 10"></div>
+      <div class="brand-item"><img src="https://i.ibb.co/8gDqVBw0/Captura-de-pantalla-2026-05-21-055242-removebg-preview.png" alt="Marca 11"></div>
+      <div class="brand-item"><img src="https://i.ibb.co/QF7vYrFn/Recurso-20re3413khjgfd-VUYVXFBhg-removebg-preview.png" alt="Marca 12"></div>
+      <div class="brand-item"><img src="https://i.ibb.co/Xrf5Vr48/307448779-5429246140499739-3551810560974368651-n-removebg-preview.png" alt="Marca 13"></div>
+      <div class="brand-item"><img src="https://i.ibb.co/hF77MDwv/324249780-1357761718320854-6170841150940039372-n-removebg-preview.png" alt="Marca 14"></div>
+      <div class="brand-item"><img src="https://i.ibb.co/RpkL8J96/image.png" alt="Marca 15"></div>
+    </div>
+  </div>
+</div>
+
 <!-- SERVICES -->
 <section id="services">
   <span class="section-tag reveal" data-es="Nuestros Servicios" data-en="Our Services">Nuestros Servicios</span>
@@ -1077,6 +1169,7 @@
     <a href="#cta" class="btn-primary" data-es="Ver Todos los Proyectos ↗" data-en="See All Projects ↗">Ver Todos los Proyectos ↗</a>
   </div>
 </section>
+
 
 <!-- REVIEWS — Google Business Profile widget -->
 <section id="reviews">
