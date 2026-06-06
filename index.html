@@ -89,8 +89,23 @@
     --border: rgba(255,255,255,0.07);
   }
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:auto}
-  body{background:var(--black);color:var(--white);font-family:'DM Sans',sans-serif;overflow-x:hidden;position:relative}
+  html{
+    scroll-behavior:auto;
+    overflow-x:hidden;
+    overflow-y:auto;
+    scrollbar-width:thin;
+    scrollbar-color:rgba(45,156,219,0.3) transparent;
+  }
+  html::-webkit-scrollbar{width:6px;}
+  html::-webkit-scrollbar-track{background:transparent;}
+  html::-webkit-scrollbar-thumb{background:rgba(45,156,219,0.3);border-radius:3px;}
+  body{
+    background:var(--black);color:var(--white);font-family:'DM Sans',sans-serif;
+    overflow:hidden;
+    position:relative;
+    width:100%;
+    min-height:100vh;
+  }
 
   /* NAV */
   nav{
@@ -661,40 +676,26 @@
   .trustindex-wrap{min-height:300px;margin-bottom:24px}
   .reviews-fallback{margin-top:0}
 
-  /* ── Unified utilities float (right, above WA) ── */
-  .utils-float{
+  /* ── Language float bubble (circular, matches WA) ── */
+  .lang-float{
     position:fixed;bottom:96px;right:28px;z-index:100000;
-    width:56px;
-    display:flex;flex-direction:column;align-items:center;gap:0;
-    background:rgba(10,10,10,0.88);
-    border:1px solid rgba(45,156,219,0.3);
-    border-radius:28px;
-    padding:8px 0;
+    width:56px;height:56px;border-radius:50%;
+    background:rgba(10,10,10,0.92);
+    border:1px solid rgba(45,156,219,0.4);
     backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
     box-shadow:0 4px 24px rgba(0,0,0,0.45);
-  }
-  .currency-float-btn{
-    width:48px;padding:6px 0;
-    border:none;cursor:pointer;background:transparent;
-    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;
-    transition:.2s;border-radius:16px;
-    color:rgba(255,255,255,0.35);
-    font-family:'DM Sans',sans-serif;
-  }
-  .currency-float-btn .cf-symbol{font-size:14px;font-weight:800;line-height:1;}
-  .currency-float-btn .cf-label{font-size:9px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;}
-  .currency-float-btn.active{color:#fff;background:rgba(45,156,219,0.22);}
-  .currency-float-btn:hover{color:#56CCF2;background:rgba(45,156,219,0.12);}
-  .lang-float-btn{
-    width:48px;height:32px;border-radius:16px;border:none;
-    cursor:pointer;background:transparent;
     display:flex;align-items:center;justify-content:center;
-    transition:.2s;padding:0;opacity:.4;
+    cursor:pointer;transition:.25s;overflow:hidden;
+    padding:0;
   }
-  .lang-float-btn img{width:24px;height:17px;border-radius:3px;display:block;}
-  .lang-float-btn.active{opacity:1;background:rgba(45,156,219,0.2);}
-  .lang-float-btn:hover{opacity:1;}
-  .uf-sep{width:30px;height:1px;background:rgba(255,255,255,0.1);margin:4px 0;}
+  .lang-float:hover{transform:scale(1.1);box-shadow:0 6px 28px rgba(45,156,219,0.35);}
+  .lang-float img{width:32px;height:23px;border-radius:4px;display:block;object-fit:cover;}
+
+  /* Hide old utils-float entirely */
+  .utils-float{display:none!important;}
+  .currency-float-btn{display:none!important;}
+  .lang-float-btn{display:none!important;}
+  .uf-sep{display:none!important;}
 
   /* WhatsApp float */
   .wa-float{
@@ -783,7 +784,10 @@
     .review-card:nth-child(2n){border-right:none}
     .review-card:nth-child(3n){border-right:1px solid var(--border)}
     /* ── Fix horizontal scroll on iPad ── */
-    html,body{max-width:100%;overflow-x:hidden}
+    html{overflow-x:hidden;overflow-y:auto;}
+    body{overflow:hidden;}
+    *{max-width:100%;}
+    img,video,canvas,iframe{max-width:100%;}
     #about{grid-template-columns:1fr;gap:40px}
     .about-text{order:0}
     .about-img-wrap{order:1}
@@ -820,11 +824,18 @@
      ANIMACIONES PREMIUM FUTURISTAS
   ═══════════════════════════════════════ */
 
-  /* Canvas de partículas fijo */
-  #particles-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:1;}
+  /* Canvas de partículas fijo — sobre toda la página incluyendo el hero */
+  #particles-canvas{
+    position:fixed;
+    inset:0;
+    z-index:3; /* above hero-bg (z-index:auto) but below nav (z-index:100) */
+    pointer-events:none;
+    opacity:1;
+    mix-blend-mode:screen; /* partículas brillan sobre cualquier fondo */
+  }
 
   /* Todo el contenido por encima del canvas */
-  nav,section,footer,.stats-bar,.brands-section{position:relative;z-index:1}
+  nav,section,footer,.stats-bar,.brands-section{position:relative;z-index:4}
 
   /* Cursor trail */
   .cursor-trail{
@@ -981,15 +992,23 @@
   @keyframes introProgress{0%{width:0}100%{width:100%}}
   /* Mobile stability: animated background, no side scroll */
   @media(max-width:768px){
-    html,body{width:100%;max-width:100%;overflow-x:hidden;overscroll-behavior-y:auto;}
-    body{touch-action:pan-y;}
+    html{
+      overflow-x:hidden;
+      overflow-y:auto;
+      -webkit-overflow-scrolling:touch;
+    }
+    body{
+      overflow:hidden;
+      touch-action:pan-y;
+    }
     section,nav,footer,.mobile-menu{max-width:100%;overflow-x:clip;}
     .stats-bar{display:flex;flex-direction:row!important;align-items:flex-start;justify-content:space-between;gap:0;max-width:100%;overflow:hidden;padding:28px 8px;}
     .stat{flex:1 1 25%;min-width:0;padding:0 3px;}
     .stat-num{font-size:clamp(30px,11vw,44px);white-space:nowrap;}
     .stat-label{font-size:clamp(8px,2.45vw,11px);line-height:1.25;margin-top:6px;letter-spacing:0;overflow-wrap:normal;}
     .stat-label{display:block;}
-    #particles-canvas{display:none!important;}
+    /* particles visible on mobile — reduced count handled in JS */
+    #particles-canvas{opacity:.7;}
     .cursor-trail,.cursor-glow{display:none!important;}
     .reveal,.reveal-left,.reveal-right{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease;}
     .reveal-left,.reveal-right{transform:translateY(18px);}
@@ -1003,7 +1022,7 @@
     .services-track{max-width:100%;will-change:auto;}
     .btn-primary:hover,.service-card:hover,.portfolio-item:hover,.btn-wa-cta:hover,.wa-float:hover{transform:none!important;}
     .btn-wa-cta{max-width:100%;padding:16px 24px;}
-    .wa-float{position:fixed!important;right:16px;bottom:16px;z-index:10001;width:56px;height:56px;display:flex!important;}
+    .wa-float{position:fixed!important;right:16px;bottom:16px;z-index:100001;width:56px;height:56px;display:flex!important;}
     .lang-float{right:16px;bottom:84px;}
     .currency-float{left:16px;bottom:16px;}
   }
@@ -1017,7 +1036,8 @@
   #contact{overflow:hidden;}
 
   /* Prevent scroll: body.intro-active */
-  body.intro-active{overflow:hidden;}
+  body.intro-active{overflow:hidden!important;}
+  html:has(body.intro-active){overflow:hidden!important;}
 </style>
 </head>
 <body>
@@ -1360,9 +1380,20 @@
 <!-- ══ SECCIÓN PRECIOS ══ -->
 <section id="precios" style="padding:100px 5%;background:transparent;">
   <div style="text-align:center;margin-bottom:60px;">
-    <span class="section-tag reveal">Inversión</span>
-    <h2 class="section-title reveal">PLANES Y <span>PRECIOS</span></h2>
-    <p class="section-desc reveal" style="margin:0 auto;">Soluciones claras, precios transparentes. Sin sorpresas. Todos los precios en USD.</p>
+    <span class="section-tag reveal" data-es="Inversión" data-en="Investment">Inversión</span>
+    <h2 class="section-title reveal" data-es="PLANES Y <span>PRECIOS</span>" data-en="PLANS &amp; <span>PRICING</span>">PLANES Y <span>PRECIOS</span></h2>
+    <p class="section-desc reveal" style="margin:0 auto 28px;" data-es="Soluciones claras, precios transparentes. Sin sorpresas. Todos los precios en USD." data-en="Clear solutions, transparent pricing. No surprises. All prices in USD.">Soluciones claras, precios transparentes. Sin sorpresas. Todos los precios en USD.</p>
+    <!-- Inline currency toggle -->
+    <div style="display:inline-flex;align-items:center;gap:0;background:rgba(255,255,255,0.05);border:1px solid rgba(45,156,219,0.25);border-radius:30px;padding:4px;margin-top:4px;">
+      <button id="p-btn-usd" onclick="globalSetCurrency('usd')"
+        style="padding:7px 20px;border-radius:24px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:.06em;transition:.2s;background:#2D9CDB;color:#fff;">
+        $ USD
+      </button>
+      <button id="p-btn-cop" onclick="globalSetCurrency('cop')"
+        style="padding:7px 20px;border-radius:24px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:.06em;transition:.2s;background:transparent;color:rgba(255,255,255,0.45);">
+        $ COP
+      </button>
+    </div>
   </div>
 
   <!-- TABS -->
@@ -1553,7 +1584,7 @@
   </div>
 
   <!-- Nota al pie -->
-  <p style="text-align:center;font-size:12px;color:rgba(255,255,255,0.35);margin-top:48px;">¿Necesitas algo personalizado? <a href="#contact" style="color:#2D9CDB;text-decoration:none;">Escríbenos</a> y armamos un plan a tu medida.</p>
+  <p style="text-align:center;font-size:12px;color:rgba(255,255,255,0.35);margin-top:48px;" data-es="¿Necesitas algo personalizado? <a href='#contact' style='color:#2D9CDB;text-decoration:none;'>Escríbenos</a> y armamos un plan a tu medida." data-en="Need something custom? <a href='#contact' style='color:#2D9CDB;text-decoration:none;'>Contact us</a> and we'll build a plan for you.">¿Necesitas algo personalizado? <a href="#contact" style="color:#2D9CDB;text-decoration:none;">Escríbenos</a> y armamos un plan a tu medida.</p>
 </section>
 
 <script>
@@ -1591,6 +1622,16 @@ function globalSetCurrency(currency) {
       btnUsd.style.background = 'transparent'; btnUsd.style.color = 'rgba(255,255,255,0.45)';
     }
   }
+
+  /* ── Sincronizar botones inline de precios ── */
+  ['p-btn-usd','n-btn-usd'].forEach(function(id){
+    var el = document.getElementById(id);
+    if(el){ el.style.background = currency==='usd'?'#2D9CDB':'transparent'; el.style.color = currency==='usd'?'#fff':'rgba(255,255,255,0.45)'; }
+  });
+  ['p-btn-cop','n-btn-cop'].forEach(function(id){
+    var el = document.getElementById(id);
+    if(el){ el.style.background = currency==='cop'?'#2D9CDB':'transparent'; el.style.color = currency==='cop'?'#fff':'rgba(255,255,255,0.45)'; }
+  });
 
   /* ── Actualizar todos los price-tag con data-usd / data-cop ── */
   document.querySelectorAll('.price-tag').forEach(function(el) {
@@ -1712,7 +1753,7 @@ function globalSetCurrency(currency) {
       <span class="live-dot-red"></span>
       <div class="live-avatars" id="liveAvatars"></div>
       <div class="live-text">
-        <span class="live-count-wrap"><span id="liveCount">14</span>&nbsp;personas están viendo esto ahora</span>
+        <span class="live-count-wrap"><span id="liveCount">14</span>&nbsp;<span data-es="personas están viendo esto ahora" data-en="people are viewing this right now">personas están viendo esto ahora</span></span>
       </div>
     </div>
     <div class="live-urgency" id="liveUrgency">
@@ -1729,9 +1770,20 @@ function globalSetCurrency(currency) {
 <section id="nfc" style="padding:100px 5%;background:transparent;overflow:hidden;">
 
   <div style="text-align:center;margin-bottom:48px;">
-    <span class="section-tag reveal">Publicidad Inteligente</span>
-    <h2 class="section-title reveal" style="margin-bottom:16px;">TECNOLOGÍA <span>NFC</span> PARA TU MARCA</h2>
-    <p class="section-desc reveal" style="margin:0 auto 32px;max-width:600px;">Conecta el mundo físico con el digital en un toque. Tus clientes escanean y llegan directo a tu WhatsApp, Google o perfil — sin apps, sin fricción.</p>
+    <span class="section-tag reveal" data-es="Publicidad Inteligente" data-en="Smart Advertising">Publicidad Inteligente</span>
+    <h2 class="section-title reveal" style="margin-bottom:16px;" data-es="TECNOLOGÍA <span>NFC</span> PARA TU MARCA" data-en="<span>NFC</span> TECHNOLOGY FOR YOUR BRAND">TECNOLOGÍA <span>NFC</span> PARA TU MARCA</h2>
+    <p class="section-desc reveal" style="margin:0 auto 32px;max-width:600px;" data-es="Conecta el mundo físico con el digital en un toque. Tus clientes escanean y llegan directo a tu WhatsApp, Google o perfil — sin apps, sin fricción." data-en="Connect the physical world with the digital in one tap. Your clients scan and land directly on your WhatsApp, Google or profile — no apps, no friction.">Conecta el mundo físico con el digital en un toque. Tus clientes escanean y llegan directo a tu WhatsApp, Google o perfil — sin apps, sin fricción.</p>
+    <!-- Inline currency toggle NFC -->
+    <div style="display:inline-flex;align-items:center;gap:0;background:rgba(255,255,255,0.05);border:1px solid rgba(45,156,219,0.25);border-radius:30px;padding:4px;">
+      <button id="n-btn-usd" onclick="globalSetCurrency('usd')"
+        style="padding:7px 20px;border-radius:24px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:.06em;transition:.2s;background:#2D9CDB;color:#fff;">
+        $ USD
+      </button>
+      <button id="n-btn-cop" onclick="globalSetCurrency('cop')"
+        style="padding:7px 20px;border-radius:24px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:.06em;transition:.2s;background:transparent;color:rgba(255,255,255,0.45);">
+        $ COP
+      </button>
+    </div>
   </div>
 
   <!-- NFC Carousel -->
@@ -1747,7 +1799,7 @@ function globalSetCurrency(currency) {
         onmouseover="this.style.borderColor='rgba(45,156,219,0.5)';this.style.boxShadow='0 12px 40px rgba(45,156,219,0.14)'"
         onmouseout="this.style.borderColor='rgba(45,156,219,0.15)';this.style.boxShadow='none'">
         <div style="position:relative;aspect-ratio:4/3;overflow:hidden;background:#0a0a0a;">
-          <img src="https://i.ibb.co/xtwRvsb4/IMG-0405.png" alt="Manilla NFC"
+          <img src="https://i.ibb.co/S7mTTMth/IMG-0414.png" alt="Manilla NFC"
             style="width:100%;height:100%;object-fit:cover;transition:.5s;"
             onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
           <div style="position:absolute;top:12px;left:12px;background:#2D9CDB;color:#fff;font-size:10px;font-weight:700;letter-spacing:.1em;padding:4px 12px;border-radius:20px;">NFC</div>
@@ -1773,53 +1825,53 @@ function globalSetCurrency(currency) {
       <!-- CARD 2: Tarjeta NFC Personalizada -->
       <div class="nfc-slide" style="flex:0 0 calc(33.333% - 16px);background:rgba(255,255,255,0.03);border:1px solid #2D9CDB;border-radius:20px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .3s,box-shadow .3s;box-shadow:0 0 30px rgba(45,156,219,0.1);">
         <div style="position:relative;aspect-ratio:4/3;overflow:hidden;background:#0a0a0a;">
-          <img src="https://i.ibb.co/S7mTTMth/IMG-0414.png" alt="Tarjeta NFC Personalizada"
+          <img src="https://i.ibb.co/xtwRvsb4/IMG-0405.png" alt="Tarjeta NFC Personalizada"
             style="width:100%;height:100%;object-fit:cover;transition:.5s;"
             onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
           <div style="position:absolute;top:12px;left:12px;background:#2D9CDB;color:#fff;font-size:10px;font-weight:700;letter-spacing:.1em;padding:4px 12px;border-radius:20px;">NFC</div>
-          <div style="position:absolute;top:12px;right:12px;background:rgba(5,5,5,0.85);color:#56CCF2;font-size:10px;font-weight:700;padding:4px 10px;border-radius:20px;">⭐ Popular</div>
+          <div style="position:absolute;top:12px;right:12px;background:rgba(5,5,5,0.85);color:#56CCF2;font-size:10px;font-weight:700;padding:4px 10px;border-radius:20px;" data-es="⭐ Popular" data-en="⭐ Popular">⭐ Popular</div>
         </div>
         <div style="padding:24px;display:flex;flex-direction:column;flex:1;">
-          <h3 style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;margin-bottom:6px;color:#fff;">Tarjeta NFC Personalizada</h3>
-          <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:20px;flex:1;">Tu tarjeta de presentación inteligente. Un toque y tus clientes ven todo tu perfil. Con logo, colores y datos personalizados.</p>
+          <h3 style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;margin-bottom:6px;color:#fff;" data-es="Tarjeta NFC Personalizada" data-en="Custom NFC Card">Tarjeta NFC Personalizada</h3>
+          <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:20px;flex:1;" data-es="Tu tarjeta de presentación inteligente. Un toque y tus clientes ven todo tu perfil. Con logo, colores y datos personalizados." data-en="Your smart business card. One tap and your clients see your full profile. With logo, colors and personalized data.">Tu tarjeta de presentación inteligente. Un toque y tus clientes ven todo tu perfil. Con logo, colores y datos personalizados.</p>
           <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
             <div>
               <div class="price-tag" data-usd="22" data-cop="91300" style="font-family:'Bebas Neue',sans-serif;font-size:38px;color:#fff;line-height:1;">$22 <span class="price-currency" style="font-size:16px;color:#2D9CDB;">USD</span></div>
-              <div style="font-size:11px;color:rgba(255,255,255,0.3);margin-top:2px;">📦 Envío gratis Cartagena</div>
+              <div style="font-size:11px;color:rgba(255,255,255,0.3);margin-top:2px;" data-es="📦 Envío gratis Cartagena" data-en="📦 Free shipping Cartagena">📦 Envío gratis Cartagena</div>
             </div>
             <a href="https://wa.me/573186471571?text=Hola%2C%20quiero%20pedir%20una%20Tarjeta%20NFC%20Personalizada%20a%2022%20USD.%20%C2%BFTienen%20disponibilidad%3F" target="_blank" rel="noopener"
               style="display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;padding:11px 18px;border-radius:10px;font-weight:700;font-size:12px;text-decoration:none;transition:.2s;white-space:nowrap;"
               onmouseover="this.style.background='#1ebe5d'" onmouseout="this.style.background='#25D366'">
               <svg width="15" height="15" viewBox="0 0 32 32" fill="#fff"><path d="M16 0C7.164 0 0 7.163 0 16c0 2.822.737 5.469 2.027 7.773L0 32l8.469-2.004A15.93 15.93 0 0 0 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm7.27 21.455c-.398-.2-2.355-1.162-2.72-1.294-.365-.133-.631-.2-.897.2-.265.398-1.029 1.294-1.262 1.56-.232.265-.465.298-.863.1-.398-.2-1.681-.62-3.2-1.977-1.183-1.057-1.981-2.362-2.213-2.76-.232-.398-.025-.613.175-.811.18-.178.398-.465.597-.697.2-.232.265-.398.398-.664.133-.265.067-.497-.033-.697-.1-.2-.897-2.162-1.229-2.96-.324-.778-.653-.672-.897-.685-.232-.012-.497-.015-.763-.015-.265 0-.697.1-1.063.497-.365.398-1.395 1.362-1.395 3.322s1.428 3.853 1.628 4.119c.2.265 2.81 4.29 6.808 6.019.952.41 1.694.655 2.273.839.955.304 1.825.261 2.513.158.767-.114 2.355-.963 2.687-1.893.332-.93.332-1.727.232-1.893-.1-.166-.365-.265-.763-.465z"/></svg>
-              Pedir ahora
+              <span data-es="Pedir ahora" data-en="Order now">Pedir ahora</span>
             </a>
           </div>
         </div>
       </div>
 
-      <!-- CARD 3: Tarjeta TripAdvisor NFC -->
+      <!-- CARD 3: Tarjeta NFC de Google -->
       <div class="nfc-slide" style="flex:0 0 calc(33.333% - 16px);background:rgba(255,255,255,0.03);border:1px solid rgba(45,156,219,0.15);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .3s,box-shadow .3s;"
         onmouseover="this.style.borderColor='rgba(45,156,219,0.5)';this.style.boxShadow='0 12px 40px rgba(45,156,219,0.14)'"
         onmouseout="this.style.borderColor='rgba(45,156,219,0.15)';this.style.boxShadow='none'">
         <div style="position:relative;aspect-ratio:4/3;overflow:hidden;background:#0a0a0a;">
-          <img src="https://i.ibb.co/vCP5tC0V/IMG-0424.png" alt="Tarjeta TripAdvisor NFC"
+          <img src="https://i.ibb.co/vCP5tC0V/IMG-0424.png" alt="Tarjeta NFC de Google"
             style="width:100%;height:100%;object-fit:cover;transition:.5s;"
             onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
           <div style="position:absolute;top:12px;left:12px;background:#2D9CDB;color:#fff;font-size:10px;font-weight:700;letter-spacing:.1em;padding:4px 12px;border-radius:20px;">NFC</div>
         </div>
         <div style="padding:24px;display:flex;flex-direction:column;flex:1;">
-          <h3 style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;margin-bottom:6px;color:#fff;">Tarjeta NFC TripAdvisor</h3>
-          <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:20px;flex:1;">Más reseñas en TripAdvisor sin esfuerzo. Perfecta para restaurantes, hoteles y negocios turísticos.</p>
+          <h3 style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;margin-bottom:6px;color:#fff;" data-es="Tarjeta NFC de Google" data-en="Google NFC Card">Tarjeta NFC de Google</h3>
+          <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:20px;flex:1;" data-es="Más reseñas en Google sin esfuerzo. Un toque lleva directo a tu perfil de Google Business. Perfecta para cualquier negocio." data-en="More Google reviews effortlessly. One tap takes customers directly to your Google Business profile. Perfect for any business.">Más reseñas en Google sin esfuerzo. Un toque lleva directo a tu perfil de Google Business. Perfecta para cualquier negocio.</p>
           <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
             <div>
               <div class="price-tag" data-usd="20" data-cop="83000" style="font-family:'Bebas Neue',sans-serif;font-size:38px;color:#fff;line-height:1;">$20 <span class="price-currency" style="font-size:16px;color:#2D9CDB;">USD</span></div>
-              <div style="font-size:11px;color:rgba(255,255,255,0.3);margin-top:2px;">📦 Envío gratis Cartagena</div>
+              <div style="font-size:11px;color:rgba(255,255,255,0.3);margin-top:2px;" data-es="📦 Envío gratis Cartagena" data-en="📦 Free shipping Cartagena">📦 Envío gratis Cartagena</div>
             </div>
-            <a href="https://wa.me/573186471571?text=Hola%2C%20quiero%20pedir%20una%20Tarjeta%20NFC%20TripAdvisor%20a%2020%20USD.%20%C2%BFTienen%20disponibilidad%3F" target="_blank" rel="noopener"
+            <a href="https://wa.me/573186471571?text=Hola%2C%20quiero%20pedir%20una%20Tarjeta%20NFC%20de%20Google%20a%2020%20USD.%20%C2%BFTienen%20disponibilidad%3F" target="_blank" rel="noopener"
               style="display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;padding:11px 18px;border-radius:10px;font-weight:700;font-size:12px;text-decoration:none;transition:.2s;white-space:nowrap;"
               onmouseover="this.style.background='#1ebe5d'" onmouseout="this.style.background='#25D366'">
               <svg width="15" height="15" viewBox="0 0 32 32" fill="#fff"><path d="M16 0C7.164 0 0 7.163 0 16c0 2.822.737 5.469 2.027 7.773L0 32l8.469-2.004A15.93 15.93 0 0 0 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm7.27 21.455c-.398-.2-2.355-1.162-2.72-1.294-.365-.133-.631-.2-.897.2-.265.398-1.029 1.294-1.262 1.56-.232.265-.465.298-.863.1-.398-.2-1.681-.62-3.2-1.977-1.183-1.057-1.981-2.362-2.213-2.76-.232-.398-.025-.613.175-.811.18-.178.398-.465.597-.697.2-.232.265-.398.398-.664.133-.265.067-.497-.033-.697-.1-.2-.897-2.162-1.229-2.96-.324-.778-.653-.672-.897-.685-.232-.012-.497-.015-.763-.015-.265 0-.697.1-1.063.497-.365.398-1.395 1.362-1.395 3.322s1.428 3.853 1.628 4.119c.2.265 2.81 4.29 6.808 6.019.952.41 1.694.655 2.273.839.955.304 1.825.261 2.513.158.767-.114 2.355-.963 2.687-1.893.332-.93.332-1.727.232-1.893-.1-.166-.365-.265-.763-.465z"/></svg>
-              Pedir ahora
+              <span data-es="Pedir ahora" data-en="Order now">Pedir ahora</span>
             </a>
           </div>
         </div>
@@ -1844,17 +1896,17 @@ function globalSetCurrency(currency) {
   <div style="max-width:700px;margin:0 auto;background:linear-gradient(135deg,rgba(45,156,219,0.08),rgba(86,204,242,0.04));border:1px solid rgba(45,156,219,0.2);border-radius:14px;padding:20px 28px;display:flex;align-items:center;justify-content:center;gap:32px;flex-wrap:wrap;text-align:center;">
     <div style="display:flex;align-items:center;gap:10px;">
       <span style="font-size:22px;">🚚</span>
-      <div><div style="font-size:13px;font-weight:700;color:#fff;">Envío a todo Colombia</div><div style="font-size:11px;color:rgba(255,255,255,0.45);">Costo según destino</div></div>
+      <div><div style="font-size:13px;font-weight:700;color:#fff;" data-es="Envío a todo Colombia" data-en="Shipping across Colombia">Envío a todo Colombia</div><div style="font-size:11px;color:rgba(255,255,255,0.45);" data-es="Costo según destino" data-en="Cost based on destination">Costo según destino</div></div>
     </div>
     <div style="width:1px;height:36px;background:rgba(45,156,219,0.2);"></div>
     <div style="display:flex;align-items:center;gap:10px;">
       <span style="font-size:22px;">🎁</span>
-      <div><div style="font-size:13px;font-weight:700;color:#56CCF2;">Cartagena — Envío GRATIS</div><div style="font-size:11px;color:rgba(255,255,255,0.45);">Entrega directa sin costo</div></div>
+      <div><div style="font-size:13px;font-weight:700;color:#56CCF2;" data-es="Cartagena — Envío GRATIS" data-en="Cartagena — FREE Shipping">Cartagena — Envío GRATIS</div><div style="font-size:11px;color:rgba(255,255,255,0.45);" data-es="Entrega directa sin costo" data-en="Direct delivery at no cost">Entrega directa sin costo</div></div>
     </div>
     <div style="width:1px;height:36px;background:rgba(45,156,219,0.2);"></div>
     <div style="display:flex;align-items:center;gap:10px;">
       <span style="font-size:22px;">⚡</span>
-      <div><div style="font-size:13px;font-weight:700;color:#fff;">Activación incluida</div><div style="font-size:11px;color:rgba(255,255,255,0.45);">Configuramos el NFC por ti</div></div>
+      <div><div style="font-size:13px;font-weight:700;color:#fff;" data-es="Activación incluida" data-en="Activation included">Activación incluida</div><div style="font-size:11px;color:rgba(255,255,255,0.45);" data-es="Configuramos el NFC por ti" data-en="We configure the NFC for you">Configuramos el NFC por ti</div></div>
     </div>
   </div>
 
@@ -2297,28 +2349,9 @@ function globalSetCurrency(currency) {
 
 </script>
 
-<!-- Unified utilities float (moneda + idioma) -->
-<div class="utils-float" aria-label="Utilidades">
-  <!-- Moneda -->
-  <button class="currency-float-btn active" id="g-btn-usd" onclick="globalSetCurrency('usd')" aria-label="USD">
-    <span class="cf-symbol">$</span>
-    <span class="cf-label">USD</span>
-  </button>
-  <div class="uf-sep"></div>
-  <button class="currency-float-btn" id="g-btn-cop" onclick="globalSetCurrency('cop')" aria-label="COP">
-    <span class="cf-symbol">$</span>
-    <span class="cf-label">COP</span>
-  </button>
-  <!-- Divisor mayor -->
-  <div class="uf-sep" style="margin:6px 0;background:rgba(45,156,219,0.25);"></div>
-  <!-- Idioma -->
-  <button class="lang-float-btn active" onclick="setLang('es');syncLangFloat('es')" id="lang-float-es" aria-label="Español">
-    <img src="https://flagcdn.com/w40/co.png" width="24" height="17" alt="Colombia" style="border-radius:3px;">
-  </button>
-  <div class="uf-sep"></div>
-  <button class="lang-float-btn" onclick="setLang('en');syncLangFloat('en')" id="lang-float-en" aria-label="English">
-    <img src="https://flagcdn.com/w40/us.png" width="24" height="17" alt="USA" style="border-radius:3px;">
-  </button>
+<!-- Language Float Bubble (circular, above WhatsApp) -->
+<div class="lang-float" id="langFloatBtn" aria-label="Toggle language" title="ES / EN">
+  <img src="https://flagcdn.com/w40/co.png" id="langFloatImg" width="32" height="23" alt="Idioma">
 </div>
 
 <!-- WhatsApp Float -->
@@ -2336,7 +2369,25 @@ function syncLangFloat(lang) {
   var floatEn = document.getElementById('lang-float-en');
   if(floatEs) floatEs.classList.toggle('active', lang === 'es');
   if(floatEn) floatEn.classList.toggle('active', lang === 'en');
+  // Update circular lang bubble flag
+  var img = document.getElementById('langFloatImg');
+  if(img){
+    img.src = lang === 'en' ? 'https://flagcdn.com/w40/us.png' : 'https://flagcdn.com/w40/co.png';
+    img.alt = lang === 'en' ? 'English' : 'Español';
+  }
 }
+
+// Circular lang button toggle
+(function(){
+  var _lang = 'es';
+  var btn = document.getElementById('langFloatBtn');
+  if(btn){
+    btn.addEventListener('click', function(){
+      _lang = _lang === 'es' ? 'en' : 'es';
+      setLang(_lang);
+    });
+  }
+})();
 
 function setLang(lang) {
   // Update nav buttons
