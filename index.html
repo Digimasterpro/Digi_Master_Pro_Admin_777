@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -112,8 +111,17 @@
     font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;
     letter-spacing:.05em;cursor:pointer;text-decoration:none;
     transition:background .2s;
+    animation:navCtaBounce 1.8s ease-in-out infinite;
+    display:inline-block;
   }
-  .nav-cta:hover{background:var(--blue-light)}
+  .nav-cta:hover{background:var(--blue-light);animation:none;transform:translateY(-2px) scale(1.04);}
+  @keyframes navCtaBounce{
+    0%,100%{transform:translateY(0) scale(1);}
+    15%{transform:translateY(-7px) scale(1.05);}
+    30%{transform:translateY(0) scale(1);}
+    45%{transform:translateY(-4px) scale(1.03);}
+    60%{transform:translateY(0) scale(1);}
+  }
   .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
   .hamburger span{width:24px;height:2px;background:var(--white);transition:.3s;display:block}
 
@@ -990,7 +998,7 @@
     <li><a href="#services" data-es="Servicios" data-en="Services">Servicios</a></li>
     <li><a href="#precios" data-es="Precios" data-en="Pricing">Precios</a></li>
     <li><a href="#reviews" data-es="Reseñas" data-en="Reviews">Reseñas</a></li>
-    <li><a href="#nfc" data-es="NFC" data-en="NFC">NFC 📲</a></li>
+    <li><a href="#nfc" data-es="NFC" data-en="NFC">NFC <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-left:2px;color:#56CCF2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20" stroke-width="3"/></svg></a></li>
     <li><a href="#portfolio" data-es="Trabajos" data-en="Work">Trabajos</a></li>
     <li><a href="#about" data-es="Nosotros" data-en="About Us">Nosotros</a></li>
     <li><a href="#contact" data-es="Contacto" data-en="Contact">Contacto</a></li>
@@ -1025,7 +1033,7 @@
     <li><a href="#services" onclick="closeMenu()" data-es="Servicios" data-en="Services">Servicios</a></li>
     <li><a href="#precios" onclick="closeMenu()" data-es="Precios" data-en="Pricing">Precios</a></li>
     <li><a href="#reviews" onclick="closeMenu()" data-es="Reseñas" data-en="Reviews">Reseñas</a></li>
-    <li><a href="#nfc" onclick="closeMenu()" data-es="NFC" data-en="NFC">NFC 📲</a></li>
+    <li><a href="#nfc" onclick="closeMenu()" data-es="NFC" data-en="NFC">NFC <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#56CCF2" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-left:4px"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20" stroke-width="3"/></svg></a></li>
     <li><a href="#portfolio" onclick="closeMenu()" data-es="Trabajos" data-en="Work">Trabajos</a></li>
     <li><a href="#about" onclick="closeMenu()" data-es="Nosotros" data-en="About Us">Nosotros</a></li>
     <li><a href="#contact" onclick="closeMenu()" data-es="Contacto" data-en="Contact">Contacto</a></li>
@@ -1319,9 +1327,9 @@
 
   <!-- TABS -->
   <div style="display:flex;justify-content:center;gap:10px;margin-bottom:48px;flex-wrap:wrap;">
-    <button onclick="showTab('web')" id="tab-web" style="padding:10px 28px;border-radius:30px;border:1px solid #2D9CDB;background:#2D9CDB;color:#fff;font-family:'DM Sans',sans-serif;font-weight:700;font-size:13px;cursor:pointer;letter-spacing:.04em;transition:.2s;">🌐 Sitios Web</button>
-    <button onclick="showTab('brand')" id="tab-brand" style="padding:10px 28px;border-radius:30px;border:1px solid rgba(45,156,219,0.3);background:transparent;color:rgba(255,255,255,0.6);font-family:'DM Sans',sans-serif;font-weight:700;font-size:13px;cursor:pointer;letter-spacing:.04em;transition:.2s;">🎨 Branding</button>
-    <button onclick="showTab('extra')" id="tab-extra" style="padding:10px 28px;border-radius:30px;border:1px solid rgba(45,156,219,0.3);background:transparent;color:rgba(255,255,255,0.6);font-family:'DM Sans',sans-serif;font-weight:700;font-size:13px;cursor:pointer;letter-spacing:.04em;transition:.2s;">⚡ Servicios Extra</button>
+    <button onclick="showTab('web')" id="tab-web" style="padding:10px 28px;border-radius:30px;border:1px solid #2D9CDB;background:#2D9CDB;color:#fff;font-family:'DM Sans',sans-serif;font-weight:700;font-size:13px;cursor:pointer;letter-spacing:.04em;transition:.2s;display:inline-flex;align-items:center;gap:7px;"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg> Sitios Web</button>
+    <button onclick="showTab('brand')" id="tab-brand" style="padding:10px 28px;border-radius:30px;border:1px solid rgba(45,156,219,0.3);background:transparent;color:rgba(255,255,255,0.6);font-family:'DM Sans',sans-serif;font-weight:700;font-size:13px;cursor:pointer;letter-spacing:.04em;transition:.2s;display:inline-flex;align-items:center;gap:7px;"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg> Branding</button>
+    <button onclick="showTab('extra')" id="tab-extra" style="padding:10px 28px;border-radius:30px;border:1px solid rgba(45,156,219,0.3);background:transparent;color:rgba(255,255,255,0.6);font-family:'DM Sans',sans-serif;font-weight:700;font-size:13px;cursor:pointer;letter-spacing:.04em;transition:.2s;display:inline-flex;align-items:center;gap:7px;"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Servicios Extra</button>
   </div>
 
   <!-- TAB: SITIOS WEB -->
@@ -1330,8 +1338,8 @@
       <!-- Plan Starter -->
       <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(45,156,219,0.15);border-radius:20px;padding:36px 28px;position:relative;transition:.3s;" onmouseover="this.style.borderColor='rgba(45,156,219,0.5)';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='rgba(45,156,219,0.15)';this.style.transform='translateY(0)'">
         <p style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#2D9CDB;margin-bottom:12px;">Starter</p>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:56px;color:#fff;line-height:1;">$499</div>
-        <p style="font-size:12px;color:rgba(255,255,255,0.4);margin-bottom:24px;">USD · pago único</p>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:56px;color:#fff;line-height:1;" data-price-usd="499">$499</div>
+        <p style="font-size:12px;color:rgba(255,255,255,0.4);margin-bottom:24px;" data-currency-label>USD · pago único</p>
         <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:32px;">
           <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#2D9CDB;">✓</span> Hasta 5 secciones</li>
           <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#2D9CDB;">✓</span> Diseño responsive</li>
@@ -1347,8 +1355,8 @@
       <div style="background:linear-gradient(135deg,rgba(45,156,219,0.12),rgba(86,204,242,0.06));border:1px solid #2D9CDB;border-radius:20px;padding:36px 28px;position:relative;transition:.3s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
         <div style="position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:#2D9CDB;color:#fff;font-size:11px;font-weight:700;letter-spacing:.1em;padding:5px 16px;border-radius:20px;white-space:nowrap;">⭐ MÁS POPULAR</div>
         <p style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#56CCF2;margin-bottom:12px;">Pro</p>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:56px;color:#fff;line-height:1;">$599</div>
-        <p style="font-size:12px;color:rgba(255,255,255,0.4);margin-bottom:24px;">USD · pago único</p>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:56px;color:#fff;line-height:1;" data-price-usd="599">$599</div>
+        <p style="font-size:12px;color:rgba(255,255,255,0.4);margin-bottom:24px;" data-currency-label>USD · pago único</p>
         <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:32px;">
           <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#56CCF2;">✓</span> Hasta 8 secciones</li>
           <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#56CCF2;">✓</span> Diseño premium a medida</li>
@@ -1363,8 +1371,8 @@
       <!-- Plan Elite -->
       <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(45,156,219,0.15);border-radius:20px;padding:36px 28px;position:relative;transition:.3s;" onmouseover="this.style.borderColor='rgba(45,156,219,0.5)';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='rgba(45,156,219,0.15)';this.style.transform='translateY(0)'">
         <p style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#2D9CDB;margin-bottom:12px;">Elite</p>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:56px;color:#fff;line-height:1;">$700</div>
-        <p style="font-size:12px;color:rgba(255,255,255,0.4);margin-bottom:24px;">USD · pago único</p>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:56px;color:#fff;line-height:1;" data-price-usd="700">$700</div>
+        <p style="font-size:12px;color:rgba(255,255,255,0.4);margin-bottom:24px;" data-currency-label>USD · pago único</p>
         <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:32px;">
           <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#2D9CDB;">✓</span> Secciones ilimitadas</li>
           <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#2D9CDB;">✓</span> Desarrollo a medida total</li>
@@ -1384,8 +1392,8 @@
       <!-- Branding Estándar -->
       <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(45,156,219,0.15);border-radius:20px;padding:36px 28px;transition:.3s;" onmouseover="this.style.borderColor='rgba(45,156,219,0.5)';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='rgba(45,156,219,0.15)';this.style.transform='translateY(0)'">
         <p style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#2D9CDB;margin-bottom:12px;">Estándar</p>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:56px;color:#fff;line-height:1;">$199</div>
-        <p style="font-size:12px;color:rgba(255,255,255,0.4);margin-bottom:24px;">USD · pago único</p>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:56px;color:#fff;line-height:1;" data-price-usd="199">$199</div>
+        <p style="font-size:12px;color:rgba(255,255,255,0.4);margin-bottom:24px;" data-currency-label>USD · pago único</p>
         <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:32px;">
           <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#2D9CDB;">✓</span> Diseño de logotipo</li>
           <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#2D9CDB;">✓</span> Paleta de colores</li>
@@ -1400,8 +1408,8 @@
       <div style="background:linear-gradient(135deg,rgba(45,156,219,0.12),rgba(86,204,242,0.06));border:1px solid #2D9CDB;border-radius:20px;padding:36px 28px;position:relative;transition:.3s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
         <div style="position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:#2D9CDB;color:#fff;font-size:11px;font-weight:700;letter-spacing:.1em;padding:5px 16px;border-radius:20px;">⭐ PREMIUM</div>
         <p style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#56CCF2;margin-bottom:12px;">Premium</p>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:56px;color:#fff;line-height:1;">$350</div>
-        <p style="font-size:12px;color:rgba(255,255,255,0.4);margin-bottom:24px;">USD · pago único</p>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:56px;color:#fff;line-height:1;" data-price-usd="350">$350</div>
+        <p style="font-size:12px;color:rgba(255,255,255,0.4);margin-bottom:24px;" data-currency-label>USD · pago único</p>
         <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:32px;">
           <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#56CCF2;">✓</span> Todo lo del plan Estándar</li>
           <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#56CCF2;">✓</span> Identidad visual completa</li>
@@ -1420,59 +1428,59 @@
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;margin-bottom:40px;">
       <!-- Cada servicio extra -->
       <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(45,156,219,0.12);border-radius:16px;padding:24px 20px;transition:.3s;display:flex;flex-direction:column;" onmouseover="this.style.borderColor='#2D9CDB';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(45,156,219,0.12)';this.style.transform='translateY(0)'">
-        <div style="font-size:28px;margin-bottom:10px;">🏢</div>
+        <div style="margin-bottom:12px;width:44px;height:44px;background:rgba(45,156,219,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2D9CDB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
         <h4 style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:8px;color:#fff;">Creación Empresa en Google</h4>
         <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:16px;">Google My Business, Maps, reseñas activas y configuración inicial.</p>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#2D9CDB;margin-bottom:16px;">$160</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#2D9CDB;margin-bottom:16px;" data-price-usd="160">$160</div>
         <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Creaci%C3%B3n%20Empresa%20en%20Google%20a%20160%20USD" target="_blank" rel="noopener" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:10px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:.04em;transition:.2s;margin-top:auto;" onmouseover="this.style.background='#2D9CDB';this.style.color='#fff'" onmouseout="this.style.background='rgba(45,156,219,0.12)';this.style.color='#56CCF2'">Lo quiero →</a>
       </div>
       <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(45,156,219,0.12);border-radius:16px;padding:24px 20px;transition:.3s;display:flex;flex-direction:column;" onmouseover="this.style.borderColor='#2D9CDB';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(45,156,219,0.12)';this.style.transform='translateY(0)'">
-        <div style="font-size:28px;margin-bottom:10px;">🔄</div>
+        <div style="margin-bottom:12px;width:44px;height:44px;background:rgba(45,156,219,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2D9CDB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></div>
         <h4 style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:8px;color:#fff;">Mantenimiento Landing Page</h4>
         <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:16px;">Actualizaciones WordPress, plugins, caché e imágenes.</p>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#2D9CDB;margin-bottom:16px;">$125</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#2D9CDB;margin-bottom:16px;" data-price-usd="125">$125</div>
         <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Mantenimiento%20Landing%20Page%20a%20125%20USD" target="_blank" rel="noopener" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:10px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:.04em;transition:.2s;margin-top:auto;" onmouseover="this.style.background='#2D9CDB';this.style.color='#fff'" onmouseout="this.style.background='rgba(45,156,219,0.12)';this.style.color='#56CCF2'">Lo quiero →</a>
       </div>
       <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(45,156,219,0.12);border-radius:16px;padding:24px 20px;transition:.3s;display:flex;flex-direction:column;" onmouseover="this.style.borderColor='#2D9CDB';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(45,156,219,0.12)';this.style.transform='translateY(0)'">
-        <div style="font-size:28px;margin-bottom:10px;">🔍</div>
+        <div style="margin-bottom:12px;width:44px;height:44px;background:rgba(45,156,219,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2D9CDB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
         <h4 style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:8px;color:#fff;">SEO Completo</h4>
         <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:16px;">Auditoría, optimización, palabras clave, SEO On-Page y local.</p>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#2D9CDB;margin-bottom:16px;">$299</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#2D9CDB;margin-bottom:16px;" data-price-usd="299">$299</div>
         <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20SEO%20Completo%20a%20299%20USD" target="_blank" rel="noopener" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:10px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:.04em;transition:.2s;margin-top:auto;" onmouseover="this.style.background='#2D9CDB';this.style.color='#fff'" onmouseout="this.style.background='rgba(45,156,219,0.12)';this.style.color='#56CCF2'">Lo quiero →</a>
       </div>
       <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(45,156,219,0.12);border-radius:16px;padding:24px 20px;transition:.3s;display:flex;flex-direction:column;" onmouseover="this.style.borderColor='#2D9CDB';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(45,156,219,0.12)';this.style.transform='translateY(0)'">
-        <div style="font-size:28px;margin-bottom:10px;">🔧</div>
+        <div style="margin-bottom:12px;width:44px;height:44px;background:rgba(45,156,219,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2D9CDB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
         <h4 style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:8px;color:#fff;">Actualizaciones Web Site</h4>
         <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:16px;">Contenido, diseños de temporada, productos y ofertas.</p>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#2D9CDB;margin-bottom:16px;">$55</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#2D9CDB;margin-bottom:16px;" data-price-usd="55">$55</div>
         <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Actualizaciones%20Web%20Site%20a%2055%20USD" target="_blank" rel="noopener" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:10px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:.04em;transition:.2s;margin-top:auto;" onmouseover="this.style.background='#2D9CDB';this.style.color='#fff'" onmouseout="this.style.background='rgba(45,156,219,0.12)';this.style.color='#56CCF2'">Lo quiero →</a>
       </div>
       <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(45,156,219,0.12);border-radius:16px;padding:24px 20px;transition:.3s;display:flex;flex-direction:column;" onmouseover="this.style.borderColor='#2D9CDB';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(45,156,219,0.12)';this.style.transform='translateY(0)'">
-        <div style="font-size:28px;margin-bottom:10px;">📈</div>
+        <div style="margin-bottom:12px;width:44px;height:44px;background:rgba(45,156,219,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2D9CDB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div>
         <h4 style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:8px;color:#fff;">Impulso de Tráfico</h4>
         <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:16px;">Google Ads, Meta Ads, métricas y reporte trimestral.</p>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#2D9CDB;margin-bottom:16px;">$270</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#2D9CDB;margin-bottom:16px;" data-price-usd="270">$270</div>
         <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Impulso%20de%20Tr%C3%A1fico%20a%20270%20USD" target="_blank" rel="noopener" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:10px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:.04em;transition:.2s;margin-top:auto;" onmouseover="this.style.background='#2D9CDB';this.style.color='#fff'" onmouseout="this.style.background='rgba(45,156,219,0.12)';this.style.color='#56CCF2'">Lo quiero →</a>
       </div>
       <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(45,156,219,0.12);border-radius:16px;padding:24px 20px;transition:.3s;display:flex;flex-direction:column;" onmouseover="this.style.borderColor='#2D9CDB';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(45,156,219,0.12)';this.style.transform='translateY(0)'">
-        <div style="font-size:28px;margin-bottom:10px;">⚙️</div>
+        <div style="margin-bottom:12px;width:44px;height:44px;background:rgba(45,156,219,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2D9CDB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34L4.93 4.93M20 12h2M2 12h2M12 20v2M12 2v2"/></svg></div>
         <h4 style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:8px;color:#fff;">Integraciones Web Site</h4>
         <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:16px;">HTML/CSS, redes sociales, canales publicitarios y plataformas.</p>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#2D9CDB;margin-bottom:16px;">$80</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#2D9CDB;margin-bottom:16px;" data-price-usd="80">$80</div>
         <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Integraciones%20Web%20Site%20a%2080%20USD" target="_blank" rel="noopener" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:10px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:.04em;transition:.2s;margin-top:auto;" onmouseover="this.style.background='#2D9CDB';this.style.color='#fff'" onmouseout="this.style.background='rgba(45,156,219,0.12)';this.style.color='#56CCF2'">Lo quiero →</a>
       </div>
       <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(45,156,219,0.12);border-radius:16px;padding:24px 20px;transition:.3s;display:flex;flex-direction:column;" onmouseover="this.style.borderColor='#2D9CDB';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(45,156,219,0.12)';this.style.transform='translateY(0)'">
-        <div style="font-size:28px;margin-bottom:10px;">📧</div>
+        <div style="margin-bottom:12px;width:44px;height:44px;background:rgba(45,156,219,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2D9CDB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
         <h4 style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:8px;color:#fff;">Correo Corporativo</h4>
         <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:16px;">Email profesional, Google Workspace o Microsoft 365, firmas HTML.</p>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#2D9CDB;margin-bottom:16px;">$110</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#2D9CDB;margin-bottom:16px;" data-price-usd="110">$110</div>
         <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Correo%20Corporativo%20a%20110%20USD" target="_blank" rel="noopener" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:10px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:.04em;transition:.2s;margin-top:auto;" onmouseover="this.style.background='#2D9CDB';this.style.color='#fff'" onmouseout="this.style.background='rgba(45,156,219,0.12)';this.style.color='#56CCF2'">Lo quiero →</a>
       </div>
       <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(45,156,219,0.12);border-radius:16px;padding:24px 20px;transition:.3s;display:flex;flex-direction:column;" onmouseover="this.style.borderColor='#2D9CDB';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(45,156,219,0.12)';this.style.transform='translateY(0)'">
-        <div style="font-size:28px;margin-bottom:10px;">🤖</div>
+        <div style="margin-bottom:12px;width:44px;height:44px;background:rgba(45,156,219,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2D9CDB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16" r="1" fill="#2D9CDB"/></svg></div>
         <h4 style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:8px;color:#fff;">Bot WhatsApp 24/7</h4>
         <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:16px;">Respuestas automáticas, catálogo, etiquetado y enrutamiento a humano.</p>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#2D9CDB;margin-bottom:16px;">$260</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#2D9CDB;margin-bottom:16px;" data-price-usd="260">$260</div>
         <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Bot%20WhatsApp%2024%2F7%20a%20260%20USD" target="_blank" rel="noopener" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:10px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:.04em;transition:.2s;margin-top:auto;" onmouseover="this.style.background='#2D9CDB';this.style.color='#fff'" onmouseout="this.style.background='rgba(45,156,219,0.12)';this.style.color='#56CCF2'">Lo quiero →</a>
       </div>
     </div>
@@ -1481,24 +1489,24 @@
     <p style="text-align:center;font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#2D9CDB;margin-bottom:24px;">🔥 Combos con descuento</p>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;">
       <div style="background:linear-gradient(135deg,rgba(45,156,219,0.1),rgba(86,204,242,0.05));border:1px solid rgba(45,156,219,0.3);border-radius:16px;padding:24px;text-align:center;">
-        <div style="font-size:22px;margin-bottom:8px;">🏆</div>
+        <div style="font-size:22px;margin-bottom:8px;">🥇</div>
         <h4 style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:6px;">Combo #1</h4>
         <p style="font-size:12px;color:rgba(255,255,255,0.5);margin-bottom:12px;">Creación Google + Actualizaciones Web</p>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:#56CCF2;">$210</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:#56CCF2;" data-price-usd="210">$210</div>
         <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20Combo%201%20a%20210%20USD" target="_blank" style="display:inline-block;margin-top:14px;background:#2D9CDB;color:#fff;padding:10px 24px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;transition:.2s;" onmouseover="this.style.background='#56CCF2'" onmouseout="this.style.background='#2D9CDB'">Lo quiero →</a>
       </div>
       <div style="background:linear-gradient(135deg,rgba(45,156,219,0.1),rgba(86,204,242,0.05));border:1px solid rgba(45,156,219,0.3);border-radius:16px;padding:24px;text-align:center;">
-        <div style="font-size:22px;margin-bottom:8px;">🤖</div>
+        <div style="font-size:22px;margin-bottom:8px;">🌟</div>
         <h4 style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:6px;">Combo #2</h4>
         <p style="font-size:12px;color:rgba(255,255,255,0.5);margin-bottom:12px;">Bot WhatsApp + Integraciones Web</p>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:#56CCF2;">$340</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:#56CCF2;" data-price-usd="340">$340</div>
         <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20Combo%202%20a%20340%20USD" target="_blank" style="display:inline-block;margin-top:14px;background:#2D9CDB;color:#fff;padding:10px 24px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;transition:.2s;" onmouseover="this.style.background='#56CCF2'" onmouseout="this.style.background='#2D9CDB'">Lo quiero →</a>
       </div>
       <div style="background:linear-gradient(135deg,rgba(45,156,219,0.1),rgba(86,204,242,0.05));border:1px solid rgba(45,156,219,0.3);border-radius:16px;padding:24px;text-align:center;">
         <div style="font-size:22px;margin-bottom:8px;">🚀</div>
         <h4 style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:6px;">Combo #3</h4>
         <p style="font-size:12px;color:rgba(255,255,255,0.5);margin-bottom:12px;">SEO + Impulso de Tráfico</p>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:#56CCF2;">$569</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:#56CCF2;" data-price-usd="569">$569</div>
         <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20Combo%203%20a%20569%20USD" target="_blank" style="display:inline-block;margin-top:14px;background:#2D9CDB;color:#fff;padding:10px 24px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;transition:.2s;" onmouseover="this.style.background='#56CCF2'" onmouseout="this.style.background='#2D9CDB'">Lo quiero →</a>
       </div>
     </div>
@@ -1520,6 +1528,73 @@ function showTab(tab) {
     }
   });
 }
+</script>
+
+<script>
+/* ══ GLOBAL CURRENCY CONVERTER ══ */
+var _currentCurrency = 'usd';
+/* Rate: 1 USD ≈ 4150 COP (puedes ajustar) */
+var COP_RATE = 4150;
+
+function globalSetCurrency(currency) {
+  _currentCurrency = currency;
+
+  /* ── Actualizar botones de la nav ── */
+  var btnUsd = document.getElementById('g-btn-usd');
+  var btnCop = document.getElementById('g-btn-cop');
+  if(btnUsd && btnCop) {
+    if(currency === 'usd') {
+      btnUsd.style.background = '#2D9CDB'; btnUsd.style.color = '#fff';
+      btnCop.style.background = 'transparent'; btnCop.style.color = 'rgba(255,255,255,0.45)';
+    } else {
+      btnCop.style.background = '#2D9CDB'; btnCop.style.color = '#fff';
+      btnUsd.style.background = 'transparent'; btnUsd.style.color = 'rgba(255,255,255,0.45)';
+    }
+  }
+
+  /* ── Actualizar todos los price-tag con data-usd / data-cop ── */
+  document.querySelectorAll('.price-tag').forEach(function(el) {
+    var usd = parseFloat(el.getAttribute('data-usd'));
+    var cop = parseFloat(el.getAttribute('data-cop'));
+    var curEl = el.querySelector('.price-currency');
+    if(currency === 'usd') {
+      el.childNodes[0].textContent = '$' + usd + ' ';
+      if(curEl) curEl.textContent = 'USD';
+    } else {
+      var copVal = cop ? cop : Math.round(usd * COP_RATE / 1000) * 1000;
+      el.childNodes[0].textContent = '$' + copVal.toLocaleString('es-CO') + ' ';
+      if(curEl) curEl.textContent = 'COP';
+    }
+  });
+
+  /* ── Planes de precios (secciones web, brand, extra, combos) ── */
+  /* Busca todos los elementos con data-price-usd */
+  document.querySelectorAll('[data-price-usd]').forEach(function(el) {
+    var usd = parseFloat(el.getAttribute('data-price-usd'));
+    if(currency === 'usd') {
+      el.textContent = '$' + usd;
+    } else {
+      var cop = Math.round(usd * COP_RATE / 1000) * 1000;
+      el.textContent = '$' + cop.toLocaleString('es-CO');
+    }
+  });
+
+  /* ── Subtítulo de moneda en planes ── */
+  document.querySelectorAll('[data-currency-label]').forEach(function(el) {
+    el.textContent = currency === 'usd' ? 'USD · pago único' : 'COP · pago único';
+  });
+
+  /* ── Guardar preferencia ── */
+  try { localStorage.setItem('currency', currency); } catch(e) {}
+}
+
+/* Aplicar preferencia guardada al cargar */
+(function(){
+  try {
+    var saved = localStorage.getItem('currency');
+    if(saved && saved !== 'usd') globalSetCurrency(saved);
+  } catch(e) {}
+})();
 </script>
 
 <hr class="glowline">
