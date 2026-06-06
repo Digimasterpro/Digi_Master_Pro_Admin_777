@@ -332,8 +332,158 @@
   #cta > *{position:relative;z-index:2}
   #cta .section-title{font-size:clamp(48px,6vw,80px);margin-bottom:16px;line-height:.95}
   #cta .section-desc{margin:0 auto 48px;font-size:16px;max-width:500px}
-  .rocket{font-size:52px;margin-bottom:28px;display:inline-block;animation:rocketFloat 3s ease-in-out infinite}
-  @keyframes rocketFloat{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-10px) rotate(5deg)}}
+  /* ── CTA CALENDAR ICON ── */
+  .cta-icon-wrap{
+    position:relative;display:inline-flex;align-items:center;justify-content:center;
+    width:100px;height:100px;margin-bottom:32px;
+  }
+  .cta-cal-ring{
+    position:absolute;border-radius:50%;border:1px solid rgba(45,156,219,0.25);
+    animation:calRingPulse 3s ease-out infinite;
+  }
+  .cta-cal-ring-1{width:80px;height:80px;animation-delay:0s}
+  .cta-cal-ring-2{width:110px;height:110px;animation-delay:.6s;border-color:rgba(86,204,242,0.18)}
+  .cta-cal-ring-3{width:140px;height:140px;animation-delay:1.2s;border-color:rgba(45,156,219,0.1)}
+  @keyframes calRingPulse{
+    0%{transform:scale(.85);opacity:0}
+    30%{opacity:1}
+    100%{transform:scale(1.35);opacity:0}
+  }
+  .cta-cal-icon{
+    position:relative;z-index:1;
+    background:rgba(45,156,219,0.08);border:1px solid rgba(45,156,219,0.25);
+    border-radius:20px;padding:18px;
+    animation:calFloat 3.5s ease-in-out infinite;
+    backdrop-filter:blur(8px);
+  }
+  @keyframes calFloat{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-8px)}
+  }
+  .cta-live-dot{
+    position:absolute;top:10px;right:10px;
+    width:9px;height:9px;border-radius:50%;background:#25D366;
+    box-shadow:0 0 0 0 rgba(37,211,102,0.5);
+    animation:livePulse 1.8s ease-out infinite;
+  }
+  @keyframes livePulse{
+    0%{box-shadow:0 0 0 0 rgba(37,211,102,0.6)}
+    70%{box-shadow:0 0 0 10px rgba(37,211,102,0)}
+    100%{box-shadow:0 0 0 0 rgba(37,211,102,0)}
+  }
+
+  /* Value props row */
+  .cta-props{
+    display:flex;gap:16px;justify-content:center;flex-wrap:wrap;
+    margin-bottom:44px;
+  }
+  .cta-prop{
+    display:flex;flex-direction:column;align-items:center;gap:4px;
+    background:rgba(45,156,219,0.06);border:1px solid rgba(45,156,219,0.15);
+    border-radius:14px;padding:18px 20px;min-width:110px;
+    transition:.25s;
+  }
+  .cta-prop:hover{background:rgba(45,156,219,0.12);border-color:rgba(45,156,219,0.35);transform:translateY(-3px)}
+  .cta-prop-icon{font-size:22px;margin-bottom:4px}
+  .cta-prop strong{font-size:13px;font-weight:700;color:var(--white);font-family:'Syne',sans-serif}
+  .cta-prop span{font-size:11px;color:var(--gray);text-align:center}
+
+  /* CTA buttons */
+  .cta-btns{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-bottom:32px}
+  .btn-book{font-size:17px;padding:20px 44px;animation:bookPulse 2.5s ease-in-out infinite}
+  @keyframes bookPulse{
+    0%,100%{box-shadow:0 8px 40px rgba(37,211,102,0.4)}
+    50%{box-shadow:0 8px 60px rgba(37,211,102,0.7), 0 0 0 8px rgba(37,211,102,0.08)}
+  }
+
+  /* Social proof */
+  .cta-social-proof{
+    display:flex;align-items:center;gap:12px;justify-content:center;flex-wrap:wrap;
+    font-size:13px;color:rgba(255,255,255,0.5);
+  }
+  .cta-avatars{display:flex}
+  .cta-avatar{
+    width:28px;height:28px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-size:11px;font-weight:700;color:#fff;
+    border:2px solid var(--black);margin-left:-6px;
+  }
+  .cta-avatar:first-child{margin-left:0}
+  .cta-stars-mini{color:#FBBC05;font-size:12px;letter-spacing:1px}
+
+  /* ── LIVE VISITORS WIDGET ── */
+  .live-widget{
+    display:inline-flex;flex-direction:column;align-items:center;gap:10px;
+    margin-top:8px;
+  }
+  .live-row{display:flex;align-items:center;gap:9px;flex-wrap:wrap;justify-content:center;}
+
+  .live-dot-red{
+    width:9px;height:9px;border-radius:50%;background:#ff4d4d;flex-shrink:0;
+    box-shadow:0 0 0 0 rgba(255,77,77,0.6);
+    animation:redPulse 1.4s ease-out infinite;
+    display:block;
+  }
+  @keyframes redPulse{
+    0%{box-shadow:0 0 0 0 rgba(255,77,77,0.7)}
+    70%{box-shadow:0 0 0 9px rgba(255,77,77,0)}
+    100%{box-shadow:0 0 0 0 rgba(255,77,77,0)}
+  }
+
+  .live-avatars{display:flex;align-items:center;}
+  .live-av{
+    width:26px;height:26px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-size:10px;font-weight:700;color:#fff;
+    border:2px solid #050505;margin-left:-7px;
+    transition:transform .3s ease;
+    flex-shrink:0;
+  }
+  .live-av:first-child{margin-left:0}
+  .live-av.entering{animation:avEnter .4s cubic-bezier(.34,1.56,.64,1) both}
+  .live-av.leaving{animation:avLeave .3s ease forwards}
+  @keyframes avEnter{from{transform:scale(0) translateY(-8px);opacity:0}to{transform:scale(1) translateY(0);opacity:1}}
+  @keyframes avLeave{from{transform:scale(1);opacity:1}to{transform:scale(0);opacity:0}}
+
+  .live-text{
+    display:flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:center;
+    font-size:13px;color:rgba(255,255,255,0.7);
+  }
+  .live-count-wrap{
+    display:flex;align-items:center;gap:4px;
+    font-size:15px;font-weight:700;color:#fff;
+  }
+  #liveCount{
+    display:inline-block;min-width:22px;text-align:center;
+    color:#56CCF2;font-family:'Bebas Neue',sans-serif;font-size:22px;
+    transition:all .35s cubic-bezier(.34,1.56,.64,1);
+  }
+  #liveCount.bump{transform:scale(1.4);color:#fff}
+
+  .live-sub{font-size:12px;color:rgba(255,255,255,0.45);}
+
+  .live-urgency{
+    display:flex;align-items:center;gap:7px;
+    background:rgba(255,77,77,0.08);border:1px solid rgba(255,77,77,0.22);
+    border-radius:20px;padding:7px 16px;font-size:12px;
+    color:rgba(255,255,255,0.65);
+    animation:urgencyGlow 3s ease-in-out infinite;
+  }
+  @keyframes urgencyGlow{
+    0%,100%{box-shadow:0 0 0 0 rgba(255,77,77,0)}
+    50%{box-shadow:0 0 14px 2px rgba(255,77,77,0.18)}
+  }
+  .live-fire{font-size:14px}
+  .live-urgency strong{color:#ff7070;font-weight:700}
+
+  /* Minimal footer */
+  .footer-minimal{
+    text-align:center;padding:32px 5% 24px;
+    background:rgba(5,5,5,0.6);backdrop-filter:blur(16px);
+    border-top:1px solid rgba(45,156,219,0.12);
+  }
+  .footer-logo-min{height:34px;width:auto;mix-blend-mode:lighten;margin-bottom:4px}
+  .footer-copy{font-size:12px;color:var(--gray);margin-top:8px}
 
   /* Badges de confianza */
   .cta-trust{
@@ -383,11 +533,17 @@
   .footer-col a:hover{color:var(--blue)}
   .social-links{display:flex;gap:12px;margin-top:16px}
   .social-link{
-    width:36px;height:36px;border-radius:8px;border:1px solid var(--border);
+    width:40px;height:40px;border-radius:10px;border:1px solid var(--border);
     display:flex;align-items:center;justify-content:center;
-    color:var(--gray);font-size:13px;text-decoration:none;transition:.2s;font-weight:600;
+    color:var(--gray);font-size:13px;text-decoration:none;transition:.25s;font-weight:600;
   }
-  .social-link:hover{border-color:var(--blue);color:var(--blue)}
+  .social-link-icon svg{transition:.25s}
+  .social-link:hover{transform:translateY(-3px)}
+  .social-link[aria-label="Instagram"]:hover{border-color:#e1306c;color:#e1306c;box-shadow:0 4px 16px rgba(225,48,108,0.25)}
+  .social-link[aria-label="TikTok"]:hover{border-color:#fff;color:#fff;box-shadow:0 4px 16px rgba(255,255,255,0.15)}
+  .social-link[aria-label="Facebook"]:hover{border-color:#1877f2;color:#1877f2;box-shadow:0 4px 16px rgba(24,119,242,0.25)}
+  .social-link[aria-label="YouTube"]:hover{border-color:#ff0000;color:#ff0000;box-shadow:0 4px 16px rgba(255,0,0,0.25)}
+  .social-link[aria-label="Linktree"]:hover{border-color:#39e09b;color:#39e09b;box-shadow:0 4px 16px rgba(57,224,155,0.25)}
   .footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px;border-top:1px solid var(--border);flex-wrap:wrap;gap:12px}
   .footer-bottom p{font-size:12px;color:var(--gray)}
   .footer-bottom-links{display:flex;gap:20px}
@@ -396,13 +552,18 @@
 
   /* MOBILE NAV */
   .mobile-menu{
-    display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:200;
-    background:var(--black);padding:30px 5%;flex-direction:column;
+    position:fixed;top:0;left:0;right:0;bottom:0;z-index:200000;
+    background:rgba(5,5,5,0.98);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+    padding:30px 5%;flex-direction:column;
+    display:flex;
+    opacity:0;visibility:hidden;pointer-events:none;
+    transition:opacity .3s ease, visibility .3s ease;
   }
-  .mobile-menu.open{display:flex}
-  .mobile-menu .close-btn{align-self:flex-end;font-size:28px;background:none;border:none;color:var(--white);cursor:pointer;margin-bottom:40px}
+  .mobile-menu.open{opacity:1;visibility:visible;pointer-events:all;}
+  .mobile-menu .close-btn{align-self:flex-end;font-size:32px;background:none;border:none;color:var(--white);cursor:pointer;margin-bottom:40px;line-height:1;}
   .mobile-menu ul{list-style:none;display:flex;flex-direction:column;gap:24px}
-  .mobile-menu a{color:var(--white);text-decoration:none;font-family:'Syne',sans-serif;font-size:22px;font-weight:700}
+  .mobile-menu a{color:var(--white);text-decoration:none;font-family:'Syne',sans-serif;font-size:22px;font-weight:700;transition:.2s}
+  .mobile-menu a:hover{color:var(--blue)}
 
   /* ANIMATIONS */
   @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
@@ -453,7 +614,8 @@
     /* ── Fix horizontal scroll on iPad ── */
     html,body{max-width:100%;overflow-x:hidden}
     #about{grid-template-columns:1fr;gap:40px}
-    .about-img-wrap{order:-1}
+    .about-text{order:0}
+    .about-img-wrap{order:1}
     .portfolio-grid{grid-template-columns:1fr 1fr}
     .stats-bar{flex-wrap:wrap;gap:16px;padding:32px 5%}
     .stat{flex:1 1 calc(50% - 16px);min-width:120px;padding:0 16px}
@@ -471,14 +633,15 @@
     #hero{padding-bottom:50px}
     .hero-content{padding-bottom:50px}
     #about{grid-template-columns:1fr}
-    .about-img-wrap{order:-1}
+    .about-text{order:-1}
+    .about-img-wrap{order:1}
     /* services carousel responsive handled via JS */
     .portfolio-grid{grid-template-columns:1fr 1fr}
     .reviews-grid{grid-template-columns:1fr}
     .review-card{border-right:none}
     .stats-bar{flex-direction:row;gap:0;padding:28px 8px}
     .stat{border-right:none;border-bottom:none;padding:0 4px;min-width:0}
-    .footer-grid{grid-template-columns:1fr}
+    footer{padding:24px 5% 20px}
     .google-reviews-top{flex-direction:column;align-items:flex-start}
   }
 
@@ -831,7 +994,6 @@
     <span class="section-tag" data-es="Sobre Nosotros" data-en="About Us">Sobre Nosotros</span>
     <h2 class="section-title" data-es="UN EQUIPO APASIONADO POR HACER <span>CRECER TU MARCA</span>" data-en="A PASSIONATE TEAM TO <span>GROW YOUR BRAND</span>">UN EQUIPO APASIONADO POR HACER <span>CRECER TU MARCA</span></h2>
     <p class="section-desc"><span data-es="En Digi Master Pro combinamos creatividad, tecnología y estrategia para ofrecer soluciones digitales a medida. Nos enfocamos en entender tu negocio y llevarlo al siguiente nivel." data-en="At Digi Master Pro we combine creativity, technology, and strategy to deliver custom digital solutions. We focus on understanding your business and taking it to the next level.">En Digi Master Pro combinamos creatividad, tecnología y estrategia para ofrecer soluciones digitales a medida. Nos enfocamos en entender tu negocio y llevarlo al siguiente nivel.</span></p>
-    <a href="#cta" class="btn-primary" data-es="Conoce al Equipo ↗" data-en="Meet the Team ↗">Conoce al Equipo ↗</a>
   </div>
 </section>
 
@@ -1061,81 +1223,115 @@
 <hr class="glowline">
 <!-- CTA -->
 <section id="cta">
-  <div class="rocket reveal">🚀</div>
-  <span class="section-tag" data-es="¿Listo para el siguiente nivel?" data-en="Ready for the next level?">¿Listo para el siguiente nivel?</span>
-  <h2 class="section-title" data-es="HABLEMOS DE<br><span>TU PROYECTO</span>" data-en="LET'S TALK ABOUT<br><span>YOUR PROJECT</span>">HABLEMOS DE<br><span>TU PROYECTO</span></h2>
-  <p class="section-desc"><span data-es="Cuéntanos tus ideas y hagamos algo increíble juntos. Estamos listos para ayudarte a crecer." data-en="Tell us your ideas and let's build something incredible together. We're ready to help you grow.">Cuéntanos tus ideas y hagamos algo increíble juntos. Estamos listos para ayudarte a crecer.</span></p>
 
-  <!-- Badges de confianza -->
-  <div class="cta-trust">
-    <div class="cta-trust-item"><span class="dot"></span><span data-es="Respuesta en menos de 1 hora" data-en="Response in less than 1 hour">Respuesta en menos de 1 hora</span></div>
-    <div class="cta-trust-item"><span class="dot"></span><span data-es="Consulta 100% gratuita" data-en="100% free consultation">Consulta 100% gratuita</span></div>
-    <div class="cta-trust-item"><span class="dot"></span><span data-es="Sin compromisos" data-en="No commitments">Sin compromisos</span></div>
+  <!-- Animated calendar icon -->
+  <div class="cta-icon-wrap reveal" id="ctaIconWrap">
+    <div class="cta-cal-ring cta-cal-ring-1"></div>
+    <div class="cta-cal-ring cta-cal-ring-2"></div>
+    <div class="cta-cal-ring cta-cal-ring-3"></div>
+    <div class="cta-cal-icon">
+      <svg viewBox="0 0 64 64" width="52" height="52" xmlns="http://www.w3.org/2000/svg">
+        <rect x="4" y="10" width="56" height="50" rx="6" fill="none" stroke="#2D9CDB" stroke-width="3"/>
+        <rect x="4" y="10" width="56" height="16" rx="6" fill="#2D9CDB" opacity="0.15"/>
+        <line x1="20" y1="4" x2="20" y2="18" stroke="#2D9CDB" stroke-width="3" stroke-linecap="round"/>
+        <line x1="44" y1="4" x2="44" y2="18" stroke="#2D9CDB" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="20" cy="38" r="3.5" fill="#2D9CDB"/>
+        <circle cx="32" cy="38" r="3.5" fill="#2D9CDB"/>
+        <circle cx="44" cy="38" r="3.5" fill="#56CCF2"/>
+        <circle cx="20" cy="50" r="3.5" fill="#2D9CDB"/>
+        <circle cx="32" cy="50" r="3.5" fill="#56CCF2"/>
+        <circle cx="44" cy="26" r="0" fill="none"/>
+        <!-- Checkmark on highlighted day -->
+        <circle cx="44" cy="38" r="7" fill="none" stroke="#56CCF2" stroke-width="1.5" opacity="0.5" class="cta-cal-pulse"/>
+      </svg>
+      <!-- Live indicator -->
+      <span class="cta-live-dot"></span>
+    </div>
   </div>
 
-  <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20hablar%20sobre%20mi%20proyecto%20con%20Digi%20Master%20Pro" target="_blank" rel="noopener" class="btn-wa-cta">
-    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16 0C7.164 0 0 7.163 0 16c0 2.822.737 5.469 2.027 7.773L0 32l8.469-2.004A15.93 15.93 0 0 0 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.333a13.27 13.27 0 0 1-6.771-1.854l-.486-.289-5.027 1.189 1.214-4.902-.317-.503A13.257 13.257 0 0 1 2.667 16C2.667 8.636 8.636 2.667 16 2.667S29.333 8.636 29.333 16 23.364 29.333 16 29.333zm7.27-9.878c-.398-.2-2.355-1.162-2.72-1.294-.365-.133-.631-.2-.897.2-.265.398-1.029 1.294-1.262 1.56-.232.265-.465.298-.863.1-.398-.2-1.681-.62-3.2-1.977-1.183-1.057-1.981-2.362-2.213-2.76-.232-.398-.025-.613.175-.811.18-.178.398-.465.597-.697.2-.232.265-.398.398-.664.133-.265.067-.497-.033-.697-.1-.2-.897-2.162-1.229-2.96-.324-.778-.653-.672-.897-.685-.232-.012-.497-.015-.763-.015-.265 0-.697.1-1.063.497-.365.398-1.395 1.362-1.395 3.322s1.428 3.853 1.628 4.119c.2.265 2.81 4.29 6.808 6.019.952.41 1.694.655 2.273.839.955.304 1.825.261 2.513.158.767-.114 2.355-.963 2.687-1.893.332-.93.332-1.727.232-1.893-.1-.166-.365-.265-.763-.465z"/></svg>
-    <div class="wa-label">
-      <span data-es="Escribenos por WhatsApp" data-en="Message us on WhatsApp">Escribenos por WhatsApp</span>
-      <small>+57 318 647 1571</small>
+  <span class="section-tag reveal" data-es="Agenda tu consulta gratis" data-en="Book your free consultation">Agenda tu consulta gratis</span>
+  <h2 class="section-title reveal" data-es="RESERVA TU SESIÓN<br><span>ESTRATÉGICA GRATIS</span>" data-en="BOOK YOUR FREE<br><span>STRATEGY SESSION</span>">RESERVA TU SESIÓN<br><span>ESTRATÉGICA GRATIS</span></h2>
+  <p class="section-desc reveal" style="margin:0 auto 36px;"><span data-es="30 minutos contigo para entender tu negocio, identificar oportunidades y mostrarte cómo llevamos tu marca al siguiente nivel. Sin costo, sin compromisos." data-en="30 minutes with you to understand your business, identify opportunities, and show you how we take your brand to the next level. No cost, no commitments.">30 minutos contigo para entender tu negocio, identificar oportunidades y mostrarte cómo llevamos tu marca al siguiente nivel. Sin costo, sin compromisos.</span></p>
+
+  <!-- Value props -->
+  <div class="cta-props reveal">
+    <div class="cta-prop">
+      <span class="cta-prop-icon">⏱</span>
+      <strong data-es="30 min" data-en="30 min">30 min</strong>
+      <span data-es="Sesión express" data-en="Express session">Sesión express</span>
     </div>
-  </a>
-  <p class="cta-note" data-es="También puedes llamarnos directamente al mismo número" data-en="You can also call us directly at the same number">También puedes llamarnos directamente al mismo número</p>
+    <div class="cta-prop">
+      <span class="cta-prop-icon">🎯</span>
+      <strong data-es="Diagnóstico" data-en="Diagnosis">Diagnóstico</strong>
+      <span data-es="Personalizado" data-en="Personalized">Personalizado</span>
+    </div>
+    <div class="cta-prop">
+      <span class="cta-prop-icon">💡</span>
+      <strong data-es="Plan de acción" data-en="Action plan">Plan de acción</strong>
+      <span data-es="Listo para aplicar" data-en="Ready to apply">Listo para aplicar</span>
+    </div>
+    <div class="cta-prop">
+      <span class="cta-prop-icon">✅</span>
+      <strong data-es="100% gratis" data-en="100% free">100% gratis</strong>
+      <span data-es="Sin letra pequeña" data-en="No fine print">Sin letra pequeña</span>
+    </div>
+  </div>
+
+  <!-- CTA buttons -->
+  <div class="cta-btns reveal">
+    <a href="https://wa.me/573186471571?text=Hola%2C%20quiero%20agendar%20mi%20sesi%C3%B3n%20estrat%C3%A9gica%20gratuita%20con%20Digi%20Master%20Pro" target="_blank" rel="noopener" class="btn-wa-cta btn-book">
+      <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16 0C7.164 0 0 7.163 0 16c0 2.822.737 5.469 2.027 7.773L0 32l8.469-2.004A15.93 15.93 0 0 0 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.333a13.27 13.27 0 0 1-6.771-1.854l-.486-.289-5.027 1.189 1.214-4.902-.317-.503A13.257 13.257 0 0 1 2.667 16C2.667 8.636 8.636 2.667 16 2.667S29.333 8.636 29.333 16 23.364 29.333 16 29.333zm7.27-9.878c-.398-.2-2.355-1.162-2.72-1.294-.365-.133-.631-.2-.897.2-.265.398-1.029 1.294-1.262 1.56-.232.265-.465.298-.863.1-.398-.2-1.681-.62-3.2-1.977-1.183-1.057-1.981-2.362-2.213-2.76-.232-.398-.025-.613.175-.811.18-.178.398-.465.597-.697.2-.232.265-.398.398-.664.133-.265.067-.497-.033-.697-.1-.2-.897-2.162-1.229-2.96-.324-.778-.653-.672-.897-.685-.232-.012-.497-.015-.763-.015-.265 0-.697.1-1.063.497-.365.398-1.395 1.362-1.395 3.322s1.428 3.853 1.628 4.119c.2.265 2.81 4.29 6.808 6.019.952.41 1.694.655 2.273.839.955.304 1.825.261 2.513.158.767-.114 2.355-.963 2.687-1.893.332-.93.332-1.727.232-1.893-.1-.166-.365-.265-.763-.465z"/></svg>
+      <div class="wa-label">
+        <span data-es="📅 Agendar sesión gratis" data-en="📅 Book free session">📅 Agendar sesión gratis</span>
+        <small data-es="Respuesta en menos de 1 hora" data-en="Response in under 1 hour">Respuesta en menos de 1 hora</small>
+      </div>
+    </a>
+  </div>
+
+  <!-- Live visitors widget -->
+  <div class="live-widget reveal" id="liveWidget">
+    <div class="live-row">
+      <span class="live-dot-red"></span>
+      <div class="live-avatars" id="liveAvatars"></div>
+      <div class="live-text">
+        <span class="live-count-wrap"><span id="liveCount">14</span>&nbsp;personas están viendo esto ahora</span>
+      </div>
+    </div>
+    <div class="live-urgency" id="liveUrgency">
+      <span class="live-fire">🔥</span>
+      <span id="liveUrgencyTxt">Alta demanda — <strong>quedan pocas fechas esta semana</strong></span>
+    </div>
+  </div>
+
 </section>
 
 <hr class="glowline">
 <!-- FOOTER -->
-<footer>
-  <div class="footer-grid">
-    <div class="footer-brand">
-      <img src="https://i.ibb.co/TDsMPDRb/Logo-Digimaster.png" alt="Digi Master Pro">
-      <p data-es="Agencia digital especializada en diseño web, branding, diseño gráfico y estrategias digitales que generan resultados." data-en="Digital agency specialized in web design, branding, graphic design, and digital strategies that deliver results.">Agencia digital especializada en diseño web, branding, diseño gráfico y estrategias digitales que generan resultados.</p>
-      <div class="social-links">
-        <a href="#" class="social-link">f</a>
-        <a href="#" class="social-link">ig</a>
-        <a href="#" class="social-link">in</a>
-        <a href="#" class="social-link">wa</a>
-      </div>
-    </div>
-    <div class="footer-col">
-      <h4 data-es="Enlaces Rápidos" data-en="Quick Links">Enlaces Rápidos</h4>
-      <ul>
-        <li><a href="#hero" data-es="Inicio" data-en="Home">Inicio</a></li>
-        <li><a href="#services" data-es="Servicios" data-en="Services">Servicios</a></li>
-        <li><a href="#portfolio" data-es="Trabajos" data-en="Work">Trabajos</a></li>
-        <li><a href="#reviews" data-es="Reseñas" data-en="Reviews">Reseñas</a></li>
-        <li><a href="#about" data-es="Sobre Nosotros" data-en="About Us">Sobre Nosotros</a></li>
-        <li><a href="#cta" data-es="Contacto" data-en="Contact">Contacto</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4 data-es="Servicios" data-en="Services">Servicios</h4>
-      <ul>
-        <li><a href="#services" data-es="Diseño Web" data-en="Web Design">Diseño Web</a></li>
-        <li><a href="#services" data-es="Branding" data-en="Branding">Branding</a></li>
-        <li><a href="#services" data-es="Diseño Gráfico" data-en="Graphic Design">Diseño Gráfico</a></li>
-        <li><a href="#services" data-es="Ecosistema Google" data-en="Google Ecosystem">Ecosistema Google</a></li>
-        <li><a href="#services" data-es="Estrategia Digital" data-en="Digital Strategy">Estrategia Digital</a></li>
-        <li><a href="#services" data-es="Programación a Medida" data-en="Custom Development">Programación a Medida</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4 data-es="Síguenos" data-en="Follow Us">Síguenos</h4>
-      <ul>
-        <li><a href="#">Facebook</a></li>
-        <li><a href="#">Instagram</a></li>
-        <li><a href="#">LinkedIn</a></li>
-        <li><a href="#">WhatsApp</a></li>
-      </ul>
-    </div>
+<footer class="footer-minimal">
+  <img src="https://i.ibb.co/TDsMPDRb/Logo-Digimaster.png" alt="Digi Master Pro" class="footer-logo-min">
+  <div class="social-links" style="justify-content:center;margin:16px 0;gap:10px;">
+    <!-- Instagram -->
+    <a href="https://www.instagram.com/digi_masterpro" target="_blank" rel="noopener" class="social-link social-link-icon" aria-label="Instagram">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+    </a>
+    <!-- TikTok -->
+    <a href="https://www.tiktok.com/@digi.master.pro" target="_blank" rel="noopener" class="social-link social-link-icon" aria-label="TikTok">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.79 1.52V6.76a4.85 4.85 0 0 1-1.02-.07z"/></svg>
+    </a>
+    <!-- Facebook -->
+    <a href="https://www.facebook.com/people/Digi-master-pro/61579261739007/" target="_blank" rel="noopener" class="social-link social-link-icon" aria-label="Facebook">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.791-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.97h-1.513c-1.491 0-1.956.93-1.956 1.874v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+    </a>
+    <!-- YouTube -->
+    <a href="https://www.youtube.com/@digi_masterpro" target="_blank" rel="noopener" class="social-link social-link-icon" aria-label="YouTube">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+    </a>
+    <!-- Linktree -->
+    <a href="https://linktr.ee/Digi_master_pro" target="_blank" rel="noopener" class="social-link social-link-icon" aria-label="Linktree">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M13.051 2.286 10.08 7.208l-5.569-.008-.01 2.31 4.197 2.43-4.197 2.414.01 2.31 5.569-.008 2.97 4.922 2.001-1.157-2.922-4.845 5.516.007.01-2.31-4.22-2.333 4.22-2.414-.01-2.31-5.516.008 2.922-4.845z"/><path d="M11.026 19.116v2.598h1.948v-2.598h-1.948z"/></svg>
+    </a>
   </div>
-  <div class="footer-bottom">
-    <p data-es="© 2024 Digi Master Pro. Todos los derechos reservados." data-en="© 2024 Digi Master Pro. All rights reserved.">© 2024 Digi Master Pro. Todos los derechos reservados.</p>
-    <div class="footer-bottom-links">
-      <a href="#" data-es="Política de Privacidad" data-en="Privacy Policy">Política de Privacidad</a>
-      <a href="#" data-es="Términos de Servicio" data-en="Terms of Service">Términos de Servicio</a>
-    </div>
-  </div>
+  <p class="footer-copy" data-es="© 2026 Digi Master Pro. Todos los derechos reservados." data-en="© 2026 Digi Master Pro. All rights reserved.">© 2026 Digi Master Pro. Todos los derechos reservados.</p>
 </footer>
 
 <script>
@@ -1590,6 +1786,121 @@ function setLang(lang) {
     introRunning = false;
     setTimeout(()=>overlay.remove(), 650);
   }, 3000);
+})();
+</script>
+
+
+
+
+<script>
+/* ══ LIVE VISITORS COUNTER ══ */
+(function(){
+  const countEl  = document.getElementById('liveCount');
+  const subEl    = document.getElementById('liveSub');
+  const avBox    = document.getElementById('liveAvatars');
+  const urgEl    = document.getElementById('liveUrgencyTxt');
+  if(!countEl) return;
+
+  // Avatar pool — initials + colors
+  const avatarPool = [
+    {i:'A',c:'#e53935'},{i:'J',c:'#8e24aa'},{i:'M',c:'#1e88e5'},
+    {i:'C',c:'#00897b'},{i:'L',c:'#f4511e'},{i:'P',c:'#3949ab'},
+    {i:'R',c:'#6d4c41'},{i:'S',c:'#00acc1'},{i:'D',c:'#43a047'},
+    {i:'V',c:'#fb8c00'},{i:'N',c:'#c62828'},{i:'F',c:'#558b2f'},
+    {i:'K',c:'#4527a0'},{i:'T',c:'#00695c'},{i:'B',c:'#ad1457'},
+  ];
+
+  let current = 14;
+  const MIN = 9, MAX = 23;
+
+  // Build initial avatar stack (5 visible)
+  let activeAvatars = [...avatarPool].sort(()=>Math.random()-.5).slice(0,5);
+  function renderAvatars(){
+    avBox.innerHTML = '';
+    activeAvatars.forEach(av => {
+      const el = document.createElement('span');
+      el.className = 'live-av';
+      el.style.background = av.c;
+      el.textContent = av.i;
+      avBox.appendChild(el);
+    });
+  }
+  renderAvatars();
+
+  // Swap one avatar out smoothly
+  function swapAvatar(){
+    const idx = Math.floor(Math.random() * activeAvatars.length);
+    const avEls = avBox.querySelectorAll('.live-av');
+    const leaving = avEls[idx];
+    if(!leaving) return;
+    leaving.classList.add('leaving');
+
+    // Pick a new avatar not currently shown
+    const usedInitials = activeAvatars.map(a=>a.i);
+    const pool = avatarPool.filter(a => !usedInitials.includes(a.i));
+    if(!pool.length) return;
+    const newAv = pool[Math.floor(Math.random()*pool.length)];
+
+    setTimeout(()=>{
+      activeAvatars[idx] = newAv;
+      const el = document.createElement('span');
+      el.className = 'live-av entering';
+      el.style.background = newAv.c;
+      el.textContent = newAv.i;
+      leaving.replaceWith(el);
+      setTimeout(()=> el.classList.remove('entering'), 400);
+    }, 300);
+  }
+
+  // Animate the number with a flip/bump
+  function setCount(n){
+    countEl.classList.remove('bump');
+    void countEl.offsetWidth; // reflow
+    countEl.textContent = n;
+    countEl.classList.add('bump');
+    setTimeout(()=> countEl.classList.remove('bump'), 400);
+  }
+
+  // Urgency messages that rotate
+  const urgencyMsgs = [
+    'Alta demanda — <strong>quedan pocas fechas esta semana</strong>',
+    '<strong>3 personas</strong> agendaron su sesión en la última hora',
+    'Solo <strong>2 slots disponibles</strong> para esta semana',
+    '<strong>Demanda alta</strong> — agenda antes de que se llene',
+    'Última semana con <strong>consulta gratuita</strong>',
+  ];
+  let urgIdx = 0;
+
+  // Main fluctuation loop
+  function fluctuate(){
+    // Change count by ±1 or ±2 randomly, biased to stay in range
+    const delta = Math.random() < 0.65 ? 1 : 2;
+    const direction = current >= MAX ? -1 : current <= MIN ? 1 : (Math.random() < 0.52 ? 1 : -1);
+    const next = Math.max(MIN, Math.min(MAX, current + direction * delta));
+
+    if(next !== current){
+      current = next;
+      setCount(current);
+      // Also swap an avatar when count changes
+      if(Math.random() < 0.7) swapAvatar();
+    }
+
+    // Rotate urgency text occasionally
+    if(Math.random() < 0.25){
+      urgIdx = (urgIdx + 1) % urgencyMsgs.length;
+      if(urgEl) urgEl.innerHTML = urgencyMsgs[urgIdx];
+    }
+
+    // Next update in 3–8 seconds
+    const delay = 3000 + Math.random() * 5000;
+    setTimeout(fluctuate, delay);
+  }
+
+  // Start after a short delay so user notices it move
+  setTimeout(fluctuate, 2800);
+
+  // Also swap avatars independently every ~6s
+  setInterval(swapAvatar, 6000 + Math.random()*3000);
 })();
 </script>
 
