@@ -1,8 +1,13 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#050505">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
 <!-- ══ GOOGLE SEARCH CONSOLE ══ -->
 <meta name="google-site-verification" content="1f5729d6d54a5a71">
@@ -75,9 +80,16 @@
 }
 </script>
 
+<link rel="dns-prefetch" href="https://i.ibb.co">
+<link rel="dns-prefetch" href="https://wa.me">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@700;800&family=DM+Sans:wght@400;500&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"></noscript>
 <style>
+  @font-face{font-family:'DM Sans';font-display:swap;}
+  @font-face{font-family:'Syne';font-display:swap;}
+  @font-face{font-family:'Bebas Neue';font-display:swap;}
   :root {
     --black: #050505;
     --dark: #0a0a0a;
@@ -110,6 +122,7 @@
   /* NAV */
   nav{
     position:fixed;top:0;left:0;right:0;z-index:100;
+    will-change:transform;transform:translateZ(0);
     display:flex;align-items:center;justify-content:space-between;
     padding:18px 5%;
     background:rgba(5,5,5,0.7);
@@ -154,11 +167,13 @@
     display:flex;align-items:flex-end;
     position:relative;overflow:hidden;
     padding:0;
+    padding-top:110px; /* nav (74px) + ticker (36px) */
   }
-  /* Background image fills entire hero */
+  /* Background image fills entire hero — positioned so CEO face is fully visible */
   #hero .hero-bg{
-    position:absolute;inset:0;
-    background:url('https://i.ibb.co/VpjKQQm6/Portadadigimasterpro-CEO.jpg') center center / cover no-repeat;
+    position:absolute;
+    top:0; left:0; right:0; bottom:0;
+    background:url('https://i.ibb.co/VpjKQQm6/Portadadigimasterpro-CEO.jpg') center 5% / cover no-repeat;
     pointer-events:none;
   }
   /* Dark gradient overlay — bottom heavy so text is readable */
@@ -234,7 +249,7 @@
   .stat-label{font-size:12px;color:var(--gray);margin-top:4px;letter-spacing:.04em}
 
   /* ABOUT */
-  #about{padding:100px 5%;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+  #about{padding:100px 5%;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;content-visibility:auto;contain-intrinsic-size:0 600px}
   .about-img-wrap{position:relative;}
   /* team photo: clean blend on black bg */
   .about-img-wrap img{
@@ -253,7 +268,7 @@
   .about-text .section-desc{margin-bottom:32px}
 
   /* SECTIONS shared */
-  section{padding:100px 5%}
+  section{padding:100px 5%;contain:layout style}
   .section-tag{display:block;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);margin-bottom:14px}
   .section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,4.5vw,60px);line-height:1;margin-bottom:16px}
   .section-title span{color:var(--blue)}
@@ -269,12 +284,13 @@
     transition:transform .6s cubic-bezier(.25,.46,.45,.94);
   }
   .service-card{
-    background:rgba(5,5,5,0.3);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+    background:rgba(8,8,8,0.85);
     border:1px solid rgba(45,156,219,0.1);
     border-radius:16px;padding:32px 24px;text-align:center;
     flex:0 0 calc(33.333% - 14px);
     transition:.3s;position:relative;overflow:hidden;
     display:flex;flex-direction:column;align-items:center;
+    transform:translateZ(0);
   }
   .service-card::before{display:none}
   .service-card:hover{transform:translateY(-4px)}
@@ -311,19 +327,19 @@
   }
 
   /* PORTFOLIO */
-  #portfolio{}
+  #portfolio{content-visibility:auto;contain-intrinsic-size:0 800px}
   .portfolio-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:40px;flex-wrap:wrap;gap:20px}
   .portfolio-filters{display:flex;gap:8px;flex-wrap:wrap}
   .filter-btn{
     padding:8px 20px;border-radius:20px;border:1px solid rgba(45,156,219,0.15);
-    background:rgba(5,5,5,0.3);backdrop-filter:blur(8px);color:var(--gray);font-family:'DM Sans',sans-serif;
+    background:rgba(10,10,10,0.9);color:var(--gray);font-family:'DM Sans',sans-serif;
     font-size:12px;font-weight:500;cursor:pointer;transition:.2s;
   }
   .filter-btn.active,.filter-btn:hover{background:var(--blue);border-color:var(--blue);color:var(--white)}
   .portfolio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
   .portfolio-item{
     border-radius:10px;overflow:hidden;position:relative;
-    background:rgba(5,5,5,0.35);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+    background:rgba(8,8,8,0.9);
     border:1px solid rgba(45,156,219,0.08);
     aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;
     transition:.3s;cursor:pointer;
@@ -359,7 +375,7 @@
   .reviews-header{text-align:center;margin-bottom:60px}
   .google-reviews-wrap{
     max-width:900px;margin:0 auto;
-    background:rgba(5,5,5,0.25);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+    background:rgba(8,8,8,0.95);
     border:1px solid rgba(45,156,219,0.15);border-radius:16px;
     overflow:hidden;box-shadow:0 0 40px rgba(45,156,219,0.06);
   }
@@ -392,7 +408,7 @@
   .reviews-track{
     display:flex;gap:0;
     width:max-content;
-    animation:reviewsScroll 32s linear infinite;
+    animation:reviewsScroll 32s linear infinite;will-change:transform;
   }
   .reviews-track:hover{animation-play-state:paused}
   @keyframes reviewsScroll{
@@ -580,7 +596,7 @@
   /* Minimal footer */
   .footer-minimal{
     text-align:center;padding:32px 5% 24px;
-    background:rgba(5,5,5,0.6);backdrop-filter:blur(16px);
+    background:rgba(5,5,5,0.95);
     border-top:1px solid rgba(45,156,219,0.12);
   }
   .footer-logo-min{height:34px;width:auto;mix-blend-mode:lighten;margin-bottom:4px}
@@ -623,7 +639,7 @@
   .cta-note{margin-top:20px;font-size:12px;color:rgba(255,255,255,0.3);letter-spacing:.04em}
 
   /* FOOTER */
-  footer{background:rgba(5,5,5,0.6);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid rgba(45,156,219,0.12);padding:60px 5% 30px}
+  footer{background:rgba(5,5,5,0.95);border-top:1px solid rgba(45,156,219,0.12);padding:60px 5% 30px}
   .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:60px;margin-bottom:48px}
   .footer-brand img{height:40px;margin-bottom:16px;mix-blend-mode:lighten}
   .footer-brand p{font-size:13px;color:var(--gray);line-height:1.7;max-width:240px}
@@ -700,6 +716,7 @@
   /* WhatsApp float */
   .wa-float{
     position:fixed;bottom:28px;right:28px;z-index:100000;
+    contain:layout style;
     width:56px;height:56px;border-radius:50%;
     background:#25D366;display:flex;align-items:center;justify-content:center;
     box-shadow:0 4px 20px rgba(37,211,102,0.45);
@@ -734,6 +751,7 @@
     background:rgba(5,5,5,0.5);
     overflow:hidden;
     position:relative;z-index:1000;
+    contain:layout style;
   }
   .brands-label{
     text-align:center;font-size:11px;font-weight:700;letter-spacing:.18em;
@@ -751,7 +769,7 @@
   .brands-track{
     display:flex;align-items:center;gap:0;
     width:max-content;
-    animation:brandsScroll 28s linear infinite;
+    animation:brandsScroll 28s linear infinite;will-change:transform;
   }
   .brands-track:hover{animation-play-state:paused}
   @keyframes brandsScroll{
@@ -772,6 +790,8 @@
     filter:none;
     opacity:.7;
     transition:.3s;
+    image-rendering:auto;
+    transform:translateZ(0);
   }
   .brand-item:hover img{opacity:1;transform:scale(1.06)}
 
@@ -805,7 +825,7 @@
   @media(max-width:768px){
     .nav-links,.nav-cta{display:none}
     .hamburger{display:flex}
-    #hero{padding-bottom:50px}
+    #hero{padding-bottom:50px; padding-top:95px} /* nav(65px) + ticker(30px) */
     .hero-content{padding-bottom:50px}
     #about{grid-template-columns:1fr}
     .about-text{order:-1}
@@ -824,18 +844,26 @@
      ANIMACIONES PREMIUM FUTURISTAS
   ═══════════════════════════════════════ */
 
-  /* Canvas de partículas fijo — sobre toda la página incluyendo el hero */
+  /* Canvas de partículas — fondo fijo en TODA la página */
   #particles-canvas{
     position:fixed;
     inset:0;
-    z-index:3; /* above hero-bg (z-index:auto) but below nav (z-index:100) */
+    z-index:9;          /* encima de secciones */
     pointer-events:none;
     opacity:1;
-    mix-blend-mode:screen; /* partículas brillan sobre cualquier fondo */
+    mix-blend-mode:screen; /* negro=invisible, azul sobre cualquier fondo = visible */
+    will-change:transform;
+    transform:translateZ(0);
   }
 
-  /* Todo el contenido por encima del canvas */
-  nav,section,footer,.stats-bar,.brands-section{position:relative;z-index:4}
+  /* Contenido en su propio stacking context */
+  nav{z-index:100!important}  /* nav siempre visible */
+  #hero{position:relative;z-index:10!important} /* hero image above particles */
+  section,footer,.stats-bar,.brands-section{position:relative;z-index:2}
+  /* Elementos interactivos encima del canvas */
+  .mobile-menu{z-index:200000!important}
+  .wa-float,.lang-float{z-index:100000!important}
+  #intro-overlay{z-index:99999!important}
 
   /* Cursor trail */
   .cursor-trail{
@@ -854,8 +882,8 @@
   }
 
   /* Reveal scroll */
-  .reveal{opacity:0;transform:translateY(40px);transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1);}
-  .reveal.visible{opacity:1;transform:translateY(0)}
+  .reveal{opacity:0;transform:translateY(40px);transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1);will-change:opacity,transform;}
+  .reveal.visible{opacity:1;transform:translateY(0);will-change:auto}
   .reveal-left{opacity:0;transform:translateX(-50px);transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1);}
   .reveal-left.visible{opacity:1;transform:translateX(0)}
   .reveal-right{opacity:0;transform:translateX(50px);transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1);}
@@ -1038,7 +1066,124 @@
   /* Prevent scroll: body.intro-active */
   body.intro-active{overflow:hidden!important;}
   html:has(body.intro-active){overflow:hidden!important;}
+
+  /* Respect user preference for reduced motion */
+  @media(prefers-reduced-motion:reduce){
+    *,*::before,*::after{
+      animation-duration:.01ms!important;
+      animation-iteration-count:1!important;
+      transition-duration:.01ms!important;
+    }
+    #particles-canvas{display:none!important;}
+    .cursor-trail,.cursor-glow{display:none!important;}
+    html{scroll-behavior:auto!important;}
+  }
+
+  /* ── BARRA INCENTIVO ESTÁTICA ── */
+  #incentivo-bar{
+    position:fixed;
+    top:74px;
+    left:0;right:0;
+    z-index:99;
+    height:32px;
+    background:rgba(5,5,5,0.88);
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(45,156,219,0.2);
+    display:flex;align-items:center;justify-content:center;
+    gap:0;
+    overflow:hidden;
+  }
+  /* separador vertical entre bloques */
+  .ibar-sep{
+    width:1px;height:16px;
+    background:rgba(255,255,255,0.1);
+    flex-shrink:0;margin:0 20px;
+  }
+  /* bloque genérico */
+  .ibar-block{
+    display:inline-flex;align-items:center;gap:7px;
+    font-size:11.5px;font-weight:500;letter-spacing:.03em;
+    color:rgba(255,255,255,0.65);
+    white-space:nowrap;flex-shrink:0;
+  }
+  .ibar-block strong{color:#fff;font-weight:700;}
+  .ibar-block .ibar-val{
+    color:#56CCF2;font-family:'Bebas Neue',sans-serif;
+    font-size:15px;line-height:1;
+    display:inline-block;min-width:20px;text-align:center;
+    transition:transform .25s cubic-bezier(.34,1.56,.64,1), color .2s;
+  }
+  .ibar-block .ibar-val.bump{transform:scale(1.35);color:#fff}
+  /* dot LIVE verde pulsante */
+  .ibar-live-dot{
+    width:7px;height:7px;border-radius:50%;
+    background:#25D366;flex-shrink:0;
+    box-shadow:0 0 0 0 rgba(37,211,102,0.6);
+    animation:ibarPulse 1.6s ease-out infinite;
+    display:inline-block;
+  }
+  @keyframes ibarPulse{
+    0%{box-shadow:0 0 0 0 rgba(37,211,102,0.8)}
+    70%{box-shadow:0 0 0 7px rgba(37,211,102,0)}
+    100%{box-shadow:0 0 0 0 rgba(37,211,102,0)}
+  }
+  /* icono usuario */
+  .ibar-user-icon{
+    display:inline-flex;align-items:center;flex-shrink:0;
+    color:rgba(255,255,255,0.5);
+  }
+  /* dot azul pulsante para tendencia */
+  .ibar-trend-dot{
+    width:6px;height:6px;border-radius:50%;
+    background:#2D9CDB;flex-shrink:0;
+    box-shadow:0 0 0 0 rgba(45,156,219,0.7);
+    animation:ibarTrendPulse 2.2s ease-out infinite;
+    display:inline-block;
+  }
+  @keyframes ibarTrendPulse{
+    0%{box-shadow:0 0 0 0 rgba(45,156,219,0.8)}
+    70%{box-shadow:0 0 0 7px rgba(45,156,219,0)}
+    100%{box-shadow:0 0 0 0 rgba(45,156,219,0)}
+  }
+  /* texto rotativo (urgencia) con fade */
+  .ibar-rotate-wrap{
+    position:relative;height:14px;overflow:hidden;
+    display:inline-flex;align-items:center;
+    transition:width .45s ease;
+  }
+  .ibar-rotate-item{
+    position:absolute;left:0;top:0;
+    white-space:nowrap;
+    opacity:0;transform:translateY(8px);
+    transition:opacity .45s ease, transform .45s ease;
+    font-size:11.5px;font-weight:500;color:rgba(255,255,255,0.65);
+    letter-spacing:.03em;
+  }
+  .ibar-rotate-item.active{opacity:1;transform:translateY(0);}
+  .ibar-rotate-item strong{color:#fff;font-weight:700;}
+  /* Mobile */
+  @media(max-width:768px){
+    #incentivo-bar{top:72px;height:30px;gap:0;}
+    .ibar-block{font-size:10.5px;gap:5px;}
+    .ibar-block .ibar-val{font-size:14px;}
+    .ibar-sep{margin:0 12px;}
+    #hero{padding-top:102px} /* nav(72px) + bar(30px) */
+    /* Ocultar bloque menos importante en móvil */
+    .ibar-hide-mobile{display:none!important;}
+  }
+  @media(max-width:480px){
+    .ibar-sep.ibar-sep-2{display:none!important;}
+    .ibar-block-3{display:none!important;}
+  }
+  /* Hero background position mobile — low % = image higher = more head visible */
+  @media(max-width:768px){
+    #hero .hero-bg{
+      background-position: center 0% !important;
+    }
+  }
 </style>
+<link rel="preload" as="image" href="https://i.ibb.co/VpjKQQm6/Portadadigimasterpro-CEO.jpg" fetchpriority="high">
+<link rel="preload" as="image" href="https://i.ibb.co/TDsMPDRb/Logo-Digimaster.png">
 </head>
 <body>
 
@@ -1048,7 +1193,7 @@
 
   <div class="intro-content">
     <div class="intro-logo" aria-label="Digi Master Pro">
-      <img src="https://i.ibb.co/TDsMPDRb/Logo-Digimaster.png" alt="Digi Master Pro">
+      <img src="https://i.ibb.co/TDsMPDRb/Logo-Digimaster.png" loading="eager" decoding="async" fetchpriority="high" alt="Digi Master Pro">
     </div>
     <div class="intro-loading-text">Cargando experiencia personalizada</div>
     <div class="intro-progress" aria-hidden="true"></div>
@@ -1063,11 +1208,10 @@
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">
-    <img src="https://i.ibb.co/TDsMPDRb/Logo-Digimaster.png" alt="Digi Master Pro">
-  </div>
+  <a href="#hero" class="nav-logo" aria-label="Inicio">
+    <img src="https://i.ibb.co/TDsMPDRb/Logo-Digimaster.png" loading="eager" decoding="async" fetchpriority="high" alt="Digi Master Pro">
+  </a>
   <ul class="nav-links">
-    <li><a href="#hero" data-es="Inicio" data-en="Home">Inicio</a></li>
     <li><a href="#services" data-es="Servicios" data-en="Services">Servicios</a></li>
     <li><a href="#precios" data-es="Precios" data-en="Pricing">Precios</a></li>
     <li><a href="#reviews" data-es="Reseñas" data-en="Reviews">Reseñas</a></li>
@@ -1082,11 +1226,48 @@
   </button>
 </nav>
 
+<!-- BARRA INCENTIVO ESTÁTICA ANIMADA -->
+<div id="incentivo-bar" aria-label="Estadísticas en vivo">
+
+  <!-- Bloque 1: visitantes en vivo -->
+  <div class="ibar-block">
+    <span class="ibar-live-dot"></span>
+    <span class="ibar-user-icon">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </span>
+    <span id="ibarViewers" class="ibar-val">23</span>
+    <span>viendo ahora</span>
+  </div>
+
+  <div class="ibar-sep"></div>
+
+  <!-- Bloque 2: cotizaciones hoy -->
+  <div class="ibar-block ibar-block-2">
+    <span class="ibar-trend-dot"></span>
+    <span id="ibarQuotes" class="ibar-val">12</span>
+    <span>cotizaciones hoy</span>
+  </div>
+
+  <div class="ibar-sep ibar-sep-2 ibar-hide-mobile"></div>
+
+  <!-- Bloque 3: mensaje rotativo de urgencia -->
+  <div class="ibar-block ibar-block-3 ibar-hide-mobile">
+    <span style="color:rgba(255,255,255,0.35);font-size:10px;">✦</span>
+    <div class="ibar-rotate-wrap" id="ibarRotateWrap">
+      <span class="ibar-rotate-item active">Agencia <strong>#1 en tendencia</strong> Colombia 2025</span>
+      <span class="ibar-rotate-item">Solo <strong>3 cupos</strong> disponibles esta semana</span>
+      <span class="ibar-rotate-item">Sesión estratégica <strong>100% gratis</strong></span>
+      <span class="ibar-rotate-item">Sitios web desde <strong>$399 USD · 7 días</strong></span>
+      <span class="ibar-rotate-item"><strong>+500 marcas</strong> impulsadas · 7 años</span>
+    </div>
+  </div>
+
+</div>
+
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
   <button class="close-btn" onclick="closeMenu()">✕</button>
   <ul>
-    <li><a href="#hero" onclick="closeMenu()" data-es="Inicio" data-en="Home">Inicio</a></li>
     <li><a href="#services" onclick="closeMenu()" data-es="Servicios" data-en="Services">Servicios</a></li>
     <li><a href="#precios" onclick="closeMenu()" data-es="Precios" data-en="Pricing">Precios</a></li>
     <li><a href="#reviews" onclick="closeMenu()" data-es="Reseñas" data-en="Reviews">Reseñas</a></li>
@@ -1114,7 +1295,7 @@
   </div>
   <div class="hero-img fade-up delay-2">
     <div class="hero-img-wrap">
-      <img src="https://i.ibb.co/VpjKQQm6/Portadadigimasterpro-CEO.jpg" alt="Felipe Ferro - CEO Digi Master Pro">
+      <img src="https://i.ibb.co/VpjKQQm6/Portadadigimasterpro-CEO.jpg" fetchpriority="high" loading="eager" decoding="async" alt="Felipe Ferro - CEO Digi Master Pro">
       <div class="hero-badge">
         <div class="name">Felipe Ferro</div>
         <div class="role" data-es="CEO &amp; Desarrollador Web Principal" data-en="CEO &amp; Lead Web Developer">CEO & Desarrollador Web Principal</div>
@@ -1138,37 +1319,37 @@
     <div class="brands-fade brands-fade-left"></div>
     <div class="brands-fade brands-fade-right"></div>
     <div class="brands-track">
-      <div class="brand-item"><img src="https://i.ibb.co/nq7KgBbm/Captura-de-pantalla-2026-06-06-065007-removebg-preview.png" alt="Marca 1"></div>
-      <div class="brand-item"><img src="https://i.ibb.co/dxxzkHK/Logo-Tienda-de-Indumentaria-Femenino-Rosa-y-Blanco-1-removebg-preview.png" alt="Marca 2"></div>
-      <div class="brand-item"><img src="https://i.ibb.co/21QzP9R6/Logo-Tienda-de-Indumentaria-Femenino-Rosa-y-Blanco-2-removebg-preview.png" alt="Marca 3"></div>
-      <div class="brand-item"><img src="https://i.ibb.co/QVqTxk0/image-22.png" alt="Marca 4"></div>
-      <div class="brand-item"><img src="https://i.ibb.co/1Y2jc88V/IMG-3707-removebg-preview.png" alt="Marca 5"></div>
-      <div class="brand-item"><img src="https://i.ibb.co/SDFs9yxz/favicon-180x180.png" alt="Marca 6"></div>
-      <div class="brand-item"><img src="https://i.ibb.co/Xx20HBY7/Captura-de-pantalla-2026-02-27-052715-removebg-preview-1.png" alt="Marca 7"></div>
-      <div class="brand-item"><img src="https://i.ibb.co/SX1FM10b/Captura-de-pantalla-2026-02-06-074303-removebg-preview.png" alt="Marca 8"></div>
-      <div class="brand-item"><img src="https://i.ibb.co/VY1HyWPD/unnamed-4-1.png" alt="Marca 9"></div>
-      <div class="brand-item"><img src="https://i.ibb.co/RGV6PcdF/Gemini-Generated-Image-knpgetknpgetknpg-1.png" alt="Marca 10"></div>
-      <div class="brand-item"><img src="https://i.ibb.co/8gDqVBw0/Captura-de-pantalla-2026-05-21-055242-removebg-preview.png" alt="Marca 11"></div>
-      <div class="brand-item"><img src="https://i.ibb.co/QF7vYrFn/Recurso-20re3413khjgfd-VUYVXFBhg-removebg-preview.png" alt="Marca 12"></div>
-      <div class="brand-item"><img src="https://i.ibb.co/Xrf5Vr48/307448779-5429246140499739-3551810560974368651-n-removebg-preview.png" alt="Marca 13"></div>
-      <div class="brand-item"><img src="https://i.ibb.co/hF77MDwv/324249780-1357761718320854-6170841150940039372-n-removebg-preview.png" alt="Marca 14"></div>
-      <div class="brand-item"><img src="https://i.ibb.co/RpkL8J96/image.png" alt="Marca 15"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://i.ibb.co/nq7KgBbm/Captura-de-pantalla-2026-06-06-065007-removebg-preview.png" alt="Marca 1"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://i.ibb.co/dxxzkHK/Logo-Tienda-de-Indumentaria-Femenino-Rosa-y-Blanco-1-removebg-preview.png" alt="Marca 2"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://i.ibb.co/21QzP9R6/Logo-Tienda-de-Indumentaria-Femenino-Rosa-y-Blanco-2-removebg-preview.png" alt="Marca 3"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://i.ibb.co/QVqTxk0/image-22.png" alt="Marca 4"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://i.ibb.co/1Y2jc88V/IMG-3707-removebg-preview.png" alt="Marca 5"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://i.ibb.co/SDFs9yxz/favicon-180x180.png" alt="Marca 6"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://i.ibb.co/Xx20HBY7/Captura-de-pantalla-2026-02-27-052715-removebg-preview-1.png" alt="Marca 7"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://i.ibb.co/SX1FM10b/Captura-de-pantalla-2026-02-06-074303-removebg-preview.png" alt="Marca 8"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://i.ibb.co/VY1HyWPD/unnamed-4-1.png" alt="Marca 9"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://i.ibb.co/RGV6PcdF/Gemini-Generated-Image-knpgetknpgetknpg-1.png" alt="Marca 10"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://i.ibb.co/8gDqVBw0/Captura-de-pantalla-2026-05-21-055242-removebg-preview.png" alt="Marca 11"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://i.ibb.co/QF7vYrFn/Recurso-20re3413khjgfd-VUYVXFBhg-removebg-preview.png" alt="Marca 12"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://i.ibb.co/Xrf5Vr48/307448779-5429246140499739-3551810560974368651-n-removebg-preview.png" alt="Marca 13"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://i.ibb.co/hF77MDwv/324249780-1357761718320854-6170841150940039372-n-removebg-preview.png" alt="Marca 14"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://i.ibb.co/RpkL8J96/image.png" alt="Marca 15"></div>
       <!-- Duplicate set for seamless infinite loop -->
-      <div class="brand-item"><img src="https://i.ibb.co/nq7KgBbm/Captura-de-pantalla-2026-06-06-065007-removebg-preview.png" alt="Marca 1"></div>
-      <div class="brand-item"><img src="https://i.ibb.co/dxxzkHK/Logo-Tienda-de-Indumentaria-Femenino-Rosa-y-Blanco-1-removebg-preview.png" alt="Marca 2"></div>
-      <div class="brand-item"><img src="https://i.ibb.co/21QzP9R6/Logo-Tienda-de-Indumentaria-Femenino-Rosa-y-Blanco-2-removebg-preview.png" alt="Marca 3"></div>
-      <div class="brand-item"><img src="https://i.ibb.co/QVqTxk0/image-22.png" alt="Marca 4"></div>
-      <div class="brand-item"><img src="https://i.ibb.co/1Y2jc88V/IMG-3707-removebg-preview.png" alt="Marca 5"></div>
-      <div class="brand-item"><img src="https://i.ibb.co/SDFs9yxz/favicon-180x180.png" alt="Marca 6"></div>
-      <div class="brand-item"><img src="https://i.ibb.co/Xx20HBY7/Captura-de-pantalla-2026-02-27-052715-removebg-preview-1.png" alt="Marca 7"></div>
-      <div class="brand-item"><img src="https://i.ibb.co/SX1FM10b/Captura-de-pantalla-2026-02-06-074303-removebg-preview.png" alt="Marca 8"></div>
-      <div class="brand-item"><img src="https://i.ibb.co/VY1HyWPD/unnamed-4-1.png" alt="Marca 9"></div>
-      <div class="brand-item"><img src="https://i.ibb.co/RGV6PcdF/Gemini-Generated-Image-knpgetknpgetknpg-1.png" alt="Marca 10"></div>
-      <div class="brand-item"><img src="https://i.ibb.co/8gDqVBw0/Captura-de-pantalla-2026-05-21-055242-removebg-preview.png" alt="Marca 11"></div>
-      <div class="brand-item"><img src="https://i.ibb.co/QF7vYrFn/Recurso-20re3413khjgfd-VUYVXFBhg-removebg-preview.png" alt="Marca 12"></div>
-      <div class="brand-item"><img src="https://i.ibb.co/Xrf5Vr48/307448779-5429246140499739-3551810560974368651-n-removebg-preview.png" alt="Marca 13"></div>
-      <div class="brand-item"><img src="https://i.ibb.co/hF77MDwv/324249780-1357761718320854-6170841150940039372-n-removebg-preview.png" alt="Marca 14"></div>
-      <div class="brand-item"><img src="https://i.ibb.co/RpkL8J96/image.png" alt="Marca 15"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://i.ibb.co/nq7KgBbm/Captura-de-pantalla-2026-06-06-065007-removebg-preview.png" alt="Marca 1"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://i.ibb.co/dxxzkHK/Logo-Tienda-de-Indumentaria-Femenino-Rosa-y-Blanco-1-removebg-preview.png" alt="Marca 2"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://i.ibb.co/21QzP9R6/Logo-Tienda-de-Indumentaria-Femenino-Rosa-y-Blanco-2-removebg-preview.png" alt="Marca 3"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://i.ibb.co/QVqTxk0/image-22.png" alt="Marca 4"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://i.ibb.co/1Y2jc88V/IMG-3707-removebg-preview.png" alt="Marca 5"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://i.ibb.co/SDFs9yxz/favicon-180x180.png" alt="Marca 6"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://i.ibb.co/Xx20HBY7/Captura-de-pantalla-2026-02-27-052715-removebg-preview-1.png" alt="Marca 7"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://i.ibb.co/SX1FM10b/Captura-de-pantalla-2026-02-06-074303-removebg-preview.png" alt="Marca 8"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://i.ibb.co/VY1HyWPD/unnamed-4-1.png" alt="Marca 9"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://i.ibb.co/RGV6PcdF/Gemini-Generated-Image-knpgetknpgetknpg-1.png" alt="Marca 10"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://i.ibb.co/8gDqVBw0/Captura-de-pantalla-2026-05-21-055242-removebg-preview.png" alt="Marca 11"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://i.ibb.co/QF7vYrFn/Recurso-20re3413khjgfd-VUYVXFBhg-removebg-preview.png" alt="Marca 12"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://i.ibb.co/Xrf5Vr48/307448779-5429246140499739-3551810560974368651-n-removebg-preview.png" alt="Marca 13"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://i.ibb.co/hF77MDwv/324249780-1357761718320854-6170841150940039372-n-removebg-preview.png" alt="Marca 14"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://i.ibb.co/RpkL8J96/image.png" alt="Marca 15"></div>
     </div>
   </div>
 </div>
@@ -1799,7 +1980,7 @@ function globalSetCurrency(currency) {
         onmouseover="this.style.borderColor='rgba(45,156,219,0.5)';this.style.boxShadow='0 12px 40px rgba(45,156,219,0.14)'"
         onmouseout="this.style.borderColor='rgba(45,156,219,0.15)';this.style.boxShadow='none'">
         <div style="position:relative;aspect-ratio:4/3;overflow:hidden;background:#0a0a0a;">
-          <img src="https://i.ibb.co/S7mTTMth/IMG-0414.png" alt="Manilla NFC"
+          <img loading="lazy" decoding="async" src="https://i.ibb.co/S7mTTMth/IMG-0414.png" alt="Manilla NFC"
             style="width:100%;height:100%;object-fit:cover;transition:.5s;"
             onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
           <div style="position:absolute;top:12px;left:12px;background:#2D9CDB;color:#fff;font-size:10px;font-weight:700;letter-spacing:.1em;padding:4px 12px;border-radius:20px;">NFC</div>
@@ -1825,7 +2006,7 @@ function globalSetCurrency(currency) {
       <!-- CARD 2: Tarjeta NFC Personalizada -->
       <div class="nfc-slide" style="flex:0 0 calc(33.333% - 16px);background:rgba(255,255,255,0.03);border:1px solid #2D9CDB;border-radius:20px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .3s,box-shadow .3s;box-shadow:0 0 30px rgba(45,156,219,0.1);">
         <div style="position:relative;aspect-ratio:4/3;overflow:hidden;background:#0a0a0a;">
-          <img src="https://i.ibb.co/xtwRvsb4/IMG-0405.png" alt="Tarjeta NFC Personalizada"
+          <img loading="lazy" decoding="async" src="https://i.ibb.co/xtwRvsb4/IMG-0405.png" alt="Tarjeta NFC Personalizada"
             style="width:100%;height:100%;object-fit:cover;transition:.5s;"
             onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
           <div style="position:absolute;top:12px;left:12px;background:#2D9CDB;color:#fff;font-size:10px;font-weight:700;letter-spacing:.1em;padding:4px 12px;border-radius:20px;">NFC</div>
@@ -1854,7 +2035,7 @@ function globalSetCurrency(currency) {
         onmouseover="this.style.borderColor='rgba(45,156,219,0.5)';this.style.boxShadow='0 12px 40px rgba(45,156,219,0.14)'"
         onmouseout="this.style.borderColor='rgba(45,156,219,0.15)';this.style.boxShadow='none'">
         <div style="position:relative;aspect-ratio:4/3;overflow:hidden;background:#0a0a0a;">
-          <img src="https://i.ibb.co/vCP5tC0V/IMG-0424.png" alt="Tarjeta NFC de Google"
+          <img loading="lazy" decoding="async" src="https://i.ibb.co/vCP5tC0V/IMG-0424.png" alt="Tarjeta NFC de Google"
             style="width:100%;height:100%;object-fit:cover;transition:.5s;"
             onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
           <div style="position:absolute;top:12px;left:12px;background:#2D9CDB;color:#fff;font-size:10px;font-weight:700;letter-spacing:.1em;padding:4px 12px;border-radius:20px;">NFC</div>
@@ -2053,7 +2234,7 @@ function globalSetCurrency(currency) {
 <!-- ABOUT -->
 <section id="about">
   <div class="about-img-wrap reveal-left">
-    <img src="https://i.ibb.co/BHbVSFF0/equipo-digimasterpro.png" alt="Equipo Digi Master Pro">
+    <img loading="lazy" decoding="async" src="https://i.ibb.co/BHbVSFF0/equipo-digimasterpro.png" alt="Equipo Digi Master Pro">
   </div>
   <div class="about-text reveal-right">
     <span class="section-tag" data-es="Sobre Nosotros" data-en="About Us">Sobre Nosotros</span>
@@ -2192,7 +2373,7 @@ function globalSetCurrency(currency) {
 <hr class="glowline">
 <!-- FOOTER -->
 <footer class="footer-minimal">
-  <img src="https://i.ibb.co/TDsMPDRb/Logo-Digimaster.png" alt="Digi Master Pro" class="footer-logo-min">
+  <img src="https://i.ibb.co/TDsMPDRb/Logo-Digimaster.png" loading="eager" decoding="async" fetchpriority="high" alt="Digi Master Pro" class="footer-logo-min">
   <div class="social-links" style="justify-content:center;margin:16px 0;gap:10px;">
     <!-- Instagram -->
     <a href="https://www.instagram.com/digi_masterpro" target="_blank" rel="noopener" class="social-link social-link-icon" aria-label="Instagram">
@@ -2442,7 +2623,7 @@ function setLang(lang) {
   const CYAN = '86,204,242';
   let isMobileMotion = window.matchMedia('(max-width: 768px)').matches;
   const connectDist = () => isMobileMotion ? 120 : 180;
-  const particleCount = () => isMobileMotion ? 44 : 120;
+  const particleCount = () => isMobileMotion ? 28 : 90;
   const particleSpeed = () => isMobileMotion ? .16 : .45;
 
   let W, H;
@@ -2572,10 +2753,18 @@ function setLang(lang) {
       }
     });
 
-    requestAnimationFrame(draw);
+    // Throttle on mobile: skip every other frame
+    if(isMobileMotion){
+      setTimeout(() => requestAnimationFrame(draw), 16);
+    } else {
+      requestAnimationFrame(draw);
+    }
   }
   draw();
 })();
+
+
+// ── Particles run on full page — no hero-only pause ──
 
 // ── 2. CURSOR TRAIL ────────────────────────────────────
 (function(){
@@ -2597,6 +2786,19 @@ function setLang(lang) {
   document.addEventListener('mouseenter',()=>trail.style.opacity='1');
 })();
 
+
+// ── CAROUSEL VISIBILITY — pause CSS animation when off-screen ──
+(function(){
+  const els = document.querySelectorAll('.brands-track,.reviews-track');
+  if(!els.length || !('IntersectionObserver' in window)) return;
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      e.target.style.animationPlayState = e.isIntersecting ? 'running' : 'paused';
+    });
+  },{threshold:0, rootMargin:'200px'});
+  els.forEach(el=>io.observe(el));
+})();
+
 // ── 3. SCROLL REVEAL ───────────────────────────────────
 (function(){
   const els = document.querySelectorAll('.reveal,.reveal-left,.reveal-right');
@@ -2607,16 +2809,34 @@ function setLang(lang) {
         io.unobserve(e.target);
       }
     });
-  },{threshold:0.12});
+  },{threshold:0.08, rootMargin:'0px 0px -40px 0px'});
   els.forEach(el=>io.observe(el));
+})();
+
+
+// ── PAGE VISIBILITY — pause all animations when tab hidden ──
+(function(){
+  const canvas = document.getElementById('particles-canvas');
+  document.addEventListener('visibilitychange', () => {
+    const hidden = document.hidden;
+    // Pause CSS animations on heavy tracks when tab hidden
+    const tracks = document.querySelectorAll('.brands-track,.reviews-track,.incentivo-track');
+    tracks.forEach(t => t.style.animationPlayState = hidden ? 'paused' : 'running');
+    // NOTE: canvas keeps running — it's the global background
+  });
 })();
 
 // ── 4. NAV SCROLL EFFECT ───────────────────────────────
 (function(){
   const nav = document.querySelector('nav');
+  let _raf=0;
   window.addEventListener('scroll',()=>{
-    nav.classList.toggle('scrolled', window.scrollY > 60);
-  });
+    if(_raf) return;
+    _raf=requestAnimationFrame(()=>{
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+      _raf=0;
+    });
+  },{passive:true});
 })();
 
 // ── 5. CONTADORES ANIMADOS EN STATS ───────────────────
@@ -2731,8 +2951,55 @@ function setLang(lang) {
 
 
 <script>
-/* ══ LIVE VISITORS COUNTER ══ */
+/* ══ BARRA ESTÁTICA — contadores animados + texto rotativo ══ */
 (function(){
+  // ── Viewers counter ──
+  const viewerEl = document.getElementById('ibarViewers');
+  const quotesEl = document.getElementById('ibarQuotes');
+
+  function bump(el){ el.classList.remove('bump'); void el.offsetWidth; el.classList.add('bump'); setTimeout(()=>el.classList.remove('bump'),350); }
+
+  // Viewers: 17–31, fluctúa cada 4–9s
+  let viewers = 23;
+  function tickViewers(){
+    const delta = Math.random()<0.55?1:2;
+    const dir   = viewers>=31?-1:viewers<=17?1:(Math.random()<0.52?1:-1);
+    const next  = Math.max(17,Math.min(31,viewers+dir*delta));
+    if(next!==viewers){ viewers=next; if(viewerEl){ viewerEl.textContent=viewers; bump(viewerEl); } }
+    setTimeout(tickViewers, 4000+Math.random()*5000);
+  }
+  setTimeout(tickViewers, 2500);
+
+  // Quotes: 8–19, fluctúa cada 12–22s
+  let quotes = 12;
+  function tickQuotes(){
+    const dir = quotes>=19?-1:quotes<=8?1:(Math.random()<0.6?1:-1);
+    quotes = Math.max(8,Math.min(19,quotes+dir));
+    if(quotesEl){ quotesEl.textContent=quotes; bump(quotesEl); }
+    setTimeout(tickQuotes, 12000+Math.random()*10000);
+  }
+  setTimeout(tickQuotes, 7000);
+
+  // ── Texto rotativo ──
+  const wrap = document.getElementById('ibarRotateWrap');
+  if(wrap){
+    const items = wrap.querySelectorAll('.ibar-rotate-item');
+    let cur = 0;
+    setInterval(()=>{
+      items[cur].classList.remove('active');
+      cur = (cur+1)%items.length;
+      items[cur].classList.add('active');
+      // auto-size the wrap to the active item width
+      wrap.style.width = items[cur].scrollWidth+'px';
+    }, 3800);
+    // init wrap width
+    wrap.style.width = items[0].scrollWidth+'px';
+  }
+})();
+
+/* ══ LIVE VISITORS COUNTER ══ — runs when browser is idle */
+(function(){
+  function initLive(){
   const countEl  = document.getElementById('liveCount');
   const subEl    = document.getElementById('liveSub');
   const avBox    = document.getElementById('liveAvatars');
@@ -2839,6 +3106,12 @@ function setLang(lang) {
 
   // Also swap avatars independently every ~6s
   setInterval(swapAvatar, 6000 + Math.random()*3000);
+  } // end initLive
+  if('requestIdleCallback' in window){
+    requestIdleCallback(initLive, {timeout:3000});
+  } else {
+    setTimeout(initLive, 2000);
+  }
 })();
 </script>
 
