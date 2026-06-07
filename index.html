@@ -3046,150 +3046,259 @@ function setLang(lang) {
 // ── Particles run on full page — no hero-only pause ──
 
 
-// ── TOUCH BURST — mobile/tablet only ──────────────────
+// ── TOUCH HUD — Futuristic scanner effect — mobile/tablet only ──
 (function(){
-  // Solo activo en dispositivos touch
   if(!('ontouchstart' in window) && !navigator.maxTouchPoints) return;
 
-  const isTouchDevice = true;
-
-  // En touch: apagamos el canvas de partículas y lo reemplazamos con bursts
-  const bgCanvas = document.getElementById('particles-canvas');
-
-  // Crear canvas overlay SOLO para touch bursts (encima de todo, pointer-events:none)
   const bc = document.createElement('canvas');
   bc.id = 'touch-burst-canvas';
-  bc.style.cssText = [
-    'position:fixed','top:0','left:0',
-    'width:100%','height:100%',
-    'pointer-events:none',
-    'z-index:9998',
-    'will-change:transform'
-  ].join(';');
+  bc.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9998;';
   document.body.appendChild(bc);
 
   const ctx = bc.getContext('2d');
   let W, H;
-  function resize(){
-    W = bc.width  = window.innerWidth;
-    H = bc.height = window.innerHeight;
-  }
+  function resize(){ W = bc.width = window.innerWidth; H = bc.height = window.innerHeight; }
   resize();
   window.addEventListener('resize', resize, {passive:true});
 
-  // Pool de partículas activas (máx 60 en pantalla)
-  const MAX_PARTS = 60;
-  let parts = [];
+  // ── Palette ──
+  const B  = [45, 156, 219];   // #2D9CDB
+  const C  = [86, 204, 242];   // #56CCF2
+  const W2 = [200, 235, 255];  // near-white
 
-  // Paleta coherente con el sitio
-  const COLORS = [
-    [45,156,219],   // blue principal
-    [86,204,242],   // cyan
-    [255,255,255],  // blanco (puntitos)
-    [45,156,219],   // blue (peso extra)
-    [86,204,242],   // cyan (peso extra)
-  ];
+  // ── Active effects pool ──
+  let effects = [];
 
-  function spawnBurst(cx, cy){
-    const count = 14 + Math.floor(Math.random() * 8); // 14-22 partículas
-    for(let i = 0; i < count; i++){
-      if(parts.length >= MAX_PARTS) parts.shift(); // descarta el más viejo
-      const angle  = (Math.PI * 2 * i / count) + (Math.random() - .5) * .8;
-      const speed  = 1.4 + Math.random() * 2.6;
-      const col    = COLORS[Math.floor(Math.random() * COLORS.length)];
-      const bright = Math.random() > .72;
-      parts.push({
-        x: cx, y: cy,
-        vx: Math.cos(angle) * speed,
-        vy: Math.sin(angle) * speed,
-        size:  bright ? 2.4 + Math.random() * 1.6 : 1.0 + Math.random() * 1.2,
-        alpha: bright ? 0.92 : 0.55 + Math.random() * 0.35,
-        fade:  bright ? 0.026 + Math.random() * .012 : 0.034 + Math.random() * .016,
-        col,
-        bright,
-        life: 1.0
-      });
+  // Draw a hexagon path centered at cx,cy with radius r and rotation rot
+  function hexPath(cx, cy, r, rot){
+    ctx.beginPath();
+    for(let i = 0; i < 6; i++){
+      const a = rot + (Math.PI / 3) * i;
+      const x = cx + r * Math.cos(a);
+      const y = cy + r * Math.sin(a);
+      i === 0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
     }
-    // También un halo central instantáneo
-    parts.push({
-      x: cx, y: cy,
-      vx: 0, vy: 0,
-      size: 18,
-      alpha: 0.18,
-      fade: 0.06,
-      col: [86,204,242],
-      bright: false,
-      halo: true,
-      life: 1.0
+    ctx.closePath();
+  }
+
+  function spawnHUD(cx, cy){
+    const now = performance.now();
+    effects.push({
+      cx, cy,
+      born: now,
+      // 3 expanding hex rings
+      rings: [
+        { delay:0,    dur:520, maxR:44, col:C,  lw:1.4, alpha:0.75 },
+        { delay:60,   dur:620, maxR:68, col:B,  lw:1.0, alpha:0.55 },
+        { delay:130,  dur:720, maxR:90, col:C,  lw:0.7, alpha:0.35 },
+      ],
+      // 6 laser lines at hex angles
+      lasers: Array.from({length:6}, (_,i)=>({
+        angle: (Math.PI/3)*i + Math.PI/6,
+        delay: i * 18,
+        dur:   420,
+        maxLen: 55 + Math.random()*30,
+        col: i%2===0 ? C : B,
+        alpha: 0.55 + Math.random()*.2
+      })),
+      // Central flash
+      flash: { dur:180, maxR:22, col:W2, alpha:0.9 },
+      // Small diamond dots at corners
+      dots: Array.from({length:6}, (_,i)=>({
+        angle: (Math.PI/3)*i,
+        dist: 46 + Math.random()*14,
+        delay: 80 + i*22,
+        dur: 380,
+        size: 2.2 + Math.random()*1.4,
+        col: i%3===0 ? W2 : C,
+        alpha: 0.8
+      })),
+      // Scan arc sweeping around
+      scanArc: { delay:20, dur:600, col:C, alpha:0.4 },
+      // Corner brackets (HUD frame)
+      brackets: [
+        {ox:-1,oy:-1}, {ox:1,oy:-1}, {ox:1,oy:1}, {ox:-1,oy:1}
+      ].map(({ox,oy},i)=>({ ox,oy, delay:30+i*15, dur:500, size:14, col:B, alpha:0.65 })),
     });
   }
 
-  // Loop de render — SOLO activo mientras haya partículas vivas
+  function easeOut(t){ return 1 - Math.pow(1-t,2); }
+  function easeInOut(t){ return t<.5 ? 2*t*t : -1+(4-2*t)*t; }
+
   let rafId = null;
   function render(){
     ctx.clearRect(0, 0, W, H);
+    const now = performance.now();
     let alive = false;
-    for(let i = parts.length - 1; i >= 0; i--){
-      const p = parts[i];
-      p.x  += p.vx;
-      p.y  += p.vy;
-      p.vx *= 0.91;
-      p.vy *= 0.91;
-      p.life -= p.fade;
-      if(p.life <= 0){ parts.splice(i, 1); continue; }
+
+    for(let ei = effects.length-1; ei >= 0; ei--){
+      const e = effects[ei];
+      const age = now - e.born;
+
+      // Max lifetime = max of all durations + max delay
+      const maxLife = 900;
+      if(age > maxLife){ effects.splice(ei,1); continue; }
       alive = true;
 
-      const a = p.alpha * p.life;
-      const [r,g,b] = p.col;
+      const {cx,cy} = e;
 
-      if(p.halo){
-        // Anillo de expansión
-        const rad = p.size * (1 + (1 - p.life) * 2.5);
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, rad, 0, Math.PI*2);
-        ctx.strokeStyle = `rgba(${r},${g},${b},${a})`;
-        ctx.lineWidth = 1.2;
+      // ── Central flash ──
+      {
+        const f = e.flash;
+        const t = Math.min(age / f.dur, 1);
+        if(t < 1){
+          const r = f.maxR * easeOut(t);
+          const a = f.alpha * (1 - t);
+          const [r0,g0,b0] = f.col;
+          const gr = ctx.createRadialGradient(cx,cy,0,cx,cy,r);
+          gr.addColorStop(0, `rgba(${r0},${g0},${b0},${a})`);
+          gr.addColorStop(0.5,`rgba(${r0},${g0},${b0},${a*.4})`);
+          gr.addColorStop(1, `rgba(${r0},${g0},${b0},0)`);
+          ctx.beginPath(); ctx.arc(cx,cy,r,0,Math.PI*2);
+          ctx.fillStyle = gr; ctx.fill();
+        }
+      }
+
+      // ── Hex rings ──
+      e.rings.forEach(ring => {
+        const t = Math.min((age - ring.delay) / ring.dur, 1);
+        if(t <= 0 || t >= 1) return;
+        const r   = ring.maxR * easeOut(t);
+        const a   = ring.alpha * (1 - Math.pow(t,1.6));
+        const rot = t * 0.18;
+        const [r0,g0,b0] = ring.col;
+        hexPath(cx, cy, r, rot);
+        ctx.strokeStyle = `rgba(${r0},${g0},${b0},${a})`;
+        ctx.lineWidth   = ring.lw * (1 - t * .4);
         ctx.stroke();
-      } else {
-        // Halo suave
-        const gr = ctx.createRadialGradient(p.x,p.y,0, p.x,p.y, p.size*(p.bright?4:2.5));
-        gr.addColorStop(0,   `rgba(${r},${g},${b},${a})`);
-        gr.addColorStop(0.4, `rgba(${r},${g},${b},${a*.3})`);
-        gr.addColorStop(1,   `rgba(${r},${g},${b},0)`);
+      });
+
+      // ── Laser lines ──
+      e.lasers.forEach(laser => {
+        const t = Math.min((age - laser.delay) / laser.dur, 1);
+        if(t <= 0) return;
+        const len = laser.maxLen * easeOut(Math.min(t*1.6, 1));
+        const fade = t > .5 ? 1 - (t-.5)*2 : 1;
+        const a  = laser.alpha * fade;
+        if(a <= 0) return;
+        const [r0,g0,b0] = laser.col;
+        const ex = cx + Math.cos(laser.angle) * len;
+        const ey = cy + Math.sin(laser.angle) * len;
+        const grad = ctx.createLinearGradient(cx,cy,ex,ey);
+        grad.addColorStop(0, `rgba(${r0},${g0},${b0},${a})`);
+        grad.addColorStop(0.6,`rgba(${r0},${g0},${b0},${a*.5})`);
+        grad.addColorStop(1, `rgba(${r0},${g0},${b0},0)`);
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size*(p.bright?4:2.5), 0, Math.PI*2);
-        ctx.fillStyle = gr;
-        ctx.fill();
-        // Core
+        ctx.moveTo(cx,cy); ctx.lineTo(ex,ey);
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 1.5 * fade;
+        ctx.stroke();
+        // Dot at tip
+        if(t < .8){
+          ctx.beginPath(); ctx.arc(ex,ey,1.8*fade,0,Math.PI*2);
+          ctx.fillStyle=`rgba(${r0},${g0},${b0},${a*.9})`;
+          ctx.fill();
+        }
+      });
+
+      // ── Corner dots ──
+      e.dots.forEach(dot => {
+        const t = Math.min((age - dot.delay) / dot.dur, 1);
+        if(t <= 0) return;
+        const dist  = dot.dist * easeOut(Math.min(t*2,1));
+        const fade  = t > .55 ? 1-(t-.55)/0.45 : 1;
+        const a     = dot.alpha * fade;
+        if(a <= 0) return;
+        const dx = cx + Math.cos(dot.angle)*dist;
+        const dy = cy + Math.sin(dot.angle)*dist;
+        const [r0,g0,b0] = dot.col;
+        // Diamond shape
+        const s = dot.size * (1 - t*.3);
+        ctx.save();
+        ctx.translate(dx, dy); ctx.rotate(Math.PI/4);
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
-        ctx.fillStyle = `rgba(${r},${g},${b},${Math.min(a*2,1)})`;
+        ctx.rect(-s/2,-s/2,s,s);
+        ctx.fillStyle=`rgba(${r0},${g0},${b0},${a})`;
         ctx.fill();
+        ctx.restore();
+      });
+
+      // ── Scan arc ──
+      {
+        const s = e.scanArc;
+        const t = Math.min((age - s.delay) / s.dur, 1);
+        if(t > 0 && t < 1){
+          const r   = 34 + 52 * easeOut(t);
+          const a   = s.alpha * (1 - t);
+          const arc = Math.PI * 2 * Math.min(t * 2.4, 1);
+          const rot = -Math.PI/2 + t * Math.PI * 2.5;
+          const [r0,g0,b0] = s.col;
+          ctx.beginPath();
+          ctx.arc(cx,cy,r, rot, rot+arc);
+          ctx.strokeStyle=`rgba(${r0},${g0},${b0},${a})`;
+          ctx.lineWidth=1.8*(1-t);
+          ctx.stroke();
+        }
+      }
+
+      // ── HUD brackets ──
+      const bSize = 34;
+      e.brackets.forEach(br => {
+        const t = Math.min((age - br.delay) / br.dur, 1);
+        if(t <= 0) return;
+        const prog = easeOut(Math.min(t*1.8,1));
+        const fade = t > .6 ? 1-(t-.6)/.4 : 1;
+        const a    = br.alpha * fade;
+        if(a <= 0) return;
+        const [r0,g0,b0] = br.col;
+        const bx = cx + br.ox * bSize;
+        const by = cy + br.oy * bSize;
+        const s  = br.size * prog;
+        ctx.strokeStyle=`rgba(${r0},${g0},${b0},${a})`;
+        ctx.lineWidth=1.4;
+        ctx.beginPath();
+        if(br.ox < 0 && br.oy < 0){ ctx.moveTo(bx+s,by); ctx.lineTo(bx,by); ctx.lineTo(bx,by+s); }
+        if(br.ox > 0 && br.oy < 0){ ctx.moveTo(bx-s,by); ctx.lineTo(bx,by); ctx.lineTo(bx,by+s); }
+        if(br.ox > 0 && br.oy > 0){ ctx.moveTo(bx-s,by); ctx.lineTo(bx,by); ctx.lineTo(bx,by-s); }
+        if(br.ox < 0 && br.oy > 0){ ctx.moveTo(bx+s,by); ctx.lineTo(bx,by); ctx.lineTo(bx,by-s); }
+        ctx.stroke();
+      });
+
+      // ── Center crosshair dot ──
+      {
+        const t = Math.min(age / 160, 1);
+        const a = 0.7 * (1 - Math.pow(Math.min(age/320,1), 1.5));
+        if(a > 0){
+          ctx.beginPath(); ctx.arc(cx,cy,3*(1-t*.3),0,Math.PI*2);
+          ctx.fillStyle=`rgba(${C[0]},${C[1]},${C[2]},${a})`;
+          ctx.fill();
+          // crosshair lines
+          const cl=7*(1-t*.2), ca=a*.6;
+          ctx.strokeStyle=`rgba(${C[0]},${C[1]},${C[2]},${ca})`;
+          ctx.lineWidth=.9;
+          ctx.beginPath();
+          ctx.moveTo(cx-cl,cy); ctx.lineTo(cx+cl,cy);
+          ctx.moveTo(cx,cy-cl); ctx.lineTo(cx,cy+cl);
+          ctx.stroke();
+        }
       }
     }
-    if(alive){
-      rafId = requestAnimationFrame(render);
-    } else {
-      rafId = null;
-      ctx.clearRect(0,0,W,H);
-    }
+
+    if(alive){ rafId = requestAnimationFrame(render); }
+    else { rafId = null; ctx.clearRect(0,0,W,H); }
   }
 
-  // Touch handlers — un burst por cada dedo
   function onTouch(e){
-    const touches = e.changedTouches;
-    for(let i = 0; i < touches.length; i++){
-      spawnBurst(touches[i].clientX, touches[i].clientY);
-    }
+    const t = e.changedTouches;
+    for(let i=0;i<t.length;i++) spawnHUD(t[i].clientX, t[i].clientY);
     if(!rafId) rafId = requestAnimationFrame(render);
   }
 
   document.addEventListener('touchstart', onTouch, {passive:true});
-  // Throttle touchmove: solo cada 80ms para no saturar
   let _lastMove = 0;
   document.addEventListener('touchmove', function(e){
     const now = Date.now();
-    if(now - _lastMove < 80) return;
+    if(now - _lastMove < 90) return;
     _lastMove = now;
     onTouch(e);
   }, {passive:true});
