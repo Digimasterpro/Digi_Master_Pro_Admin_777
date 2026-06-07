@@ -134,38 +134,149 @@
   .nav-links{display:flex;gap:32px;list-style:none}
   .nav-links a{color:rgba(255,255,255,0.7);text-decoration:none;font-size:13px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;transition:.2s}
   .nav-links a:hover{color:var(--white)}
-  .nav-cta{
-    background:var(--blue);color:var(--white);
-    border:none;padding:10px 24px;border-radius:6px;
-    font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;
-    letter-spacing:.05em;cursor:pointer;text-decoration:none;
-    transition:background .2s;
-    animation:navCtaBounce 1.8s ease-in-out infinite;
+  /* ══ UNIFIED NEON BUTTON STYLE — "HABLEMOS" ══ */
+  @keyframes neonPulse{
+    0%,100%{box-shadow:0 0 8px rgba(45,156,219,0.5), 0 0 18px rgba(45,156,219,0.2), inset 0 0 8px rgba(45,156,219,0.06);}
+    50%{box-shadow:0 0 16px rgba(86,204,242,0.8), 0 0 32px rgba(45,156,219,0.4), 0 0 50px rgba(45,156,219,0.15), inset 0 0 12px rgba(86,204,242,0.1);}
+  }
+  @keyframes dotPulse{
+    0%,100%{box-shadow:0 0 0 0 rgba(86,204,242,0.7);transform:scale(1);}
+    50%{box-shadow:0 0 0 5px rgba(86,204,242,0);transform:scale(1.2);}
+  }
+  @keyframes borderShimmer{
+    0%{border-color:rgba(45,156,219,0.6);}
+    50%{border-color:rgba(86,204,242,1);}
+    100%{border-color:rgba(45,156,219,0.6);}
+  }
+  @keyframes btnGlow{
+    0%,100%{box-shadow:0 0 8px rgba(45,156,219,0.5), 0 0 18px rgba(45,156,219,0.2);}
+    50%{box-shadow:0 0 16px rgba(86,204,242,0.8), 0 0 32px rgba(45,156,219,0.4);}
+  }
+  @keyframes navCtaBounce{ 0%,100%{opacity:1} }
+  @keyframes heroBtnBounce{ 0%,100%{opacity:1} }
+  @keyframes submitBtnBounce{ 0%,100%{opacity:1} }
+
+  /* Base neon button */
+  .neon-btn{
+    background:rgba(5,5,5,0.6);
+    color:var(--white);
+    border:1px solid rgba(45,156,219,0.7);
+    padding:10px 24px;border-radius:8px;
+    font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;
+    letter-spacing:.1em;cursor:pointer;text-decoration:none;
+    transition:all .3s ease;
+    display:inline-flex;align-items:center;gap:10px;
+    position:relative;overflow:hidden;
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+    text-transform:uppercase;
+    
+  }
+  .neon-btn::before{
+    content:'';
+    width:7px;height:7px;border-radius:50%;
+    background:#56CCF2;flex-shrink:0;
+    box-shadow:0 0 6px #56CCF2, 0 0 12px rgba(86,204,242,0.6);
     display:inline-block;
   }
-  .nav-cta:hover{background:var(--blue-light);animation:none;transform:translateY(-2px) scale(1.04);}
-  @keyframes navCtaBounce{
-    0%,100%{transform:translateY(0) scale(1);}
-    15%{transform:translateY(-7px) scale(1.05);}
-    30%{transform:translateY(0) scale(1);}
-    45%{transform:translateY(-4px) scale(1.03);}
-    60%{transform:translateY(0) scale(1);}
+  .neon-btn:hover{
+    border-color:rgba(86,204,242,1);color:#56CCF2;
+    background:rgba(45,156,219,0.1);
+    box-shadow:0 0 20px rgba(86,204,242,0.7), 0 0 40px rgba(45,156,219,0.3), inset 0 0 16px rgba(86,204,242,0.08);
+    transform:translateY(-2px);
+    animation:none;
   }
-  @keyframes heroBtnBounce{
-    0%,100%{transform:translateY(0) scale(1);}
-    12%{transform:translateY(-8px) scale(1.04);}
-    26%{transform:translateY(0) scale(1);}
-    40%{transform:translateY(-4px) scale(1.02);}
-    54%{transform:translateY(0) scale(1);}
+  .neon-btn:hover::before{
+    box-shadow:0 0 10px #56CCF2, 0 0 20px rgba(86,204,242,0.9);
   }
-  @keyframes submitBtnBounce{
-    0%,100%{transform:translateY(0) scale(1);}
-    15%{transform:translateY(-6px) scale(1.03);}
-    30%{transform:translateY(0) scale(1);}
-    45%{transform:translateY(-3px) scale(1.015);}
-    60%{transform:translateY(0) scale(1);}
+
+  /* Nav CTA */
+  .nav-cta{
+    background:rgba(5,5,5,0.6);color:var(--white);
+    border:1px solid rgba(45,156,219,0.7);
+    padding:9px 20px;border-radius:8px;
+    font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;
+    letter-spacing:.1em;cursor:pointer;text-decoration:none;
+    transition:all .3s ease;
+    display:inline-flex;align-items:center;gap:10px;
+    position:relative;overflow:hidden;
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+    text-transform:uppercase;
+    
   }
-  .hero-cta-bounce:hover{animation:none!important;transform:translateY(-2px) scale(1.03);}
+  .nav-cta::before{
+    content:'';
+    width:7px;height:7px;border-radius:50%;
+    background:#56CCF2;flex-shrink:0;
+    box-shadow:0 0 6px #56CCF2, 0 0 12px rgba(86,204,242,0.6);
+    display:inline-block;
+  }
+  .nav-cta:hover{
+    border-color:rgba(86,204,242,1);color:#56CCF2;
+    background:rgba(45,156,219,0.1);
+    box-shadow:0 0 20px rgba(86,204,242,0.7), 0 0 40px rgba(45,156,219,0.3);
+    transform:translateY(-2px);animation:none;
+  }
+  .hero-cta-bounce:hover{transform:translateY(-2px);}
+
+  /* ══ BOTÓN HERO ESPECIAL — "RESERVA TU SESIÓN GRATIS" ══ */
+  @keyframes ctaShine{
+    0%{left:-120%}
+    40%,100%{left:120%}
+  }
+  @keyframes ctaPulseRing{
+    0%{box-shadow:0 0 0 0 rgba(37,211,102,0.7), 0 0 16px rgba(37,211,102,0.5), 0 0 32px rgba(37,211,102,0.2);}
+    50%{box-shadow:0 0 0 10px rgba(37,211,102,0), 0 0 30px rgba(37,211,102,0.8), 0 0 60px rgba(37,211,102,0.35);}
+    100%{box-shadow:0 0 0 0 rgba(37,211,102,0), 0 0 16px rgba(37,211,102,0.5), 0 0 32px rgba(37,211,102,0.2);}
+  }
+  @keyframes ctaDotBounce{
+    0%,100%{transform:scale(1);opacity:1;}
+    25%{transform:scale(1.6);opacity:0.7;}
+    50%{transform:scale(0.8);opacity:1;}
+    75%{transform:scale(1.3);opacity:0.8;}
+  }
+  @keyframes ctaBorderFlow{
+    0%,100%{border-color:rgba(37,211,102,0.9);}
+    33%{border-color:rgba(30,190,93,1);}
+    66%{border-color:rgba(57,224,155,1);}
+  }
+  .btn-hero-cta{
+    background:rgba(5,5,5,0.5);
+    color:#fff;
+    border:1.5px solid rgba(37,211,102,0.95);
+    padding:14px 30px;border-radius:8px;text-decoration:none;
+    font-weight:800;font-size:13px;letter-spacing:.12em;text-transform:uppercase;
+    display:inline-flex;align-items:center;gap:12px;cursor:pointer;
+    position:relative;overflow:hidden;
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    animation:ctaBorderFlow 3s ease-in-out infinite;
+    transition:all .3s ease;
+  }
+  .btn-hero-cta .hero-dot{
+    width:9px;height:9px;border-radius:50%;
+    background:#25D366;flex-shrink:0;
+    box-shadow:0 0 8px #25D366, 0 0 16px rgba(37,211,102,0.8);
+    
+    display:inline-block;
+  }
+  .btn-hero-cta::after{
+    content:'';position:absolute;top:0;left:-120%;
+    width:50%;height:100%;
+    background:linear-gradient(90deg,transparent,rgba(37,211,102,0.22),transparent);
+    transform:skewX(-18deg);
+    animation:ctaShine 2.8s ease infinite;
+    pointer-events:none;
+  }
+  .btn-hero-cta:hover{
+    background:rgba(37,211,102,0.12);
+    border-color:rgba(57,224,155,1);
+    color:#39e09b;
+    box-shadow:0 0 30px rgba(37,211,102,0.8), 0 0 60px rgba(37,211,102,0.4), 0 0 0 4px rgba(37,211,102,0.15);
+    transform:translateY(-3px) scale(1.02);
+    animation:none;
+  }
+  .btn-hero-cta:hover .hero-dot{
+    box-shadow:0 0 14px #25D366, 0 0 28px rgba(37,211,102,1);
+  }
   .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
   .hamburger span{width:24px;height:2px;background:var(--white);transition:.3s;display:block}
 
@@ -241,20 +352,54 @@
   }
   .hero-btns{display:flex;gap:14px;flex-wrap:wrap}
   .btn-primary{
-    background:var(--blue);color:var(--white);
-    padding:14px 30px;border-radius:8px;text-decoration:none;
-    font-weight:600;font-size:14px;letter-spacing:.04em;
-    display:inline-flex;align-items:center;gap:8px;transition:.2s;border:none;cursor:pointer;
+    background:rgba(5,5,5,0.6);color:var(--white);
+    border:1px solid rgba(45,156,219,0.7);
+    padding:13px 28px;border-radius:8px;text-decoration:none;
+    font-weight:700;font-size:13px;letter-spacing:.1em;text-transform:uppercase;
+    display:inline-flex;align-items:center;gap:10px;cursor:pointer;
+    position:relative;overflow:hidden;
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+    transition:all .3s ease;
+    
   }
-  .btn-primary:hover{background:var(--blue-light);transform:translateY(-1px)}
+  .btn-primary::before{
+    content:'';
+    width:7px;height:7px;border-radius:50%;
+    background:#56CCF2;flex-shrink:0;
+    box-shadow:0 0 6px #56CCF2, 0 0 12px rgba(86,204,242,0.6);
+    display:inline-block;
+  }
+  .btn-primary::after{ content:none; }
+  .btn-primary:hover{
+    border-color:rgba(86,204,242,1);color:#56CCF2;
+    background:rgba(45,156,219,0.1);
+    box-shadow:0 0 20px rgba(86,204,242,0.7), 0 0 40px rgba(45,156,219,0.3);
+    transform:translateY(-2px);animation:none;
+  }
+  .btn-primary:hover::after{left:150%;}
   .btn-outline{
-    border:1px solid rgba(255,255,255,0.5);color:var(--white);
-    padding:14px 30px;border-radius:8px;text-decoration:none;
-    font-weight:500;font-size:14px;letter-spacing:.04em;
-    display:inline-flex;align-items:center;gap:8px;transition:.2s;
-    backdrop-filter:blur(6px);background:rgba(255,255,255,0.06);
+    background:rgba(5,5,5,0.6);color:var(--white);
+    border:1px solid rgba(45,156,219,0.7);
+    padding:13px 28px;border-radius:8px;text-decoration:none;
+    font-weight:700;font-size:13px;letter-spacing:.1em;text-transform:uppercase;
+    display:inline-flex;align-items:center;gap:10px;
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+    transition:all .3s ease;
+    
   }
-  .btn-outline:hover{border-color:var(--blue);color:var(--blue)}
+  .btn-outline::before{
+    content:'';
+    width:7px;height:7px;border-radius:50%;
+    background:#56CCF2;flex-shrink:0;
+    box-shadow:0 0 6px #56CCF2, 0 0 12px rgba(86,204,242,0.6);
+    display:inline-block;
+  }
+  .btn-outline:hover{
+    border-color:rgba(86,204,242,1);color:#56CCF2;
+    background:rgba(45,156,219,0.1);
+    box-shadow:0 0 20px rgba(86,204,242,0.7), 0 0 40px rgba(45,156,219,0.3);
+    transform:translateY(-2px);animation:none;
+  }
   .hero-services{display:flex;gap:32px;flex-wrap:wrap;margin-top:48px}
   .hero-service-item{display:flex;flex-direction:column;gap:4px}
   .hero-service-item .icon{font-size:20px;margin-bottom:2px}
@@ -353,20 +498,59 @@
     .service-card{flex:0 0 calc(100% - 0px)}
   }
 
+  /* PORTFOLIO SLIDESHOW */
+  .pf-slideshow { position:relative; }
+  .pf-slide {
+    position:absolute; inset:0;
+    background-size:contain !important;
+    background-position:center center !important;
+    background-repeat:no-repeat !important;
+    background-color:#0a0a0a;
+    opacity:0;
+    transition:opacity 0.8s ease;
+  }
+  .pf-slide.active { opacity:1; }
+  .pf-dots {
+    position:absolute; bottom:10px; left:50%; transform:translateX(-50%);
+    display:flex; gap:5px; z-index:3;
+  }
+  .pf-dot {
+    width:6px; height:6px; border-radius:50%;
+    background:rgba(255,255,255,0.4); transition:.3s;
+  }
+  .pf-dot.active { background:#2D9CDB; width:16px; border-radius:3px; }
+
   /* PORTFOLIO */
   #portfolio{content-visibility:auto;contain-intrinsic-size:0 800px}
   .portfolio-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:40px;flex-wrap:wrap;gap:20px}
   .portfolio-filters{display:flex;gap:8px;flex-wrap:wrap}
   .filter-btn{
-    padding:8px 20px;border-radius:20px;border:1px solid rgba(45,156,219,0.15);
-    background:rgba(10,10,10,0.9);color:var(--gray);font-family:'DM Sans',sans-serif;
-    font-size:12px;font-weight:500;cursor:pointer;transition:.2s;
+    padding:7px 18px;border-radius:20px;
+    border:1px solid rgba(45,156,219,0.7);
+    background:rgba(5,5,5,0.6);color:rgba(255,255,255,0.6);
+    font-family:'DM Sans',sans-serif;
+    font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    cursor:pointer;transition:all .3s ease;
+    backdrop-filter:blur(12px);
+    display:inline-flex;align-items:center;gap:8px;
+    
   }
-  .filter-btn.active,.filter-btn:hover{background:var(--blue);border-color:var(--blue);color:var(--white)}
+  .filter-btn::before{
+    content:'';width:6px;height:6px;border-radius:50%;
+    background:#56CCF2;flex-shrink:0;
+    box-shadow:0 0 5px #56CCF2;
+    display:inline-block;
+  }
+  .filter-btn:hover,.filter-btn.active{
+    border-color:rgba(86,204,242,1);color:#56CCF2;
+    background:rgba(45,156,219,0.1);
+    box-shadow:0 0 18px rgba(86,204,242,0.6), 0 0 36px rgba(45,156,219,0.25);
+    animation:none;
+  }
   .portfolio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
   .portfolio-item{
     border-radius:10px;overflow:hidden;position:relative;
-    background:rgba(8,8,8,0.9);
+    background:#0a0a0a;
     border:1px solid rgba(45,156,219,0.08);
     aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;
     transition:.3s;cursor:pointer;
@@ -408,7 +592,7 @@
   }
   .google-reviews-top{
     display:flex;align-items:center;justify-content:space-between;
-    padding:28px 32px;border-bottom:1px solid rgba(45,156,219,0.12);flex-wrap:wrap;gap:16px;
+    padding:28px 32px;border-bottom:none;flex-wrap:wrap;gap:16px;
   }
   .g-profile{display:flex;align-items:center;gap:16px}
   .g-logo{width:48px;height:48px}
@@ -419,14 +603,32 @@
   .g-stars-big{color:#FBBC05;font-size:18px;letter-spacing:2px}
   .g-count{font-size:12px;color:var(--gray);margin-top:4px}
   .btn-leave-review{
-    background:transparent;border:1px solid var(--blue);color:var(--blue);
-    padding:10px 20px;border-radius:6px;font-family:'DM Sans',sans-serif;
-    font-size:13px;font-weight:600;cursor:pointer;text-decoration:none;
-    transition:.2s;display:inline-block;
+    background:rgba(5,5,5,0.6);color:var(--white);
+    border:1px solid rgba(45,156,219,0.7);
+    padding:9px 20px;border-radius:8px;
+    font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;
+    letter-spacing:.1em;text-transform:uppercase;
+    cursor:pointer;text-decoration:none;
+    display:inline-flex;align-items:center;gap:10px;
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+    transition:all .3s ease;
+    
   }
-  .btn-leave-review:hover{background:var(--blue);color:var(--white)}
+  .btn-leave-review::before{
+    content:'';
+    width:7px;height:7px;border-radius:50%;
+    background:#56CCF2;flex-shrink:0;
+    box-shadow:0 0 6px #56CCF2, 0 0 12px rgba(86,204,242,0.6);
+    display:inline-block;
+  }
+  .btn-leave-review:hover{
+    border-color:rgba(86,204,242,1);color:#56CCF2;
+    background:rgba(45,156,219,0.1);
+    box-shadow:0 0 20px rgba(86,204,242,0.7), 0 0 40px rgba(45,156,219,0.3);
+    transform:translateY(-2px);animation:none;
+  }
   /* Reviews infinite carousel */
-  .reviews-carousel{overflow:hidden;position:relative;border-top:1px solid var(--border);}
+  .reviews-carousel{overflow:hidden;position:relative;border-top:none;}
   .reviews-carousel::before,.reviews-carousel::after{
     content:'';position:absolute;top:0;bottom:0;width:120px;z-index:2;pointer-events:none;
   }
@@ -446,7 +648,7 @@
     width:320px;flex-shrink:0;
     padding:28px 24px;
     background:transparent;
-    border-right:1px solid rgba(45,156,219,0.08);border-top:1px solid rgba(45,156,219,0.08);
+    border-right:none;border-top:none;
     transition:.2s;
   }
   .review-card:hover{background:rgba(255,255,255,0.03)}
@@ -457,7 +659,7 @@
   .stars{color:#FBBC05;font-size:12px;margin-bottom:10px;letter-spacing:1px}
   .review-card p{font-size:13px;color:rgba(255,255,255,0.6);line-height:1.7}
   .reviews-footer{
-    padding:20px 32px;border-top:1px solid var(--border);
+    padding:20px 32px;border-top:none;
     display:flex;align-items:center;justify-content:center;gap:10px;
   }
   .reviews-footer span{font-size:12px;color:var(--gray)}
@@ -546,10 +748,10 @@
 
   /* CTA buttons */
   .cta-btns{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-bottom:32px}
-  .btn-book{font-size:17px;padding:20px 44px;animation:bookPulse 2.5s ease-in-out infinite}
+  .btn-book{font-size:15px;padding:18px 44px;}
   @keyframes bookPulse{
-    0%,100%{box-shadow:0 8px 40px rgba(37,211,102,0.4)}
-    50%{box-shadow:0 8px 60px rgba(37,211,102,0.7), 0 0 0 8px rgba(37,211,102,0.08)}
+    0%,100%{box-shadow:0 0 8px rgba(37,211,102,0.5), 0 0 20px rgba(37,211,102,0.2);}
+    50%{box-shadow:0 0 20px rgba(37,211,102,0.8), 0 0 40px rgba(37,211,102,0.4);}
   }
 
   /* Social proof */
@@ -636,7 +838,7 @@
   .footer-minimal{
     text-align:center;padding:32px 5% 24px;
     background:rgba(5,5,5,0.95);
-    border-top:1px solid rgba(45,156,219,0.12);
+    border-top:none;
   }
   .footer-logo-min{height:34px;width:auto;mix-blend-mode:lighten;margin-bottom:4px}
   .footer-copy{font-size:12px;color:var(--gray);margin-top:8px}
@@ -657,20 +859,42 @@
 
   /* Botón WhatsApp CTA */
   .btn-wa-cta{
+    background:rgba(5,5,5,0.6);color:#fff;
+    border:1px solid rgba(37,211,102,0.7);
+    padding:17px 38px;border-radius:8px;
+    text-decoration:none;font-weight:700;font-size:15px;letter-spacing:.08em;
     display:inline-flex;align-items:center;gap:14px;
-    background:linear-gradient(135deg,#25D366,#128C7E);
-    color:#fff;padding:18px 40px;border-radius:50px;
-    text-decoration:none;font-weight:700;font-size:16px;letter-spacing:.04em;
-    box-shadow:0 8px 40px rgba(37,211,102,0.4);
-    transition:.3s;position:relative;overflow:hidden;
+    position:relative;overflow:hidden;
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+    transition:all .3s ease;
+    text-transform:uppercase;
+    
+  }
+  @keyframes waGlow{
+    0%,100%{box-shadow:0 0 10px rgba(37,211,102,0.5), 0 0 20px rgba(37,211,102,0.2);}
+    50%{box-shadow:0 0 20px rgba(37,211,102,0.8), 0 0 40px rgba(37,211,102,0.4);}
+  }
+  @keyframes waDotPulse{
+    0%,100%{box-shadow:0 0 0 0 rgba(37,211,102,0.7);transform:scale(1);}
+    50%{box-shadow:0 0 0 5px rgba(37,211,102,0);transform:scale(1.2);}
   }
   .btn-wa-cta::before{
-    content:'';position:absolute;inset:0;
-    background:linear-gradient(135deg,rgba(255,255,255,0.15),transparent);
-    pointer-events:none;
+    content:'';
+    width:8px;height:8px;border-radius:50%;
+    background:#25D366;flex-shrink:0;
+    box-shadow:0 0 6px #25D366, 0 0 12px rgba(37,211,102,0.6);
+    
+    display:inline-block;
   }
-  .btn-wa-cta:hover{transform:translateY(-3px);box-shadow:0 14px 50px rgba(37,211,102,0.55)}
-  .btn-wa-cta svg{width:24px;height:24px;fill:#fff;flex-shrink:0}
+  .btn-wa-cta:hover{
+    transform:translateY(-2px);
+    border-color:rgba(37,211,102,1);
+    background:rgba(37,211,102,0.1);
+    box-shadow:0 0 24px rgba(37,211,102,0.8), 0 0 50px rgba(37,211,102,0.3);
+    animation:none;
+  }
+  .btn-wa-cta:hover::before{box-shadow:0 0 10px #25D366, 0 0 20px rgba(37,211,102,0.9);}
+  .btn-wa-cta svg{width:24px;height:24px;fill:#25D366;flex-shrink:0}
   .btn-wa-cta .wa-label{display:flex;flex-direction:column;text-align:left;gap:1px}
   .btn-wa-cta .wa-label small{font-size:10px;font-weight:400;opacity:.8;letter-spacing:.04em}
 
@@ -678,7 +902,7 @@
   .cta-note{margin-top:20px;font-size:12px;color:rgba(255,255,255,0.3);letter-spacing:.04em}
 
   /* FOOTER */
-  footer{background:rgba(5,5,5,0.95);border-top:1px solid rgba(45,156,219,0.12);padding:60px 5% 30px}
+  footer{background:rgba(5,5,5,0.95);border-top:none;padding:60px 5% 30px}
   .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:60px;margin-bottom:48px}
   .footer-brand img{height:40px;margin-bottom:16px;mix-blend-mode:lighten}
   .footer-brand p{font-size:13px;color:var(--gray);line-height:1.7;max-width:240px}
@@ -700,7 +924,7 @@
   .social-link[aria-label="Facebook"]:hover{border-color:#1877f2;color:#1877f2;box-shadow:0 4px 16px rgba(24,119,242,0.25)}
   .social-link[aria-label="YouTube"]:hover{border-color:#ff0000;color:#ff0000;box-shadow:0 4px 16px rgba(255,0,0,0.25)}
   .social-link[aria-label="Linktree"]:hover{border-color:#39e09b;color:#39e09b;box-shadow:0 4px 16px rgba(57,224,155,0.25)}
-  .footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px;border-top:1px solid var(--border);flex-wrap:wrap;gap:12px}
+  .footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px;border-top:none;flex-wrap:wrap;gap:12px}
   .footer-bottom p{font-size:12px;color:var(--gray)}
   .footer-bottom-links{display:flex;gap:20px}
   .footer-bottom-links a{font-size:12px;color:var(--gray);text-decoration:none;transition:.2s}
@@ -785,17 +1009,35 @@
   /* ── BRANDS CAROUSEL ── */
   .brands-section{
     padding:40px 0;
-    border-top:1px solid rgba(45,156,219,0.1);
-    border-bottom:1px solid rgba(45,156,219,0.1);
-    background:rgba(5,5,5,0.5);
+    border-top:none;
+    border-bottom:none;
+    background:transparent;
     overflow:hidden;
     position:relative;z-index:1000;
     contain:layout style;
   }
   .brands-label{
-    text-align:center;font-size:11px;font-weight:700;letter-spacing:.18em;
-    text-transform:uppercase;color:rgba(255,255,255,0.25);
-    margin-bottom:28px;
+    text-align:center;font-size:11px;font-weight:700;letter-spacing:.22em;
+    text-transform:uppercase;margin-bottom:28px;
+    position:relative;display:flex;align-items:center;justify-content:center;gap:16px;
+  }
+  .brands-label::before,.brands-label::after{
+    content:'';flex:1;max-width:80px;height:1px;
+    background:linear-gradient(to right,transparent,rgba(45,156,219,0.35));
+  }
+  .brands-label::after{
+    background:linear-gradient(to left,transparent,rgba(45,156,219,0.35));
+  }
+  .brands-label span{
+    background:linear-gradient(90deg,rgba(255,255,255,0.45) 0%,rgba(86,204,242,0.8) 40%,rgba(255,255,255,0.45) 70%,rgba(86,204,242,0.6) 100%);
+    background-size:200% auto;
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    background-clip:text;
+    animation:labelShine 4s ease-in-out infinite;
+  }
+  @keyframes labelShine{
+    0%,100%{background-position:0% center}
+    50%{background-position:100% center}
   }
   .brands-track-wrap{
     position:relative;overflow:hidden;
@@ -819,7 +1061,7 @@
     display:flex;align-items:center;justify-content:center;
     padding:0 36px;
     height:64px;flex-shrink:0;
-    border-right:1px solid rgba(255,255,255,0.06);
+    border-right:none;
     transition:.3s;
   }
   .brand-item:hover{background:rgba(45,156,219,0.05)}
@@ -960,8 +1202,8 @@
   /* Glowline divisor */
   .glowline{
     width:100%;height:1px;border:none;margin:0;
-    background:linear-gradient(to right,transparent,rgba(45,156,219,0.4),transparent);
-    box-shadow:0 0 10px rgba(45,156,219,0.25);
+    background:none;
+    box-shadow:none;
   }
 
   /* Nav scrolled */
@@ -970,27 +1212,15 @@
     box-shadow:0 1px 0 rgba(45,156,219,0.18),0 4px 30px rgba(0,0,0,0.6);
   }
 
-  /* Shimmer on primary buttons */
-  .btn-primary{overflow:hidden;position:relative;}
-  .btn-primary::after{
-    content:'';position:absolute;top:0;left:-100%;
-    width:55%;height:100%;
-    background:linear-gradient(90deg,transparent,rgba(255,255,255,0.12),transparent);
-    transform:skewX(-20deg);
-    animation:shimmer 4s ease infinite;
-    pointer-events:none;
-  }
-  @keyframes shimmer{0%{left:-100%}45%,100%{left:160%}}
-
   /* Section tag with glow dot */
   .section-tag{position:relative;padding-left:14px;}
   .section-tag::before{
     content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);
     width:6px;height:6px;border-radius:50%;
     background:var(--blue);box-shadow:0 0 8px 2px rgba(45,156,219,0.8);
-    animation:dotPulse 2s ease-in-out infinite;
+    animation:sectionDotPulse 2s ease-in-out infinite;
   }
-  @keyframes dotPulse{0%,100%{box-shadow:0 0 6px 2px rgba(45,156,219,0.7)}50%{box-shadow:0 0 14px 5px rgba(45,156,219,0.4)}}
+  @keyframes sectionDotPulse{0%,100%{box-shadow:0 0 6px 2px rgba(45,156,219,0.7)}50%{box-shadow:0 0 14px 5px rgba(45,156,219,0.4)}}
 
   /* About image floating */
   /* imgFloat removed */
@@ -1091,7 +1321,7 @@
     .stat.visible .stat-num{animation:statPop .5s cubic-bezier(.22,1,.36,1) both;}
     .btn-primary::after,.section-tag::before{animation-duration:4.8s;}
     .services-track{max-width:100%;will-change:auto;}
-    .btn-primary:hover,.service-card:hover,.portfolio-item:hover,.btn-wa-cta:hover,.wa-float:hover{transform:none!important;}
+    .btn-primary:hover,.service-card:hover,.portfolio-item:hover,.btn-wa-cta:hover,.wa-float:hover,.btn-hero-cta:hover{transform:none!important;}
     .btn-wa-cta{max-width:100%;padding:16px 24px;}
     .wa-float{position:fixed!important;right:16px;bottom:16px;z-index:100001;width:56px;height:56px;display:flex!important;}
     .lang-float{right:16px;bottom:84px;}
@@ -1132,7 +1362,7 @@
     height:32px;
     background:rgba(5,5,5,0.88);
     backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
-    border-bottom:1px solid rgba(45,156,219,0.2);
+    border-bottom:none;
     display:flex;align-items:center;justify-content:center;
     gap:0;
     overflow:visible;
@@ -1562,7 +1792,7 @@
     <h1 class="hero-title fade-up delay-1" data-es="IMPULSAMOS<br>TU MARCA<br><span>EN EL MUNDO<br>DIGITAL</span>" data-en="WE BOOST<br>YOUR BRAND<br><span>IN THE DIGITAL<br>WORLD</span>">IMPULSAMOS<br>TU MARCA<br><span>EN EL MUNDO<br>DIGITAL</span></h1>
     <p class="hero-sub fade-up delay-2" data-es="No solo creamos sitios web. Diseñamos experiencias, construimos marcas y generamos resultados. Más de 7 años impulsando negocios en el mundo digital." data-en="We don't just build websites. We design experiences, build brands, and generate results. Over 7 years boosting businesses in the digital world.">No solo creamos sitios web. Diseñamos experiencias, construimos marcas y generamos resultados. Más de 7 años impulsando negocios en el mundo digital.</p>
     <div class="hero-btns fade-up delay-3">
-      <a href="#cta" class="btn-primary hero-cta-bounce" data-es="✦ Reserva tu sesión gratis" data-en="✦ Book your free session" style="animation:heroBtnBounce 1.8s ease-in-out infinite;">✦ Reserva tu sesión gratis</a>
+      <a href="#cta" class="btn-hero-cta hero-cta-bounce" data-es="✦ Reserva tu sesión gratis" data-en="✦ Book your free session"><span class="hero-dot"></span>✦ RESERVA TU SESIÓN GRATIS</a>
       <a href="#portfolio" class="btn-outline" data-es="Portafolio de Trabajos" data-en="Work Portfolio" style="display:inline-flex;align-items:center;gap:9px;">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
         Portafolio de Trabajos
@@ -1618,7 +1848,7 @@
 
 <!-- BRANDS CAROUSEL -->
 <div class="brands-section reveal">
-  <p class="brands-label" data-es="Marcas que confían en nosotros" data-en="Brands that trust us">Marcas que confían en nosotros</p>
+  <p class="brands-label" data-es="Marcas que confían en Digi Master Pro" data-en="Brands that trust Digi Master Pro"><span>Marcas que confían en Digi Master Pro</span></p>
   <div class="brands-track-wrap">
     <div class="brands-fade brands-fade-left"></div>
     <div class="brands-fade brands-fade-right"></div>
@@ -1881,11 +2111,11 @@
     <!-- Inline currency toggle -->
     <div style="display:inline-flex;align-items:center;gap:0;background:rgba(255,255,255,0.05);border:1px solid rgba(45,156,219,0.25);border-radius:30px;padding:4px;margin-top:4px;">
       <button id="p-btn-usd" onclick="globalSetCurrency('usd')"
-        style="padding:7px 20px;border-radius:24px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:.06em;transition:.2s;background:#2D9CDB;color:#fff;">
+        style="padding:7px 18px;border-radius:22px;border:1px solid rgba(86,204,242,0.9);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;transition:all .3s ease;background:rgba(45,156,219,0.15);color:#56CCF2;box-shadow:0 0 16px rgba(86,204,242,0.7),0 0 30px rgba(45,156,219,0.3);">
         $ USD
       </button>
       <button id="p-btn-cop" onclick="globalSetCurrency('cop')"
-        style="padding:7px 20px;border-radius:24px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:.06em;transition:.2s;background:transparent;color:rgba(255,255,255,0.45);">
+        style="padding:7px 18px;border-radius:22px;border:1px solid rgba(45,156,219,0.5);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;transition:all .3s ease;background:rgba(5,5,5,0.6);color:rgba(255,255,255,0.55);backdrop-filter:blur(8px);">
         $ COP
       </button>
     </div>
@@ -1893,9 +2123,9 @@
 
   <!-- TABS -->
   <div style="display:flex;justify-content:center;gap:10px;margin-bottom:48px;flex-wrap:wrap;">
-    <button onclick="showTab('web')" id="tab-web" style="padding:10px 28px;border-radius:30px;border:1px solid #2D9CDB;background:#2D9CDB;color:#fff;font-family:'DM Sans',sans-serif;font-weight:700;font-size:13px;cursor:pointer;letter-spacing:.04em;transition:.2s;display:inline-flex;align-items:center;gap:7px;"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg> <span data-es="Sitios Web" data-en="Websites">Sitios Web</span></button>
-    <button onclick="showTab('brand')" id="tab-brand" style="padding:10px 28px;border-radius:30px;border:1px solid rgba(45,156,219,0.3);background:transparent;color:rgba(255,255,255,0.6);font-family:'DM Sans',sans-serif;font-weight:700;font-size:13px;cursor:pointer;letter-spacing:.04em;transition:.2s;display:inline-flex;align-items:center;gap:7px;"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg> <span data-es="Branding" data-en="Branding">Branding</span></button>
-    <button onclick="showTab('extra')" id="tab-extra" style="padding:10px 28px;border-radius:30px;border:1px solid rgba(45,156,219,0.3);background:transparent;color:rgba(255,255,255,0.6);font-family:'DM Sans',sans-serif;font-weight:700;font-size:13px;cursor:pointer;letter-spacing:.04em;transition:.2s;display:inline-flex;align-items:center;gap:7px;"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> <span data-es="Servicios Extra" data-en="Extra Services">Servicios Extra</span></button>
+    <button onclick="showTab('web')" id="tab-web" style="padding:9px 24px;border-radius:24px;border:1px solid rgba(86,204,242,0.9);background:rgba(45,156,219,0.12);color:#56CCF2;font-family:'DM Sans',sans-serif;font-weight:700;font-size:12px;cursor:pointer;letter-spacing:.08em;text-transform:uppercase;transition:all .3s ease;display:inline-flex;align-items:center;gap:7px;box-shadow:0 0 18px rgba(86,204,242,0.7),0 0 36px rgba(45,156,219,0.3);backdrop-filter:blur(12px);"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg> <span data-es="Sitios Web" data-en="Websites">Sitios Web</span></button>
+    <button onclick="showTab('brand')" id="tab-brand" style="padding:9px 24px;border-radius:24px;border:1px solid rgba(45,156,219,0.55);background:rgba(5,5,5,0.6);color:rgba(255,255,255,0.6);font-family:'DM Sans',sans-serif;font-weight:700;font-size:12px;cursor:pointer;letter-spacing:.08em;text-transform:uppercase;transition:all .3s ease;display:inline-flex;align-items:center;gap:7px;backdrop-filter:blur(12px);"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg> <span data-es="Branding" data-en="Branding">Branding</span></button>
+    <button onclick="showTab('extra')" id="tab-extra" style="padding:9px 24px;border-radius:24px;border:1px solid rgba(45,156,219,0.55);background:rgba(5,5,5,0.6);color:rgba(255,255,255,0.6);font-family:'DM Sans',sans-serif;font-weight:700;font-size:12px;cursor:pointer;letter-spacing:.08em;text-transform:uppercase;transition:all .3s ease;display:inline-flex;align-items:center;gap:7px;backdrop-filter:blur(12px);"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> <span data-es="Servicios Extra" data-en="Extra Services">Servicios Extra</span></button>
   </div>
 
   <!-- TAB: SITIOS WEB -->
@@ -1914,12 +2144,12 @@
           <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#2D9CDB;">✓</span> <span data-es="SEO básico incluido" data-en="Basic SEO included">SEO básico incluido</span></li>
           <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#2D9CDB;">✓</span> <span data-es="Entrega en 7 días" data-en="7-day delivery">Entrega en 7 días</span></li>
         </ul>
-        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20plan%20Starter%20de%20p%C3%A1gina%20web%20a%20499%20USD" target="_blank" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:14px;border-radius:10px;font-weight:700;font-size:13px;text-decoration:none;letter-spacing:.04em;transition:.2s;" onmouseover="this.style.background='#2D9CDB';this.style.color='#fff'" onmouseout="this.style.background='rgba(45,156,219,0.12)';this.style.color='#56CCF2'" data-es="Quiero este plan →" data-en="I want this plan →">Quiero este plan →</a>
+        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20plan%20Starter%20de%20p%C3%A1gina%20web%20a%20499%20USD" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:10px;text-align:center;background:rgba(5,5,5,0.6);border:1px solid rgba(45,156,219,0.7);color:#fff;padding:13px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:.1em;text-transform:uppercase;transition:all .3s ease;backdrop-filter:blur(12px);" onmouseover="this.style.animation='none';this.style.borderColor='rgba(86,204,242,1)';this.style.color='#56CCF2';this.style.background='rgba(45,156,219,0.1)';this.style.boxShadow='0 0 20px rgba(86,204,242,0.7),0 0 40px rgba(45,156,219,0.3)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='rgba(45,156,219,0.7)';this.style.color='#fff';this.style.background='rgba(5,5,5,0.6)';this.style.boxShadow='';this.style.transform=''" data-es="Quiero este plan →" data-en="I want this plan →"><span style="width:7px;height:7px;border-radius:50%;background:#56CCF2;box-shadow:0 0 6px #56CCF2;flex-shrink:0;display:inline-block;"></span>Quiero este plan →</a>
       </div>
 
       <!-- Plan Pro (destacado) -->
       <div style="background:linear-gradient(135deg,rgba(45,156,219,0.12),rgba(86,204,242,0.06));border:1px solid #2D9CDB;border-radius:20px;padding:36px 28px;position:relative;transition:.3s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
-        <div style="position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:#2D9CDB;color:#fff;font-size:11px;font-weight:700;letter-spacing:.1em;padding:5px 16px;border-radius:20px;white-space:nowrap;">⭐ MÁS POPULAR</div>
+        <div style="position:absolute;top:-16px;left:50%;transform:translateX(-50%);display:inline-flex;align-items:center;gap:8px;background:rgba(5,5,5,0.7);color:#56CCF2;font-size:11px;font-weight:800;letter-spacing:.12em;padding:6px 18px;border-radius:20px;white-space:nowrap;border:1.5px solid rgba(86,204,242,0.9);backdrop-filter:blur(12px);box-shadow:0 0 14px rgba(86,204,242,0.6),0 0 28px rgba(45,156,219,0.3);"><span style="width:7px;height:7px;border-radius:50%;background:#56CCF2;box-shadow:0 0 6px #56CCF2,0 0 12px rgba(86,204,242,0.8);flex-shrink:0;display:inline-block;"></span>⭐ MÁS POPULAR</div>
         <p style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#56CCF2;margin-bottom:12px;">Pro</p>
         <div style="font-family:'Bebas Neue',sans-serif;font-size:56px;color:#fff;line-height:1;" data-price-usd="599">$599</div>
         <p style="font-size:12px;color:rgba(255,255,255,0.4);margin-bottom:24px;" data-currency-label>USD · pago único</p>
@@ -1931,7 +2161,7 @@
           <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#56CCF2;">✓</span> <span data-es="SEO completo + Analytics" data-en="Full SEO + Analytics">SEO completo + Analytics</span></li>
           <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#56CCF2;">✓</span> <span data-es="Entrega en 10 días" data-en="10-day delivery">Entrega en 10 días</span></li>
         </ul>
-        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20plan%20Pro%20de%20p%C3%A1gina%20web%20a%20599%20USD" target="_blank" style="display:block;text-align:center;background:#2D9CDB;color:#fff;padding:14px;border-radius:10px;font-weight:700;font-size:13px;text-decoration:none;letter-spacing:.04em;transition:.2s;" onmouseover="this.style.background='#56CCF2'" onmouseout="this.style.background='#2D9CDB'" data-es="Quiero este plan →" data-en="I want this plan →">Quiero este plan →</a>
+        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20plan%20Pro%20de%20p%C3%A1gina%20web%20a%20599%20USD" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:10px;text-align:center;background:rgba(5,5,5,0.6);border:1px solid rgba(45,156,219,0.7);color:#fff;padding:13px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:.1em;text-transform:uppercase;transition:all .3s ease;backdrop-filter:blur(12px);" onmouseover="this.style.animation='none';this.style.borderColor='rgba(86,204,242,1)';this.style.color='#56CCF2';this.style.background='rgba(45,156,219,0.1)';this.style.boxShadow='0 0 20px rgba(86,204,242,0.7),0 0 40px rgba(45,156,219,0.3)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='rgba(45,156,219,0.7)';this.style.color='#fff';this.style.background='rgba(5,5,5,0.6)';this.style.boxShadow='';this.style.transform=''" data-es="Quiero este plan →" data-en="I want this plan →"><span style="width:7px;height:7px;border-radius:50%;background:#56CCF2;box-shadow:0 0 6px #56CCF2;flex-shrink:0;display:inline-block;"></span>Quiero este plan →</a>
       </div>
 
       <!-- Plan Elite -->
@@ -1947,7 +2177,7 @@
           <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#2D9CDB;">✓</span> <span data-es="SEO avanzado + Google Ads" data-en="Advanced SEO + Google Ads">SEO avanzado + Google Ads</span></li>
           <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#2D9CDB;">✓</span> <span data-es="Soporte 30 días incluido" data-en="30-day support included">Soporte 30 días incluido</span></li>
         </ul>
-        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20plan%20Elite%20de%20p%C3%A1gina%20web%20a%20700%20USD" target="_blank" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:14px;border-radius:10px;font-weight:700;font-size:13px;text-decoration:none;letter-spacing:.04em;transition:.2s;" onmouseover="this.style.background='#2D9CDB';this.style.color='#fff'" onmouseout="this.style.background='rgba(45,156,219,0.12)';this.style.color='#56CCF2'" data-es="Quiero este plan →" data-en="I want this plan →">Quiero este plan →</a>
+        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20plan%20Elite%20de%20p%C3%A1gina%20web%20a%20700%20USD" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:10px;text-align:center;background:rgba(5,5,5,0.6);border:1px solid rgba(45,156,219,0.7);color:#fff;padding:13px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:.1em;text-transform:uppercase;transition:all .3s ease;backdrop-filter:blur(12px);" onmouseover="this.style.animation='none';this.style.borderColor='rgba(86,204,242,1)';this.style.color='#56CCF2';this.style.background='rgba(45,156,219,0.1)';this.style.boxShadow='0 0 20px rgba(86,204,242,0.7),0 0 40px rgba(45,156,219,0.3)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='rgba(45,156,219,0.7)';this.style.color='#fff';this.style.background='rgba(5,5,5,0.6)';this.style.boxShadow='';this.style.transform=''" data-es="Quiero este plan →" data-en="I want this plan →"><span style="width:7px;height:7px;border-radius:50%;background:#56CCF2;box-shadow:0 0 6px #56CCF2;flex-shrink:0;display:inline-block;"></span>Quiero este plan →</a>
       </div>
     </div>
   </div>
@@ -1967,7 +2197,7 @@
           <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#2D9CDB;">✓</span> <span data-es="Manual de marca básico" data-en="Basic brand manual">Manual de marca básico</span></li>
           <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#2D9CDB;">✓</span> <span data-es="Archivos en todos los formatos" data-en="Files in all formats">Archivos en todos los formatos</span></li>
         </ul>
-        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20branding%20Est%C3%A1ndar%20a%20199%20USD" target="_blank" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:14px;border-radius:10px;font-weight:700;font-size:13px;text-decoration:none;letter-spacing:.04em;transition:.2s;" onmouseover="this.style.background='#2D9CDB';this.style.color='#fff'" onmouseout="this.style.background='rgba(45,156,219,0.12)';this.style.color='#56CCF2'" data-es="Quiero este plan →" data-en="I want this plan →">Quiero este plan →</a>
+        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20branding%20Est%C3%A1ndar%20a%20199%20USD" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:10px;text-align:center;background:rgba(5,5,5,0.6);border:1px solid rgba(45,156,219,0.7);color:#fff;padding:13px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:.1em;text-transform:uppercase;transition:all .3s ease;backdrop-filter:blur(12px);" onmouseover="this.style.animation='none';this.style.borderColor='rgba(86,204,242,1)';this.style.color='#56CCF2';this.style.background='rgba(45,156,219,0.1)';this.style.boxShadow='0 0 20px rgba(86,204,242,0.7),0 0 40px rgba(45,156,219,0.3)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='rgba(45,156,219,0.7)';this.style.color='#fff';this.style.background='rgba(5,5,5,0.6)';this.style.boxShadow='';this.style.transform=''" data-es="Quiero este plan →" data-en="I want this plan →"><span style="width:7px;height:7px;border-radius:50%;background:#56CCF2;box-shadow:0 0 6px #56CCF2;flex-shrink:0;display:inline-block;"></span>Quiero este plan →</a>
       </div>
 
       <!-- Branding Premium -->
@@ -1984,7 +2214,7 @@
           <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#56CCF2;">✓</span> <span data-es="Manual de marca completo" data-en="Complete brand manual">Manual de marca completo</span></li>
           <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#56CCF2;">✓</span> <span data-es="Estrategia de marca incluida" data-en="Brand strategy included">Estrategia de marca incluida</span></li>
         </ul>
-        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20branding%20Premium%20a%20350%20USD" target="_blank" style="display:block;text-align:center;background:#2D9CDB;color:#fff;padding:14px;border-radius:10px;font-weight:700;font-size:13px;text-decoration:none;letter-spacing:.04em;transition:.2s;" onmouseover="this.style.background='#56CCF2'" onmouseout="this.style.background='#2D9CDB'" data-es="Quiero este plan →" data-en="I want this plan →">Quiero este plan →</a>
+        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20branding%20Premium%20a%20350%20USD" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:10px;text-align:center;background:rgba(5,5,5,0.6);border:1px solid rgba(45,156,219,0.7);color:#fff;padding:13px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:.1em;text-transform:uppercase;transition:all .3s ease;backdrop-filter:blur(12px);" onmouseover="this.style.animation='none';this.style.borderColor='rgba(86,204,242,1)';this.style.color='#56CCF2';this.style.background='rgba(45,156,219,0.1)';this.style.boxShadow='0 0 20px rgba(86,204,242,0.7),0 0 40px rgba(45,156,219,0.3)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='rgba(45,156,219,0.7)';this.style.color='#fff';this.style.background='rgba(5,5,5,0.6)';this.style.boxShadow='';this.style.transform=''" data-es="Quiero este plan →" data-en="I want this plan →"><span style="width:7px;height:7px;border-radius:50%;background:#56CCF2;box-shadow:0 0 6px #56CCF2;flex-shrink:0;display:inline-block;"></span>Quiero este plan →</a>
       </div>
     </div>
   </div>
@@ -1998,56 +2228,56 @@
         <h4 style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:8px;color:#fff;" data-es="Creación Empresa en Google" data-en="Google Business Setup">Creación Empresa en Google</h4>
         <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:16px;" data-es="Google My Business, Maps, reseñas activas y configuración inicial." data-en="Google My Business, Maps, active reviews and initial setup.">Google My Business, Maps, reseñas activas y configuración inicial.</p>
         <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#2D9CDB;margin-bottom:16px;" data-price-usd="160">$160</div>
-        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Creaci%C3%B3n%20Empresa%20en%20Google%20a%20160%20USD" target="_blank" rel="noopener" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:10px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:.04em;transition:.2s;margin-top:auto;" onmouseover="this.style.background='#2D9CDB';this.style.color='#fff'" onmouseout="this.style.background='rgba(45,156,219,0.12)';this.style.color='#56CCF2'" data-es="Lo quiero →" data-en="I want it →">Lo quiero →</a>
+        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Creaci%C3%B3n%20Empresa%20en%20Google%20a%20160%20USD" target="_blank" rel="noopener" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:10px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:.04em;transition:.2s;margin-top:auto;" onmouseover="this.style.background='rgba(45,156,219,0.16)';this.style.color='#fff';this.style.borderColor='rgba(86,204,242,0.6)';this.style.boxShadow='0 0 20px rgba(45,156,219,0.3)'" onmouseout="this.style.background='rgba(45,156,219,0.07)';this.style.color='#56CCF2';this.style.borderColor='rgba(45,156,219,0.35)';this.style.boxShadow='0 0 10px rgba(45,156,219,0.1),inset 0 1px 0 rgba(255,255,255,0.05)'" data-es="Lo quiero →" data-en="I want it →">Lo quiero →</a>
       </div>
       <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(45,156,219,0.12);border-radius:16px;padding:24px 20px;transition:.3s;display:flex;flex-direction:column;" onmouseover="this.style.borderColor='#2D9CDB';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(45,156,219,0.12)';this.style.transform='translateY(0)'">
         <div style="margin-bottom:12px;width:44px;height:44px;background:rgba(45,156,219,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2D9CDB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></div>
         <h4 style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:8px;color:#fff;" data-es="Mantenimiento Landing Page" data-en="Landing Page Maintenance">Mantenimiento Landing Page</h4>
         <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:16px;" data-es="Actualizaciones WordPress, plugins, caché e imágenes." data-en="WordPress updates, plugins, cache and images.">Actualizaciones WordPress, plugins, caché e imágenes.</p>
         <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#2D9CDB;margin-bottom:16px;" data-price-usd="125">$125</div>
-        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Mantenimiento%20Landing%20Page%20a%20125%20USD" target="_blank" rel="noopener" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:10px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:.04em;transition:.2s;margin-top:auto;" onmouseover="this.style.background='#2D9CDB';this.style.color='#fff'" onmouseout="this.style.background='rgba(45,156,219,0.12)';this.style.color='#56CCF2'" data-es="Lo quiero →" data-en="I want it →">Lo quiero →</a>
+        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Mantenimiento%20Landing%20Page%20a%20125%20USD" target="_blank" rel="noopener" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:10px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:.04em;transition:.2s;margin-top:auto;" onmouseover="this.style.background='rgba(45,156,219,0.16)';this.style.color='#fff';this.style.borderColor='rgba(86,204,242,0.6)';this.style.boxShadow='0 0 20px rgba(45,156,219,0.3)'" onmouseout="this.style.background='rgba(45,156,219,0.07)';this.style.color='#56CCF2';this.style.borderColor='rgba(45,156,219,0.35)';this.style.boxShadow='0 0 10px rgba(45,156,219,0.1),inset 0 1px 0 rgba(255,255,255,0.05)'" data-es="Lo quiero →" data-en="I want it →">Lo quiero →</a>
       </div>
       <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(45,156,219,0.12);border-radius:16px;padding:24px 20px;transition:.3s;display:flex;flex-direction:column;" onmouseover="this.style.borderColor='#2D9CDB';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(45,156,219,0.12)';this.style.transform='translateY(0)'">
         <div style="margin-bottom:12px;width:44px;height:44px;background:rgba(45,156,219,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2D9CDB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
         <h4 style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:8px;color:#fff;" data-es="SEO Completo" data-en="Full SEO">SEO Completo</h4>
         <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:16px;" data-es="Auditoría, optimización, palabras clave, SEO On-Page y local." data-en="Audit, optimization, keywords, On-Page and local SEO.">Auditoría, optimización, palabras clave, SEO On-Page y local.</p>
         <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#2D9CDB;margin-bottom:16px;" data-price-usd="299">$299</div>
-        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20SEO%20Completo%20a%20299%20USD" target="_blank" rel="noopener" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:10px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:.04em;transition:.2s;margin-top:auto;" onmouseover="this.style.background='#2D9CDB';this.style.color='#fff'" onmouseout="this.style.background='rgba(45,156,219,0.12)';this.style.color='#56CCF2'" data-es="Lo quiero →" data-en="I want it →">Lo quiero →</a>
+        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20SEO%20Completo%20a%20299%20USD" target="_blank" rel="noopener" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:10px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:.04em;transition:.2s;margin-top:auto;" onmouseover="this.style.background='rgba(45,156,219,0.16)';this.style.color='#fff';this.style.borderColor='rgba(86,204,242,0.6)';this.style.boxShadow='0 0 20px rgba(45,156,219,0.3)'" onmouseout="this.style.background='rgba(45,156,219,0.07)';this.style.color='#56CCF2';this.style.borderColor='rgba(45,156,219,0.35)';this.style.boxShadow='0 0 10px rgba(45,156,219,0.1),inset 0 1px 0 rgba(255,255,255,0.05)'" data-es="Lo quiero →" data-en="I want it →">Lo quiero →</a>
       </div>
       <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(45,156,219,0.12);border-radius:16px;padding:24px 20px;transition:.3s;display:flex;flex-direction:column;" onmouseover="this.style.borderColor='#2D9CDB';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(45,156,219,0.12)';this.style.transform='translateY(0)'">
         <div style="margin-bottom:12px;width:44px;height:44px;background:rgba(45,156,219,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2D9CDB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
         <h4 style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:8px;color:#fff;" data-es="Actualizaciones Web Site" data-en="Website Updates">Actualizaciones Web Site</h4>
         <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:16px;" data-es="Contenido, diseños de temporada, productos y ofertas." data-en="Content, seasonal designs, products and promotions.">Contenido, diseños de temporada, productos y ofertas.</p>
         <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#2D9CDB;margin-bottom:16px;" data-price-usd="55">$55</div>
-        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Actualizaciones%20Web%20Site%20a%2055%20USD" target="_blank" rel="noopener" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:10px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:.04em;transition:.2s;margin-top:auto;" onmouseover="this.style.background='#2D9CDB';this.style.color='#fff'" onmouseout="this.style.background='rgba(45,156,219,0.12)';this.style.color='#56CCF2'" data-es="Lo quiero →" data-en="I want it →">Lo quiero →</a>
+        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Actualizaciones%20Web%20Site%20a%2055%20USD" target="_blank" rel="noopener" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:10px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:.04em;transition:.2s;margin-top:auto;" onmouseover="this.style.background='rgba(45,156,219,0.16)';this.style.color='#fff';this.style.borderColor='rgba(86,204,242,0.6)';this.style.boxShadow='0 0 20px rgba(45,156,219,0.3)'" onmouseout="this.style.background='rgba(45,156,219,0.07)';this.style.color='#56CCF2';this.style.borderColor='rgba(45,156,219,0.35)';this.style.boxShadow='0 0 10px rgba(45,156,219,0.1),inset 0 1px 0 rgba(255,255,255,0.05)'" data-es="Lo quiero →" data-en="I want it →">Lo quiero →</a>
       </div>
       <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(45,156,219,0.12);border-radius:16px;padding:24px 20px;transition:.3s;display:flex;flex-direction:column;" onmouseover="this.style.borderColor='#2D9CDB';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(45,156,219,0.12)';this.style.transform='translateY(0)'">
         <div style="margin-bottom:12px;width:44px;height:44px;background:rgba(45,156,219,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2D9CDB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div>
         <h4 style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:8px;color:#fff;" data-es="Impulso de Tráfico" data-en="Traffic Boost">Impulso de Tráfico</h4>
         <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:16px;" data-es="Google Ads, Meta Ads, métricas y reporte trimestral." data-en="Google Ads, Meta Ads, metrics and quarterly report.">Google Ads, Meta Ads, métricas y reporte trimestral.</p>
         <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#2D9CDB;margin-bottom:16px;" data-price-usd="270">$270</div>
-        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Impulso%20de%20Tr%C3%A1fico%20a%20270%20USD" target="_blank" rel="noopener" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:10px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:.04em;transition:.2s;margin-top:auto;" onmouseover="this.style.background='#2D9CDB';this.style.color='#fff'" onmouseout="this.style.background='rgba(45,156,219,0.12)';this.style.color='#56CCF2'" data-es="Lo quiero →" data-en="I want it →">Lo quiero →</a>
+        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Impulso%20de%20Tr%C3%A1fico%20a%20270%20USD" target="_blank" rel="noopener" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:10px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:.04em;transition:.2s;margin-top:auto;" onmouseover="this.style.background='rgba(45,156,219,0.16)';this.style.color='#fff';this.style.borderColor='rgba(86,204,242,0.6)';this.style.boxShadow='0 0 20px rgba(45,156,219,0.3)'" onmouseout="this.style.background='rgba(45,156,219,0.07)';this.style.color='#56CCF2';this.style.borderColor='rgba(45,156,219,0.35)';this.style.boxShadow='0 0 10px rgba(45,156,219,0.1),inset 0 1px 0 rgba(255,255,255,0.05)'" data-es="Lo quiero →" data-en="I want it →">Lo quiero →</a>
       </div>
       <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(45,156,219,0.12);border-radius:16px;padding:24px 20px;transition:.3s;display:flex;flex-direction:column;" onmouseover="this.style.borderColor='#2D9CDB';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(45,156,219,0.12)';this.style.transform='translateY(0)'">
         <div style="margin-bottom:12px;width:44px;height:44px;background:rgba(45,156,219,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2D9CDB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34L4.93 4.93M20 12h2M2 12h2M12 20v2M12 2v2"/></svg></div>
         <h4 style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:8px;color:#fff;" data-es="Integraciones Web Site" data-en="Website Integrations">Integraciones Web Site</h4>
         <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:16px;" data-es="HTML/CSS, redes sociales, canales publicitarios y plataformas." data-en="HTML/CSS, social media, advertising channels and platforms.">HTML/CSS, redes sociales, canales publicitarios y plataformas.</p>
         <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#2D9CDB;margin-bottom:16px;" data-price-usd="80">$80</div>
-        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Integraciones%20Web%20Site%20a%2080%20USD" target="_blank" rel="noopener" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:10px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:.04em;transition:.2s;margin-top:auto;" onmouseover="this.style.background='#2D9CDB';this.style.color='#fff'" onmouseout="this.style.background='rgba(45,156,219,0.12)';this.style.color='#56CCF2'" data-es="Lo quiero →" data-en="I want it →">Lo quiero →</a>
+        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Integraciones%20Web%20Site%20a%2080%20USD" target="_blank" rel="noopener" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:10px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:.04em;transition:.2s;margin-top:auto;" onmouseover="this.style.background='rgba(45,156,219,0.16)';this.style.color='#fff';this.style.borderColor='rgba(86,204,242,0.6)';this.style.boxShadow='0 0 20px rgba(45,156,219,0.3)'" onmouseout="this.style.background='rgba(45,156,219,0.07)';this.style.color='#56CCF2';this.style.borderColor='rgba(45,156,219,0.35)';this.style.boxShadow='0 0 10px rgba(45,156,219,0.1),inset 0 1px 0 rgba(255,255,255,0.05)'" data-es="Lo quiero →" data-en="I want it →">Lo quiero →</a>
       </div>
       <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(45,156,219,0.12);border-radius:16px;padding:24px 20px;transition:.3s;display:flex;flex-direction:column;" onmouseover="this.style.borderColor='#2D9CDB';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(45,156,219,0.12)';this.style.transform='translateY(0)'">
         <div style="margin-bottom:12px;width:44px;height:44px;background:rgba(45,156,219,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2D9CDB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
         <h4 style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:8px;color:#fff;" data-es="Correo Corporativo" data-en="Corporate Email">Correo Corporativo</h4>
         <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:16px;" data-es="Email profesional, Google Workspace o Microsoft 365, firmas HTML." data-en="Professional email, Google Workspace or Microsoft 365, HTML signatures.">Email profesional, Google Workspace o Microsoft 365, firmas HTML.</p>
         <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#2D9CDB;margin-bottom:16px;" data-price-usd="110">$110</div>
-        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Correo%20Corporativo%20a%20110%20USD" target="_blank" rel="noopener" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:10px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:.04em;transition:.2s;margin-top:auto;" onmouseover="this.style.background='#2D9CDB';this.style.color='#fff'" onmouseout="this.style.background='rgba(45,156,219,0.12)';this.style.color='#56CCF2'" data-es="Lo quiero →" data-en="I want it →">Lo quiero →</a>
+        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Correo%20Corporativo%20a%20110%20USD" target="_blank" rel="noopener" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:10px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:.04em;transition:.2s;margin-top:auto;" onmouseover="this.style.background='rgba(45,156,219,0.16)';this.style.color='#fff';this.style.borderColor='rgba(86,204,242,0.6)';this.style.boxShadow='0 0 20px rgba(45,156,219,0.3)'" onmouseout="this.style.background='rgba(45,156,219,0.07)';this.style.color='#56CCF2';this.style.borderColor='rgba(45,156,219,0.35)';this.style.boxShadow='0 0 10px rgba(45,156,219,0.1),inset 0 1px 0 rgba(255,255,255,0.05)'" data-es="Lo quiero →" data-en="I want it →">Lo quiero →</a>
       </div>
       <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(45,156,219,0.12);border-radius:16px;padding:24px 20px;transition:.3s;display:flex;flex-direction:column;" onmouseover="this.style.borderColor='#2D9CDB';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(45,156,219,0.12)';this.style.transform='translateY(0)'">
         <div style="margin-bottom:12px;width:44px;height:44px;background:rgba(45,156,219,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2D9CDB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16" r="1" fill="#2D9CDB"/></svg></div>
         <h4 style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:8px;color:#fff;" data-es="Bot WhatsApp 24/7" data-en="WhatsApp Bot 24/7">Bot WhatsApp 24/7</h4>
         <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:16px;" data-es="Respuestas automáticas, catálogo, etiquetado y enrutamiento a humano." data-en="Automated replies, catalog, tagging and human routing.">Respuestas automáticas, catálogo, etiquetado y enrutamiento a humano.</p>
         <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#2D9CDB;margin-bottom:16px;" data-price-usd="260">$260</div>
-        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Bot%20WhatsApp%2024%2F7%20a%20260%20USD" target="_blank" rel="noopener" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:10px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:.04em;transition:.2s;margin-top:auto;" onmouseover="this.style.background='#2D9CDB';this.style.color='#fff'" onmouseout="this.style.background='rgba(45,156,219,0.12)';this.style.color='#56CCF2'" data-es="Lo quiero →" data-en="I want it →">Lo quiero →</a>
+        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Bot%20WhatsApp%2024%2F7%20a%20260%20USD" target="_blank" rel="noopener" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:10px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:.04em;transition:.2s;margin-top:auto;" onmouseover="this.style.background='rgba(45,156,219,0.16)';this.style.color='#fff';this.style.borderColor='rgba(86,204,242,0.6)';this.style.boxShadow='0 0 20px rgba(45,156,219,0.3)'" onmouseout="this.style.background='rgba(45,156,219,0.07)';this.style.color='#56CCF2';this.style.borderColor='rgba(45,156,219,0.35)';this.style.boxShadow='0 0 10px rgba(45,156,219,0.1),inset 0 1px 0 rgba(255,255,255,0.05)'" data-es="Lo quiero →" data-en="I want it →">Lo quiero →</a>
       </div>
     </div>
 
@@ -2059,21 +2289,21 @@
         <h4 style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:6px;">Combo #1</h4>
         <p style="font-size:12px;color:rgba(255,255,255,0.5);margin-bottom:12px;" data-es="Creación Google + Actualizaciones Web" data-en="Google Setup + Website Updates">Creación Google + Actualizaciones Web</p>
         <div style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:#56CCF2;" data-price-usd="210">$210</div>
-        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20Combo%201%20a%20210%20USD" target="_blank" style="display:inline-block;margin-top:14px;background:#2D9CDB;color:#fff;padding:10px 24px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;transition:.2s;" onmouseover="this.style.background='#56CCF2'" onmouseout="this.style.background='#2D9CDB'" data-es="Lo quiero →" data-en="I want it →">Lo quiero →</a>
+        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20Combo%201%20a%20210%20USD" target="_blank" style="display:inline-block;margin-top:14px;background:#2D9CDB;color:#fff;padding:10px 24px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;transition:.2s;" onmouseover="this.style.background='linear-gradient(135deg,rgba(56,170,230,0.95),rgba(45,156,219,1))';this.style.boxShadow='0 0 28px rgba(45,156,219,0.55)'" onmouseout="this.style.background='linear-gradient(135deg,rgba(45,156,219,0.9),rgba(30,110,165,0.95))';this.style.boxShadow='0 0 18px rgba(45,156,219,0.3),inset 0 1px 0 rgba(255,255,255,0.12)'" data-es="Lo quiero →" data-en="I want it →">Lo quiero →</a>
       </div>
       <div style="background:linear-gradient(135deg,rgba(45,156,219,0.1),rgba(86,204,242,0.05));border:1px solid rgba(45,156,219,0.3);border-radius:16px;padding:24px;text-align:center;">
         <div style="display:flex;justify-content:center;margin-bottom:10px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#56CCF2" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="rgba(86,204,242,0.08)"/></svg></div>
         <h4 style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:6px;">Combo #2</h4>
         <p style="font-size:12px;color:rgba(255,255,255,0.5);margin-bottom:12px;" data-es="Bot WhatsApp + Integraciones Web" data-en="WhatsApp Bot + Website Integrations">Bot WhatsApp + Integraciones Web</p>
         <div style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:#56CCF2;" data-price-usd="340">$340</div>
-        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20Combo%202%20a%20340%20USD" target="_blank" style="display:inline-block;margin-top:14px;background:#2D9CDB;color:#fff;padding:10px 24px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;transition:.2s;" onmouseover="this.style.background='#56CCF2'" onmouseout="this.style.background='#2D9CDB'" data-es="Lo quiero →" data-en="I want it →">Lo quiero →</a>
+        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20Combo%202%20a%20340%20USD" target="_blank" style="display:inline-block;margin-top:14px;background:#2D9CDB;color:#fff;padding:10px 24px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;transition:.2s;" onmouseover="this.style.background='linear-gradient(135deg,rgba(56,170,230,0.95),rgba(45,156,219,1))';this.style.boxShadow='0 0 28px rgba(45,156,219,0.55)'" onmouseout="this.style.background='linear-gradient(135deg,rgba(45,156,219,0.9),rgba(30,110,165,0.95))';this.style.boxShadow='0 0 18px rgba(45,156,219,0.3),inset 0 1px 0 rgba(255,255,255,0.12)'" data-es="Lo quiero →" data-en="I want it →">Lo quiero →</a>
       </div>
       <div style="background:linear-gradient(135deg,rgba(45,156,219,0.1),rgba(86,204,242,0.05));border:1px solid rgba(45,156,219,0.3);border-radius:16px;padding:24px;text-align:center;">
         <div style="display:flex;justify-content:center;margin-bottom:10px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2D9CDB" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2l.94-.94-3-3-.94.94z" fill="rgba(45,156,219,0.1)"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" fill="rgba(45,156,219,0.1)"/></svg></div>
         <h4 style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:6px;">Combo #3</h4>
         <p style="font-size:12px;color:rgba(255,255,255,0.5);margin-bottom:12px;" data-es="SEO + Impulso de Tráfico" data-en="SEO + Traffic Boost">SEO + Impulso de Tráfico</p>
         <div style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:#56CCF2;" data-price-usd="569">$569</div>
-        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20Combo%203%20a%20569%20USD" target="_blank" style="display:inline-block;margin-top:14px;background:#2D9CDB;color:#fff;padding:10px 24px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;transition:.2s;" onmouseover="this.style.background='#56CCF2'" onmouseout="this.style.background='#2D9CDB'" data-es="Lo quiero →" data-en="I want it →">Lo quiero →</a>
+        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20Combo%203%20a%20569%20USD" target="_blank" style="display:inline-block;margin-top:14px;background:#2D9CDB;color:#fff;padding:10px 24px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;transition:.2s;" onmouseover="this.style.background='linear-gradient(135deg,rgba(56,170,230,0.95),rgba(45,156,219,1))';this.style.boxShadow='0 0 28px rgba(45,156,219,0.55)'" onmouseout="this.style.background='linear-gradient(135deg,rgba(45,156,219,0.9),rgba(30,110,165,0.95))';this.style.boxShadow='0 0 18px rgba(45,156,219,0.3),inset 0 1px 0 rgba(255,255,255,0.12)'" data-es="Lo quiero →" data-en="I want it →">Lo quiero →</a>
       </div>
     </div>
   </div>
@@ -2088,9 +2318,15 @@ function showTab(tab) {
     document.getElementById('panel-'+t).style.display = t===tab ? 'block' : 'none';
     const btn = document.getElementById('tab-'+t);
     if(t===tab){
-      btn.style.background='#2D9CDB'; btn.style.color='#fff'; btn.style.borderColor='#2D9CDB';
+      btn.style.background='linear-gradient(135deg,rgba(45,156,219,0.88),rgba(30,110,165,0.95))';
+      btn.style.color='#fff';
+      btn.style.borderColor='rgba(86,204,242,0.5)';
+      btn.style.boxShadow='0 0 16px rgba(45,156,219,0.3),inset 0 1px 0 rgba(255,255,255,0.12)';
     } else {
-      btn.style.background='transparent'; btn.style.color='rgba(255,255,255,0.6)'; btn.style.borderColor='rgba(45,156,219,0.3)';
+      btn.style.background='rgba(8,8,8,0.7)';
+      btn.style.color='rgba(255,255,255,0.45)';
+      btn.style.borderColor='rgba(45,156,219,0.22)';
+      btn.style.boxShadow='none';
     }
   });
 }
@@ -2110,22 +2346,22 @@ function globalSetCurrency(currency) {
   var btnCop = document.getElementById('g-btn-cop');
   if(btnUsd && btnCop) {
     if(currency === 'usd') {
-      btnUsd.style.background = '#2D9CDB'; btnUsd.style.color = '#fff';
-      btnCop.style.background = 'transparent'; btnCop.style.color = 'rgba(255,255,255,0.45)';
+      btnUsd.style.background = 'linear-gradient(135deg,rgba(45,156,219,0.88),rgba(30,110,165,0.95))'; btnUsd.style.color = '#fff'; btnUsd.style.boxShadow='0 0 12px rgba(45,156,219,0.25)';
+      btnCop.style.background = 'transparent'; btnCop.style.color = 'rgba(255,255,255,0.4)'; btnCop.style.boxShadow='none';
     } else {
-      btnCop.style.background = '#2D9CDB'; btnCop.style.color = '#fff';
-      btnUsd.style.background = 'transparent'; btnUsd.style.color = 'rgba(255,255,255,0.45)';
+      btnCop.style.background = 'linear-gradient(135deg,rgba(45,156,219,0.88),rgba(30,110,165,0.95))'; btnCop.style.color = '#fff'; btnCop.style.boxShadow='0 0 12px rgba(45,156,219,0.25)';
+      btnUsd.style.background = 'transparent'; btnUsd.style.color = 'rgba(255,255,255,0.4)'; btnUsd.style.boxShadow='none';
     }
   }
 
   /* ── Sincronizar botones inline de precios ── */
   ['p-btn-usd','n-btn-usd'].forEach(function(id){
     var el = document.getElementById(id);
-    if(el){ el.style.background = currency==='usd'?'#2D9CDB':'transparent'; el.style.color = currency==='usd'?'#fff':'rgba(255,255,255,0.45)'; }
+    if(el){ el.style.background = currency==='usd'?'linear-gradient(135deg,rgba(45,156,219,0.88),rgba(30,110,165,0.95))':'transparent'; el.style.color = currency==='usd'?'#fff':'rgba(255,255,255,0.4)'; el.style.boxShadow = currency==='usd'?'0 0 12px rgba(45,156,219,0.25)':'none'; }
   });
   ['p-btn-cop','n-btn-cop'].forEach(function(id){
     var el = document.getElementById(id);
-    if(el){ el.style.background = currency==='cop'?'#2D9CDB':'transparent'; el.style.color = currency==='cop'?'#fff':'rgba(255,255,255,0.45)'; }
+    if(el){ el.style.background = currency==='cop'?'linear-gradient(135deg,rgba(45,156,219,0.88),rgba(30,110,165,0.95))':'transparent'; el.style.color = currency==='cop'?'#fff':'rgba(255,255,255,0.4)'; el.style.boxShadow = currency==='cop'?'0 0 12px rgba(45,156,219,0.25)':'none'; }
   });
 
   /* ── Actualizar todos los price-tag con data-usd / data-cop ── */
@@ -2300,11 +2536,11 @@ function globalSetCurrency(currency) {
     <!-- Inline currency toggle NFC -->
     <div style="display:inline-flex;align-items:center;gap:0;background:rgba(255,255,255,0.05);border:1px solid rgba(45,156,219,0.25);border-radius:30px;padding:4px;">
       <button id="n-btn-usd" onclick="globalSetCurrency('usd')"
-        style="padding:7px 20px;border-radius:24px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:.06em;transition:.2s;background:#2D9CDB;color:#fff;">
+        style="padding:7px 18px;border-radius:22px;border:1px solid rgba(86,204,242,0.9);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;transition:all .3s ease;background:rgba(45,156,219,0.15);color:#56CCF2;box-shadow:0 0 16px rgba(86,204,242,0.7),0 0 30px rgba(45,156,219,0.3);">
         $ USD
       </button>
       <button id="n-btn-cop" onclick="globalSetCurrency('cop')"
-        style="padding:7px 20px;border-radius:24px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:.06em;transition:.2s;background:transparent;color:rgba(255,255,255,0.45);">
+        style="padding:7px 18px;border-radius:22px;border:1px solid rgba(45,156,219,0.5);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;transition:all .3s ease;background:rgba(5,5,5,0.6);color:rgba(255,255,255,0.55);backdrop-filter:blur(8px);">
         $ COP
       </button>
     </div>
@@ -2337,9 +2573,8 @@ function globalSetCurrency(currency) {
               <div style="font-size:11px;color:rgba(255,255,255,0.3);margin-top:2px;">✦ Envío gratis Cartagena</div>
             </div>
             <a href="https://wa.me/573186471571?text=Hola%2C%20quiero%20pedir%20una%20Manilla%20NFC%20a%2030%20USD.%20%C2%BFTienen%20disponibilidad%3F" target="_blank" rel="noopener"
-              style="display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;padding:11px 18px;border-radius:10px;font-weight:700;font-size:12px;text-decoration:none;transition:.2s;white-space:nowrap;"
-              onmouseover="this.style.background='#1ebe5d'" onmouseout="this.style.background='#25D366'">
-              <svg width="15" height="15" viewBox="0 0 32 32" fill="#fff"><path d="M16 0C7.164 0 0 7.163 0 16c0 2.822.737 5.469 2.027 7.773L0 32l8.469-2.004A15.93 15.93 0 0 0 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm7.27 21.455c-.398-.2-2.355-1.162-2.72-1.294-.365-.133-.631-.2-.897.2-.265.398-1.029 1.294-1.262 1.56-.232.265-.465.298-.863.1-.398-.2-1.681-.62-3.2-1.977-1.183-1.057-1.981-2.362-2.213-2.76-.232-.398-.025-.613.175-.811.18-.178.398-.465.597-.697.2-.232.265-.398.398-.664.133-.265.067-.497-.033-.697-.1-.2-.897-2.162-1.229-2.96-.324-.778-.653-.672-.897-.685-.232-.012-.497-.015-.763-.015-.265 0-.697.1-1.063.497-.365.398-1.395 1.362-1.395 3.322s1.428 3.853 1.628 4.119c.2.265 2.81 4.29 6.808 6.019.952.41 1.694.655 2.273.839.955.304 1.825.261 2.513.158.767-.114 2.355-.963 2.687-1.893.332-.93.332-1.727.232-1.893-.1-.166-.365-.265-.763-.465z"/></svg>
+              style="display:inline-flex;align-items:center;gap:8px;background:rgba(5,5,5,0.6);color:#fff;border:1px solid rgba(37,211,102,0.7);padding:11px 18px;border-radius:10px;font-weight:700;font-size:12px;text-decoration:none;transition:all .3s ease;white-space:nowrap;backdrop-filter:blur(10px);" onmouseover="this.style.animation='none';this.style.borderColor='rgba(37,211,102,1)';this.style.color='#25D366';this.style.background='rgba(37,211,102,0.1)';this.style.boxShadow='0 0 18px rgba(37,211,102,0.7),0 0 36px rgba(37,211,102,0.3)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='rgba(37,211,102,0.7)';this.style.color='#fff';this.style.background='rgba(5,5,5,0.6)';this.style.boxShadow='';this.style.transform='';this.style.animation='waGlow 3s ease-in-out infinite'">
+              <svg width="15" height="15" viewBox="0 0 32 32" fill="#25D366"><path d="M16 0C7.164 0 0 7.163 0 16c0 2.822.737 5.469 2.027 7.773L0 32l8.469-2.004A15.93 15.93 0 0 0 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm7.27 21.455c-.398-.2-2.355-1.162-2.72-1.294-.365-.133-.631-.2-.897.2-.265.398-1.029 1.294-1.262 1.56-.232.265-.465.298-.863.1-.398-.2-1.681-.62-3.2-1.977-1.183-1.057-1.981-2.362-2.213-2.76-.232-.398-.025-.613.175-.811.18-.178.398-.465.597-.697.2-.232.265-.398.398-.664.133-.265.067-.497-.033-.697-.1-.2-.897-2.162-1.229-2.96-.324-.778-.653-.672-.897-.685-.232-.012-.497-.015-.763-.015-.265 0-.697.1-1.063.497-.365.398-1.395 1.362-1.395 3.322s1.428 3.853 1.628 4.119c.2.265 2.81 4.29 6.808 6.019.952.41 1.694.655 2.273.839.955.304 1.825.261 2.513.158.767-.114 2.355-.963 2.687-1.893.332-.93.332-1.727.232-1.893-.1-.166-.365-.265-.763-.465z"/></svg>
               Pedir ahora
             </a>
           </div>
@@ -2364,9 +2599,8 @@ function globalSetCurrency(currency) {
               <div style="font-size:11px;color:rgba(255,255,255,0.3);margin-top:2px;" data-es="✦ Envío gratis Cartagena" data-en="✦ Free shipping Cartagena">✦ Envío gratis Cartagena</div>
             </div>
             <a href="https://wa.me/573186471571?text=Hola%2C%20quiero%20pedir%20una%20Tarjeta%20NFC%20Personalizada%20a%2022%20USD.%20%C2%BFTienen%20disponibilidad%3F" target="_blank" rel="noopener"
-              style="display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;padding:11px 18px;border-radius:10px;font-weight:700;font-size:12px;text-decoration:none;transition:.2s;white-space:nowrap;"
-              onmouseover="this.style.background='#1ebe5d'" onmouseout="this.style.background='#25D366'">
-              <svg width="15" height="15" viewBox="0 0 32 32" fill="#fff"><path d="M16 0C7.164 0 0 7.163 0 16c0 2.822.737 5.469 2.027 7.773L0 32l8.469-2.004A15.93 15.93 0 0 0 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm7.27 21.455c-.398-.2-2.355-1.162-2.72-1.294-.365-.133-.631-.2-.897.2-.265.398-1.029 1.294-1.262 1.56-.232.265-.465.298-.863.1-.398-.2-1.681-.62-3.2-1.977-1.183-1.057-1.981-2.362-2.213-2.76-.232-.398-.025-.613.175-.811.18-.178.398-.465.597-.697.2-.232.265-.398.398-.664.133-.265.067-.497-.033-.697-.1-.2-.897-2.162-1.229-2.96-.324-.778-.653-.672-.897-.685-.232-.012-.497-.015-.763-.015-.265 0-.697.1-1.063.497-.365.398-1.395 1.362-1.395 3.322s1.428 3.853 1.628 4.119c.2.265 2.81 4.29 6.808 6.019.952.41 1.694.655 2.273.839.955.304 1.825.261 2.513.158.767-.114 2.355-.963 2.687-1.893.332-.93.332-1.727.232-1.893-.1-.166-.365-.265-.763-.465z"/></svg>
+              style="display:inline-flex;align-items:center;gap:8px;background:rgba(5,5,5,0.6);color:#fff;border:1px solid rgba(37,211,102,0.7);padding:11px 18px;border-radius:10px;font-weight:700;font-size:12px;text-decoration:none;transition:all .3s ease;white-space:nowrap;backdrop-filter:blur(10px);" onmouseover="this.style.animation='none';this.style.borderColor='rgba(37,211,102,1)';this.style.color='#25D366';this.style.background='rgba(37,211,102,0.1)';this.style.boxShadow='0 0 18px rgba(37,211,102,0.7),0 0 36px rgba(37,211,102,0.3)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='rgba(37,211,102,0.7)';this.style.color='#fff';this.style.background='rgba(5,5,5,0.6)';this.style.boxShadow='';this.style.transform='';this.style.animation='waGlow 3s ease-in-out infinite'">
+              <svg width="15" height="15" viewBox="0 0 32 32" fill="#25D366"><path d="M16 0C7.164 0 0 7.163 0 16c0 2.822.737 5.469 2.027 7.773L0 32l8.469-2.004A15.93 15.93 0 0 0 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm7.27 21.455c-.398-.2-2.355-1.162-2.72-1.294-.365-.133-.631-.2-.897.2-.265.398-1.029 1.294-1.262 1.56-.232.265-.465.298-.863.1-.398-.2-1.681-.62-3.2-1.977-1.183-1.057-1.981-2.362-2.213-2.76-.232-.398-.025-.613.175-.811.18-.178.398-.465.597-.697.2-.232.265-.398.398-.664.133-.265.067-.497-.033-.697-.1-.2-.897-2.162-1.229-2.96-.324-.778-.653-.672-.897-.685-.232-.012-.497-.015-.763-.015-.265 0-.697.1-1.063.497-.365.398-1.395 1.362-1.395 3.322s1.428 3.853 1.628 4.119c.2.265 2.81 4.29 6.808 6.019.952.41 1.694.655 2.273.839.955.304 1.825.261 2.513.158.767-.114 2.355-.963 2.687-1.893.332-.93.332-1.727.232-1.893-.1-.166-.365-.265-.763-.465z"/></svg>
               <span data-es="Pedir ahora" data-en="Order now">Pedir ahora</span>
             </a>
           </div>
@@ -2392,9 +2626,8 @@ function globalSetCurrency(currency) {
               <div style="font-size:11px;color:rgba(255,255,255,0.3);margin-top:2px;" data-es="✦ Envío gratis Cartagena" data-en="✦ Free shipping Cartagena">✦ Envío gratis Cartagena</div>
             </div>
             <a href="https://wa.me/573186471571?text=Hola%2C%20quiero%20pedir%20una%20Tarjeta%20NFC%20de%20Google%20a%2020%20USD.%20%C2%BFTienen%20disponibilidad%3F" target="_blank" rel="noopener"
-              style="display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;padding:11px 18px;border-radius:10px;font-weight:700;font-size:12px;text-decoration:none;transition:.2s;white-space:nowrap;"
-              onmouseover="this.style.background='#1ebe5d'" onmouseout="this.style.background='#25D366'">
-              <svg width="15" height="15" viewBox="0 0 32 32" fill="#fff"><path d="M16 0C7.164 0 0 7.163 0 16c0 2.822.737 5.469 2.027 7.773L0 32l8.469-2.004A15.93 15.93 0 0 0 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm7.27 21.455c-.398-.2-2.355-1.162-2.72-1.294-.365-.133-.631-.2-.897.2-.265.398-1.029 1.294-1.262 1.56-.232.265-.465.298-.863.1-.398-.2-1.681-.62-3.2-1.977-1.183-1.057-1.981-2.362-2.213-2.76-.232-.398-.025-.613.175-.811.18-.178.398-.465.597-.697.2-.232.265-.398.398-.664.133-.265.067-.497-.033-.697-.1-.2-.897-2.162-1.229-2.96-.324-.778-.653-.672-.897-.685-.232-.012-.497-.015-.763-.015-.265 0-.697.1-1.063.497-.365.398-1.395 1.362-1.395 3.322s1.428 3.853 1.628 4.119c.2.265 2.81 4.29 6.808 6.019.952.41 1.694.655 2.273.839.955.304 1.825.261 2.513.158.767-.114 2.355-.963 2.687-1.893.332-.93.332-1.727.232-1.893-.1-.166-.365-.265-.763-.465z"/></svg>
+              style="display:inline-flex;align-items:center;gap:8px;background:rgba(5,5,5,0.6);color:#fff;border:1px solid rgba(37,211,102,0.7);padding:11px 18px;border-radius:10px;font-weight:700;font-size:12px;text-decoration:none;transition:all .3s ease;white-space:nowrap;backdrop-filter:blur(10px);" onmouseover="this.style.animation='none';this.style.borderColor='rgba(37,211,102,1)';this.style.color='#25D366';this.style.background='rgba(37,211,102,0.1)';this.style.boxShadow='0 0 18px rgba(37,211,102,0.7),0 0 36px rgba(37,211,102,0.3)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='rgba(37,211,102,0.7)';this.style.color='#fff';this.style.background='rgba(5,5,5,0.6)';this.style.boxShadow='';this.style.transform='';this.style.animation='waGlow 3s ease-in-out infinite'">
+              <svg width="15" height="15" viewBox="0 0 32 32" fill="#25D366"><path d="M16 0C7.164 0 0 7.163 0 16c0 2.822.737 5.469 2.027 7.773L0 32l8.469-2.004A15.93 15.93 0 0 0 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm7.27 21.455c-.398-.2-2.355-1.162-2.72-1.294-.365-.133-.631-.2-.897.2-.265.398-1.029 1.294-1.262 1.56-.232.265-.465.298-.863.1-.398-.2-1.681-.62-3.2-1.977-1.183-1.057-1.981-2.362-2.213-2.76-.232-.398-.025-.613.175-.811.18-.178.398-.465.597-.697.2-.232.265-.398.398-.664.133-.265.067-.497-.033-.697-.1-.2-.897-2.162-1.229-2.96-.324-.778-.653-.672-.897-.685-.232-.012-.497-.015-.763-.015-.265 0-.697.1-1.063.497-.365.398-1.395 1.362-1.395 3.322s1.428 3.853 1.628 4.119c.2.265 2.81 4.29 6.808 6.019.952.41 1.694.655 2.273.839.955.304 1.825.261 2.513.158.767-.114 2.355-.963 2.687-1.893.332-.93.332-1.727.232-1.893-.1-.166-.365-.265-.763-.465z"/></svg>
               <span data-es="Pedir ahora" data-en="Order now">Pedir ahora</span>
             </a>
           </div>
@@ -2500,70 +2733,128 @@ function globalSetCurrency(currency) {
       <span class="section-tag" data-es="Nuestros Trabajos" data-en="Our Work">Nuestros Trabajos</span>
       <h2 class="section-title" data-es="PROYECTOS QUE HABLAN<br><span>DE RESULTADOS</span>" data-en="PROJECTS THAT SPEAK<br><span>OF RESULTS</span>">PROYECTOS QUE HABLAN<br><span>DE RESULTADOS</span></h2>
     </div>
-    <div class="portfolio-filters">
-      <button class="filter-btn active" data-es="Todos" data-en="All">Todos</button>
-      <button class="filter-btn" data-es="Sitios Web" data-en="Websites">Sitios Web</button>
-      <button class="filter-btn">Branding</button>
-      <button class="filter-btn" data-es="Diseño Gráfico" data-en="Graphic Design">Diseño Gráfico</button>
-      <button class="filter-btn" data-es="Ecosistema Google" data-en="Google Ecosystem">Ecosistema Google</button>
-      <button class="filter-btn" data-es="Programación" data-en="Development">Programación</button>
-      <button class="filter-btn" data-es="Fotografía" data-en="Photography">Fotografía</button>
-      <button class="filter-btn" data-es="Community Manager" data-en="Community Manager">Community Manager</button>
-    </div>
   </div>
   <div class="portfolio-grid">
-    <!-- PROYECTO 1: Diseño Web — reemplaza href="#" con la URL real del proyecto -->
-    <a class="portfolio-item" data-cat="Sitios Web" href="#" target="_blank" rel="noopener"
-       style="background:url(https://i.ibb.co/RGKfSvYR/servicios-web-sites.png) center/cover no-repeat; text-decoration:none;">
+    <!-- PROYECTO 1: Diseño Web — Slideshow de proyectos web -->
+    <a class="portfolio-item pf-slideshow" data-cat="Sitios Web" href="https://vivamoscolombiatravel.com/" target="_blank" rel="noopener" style="text-decoration:none;overflow:hidden;" data-links="https://vivamoscolombiatravel.com/,https://autenticostravel.com/,https://ranchocariberd.com/,https://nexxtours.com/">
+      <div class="pf-slide active" style="background:url(https://i.ibb.co/9mRVWfYC/web-vivamos-colombia.jpg) center/cover no-repeat;"></div>
+      <div class="pf-slide" style="background:url(https://i.ibb.co/KzWt2xx8/Whats-App-Image-2026-06-07-at-2-07-36-AM.jpg) center/cover no-repeat;"></div>
+      <div class="pf-slide" style="background:url(https://i.ibb.co/p6bJzqGT/web-rancho-caribe-o.jpg) center/cover no-repeat;"></div>
+      <div class="pf-slide" style="background:url(https://i.ibb.co/hFmCyHQ1/web-nexttours.jpg) center/cover no-repeat;"></div>
+      <div class="pf-dots">
+        <span class="pf-dot active"></span>
+        <span class="pf-dot"></span>
+        <span class="pf-dot"></span>
+        <span class="pf-dot"></span>
+      </div>
       <div class="overlay">
         <h4 data-es="Diseño Web" data-en="Web Design">Diseño Web</h4>
         <span data-es="Sitios Web" data-en="Websites">Sitios Web</span>
         <span class="overlay-link" data-es="Ver proyecto ↗" data-en="View project ↗">Ver proyecto ↗</span>
       </div>
     </a>
-    <!-- PROYECTO 2: Diseño Gráfico — reemplaza href="#" con la URL real del proyecto -->
-    <a class="portfolio-item" data-cat="Diseño Gráfico" href="https://gotoart0101.myportfolio.com/diseno" target="_blank" rel="noopener"
-       style="background:url(https://i.ibb.co/zhjCwL9M/servicios-de-dise-o-grafico.png) center/cover no-repeat; text-decoration:none;">
+    <!-- PROYECTO 2: Diseño Gráfico — Slideshow -->
+    <a class="portfolio-item pf-slideshow" data-cat="Diseño Gráfico" href="https://gotoart0101.myportfolio.com/diseno" target="_blank" rel="noopener" style="text-decoration:none;overflow:hidden;">
+      <div class="pf-slide active" style="background:url(https://i.ibb.co/DDBwpDtF/Captura-de-pantalla-2026-06-07-024556.png) center/cover no-repeat;"></div>
+      <div class="pf-slide" style="background:url(https://i.ibb.co/bRzGX5MR/Captura-de-pantalla-2026-06-07-024607.png) center/cover no-repeat;"></div>
+      <div class="pf-slide" style="background:url(https://i.ibb.co/Rk0JgxX6/Captura-de-pantalla-2026-06-07-024634.png) center/cover no-repeat;"></div>
+      <div class="pf-slide" style="background:url(https://i.ibb.co/7xDmPDVp/seccion-dise-o-minitura-youtube.jpg) center/cover no-repeat;"></div>
+      <div class="pf-slide" style="background:url(https://i.ibb.co/xKXWZ935/portada-de-dise-o-grafico.jpg) center/cover no-repeat;"></div>
+      <div class="pf-slide" style="background:url(https://i.ibb.co/R4yqnnnT/Captura-de-pantalla-2026-06-07-024751.png) center/cover no-repeat;"></div>
+      <div class="pf-dots">
+        <span class="pf-dot active"></span>
+        <span class="pf-dot"></span>
+        <span class="pf-dot"></span>
+        <span class="pf-dot"></span>
+        <span class="pf-dot"></span>
+        <span class="pf-dot"></span>
+      </div>
       <div class="overlay">
         <h4 data-es="Diseño Gráfico" data-en="Graphic Design">Diseño Gráfico</h4>
-        <span data-es="Identidad Visual" data-en="Visual Identity">Identidad Visual</span>
         <span class="overlay-link" data-es="Ver proyecto ↗" data-en="View project ↗">Ver proyecto ↗</span>
       </div>
     </a>
-    <!-- PROYECTO 3: Branding -->
-    <a class="portfolio-item" data-cat="Branding" href="https://heyzine.com/flip-book/267a1d8e4e.html#page/1" target="_blank" rel="noopener"
-       style="background:url(https://i.ibb.co/d4hGfJ2x/portada-branding.jpg) center/cover no-repeat;">
+    <!-- PROYECTO 3: Branding — Slideshow Perfumería RC -->
+    <a class="portfolio-item pf-slideshow" data-cat="Branding" href="#" rel="noopener" style="text-decoration:none;overflow:hidden;">
+      <div class="pf-slide active" style="background:url(https://i.ibb.co/d4hGfJ2x/portada-branding.jpg) center/cover no-repeat;"></div>
+      <div class="pf-slide" style="background:url(https://i.ibb.co/8Lgdv0qk/Captura-de-pantalla-2026-06-07-022739.png) center/cover no-repeat;"></div>
+      <div class="pf-slide" style="background:url(https://i.ibb.co/HfnMBSvx/Captura-de-pantalla-2026-06-07-022752.png) center/cover no-repeat;"></div>
+      <div class="pf-slide" style="background:url(https://i.ibb.co/KxMXwDpG/Captura-de-pantalla-2026-06-07-022803.png) center/cover no-repeat;"></div>
+      <div class="pf-slide" style="background:url(https://i.ibb.co/1Y0bbrDk/Captura-de-pantalla-2026-06-07-022815.png) center/cover no-repeat;"></div>
+      <div class="pf-slide" style="background:url(https://i.ibb.co/CKfLrvph/Captura-de-pantalla-2026-06-07-022829.png) center/cover no-repeat;"></div>
+      <div class="pf-slide" style="background:url(https://i.ibb.co/cKbMyBN4/Captura-de-pantalla-2026-06-07-022845.png) center/cover no-repeat;"></div>
+      <div class="pf-dots">
+        <span class="pf-dot active"></span>
+        <span class="pf-dot"></span>
+        <span class="pf-dot"></span>
+        <span class="pf-dot"></span>
+        <span class="pf-dot"></span>
+        <span class="pf-dot"></span>
+        <span class="pf-dot"></span>
+      </div>
       <div class="overlay">
         <h4 data-es="Perfumería RC" data-en="Perfumería RC">Perfumería RC</h4>
         <span data-es="Branding" data-en="Branding">Branding</span>
-        <span class="overlay-link" data-es="Ver proyecto ↗" data-en="View project ↗">Ver proyecto ↗</span>
       </div>
     </a>
-    <!-- PROYECTO 4: Ecosistema Google — reemplaza href="#" con la URL real del proyecto -->
-    <a class="portfolio-item" data-cat="Ecosistema Google" href="#" target="_blank" rel="noopener"
-       style="background:url(https://i.ibb.co/qMJdNGPT/servicios-ecosistema-google.png) center/cover no-repeat; text-decoration:none;">
+    <!-- PROYECTO: Branding — Slideshow Wimon Tours -->
+    <a class="portfolio-item pf-slideshow" data-cat="Branding" href="#" rel="noopener" style="text-decoration:none;overflow:hidden;">
+      <div class="pf-slide active" style="background:url(https://i.ibb.co/RGNwx7c8/Whats-App-Image-2026-06-07-at-2-07-37-AM-2.jpg) center/cover no-repeat;"></div>
+      <div class="pf-slide" style="background:url(https://i.ibb.co/SX2LpDNF/Captura-de-pantalla-2026-06-07-024010.png) center/cover no-repeat;"></div>
+      <div class="pf-slide" style="background:url(https://i.ibb.co/cKJ2rF3T/Captura-de-pantalla-2026-06-07-024001.png) center/cover no-repeat;"></div>
+      <div class="pf-slide" style="background:url(https://i.ibb.co/QFv6NcYn/Captura-de-pantalla-2026-06-07-023935.png) center/cover no-repeat;"></div>
+      <div class="pf-slide" style="background:url(https://i.ibb.co/tpP1M9gT/Captura-de-pantalla-2026-06-07-023949.png) center/cover no-repeat;"></div>
+      <div class="pf-slide" style="background:url(https://i.ibb.co/0V6qkY8m/Captura-de-pantalla-2026-06-07-023920.png) center/cover no-repeat;"></div>
+      <div class="pf-slide" style="background:url(https://i.ibb.co/7dp0647X/Captura-de-pantalla-2026-06-07-023911.png) center/cover no-repeat;"></div>
+      <div class="pf-dots">
+        <span class="pf-dot active"></span>
+        <span class="pf-dot"></span>
+        <span class="pf-dot"></span>
+        <span class="pf-dot"></span>
+        <span class="pf-dot"></span>
+        <span class="pf-dot"></span>
+        <span class="pf-dot"></span>
+      </div>
       <div class="overlay">
-        <h4 data-es="Ecosistema Google" data-en="Google Ecosystem">Ecosistema Google</h4>
-        <span data-es="SEO &amp; Ads" data-en="SEO &amp; Ads">SEO &amp; Ads</span>
-        <span class="overlay-link" data-es="Ver proyecto ↗" data-en="View project ↗">Ver proyecto ↗</span>
+        <h4>Wimon Tours</h4>
+        <span data-es="Branding" data-en="Branding">Branding</span>
       </div>
     </a>
-    <!-- PROYECTO 5: Fotografía — reemplaza href="#" con la URL real del proyecto -->
-    <a class="portfolio-item" data-cat="Fotografía" href="https://gotoart0101.myportfolio.com/work" target="_blank" rel="noopener"
-       style="background:url(https://i.ibb.co/C3f3x8f7/servicios-de-fotografia.png) center/cover no-repeat; text-decoration:none;">
+    <!-- PROYECTO 5: Fotografía — Slideshow -->
+    <a class="portfolio-item pf-slideshow" data-cat="Fotografía" href="https://gotoart0101.myportfolio.com/work" target="_blank" rel="noopener" style="text-decoration:none;overflow:hidden;">
+      <div class="pf-slide active" style="background:url(https://i.ibb.co/yBddbMLK/Captura-de-pantalla-2026-06-07-025124.png) center/cover no-repeat;"></div>
+      <div class="pf-slide" style="background:url(https://i.ibb.co/JFvd9WHk/Captura-de-pantalla-2026-06-07-025356.png) center/cover no-repeat;"></div>
+      <div class="pf-slide" style="background:url(https://i.ibb.co/mrYdcTnb/Captura-de-pantalla-2026-06-07-025502.png) center/cover no-repeat;"></div>
+      <div class="pf-slide" style="background:url(https://i.ibb.co/k2JjZGdJ/Captura-de-pantalla-2026-06-07-025537.png) center/cover no-repeat;"></div>
+      <div class="pf-dots">
+        <span class="pf-dot active"></span>
+        <span class="pf-dot"></span>
+        <span class="pf-dot"></span>
+        <span class="pf-dot"></span>
+      </div>
       <div class="overlay">
         <h4 data-es="Fotografía" data-en="Photography">Fotografía</h4>
         <span data-es="Marca &amp; Productos" data-en="Brand &amp; Products">Marca &amp; Productos</span>
         <span class="overlay-link" data-es="Ver proyecto ↗" data-en="View project ↗">Ver proyecto ↗</span>
       </div>
     </a>
-    <!-- PROYECTO 6: Community Manager — reemplaza href="#" con la URL real del proyecto -->
-    <a class="portfolio-item" data-cat="Community Manager" href="#" target="_blank" rel="noopener"
-       style="background:url(https://i.ibb.co/tMW43ZXY/servicios-community.png) center/cover no-repeat; text-decoration:none;">
+    <!-- PROYECTO: Fotografía — Portafolio Slideshow -->
+    <a class="portfolio-item pf-slideshow" data-cat="Fotografía" href="#" rel="noopener" style="text-decoration:none;overflow:hidden;">
+      <div class="pf-slide active" style="background:url(https://i.ibb.co/0Rgk2MTD/Captura-de-pantalla-2026-06-07-030412.png) center/cover no-repeat;"></div>
+      <div class="pf-slide" style="background:url(https://i.ibb.co/m5TGdKC1/Captura-de-pantalla-2026-06-07-030629.png) center/cover no-repeat;"></div>
+      <div class="pf-slide" style="background:url(https://i.ibb.co/GfyfJxtN/Captura-de-pantalla-2026-06-07-030701.png) center/cover no-repeat;"></div>
+      <div class="pf-slide" style="background:url(https://i.ibb.co/DDxZNmD1/Captura-de-pantalla-2026-06-07-030842.png) center/cover no-repeat;"></div>
+      <div class="pf-slide" style="background:url(https://i.ibb.co/TBsjFvdL/Captura-de-pantalla-2026-06-07-030924.png) center/cover no-repeat;"></div>
+      <div class="pf-dots">
+        <span class="pf-dot active"></span>
+        <span class="pf-dot"></span>
+        <span class="pf-dot"></span>
+        <span class="pf-dot"></span>
+        <span class="pf-dot"></span>
+      </div>
       <div class="overlay">
-        <h4 data-es="Community Manager" data-en="Community Manager">Community Manager</h4>
-        <span data-es="Redes Sociales" data-en="Social Media">Redes Sociales</span>
-        <span class="overlay-link" data-es="Ver proyecto ↗" data-en="View project ↗">Ver proyecto ↗</span>
+        <h4 data-es="Portafolio" data-en="Portfolio">Portafolio</h4>
+        <span data-es="Fotografía" data-en="Photography">Fotografía</span>
       </div>
     </a>
   </div>
@@ -2653,10 +2944,11 @@ function globalSetCurrency(currency) {
       <input type="hidden" name="_next" value="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/#contact">
 
       <button type="submit" id="submitBtn"
-        style="background:linear-gradient(135deg,#2D9CDB,#56CCF2);color:#fff;border:none;border-radius:10px;padding:18px 32px;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:700;cursor:pointer;letter-spacing:.04em;transition:.3s;display:flex;align-items:center;justify-content:center;gap:10px;animation:submitBtnBounce 1.8s ease-in-out infinite;"
-        onmouseover="this.style.animation='none';this.style.transform='translateY(-2px) scale(1.03)'"
-        onmouseout="this.style.animation='submitBtnBounce 1.8s ease-in-out infinite';this.style.transform=''"
+        style="background:rgba(5,5,5,0.6);color:#fff;border:1px solid rgba(45,156,219,0.7);border-radius:8px;padding:16px 32px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;letter-spacing:.1em;text-transform:uppercase;transition:all .3s ease;display:flex;align-items:center;justify-content:center;gap:12px;backdrop-filter:blur(12px);"
+        onmouseover="this.style.animation='none';this.style.transform='translateY(-2px)';this.style.borderColor='rgba(86,204,242,1)';this.style.color='#56CCF2';this.style.background='rgba(45,156,219,0.1)';this.style.boxShadow='0 0 20px rgba(86,204,242,0.7), 0 0 40px rgba(45,156,219,0.3)'"
+        onmouseout="this.style.borderColor='rgba(45,156,219,0.7)';this.style.color='#fff';this.style.background='rgba(5,5,5,0.6)';this.style.boxShadow='';this.style.transform=''"
         data-es="Enviar mensaje — te respondemos hoy" data-en="Send message — we reply today">
+        <span style="width:8px;height:8px;border-radius:50%;background:#56CCF2;box-shadow:0 0 6px #56CCF2,0 0 12px rgba(86,204,242,0.6);flex-shrink:0;display:inline-block;"></span>
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
         <span data-es="Enviar mensaje — te respondemos hoy" data-en="Send message — we reply today">Enviar mensaje — te respondemos hoy</span>
       </button>
@@ -2713,7 +3005,7 @@ function globalSetCurrency(currency) {
       }
     } catch {
       if(btnSpan) btnSpan.textContent = isEn ? 'Send message — we reply today' : 'Enviar mensaje — te respondemos hoy';
-      btn.style.animation = 'submitBtnBounce 1.8s ease-in-out infinite';
+      btn.style.boxShadow = '0 0 20px rgba(45,156,219,0.3),inset 0 1px 0 rgba(255,255,255,0.1)';
       btn.style.opacity = '1';
       btn.disabled = false;
       msg.style.display = 'block';
@@ -3639,5 +3931,26 @@ function setLang(lang) {
   Agencia digital con más de 7 años de experiencia generando resultados.
 </div>
 
+
+<script>
+/* ══ PORTFOLIO SLIDESHOW ══ */
+(function(){
+  document.querySelectorAll('.pf-slideshow').forEach(function(item){
+    var slides = item.querySelectorAll('.pf-slide');
+    var dots   = item.querySelectorAll('.pf-dot');
+    var links  = (item.dataset.links || '').split(',');
+    if(slides.length < 2) return;
+    var cur = 0;
+    setInterval(function(){
+      slides[cur].classList.remove('active');
+      dots[cur].classList.remove('active');
+      cur = (cur + 1) % slides.length;
+      slides[cur].classList.add('active');
+      dots[cur].classList.add('active');
+      if(links[cur]) item.href = links[cur];
+    }, 2800);
+  });
+})();
+</script>
 </body>
 </html>
