@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -519,7 +520,19 @@
     transition:.25s;
   }
   .cta-prop:hover{background:rgba(45,156,219,0.12);border-color:rgba(45,156,219,0.35);transform:translateY(-3px)}
-  .cta-prop-icon{font-size:22px;margin-bottom:4px}
+  .cta-prop-icon{
+    width:36px;height:36px;margin-bottom:6px;
+    display:flex;align-items:center;justify-content:center;
+    background:rgba(45,156,219,0.1);border-radius:10px;
+    border:1px solid rgba(45,156,219,0.2);
+    filter:drop-shadow(0 0 6px rgba(86,204,242,0.25));
+    transition:.25s;
+  }
+  .cta-prop:hover .cta-prop-icon{
+    background:rgba(45,156,219,0.18);
+    filter:drop-shadow(0 0 10px rgba(86,204,242,0.5));
+    border-color:rgba(86,204,242,0.45);
+  }
   .cta-prop strong{font-size:13px;font-weight:700;color:var(--white);font-family:'Syne',sans-serif}
   .cta-prop span{font-size:11px;color:var(--gray);text-align:center}
 
@@ -824,8 +837,8 @@
     /* ── Fix horizontal scroll on iPad ── */
     html{overflow-x:hidden;overflow-y:auto;}
     body{overflow:hidden;}
-    *{max-width:100%;}
     img,video,canvas,iframe{max-width:100%;}
+    /* NOTE: No ponemos *{max-width:100%} porque rompe flex en #incentivo-bar */
     #about{grid-template-columns:1fr;gap:40px}
     .about-text{order:0}
     .about-img-wrap{order:1}
@@ -1180,6 +1193,30 @@
   }
   .ibar-rotate-item.active{opacity:1;transform:translateY(0);}
   .ibar-rotate-item strong{color:#fff;font-weight:700;}
+  /* iPad Air / Tablet (769–1024px) */
+  @media(min-width:769px) and (max-width:1024px){
+    /* Nav en tablet sigue siendo la versión desktop (links visibles).
+       Nav real: ~74px. Barra incentivo: 32px → total offset: 106px
+       Añadimos un poco de aire para que no quede pegado: 120px */
+    #incentivo-bar{
+      top:74px;            /* siempre pegado debajo de la nav */
+      height:32px;
+      gap:0;
+      padding:0 24px;
+      overflow:hidden;
+      justify-content:center;
+    }
+    #hero{
+      padding-top:140px;   /* nav(74px) + barra(32px) + aire(34px) */
+    }
+    .ibar-block{font-size:11px;gap:6px;flex-shrink:0;white-space:nowrap;}
+    .ibar-block .ibar-val{font-size:14px;}
+    .ibar-sep{margin:0 20px;flex-shrink:0;}
+    /* En tablet solo mostramos los 2 contadores, nada más */
+    .ibar-block-3{display:none!important;}
+    .ibar-sep.ibar-hide-mobile{display:none!important;}
+  }
+
   /* Mobile */
   @media(max-width:768px){
     #incentivo-bar{top:72px;height:30px;gap:0;}
@@ -1214,7 +1251,7 @@
     <div class="intro-logo" aria-label="Digi Master Pro">
       <img src="https://i.ibb.co/TDsMPDRb/Logo-Digimaster.png" loading="eager" decoding="async" fetchpriority="high" alt="Digi Master Pro">
     </div>
-    <div class="intro-loading-text">Cargando experiencia personalizada</div>
+    <div class="intro-loading-text" data-es="Cargando experiencia personalizada" data-en="Loading personalized experience">Cargando experiencia personalizada</div>
     <div class="intro-progress" aria-hidden="true"></div>
   </div>
 </div>
@@ -1257,7 +1294,7 @@
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
     </span>
     <span id="ibarViewers" class="ibar-val">23</span>
-    <span>viendo ahora</span>
+    <span data-es="viendo ahora" data-en="viewing now">viendo ahora</span>
   </div>
 
   <div class="ibar-sep"></div>
@@ -1266,7 +1303,7 @@
   <div class="ibar-block ibar-block-2">
     <span class="ibar-trend-dot"></span>
     <span id="ibarQuotes" class="ibar-val">12</span>
-    <span>cotizaciones hoy</span>
+    <span data-es="cotizaciones hoy" data-en="quotes today">cotizaciones hoy</span>
   </div>
 
   <div class="ibar-sep ibar-sep-2 ibar-hide-mobile"></div>
@@ -1275,11 +1312,11 @@
   <div class="ibar-block ibar-block-3 ibar-hide-mobile">
     <span style="color:rgba(255,255,255,0.35);font-size:10px;">✦</span>
     <div class="ibar-rotate-wrap" id="ibarRotateWrap">
-      <span class="ibar-rotate-item active">Agencia <strong>#1 en tendencia</strong> Colombia 2025</span>
-      <span class="ibar-rotate-item">Solo <strong>3 cupos</strong> disponibles esta semana</span>
-      <span class="ibar-rotate-item">Sesión estratégica <strong>100% gratis</strong></span>
-      <span class="ibar-rotate-item">Sitios web desde <strong>$399 USD · 7 días</strong></span>
-      <span class="ibar-rotate-item"><strong>+500 marcas</strong> impulsadas · 7 años</span>
+      <span class="ibar-rotate-item active" data-es="Agencia <strong>#1 en tendencia</strong> Colombia 2025" data-en="Agency <strong>#1 trending</strong> Colombia 2025">Agencia <strong>#1 en tendencia</strong> Colombia 2025</span>
+      <span class="ibar-rotate-item" data-es="Solo <strong>3 cupos</strong> disponibles esta semana" data-en="Only <strong>3 slots</strong> available this week">Solo <strong>3 cupos</strong> disponibles esta semana</span>
+      <span class="ibar-rotate-item" data-es="Sesión estratégica <strong>100% gratis</strong>" data-en="Strategy session <strong>100% free</strong>">Sesión estratégica <strong>100% gratis</strong></span>
+      <span class="ibar-rotate-item" data-es="Sitios web desde <strong>$399 USD · 7 días</strong>" data-en="Websites from <strong>$399 USD · 7 days</strong>">Sitios web desde <strong>$399 USD · 7 días</strong></span>
+      <span class="ibar-rotate-item" data-es="<strong>+500 marcas</strong> impulsadas · 7 años" data-en="<strong>+500 brands</strong> boosted · 7 years"><strong>+500 marcas</strong> impulsadas · 7 años</span>
     </div>
   </div>
 
@@ -1599,9 +1636,9 @@
 
   <!-- TABS -->
   <div style="display:flex;justify-content:center;gap:10px;margin-bottom:48px;flex-wrap:wrap;">
-    <button onclick="showTab('web')" id="tab-web" style="padding:10px 28px;border-radius:30px;border:1px solid #2D9CDB;background:#2D9CDB;color:#fff;font-family:'DM Sans',sans-serif;font-weight:700;font-size:13px;cursor:pointer;letter-spacing:.04em;transition:.2s;display:inline-flex;align-items:center;gap:7px;"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg> Sitios Web</button>
-    <button onclick="showTab('brand')" id="tab-brand" style="padding:10px 28px;border-radius:30px;border:1px solid rgba(45,156,219,0.3);background:transparent;color:rgba(255,255,255,0.6);font-family:'DM Sans',sans-serif;font-weight:700;font-size:13px;cursor:pointer;letter-spacing:.04em;transition:.2s;display:inline-flex;align-items:center;gap:7px;"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg> Branding</button>
-    <button onclick="showTab('extra')" id="tab-extra" style="padding:10px 28px;border-radius:30px;border:1px solid rgba(45,156,219,0.3);background:transparent;color:rgba(255,255,255,0.6);font-family:'DM Sans',sans-serif;font-weight:700;font-size:13px;cursor:pointer;letter-spacing:.04em;transition:.2s;display:inline-flex;align-items:center;gap:7px;"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Servicios Extra</button>
+    <button onclick="showTab('web')" id="tab-web" style="padding:10px 28px;border-radius:30px;border:1px solid #2D9CDB;background:#2D9CDB;color:#fff;font-family:'DM Sans',sans-serif;font-weight:700;font-size:13px;cursor:pointer;letter-spacing:.04em;transition:.2s;display:inline-flex;align-items:center;gap:7px;"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg> <span data-es="Sitios Web" data-en="Websites">Sitios Web</span></button>
+    <button onclick="showTab('brand')" id="tab-brand" style="padding:10px 28px;border-radius:30px;border:1px solid rgba(45,156,219,0.3);background:transparent;color:rgba(255,255,255,0.6);font-family:'DM Sans',sans-serif;font-weight:700;font-size:13px;cursor:pointer;letter-spacing:.04em;transition:.2s;display:inline-flex;align-items:center;gap:7px;"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg> <span data-es="Branding" data-en="Branding">Branding</span></button>
+    <button onclick="showTab('extra')" id="tab-extra" style="padding:10px 28px;border-radius:30px;border:1px solid rgba(45,156,219,0.3);background:transparent;color:rgba(255,255,255,0.6);font-family:'DM Sans',sans-serif;font-weight:700;font-size:13px;cursor:pointer;letter-spacing:.04em;transition:.2s;display:inline-flex;align-items:center;gap:7px;"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> <span data-es="Servicios Extra" data-en="Extra Services">Servicios Extra</span></button>
   </div>
 
   <!-- TAB: SITIOS WEB -->
@@ -1613,14 +1650,14 @@
         <div style="font-family:'Bebas Neue',sans-serif;font-size:56px;color:#fff;line-height:1;" data-price-usd="499">$499</div>
         <p style="font-size:12px;color:rgba(255,255,255,0.4);margin-bottom:24px;" data-currency-label>USD · pago único</p>
         <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:32px;">
-          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#2D9CDB;">✓</span> Hasta 5 secciones</li>
-          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#2D9CDB;">✓</span> Diseño responsive</li>
-          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#2D9CDB;">✓</span> Formulario de contacto</li>
-          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#2D9CDB;">✓</span> Integración WhatsApp</li>
-          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#2D9CDB;">✓</span> SEO básico incluido</li>
-          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#2D9CDB;">✓</span> Entrega en 7 días</li>
+          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#2D9CDB;">✓</span> <span data-es="Hasta 5 secciones" data-en="Up to 5 sections">Hasta 5 secciones</span></li>
+          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#2D9CDB;">✓</span> <span data-es="Diseño responsive" data-en="Responsive design">Diseño responsive</span></li>
+          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#2D9CDB;">✓</span> <span data-es="Formulario de contacto" data-en="Contact form">Formulario de contacto</span></li>
+          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#2D9CDB;">✓</span> <span data-es="Integración WhatsApp" data-en="WhatsApp integration">Integración WhatsApp</span></li>
+          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#2D9CDB;">✓</span> <span data-es="SEO básico incluido" data-en="Basic SEO included">SEO básico incluido</span></li>
+          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#2D9CDB;">✓</span> <span data-es="Entrega en 7 días" data-en="7-day delivery">Entrega en 7 días</span></li>
         </ul>
-        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20plan%20Starter%20de%20p%C3%A1gina%20web%20a%20499%20USD" target="_blank" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:14px;border-radius:10px;font-weight:700;font-size:13px;text-decoration:none;letter-spacing:.04em;transition:.2s;" onmouseover="this.style.background='#2D9CDB';this.style.color='#fff'" onmouseout="this.style.background='rgba(45,156,219,0.12)';this.style.color='#56CCF2'">Quiero este plan →</a>
+        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20plan%20Starter%20de%20p%C3%A1gina%20web%20a%20499%20USD" target="_blank" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:14px;border-radius:10px;font-weight:700;font-size:13px;text-decoration:none;letter-spacing:.04em;transition:.2s;" onmouseover="this.style.background='#2D9CDB';this.style.color='#fff'" onmouseout="this.style.background='rgba(45,156,219,0.12)';this.style.color='#56CCF2'" data-es="Quiero este plan →" data-en="I want this plan →">Quiero este plan →</a>
       </div>
 
       <!-- Plan Pro (destacado) -->
@@ -1630,14 +1667,14 @@
         <div style="font-family:'Bebas Neue',sans-serif;font-size:56px;color:#fff;line-height:1;" data-price-usd="599">$599</div>
         <p style="font-size:12px;color:rgba(255,255,255,0.4);margin-bottom:24px;" data-currency-label>USD · pago único</p>
         <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:32px;">
-          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#56CCF2;">✓</span> Hasta 8 secciones</li>
-          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#56CCF2;">✓</span> Diseño premium a medida</li>
-          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#56CCF2;">✓</span> Galería de proyectos</li>
-          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#56CCF2;">✓</span> Animaciones avanzadas</li>
-          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#56CCF2;">✓</span> SEO completo + Analytics</li>
-          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#56CCF2;">✓</span> Entrega en 10 días</li>
+          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#56CCF2;">✓</span> <span data-es="Hasta 8 secciones" data-en="Up to 8 sections">Hasta 8 secciones</span></li>
+          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#56CCF2;">✓</span> <span data-es="Diseño premium a medida" data-en="Custom premium design">Diseño premium a medida</span></li>
+          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#56CCF2;">✓</span> <span data-es="Galería de proyectos" data-en="Project gallery">Galería de proyectos</span></li>
+          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#56CCF2;">✓</span> <span data-es="Animaciones avanzadas" data-en="Advanced animations">Animaciones avanzadas</span></li>
+          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#56CCF2;">✓</span> <span data-es="SEO completo + Analytics" data-en="Full SEO + Analytics">SEO completo + Analytics</span></li>
+          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#56CCF2;">✓</span> <span data-es="Entrega en 10 días" data-en="10-day delivery">Entrega en 10 días</span></li>
         </ul>
-        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20plan%20Pro%20de%20p%C3%A1gina%20web%20a%20599%20USD" target="_blank" style="display:block;text-align:center;background:#2D9CDB;color:#fff;padding:14px;border-radius:10px;font-weight:700;font-size:13px;text-decoration:none;letter-spacing:.04em;transition:.2s;" onmouseover="this.style.background='#56CCF2'" onmouseout="this.style.background='#2D9CDB'">Quiero este plan →</a>
+        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20plan%20Pro%20de%20p%C3%A1gina%20web%20a%20599%20USD" target="_blank" style="display:block;text-align:center;background:#2D9CDB;color:#fff;padding:14px;border-radius:10px;font-weight:700;font-size:13px;text-decoration:none;letter-spacing:.04em;transition:.2s;" onmouseover="this.style.background='#56CCF2'" onmouseout="this.style.background='#2D9CDB'" data-es="Quiero este plan →" data-en="I want this plan →">Quiero este plan →</a>
       </div>
 
       <!-- Plan Elite -->
@@ -1646,14 +1683,14 @@
         <div style="font-family:'Bebas Neue',sans-serif;font-size:56px;color:#fff;line-height:1;" data-price-usd="700">$700</div>
         <p style="font-size:12px;color:rgba(255,255,255,0.4);margin-bottom:24px;" data-currency-label>USD · pago único</p>
         <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:32px;">
-          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#2D9CDB;">✓</span> Secciones ilimitadas</li>
-          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#2D9CDB;">✓</span> Desarrollo a medida total</li>
-          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#2D9CDB;">✓</span> Integraciones avanzadas</li>
-          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#2D9CDB;">✓</span> E-commerce o reservas</li>
-          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#2D9CDB;">✓</span> SEO avanzado + Google Ads</li>
-          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#2D9CDB;">✓</span> Soporte 30 días incluido</li>
+          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#2D9CDB;">✓</span> <span data-es="Secciones ilimitadas" data-en="Unlimited sections">Secciones ilimitadas</span></li>
+          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#2D9CDB;">✓</span> <span data-es="Desarrollo a medida total" data-en="Fully custom development">Desarrollo a medida total</span></li>
+          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#2D9CDB;">✓</span> <span data-es="Integraciones avanzadas" data-en="Advanced integrations">Integraciones avanzadas</span></li>
+          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#2D9CDB;">✓</span> <span data-es="E-commerce o reservas" data-en="E-commerce or bookings">E-commerce o reservas</span></li>
+          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#2D9CDB;">✓</span> <span data-es="SEO avanzado + Google Ads" data-en="Advanced SEO + Google Ads">SEO avanzado + Google Ads</span></li>
+          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#2D9CDB;">✓</span> <span data-es="Soporte 30 días incluido" data-en="30-day support included">Soporte 30 días incluido</span></li>
         </ul>
-        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20plan%20Elite%20de%20p%C3%A1gina%20web%20a%20700%20USD" target="_blank" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:14px;border-radius:10px;font-weight:700;font-size:13px;text-decoration:none;letter-spacing:.04em;transition:.2s;" onmouseover="this.style.background='#2D9CDB';this.style.color='#fff'" onmouseout="this.style.background='rgba(45,156,219,0.12)';this.style.color='#56CCF2'">Quiero este plan →</a>
+        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20plan%20Elite%20de%20p%C3%A1gina%20web%20a%20700%20USD" target="_blank" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:14px;border-radius:10px;font-weight:700;font-size:13px;text-decoration:none;letter-spacing:.04em;transition:.2s;" onmouseover="this.style.background='#2D9CDB';this.style.color='#fff'" onmouseout="this.style.background='rgba(45,156,219,0.12)';this.style.color='#56CCF2'" data-es="Quiero este plan →" data-en="I want this plan →">Quiero este plan →</a>
       </div>
     </div>
   </div>
@@ -1667,13 +1704,13 @@
         <div style="font-family:'Bebas Neue',sans-serif;font-size:56px;color:#fff;line-height:1;" data-price-usd="199">$199</div>
         <p style="font-size:12px;color:rgba(255,255,255,0.4);margin-bottom:24px;" data-currency-label>USD · pago único</p>
         <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:32px;">
-          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#2D9CDB;">✓</span> Diseño de logotipo</li>
-          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#2D9CDB;">✓</span> Paleta de colores</li>
-          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#2D9CDB;">✓</span> Tipografías corporativas</li>
-          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#2D9CDB;">✓</span> Manual de marca básico</li>
-          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#2D9CDB;">✓</span> Archivos en todos los formatos</li>
+          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#2D9CDB;">✓</span> <span data-es="Diseño de logotipo" data-en="Logo design">Diseño de logotipo</span></li>
+          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#2D9CDB;">✓</span> <span data-es="Paleta de colores" data-en="Color palette">Paleta de colores</span></li>
+          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#2D9CDB;">✓</span> <span data-es="Tipografías corporativas" data-en="Corporate typography">Tipografías corporativas</span></li>
+          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#2D9CDB;">✓</span> <span data-es="Manual de marca básico" data-en="Basic brand manual">Manual de marca básico</span></li>
+          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#2D9CDB;">✓</span> <span data-es="Archivos en todos los formatos" data-en="Files in all formats">Archivos en todos los formatos</span></li>
         </ul>
-        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20branding%20Est%C3%A1ndar%20a%20199%20USD" target="_blank" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:14px;border-radius:10px;font-weight:700;font-size:13px;text-decoration:none;letter-spacing:.04em;transition:.2s;" onmouseover="this.style.background='#2D9CDB';this.style.color='#fff'" onmouseout="this.style.background='rgba(45,156,219,0.12)';this.style.color='#56CCF2'">Quiero este plan →</a>
+        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20branding%20Est%C3%A1ndar%20a%20199%20USD" target="_blank" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:14px;border-radius:10px;font-weight:700;font-size:13px;text-decoration:none;letter-spacing:.04em;transition:.2s;" onmouseover="this.style.background='#2D9CDB';this.style.color='#fff'" onmouseout="this.style.background='rgba(45,156,219,0.12)';this.style.color='#56CCF2'" data-es="Quiero este plan →" data-en="I want this plan →">Quiero este plan →</a>
       </div>
 
       <!-- Branding Premium -->
@@ -1683,14 +1720,14 @@
         <div style="font-family:'Bebas Neue',sans-serif;font-size:56px;color:#fff;line-height:1;" data-price-usd="350">$350</div>
         <p style="font-size:12px;color:rgba(255,255,255,0.4);margin-bottom:24px;" data-currency-label>USD · pago único</p>
         <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:32px;">
-          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#56CCF2;">✓</span> Todo lo del plan Estándar</li>
-          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#56CCF2;">✓</span> Identidad visual completa</li>
-          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#56CCF2;">✓</span> Diseño de redes sociales</li>
-          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#56CCF2;">✓</span> Papelería corporativa</li>
-          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#56CCF2;">✓</span> Manual de marca completo</li>
-          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#56CCF2;">✓</span> Estrategia de marca incluida</li>
+          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#56CCF2;">✓</span> <span data-es="Todo lo del plan Estándar" data-en="Everything in Standard plan">Todo lo del plan Estándar</span></li>
+          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#56CCF2;">✓</span> <span data-es="Identidad visual completa" data-en="Full visual identity">Identidad visual completa</span></li>
+          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#56CCF2;">✓</span> <span data-es="Diseño de redes sociales" data-en="Social media design">Diseño de redes sociales</span></li>
+          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#56CCF2;">✓</span> <span data-es="Papelería corporativa" data-en="Corporate stationery">Papelería corporativa</span></li>
+          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#56CCF2;">✓</span> <span data-es="Manual de marca completo" data-en="Complete brand manual">Manual de marca completo</span></li>
+          <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#56CCF2;">✓</span> <span data-es="Estrategia de marca incluida" data-en="Brand strategy included">Estrategia de marca incluida</span></li>
         </ul>
-        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20branding%20Premium%20a%20350%20USD" target="_blank" style="display:block;text-align:center;background:#2D9CDB;color:#fff;padding:14px;border-radius:10px;font-weight:700;font-size:13px;text-decoration:none;letter-spacing:.04em;transition:.2s;" onmouseover="this.style.background='#56CCF2'" onmouseout="this.style.background='#2D9CDB'">Quiero este plan →</a>
+        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20branding%20Premium%20a%20350%20USD" target="_blank" style="display:block;text-align:center;background:#2D9CDB;color:#fff;padding:14px;border-radius:10px;font-weight:700;font-size:13px;text-decoration:none;letter-spacing:.04em;transition:.2s;" onmouseover="this.style.background='#56CCF2'" onmouseout="this.style.background='#2D9CDB'" data-es="Quiero este plan →" data-en="I want this plan →">Quiero este plan →</a>
       </div>
     </div>
   </div>
@@ -1701,85 +1738,85 @@
       <!-- Cada servicio extra -->
       <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(45,156,219,0.12);border-radius:16px;padding:24px 20px;transition:.3s;display:flex;flex-direction:column;" onmouseover="this.style.borderColor='#2D9CDB';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(45,156,219,0.12)';this.style.transform='translateY(0)'">
         <div style="margin-bottom:12px;width:44px;height:44px;background:rgba(45,156,219,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2D9CDB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
-        <h4 style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:8px;color:#fff;">Creación Empresa en Google</h4>
-        <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:16px;">Google My Business, Maps, reseñas activas y configuración inicial.</p>
+        <h4 style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:8px;color:#fff;" data-es="Creación Empresa en Google" data-en="Google Business Setup">Creación Empresa en Google</h4>
+        <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:16px;" data-es="Google My Business, Maps, reseñas activas y configuración inicial." data-en="Google My Business, Maps, active reviews and initial setup.">Google My Business, Maps, reseñas activas y configuración inicial.</p>
         <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#2D9CDB;margin-bottom:16px;" data-price-usd="160">$160</div>
-        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Creaci%C3%B3n%20Empresa%20en%20Google%20a%20160%20USD" target="_blank" rel="noopener" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:10px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:.04em;transition:.2s;margin-top:auto;" onmouseover="this.style.background='#2D9CDB';this.style.color='#fff'" onmouseout="this.style.background='rgba(45,156,219,0.12)';this.style.color='#56CCF2'">Lo quiero →</a>
+        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Creaci%C3%B3n%20Empresa%20en%20Google%20a%20160%20USD" target="_blank" rel="noopener" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:10px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:.04em;transition:.2s;margin-top:auto;" onmouseover="this.style.background='#2D9CDB';this.style.color='#fff'" onmouseout="this.style.background='rgba(45,156,219,0.12)';this.style.color='#56CCF2'" data-es="Lo quiero →" data-en="I want it →">Lo quiero →</a>
       </div>
       <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(45,156,219,0.12);border-radius:16px;padding:24px 20px;transition:.3s;display:flex;flex-direction:column;" onmouseover="this.style.borderColor='#2D9CDB';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(45,156,219,0.12)';this.style.transform='translateY(0)'">
         <div style="margin-bottom:12px;width:44px;height:44px;background:rgba(45,156,219,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2D9CDB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></div>
-        <h4 style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:8px;color:#fff;">Mantenimiento Landing Page</h4>
-        <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:16px;">Actualizaciones WordPress, plugins, caché e imágenes.</p>
+        <h4 style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:8px;color:#fff;" data-es="Mantenimiento Landing Page" data-en="Landing Page Maintenance">Mantenimiento Landing Page</h4>
+        <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:16px;" data-es="Actualizaciones WordPress, plugins, caché e imágenes." data-en="WordPress updates, plugins, cache and images.">Actualizaciones WordPress, plugins, caché e imágenes.</p>
         <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#2D9CDB;margin-bottom:16px;" data-price-usd="125">$125</div>
-        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Mantenimiento%20Landing%20Page%20a%20125%20USD" target="_blank" rel="noopener" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:10px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:.04em;transition:.2s;margin-top:auto;" onmouseover="this.style.background='#2D9CDB';this.style.color='#fff'" onmouseout="this.style.background='rgba(45,156,219,0.12)';this.style.color='#56CCF2'">Lo quiero →</a>
+        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Mantenimiento%20Landing%20Page%20a%20125%20USD" target="_blank" rel="noopener" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:10px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:.04em;transition:.2s;margin-top:auto;" onmouseover="this.style.background='#2D9CDB';this.style.color='#fff'" onmouseout="this.style.background='rgba(45,156,219,0.12)';this.style.color='#56CCF2'" data-es="Lo quiero →" data-en="I want it →">Lo quiero →</a>
       </div>
       <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(45,156,219,0.12);border-radius:16px;padding:24px 20px;transition:.3s;display:flex;flex-direction:column;" onmouseover="this.style.borderColor='#2D9CDB';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(45,156,219,0.12)';this.style.transform='translateY(0)'">
         <div style="margin-bottom:12px;width:44px;height:44px;background:rgba(45,156,219,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2D9CDB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
-        <h4 style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:8px;color:#fff;">SEO Completo</h4>
-        <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:16px;">Auditoría, optimización, palabras clave, SEO On-Page y local.</p>
+        <h4 style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:8px;color:#fff;" data-es="SEO Completo" data-en="Full SEO">SEO Completo</h4>
+        <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:16px;" data-es="Auditoría, optimización, palabras clave, SEO On-Page y local." data-en="Audit, optimization, keywords, On-Page and local SEO.">Auditoría, optimización, palabras clave, SEO On-Page y local.</p>
         <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#2D9CDB;margin-bottom:16px;" data-price-usd="299">$299</div>
-        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20SEO%20Completo%20a%20299%20USD" target="_blank" rel="noopener" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:10px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:.04em;transition:.2s;margin-top:auto;" onmouseover="this.style.background='#2D9CDB';this.style.color='#fff'" onmouseout="this.style.background='rgba(45,156,219,0.12)';this.style.color='#56CCF2'">Lo quiero →</a>
+        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20SEO%20Completo%20a%20299%20USD" target="_blank" rel="noopener" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:10px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:.04em;transition:.2s;margin-top:auto;" onmouseover="this.style.background='#2D9CDB';this.style.color='#fff'" onmouseout="this.style.background='rgba(45,156,219,0.12)';this.style.color='#56CCF2'" data-es="Lo quiero →" data-en="I want it →">Lo quiero →</a>
       </div>
       <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(45,156,219,0.12);border-radius:16px;padding:24px 20px;transition:.3s;display:flex;flex-direction:column;" onmouseover="this.style.borderColor='#2D9CDB';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(45,156,219,0.12)';this.style.transform='translateY(0)'">
         <div style="margin-bottom:12px;width:44px;height:44px;background:rgba(45,156,219,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2D9CDB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
-        <h4 style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:8px;color:#fff;">Actualizaciones Web Site</h4>
-        <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:16px;">Contenido, diseños de temporada, productos y ofertas.</p>
+        <h4 style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:8px;color:#fff;" data-es="Actualizaciones Web Site" data-en="Website Updates">Actualizaciones Web Site</h4>
+        <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:16px;" data-es="Contenido, diseños de temporada, productos y ofertas." data-en="Content, seasonal designs, products and promotions.">Contenido, diseños de temporada, productos y ofertas.</p>
         <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#2D9CDB;margin-bottom:16px;" data-price-usd="55">$55</div>
-        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Actualizaciones%20Web%20Site%20a%2055%20USD" target="_blank" rel="noopener" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:10px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:.04em;transition:.2s;margin-top:auto;" onmouseover="this.style.background='#2D9CDB';this.style.color='#fff'" onmouseout="this.style.background='rgba(45,156,219,0.12)';this.style.color='#56CCF2'">Lo quiero →</a>
+        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Actualizaciones%20Web%20Site%20a%2055%20USD" target="_blank" rel="noopener" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:10px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:.04em;transition:.2s;margin-top:auto;" onmouseover="this.style.background='#2D9CDB';this.style.color='#fff'" onmouseout="this.style.background='rgba(45,156,219,0.12)';this.style.color='#56CCF2'" data-es="Lo quiero →" data-en="I want it →">Lo quiero →</a>
       </div>
       <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(45,156,219,0.12);border-radius:16px;padding:24px 20px;transition:.3s;display:flex;flex-direction:column;" onmouseover="this.style.borderColor='#2D9CDB';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(45,156,219,0.12)';this.style.transform='translateY(0)'">
         <div style="margin-bottom:12px;width:44px;height:44px;background:rgba(45,156,219,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2D9CDB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div>
-        <h4 style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:8px;color:#fff;">Impulso de Tráfico</h4>
-        <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:16px;">Google Ads, Meta Ads, métricas y reporte trimestral.</p>
+        <h4 style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:8px;color:#fff;" data-es="Impulso de Tráfico" data-en="Traffic Boost">Impulso de Tráfico</h4>
+        <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:16px;" data-es="Google Ads, Meta Ads, métricas y reporte trimestral." data-en="Google Ads, Meta Ads, metrics and quarterly report.">Google Ads, Meta Ads, métricas y reporte trimestral.</p>
         <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#2D9CDB;margin-bottom:16px;" data-price-usd="270">$270</div>
-        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Impulso%20de%20Tr%C3%A1fico%20a%20270%20USD" target="_blank" rel="noopener" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:10px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:.04em;transition:.2s;margin-top:auto;" onmouseover="this.style.background='#2D9CDB';this.style.color='#fff'" onmouseout="this.style.background='rgba(45,156,219,0.12)';this.style.color='#56CCF2'">Lo quiero →</a>
+        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Impulso%20de%20Tr%C3%A1fico%20a%20270%20USD" target="_blank" rel="noopener" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:10px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:.04em;transition:.2s;margin-top:auto;" onmouseover="this.style.background='#2D9CDB';this.style.color='#fff'" onmouseout="this.style.background='rgba(45,156,219,0.12)';this.style.color='#56CCF2'" data-es="Lo quiero →" data-en="I want it →">Lo quiero →</a>
       </div>
       <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(45,156,219,0.12);border-radius:16px;padding:24px 20px;transition:.3s;display:flex;flex-direction:column;" onmouseover="this.style.borderColor='#2D9CDB';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(45,156,219,0.12)';this.style.transform='translateY(0)'">
         <div style="margin-bottom:12px;width:44px;height:44px;background:rgba(45,156,219,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2D9CDB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34L4.93 4.93M20 12h2M2 12h2M12 20v2M12 2v2"/></svg></div>
-        <h4 style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:8px;color:#fff;">Integraciones Web Site</h4>
-        <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:16px;">HTML/CSS, redes sociales, canales publicitarios y plataformas.</p>
+        <h4 style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:8px;color:#fff;" data-es="Integraciones Web Site" data-en="Website Integrations">Integraciones Web Site</h4>
+        <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:16px;" data-es="HTML/CSS, redes sociales, canales publicitarios y plataformas." data-en="HTML/CSS, social media, advertising channels and platforms.">HTML/CSS, redes sociales, canales publicitarios y plataformas.</p>
         <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#2D9CDB;margin-bottom:16px;" data-price-usd="80">$80</div>
-        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Integraciones%20Web%20Site%20a%2080%20USD" target="_blank" rel="noopener" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:10px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:.04em;transition:.2s;margin-top:auto;" onmouseover="this.style.background='#2D9CDB';this.style.color='#fff'" onmouseout="this.style.background='rgba(45,156,219,0.12)';this.style.color='#56CCF2'">Lo quiero →</a>
+        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Integraciones%20Web%20Site%20a%2080%20USD" target="_blank" rel="noopener" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:10px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:.04em;transition:.2s;margin-top:auto;" onmouseover="this.style.background='#2D9CDB';this.style.color='#fff'" onmouseout="this.style.background='rgba(45,156,219,0.12)';this.style.color='#56CCF2'" data-es="Lo quiero →" data-en="I want it →">Lo quiero →</a>
       </div>
       <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(45,156,219,0.12);border-radius:16px;padding:24px 20px;transition:.3s;display:flex;flex-direction:column;" onmouseover="this.style.borderColor='#2D9CDB';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(45,156,219,0.12)';this.style.transform='translateY(0)'">
         <div style="margin-bottom:12px;width:44px;height:44px;background:rgba(45,156,219,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2D9CDB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-        <h4 style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:8px;color:#fff;">Correo Corporativo</h4>
-        <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:16px;">Email profesional, Google Workspace o Microsoft 365, firmas HTML.</p>
+        <h4 style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:8px;color:#fff;" data-es="Correo Corporativo" data-en="Corporate Email">Correo Corporativo</h4>
+        <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:16px;" data-es="Email profesional, Google Workspace o Microsoft 365, firmas HTML." data-en="Professional email, Google Workspace or Microsoft 365, HTML signatures.">Email profesional, Google Workspace o Microsoft 365, firmas HTML.</p>
         <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#2D9CDB;margin-bottom:16px;" data-price-usd="110">$110</div>
-        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Correo%20Corporativo%20a%20110%20USD" target="_blank" rel="noopener" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:10px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:.04em;transition:.2s;margin-top:auto;" onmouseover="this.style.background='#2D9CDB';this.style.color='#fff'" onmouseout="this.style.background='rgba(45,156,219,0.12)';this.style.color='#56CCF2'">Lo quiero →</a>
+        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Correo%20Corporativo%20a%20110%20USD" target="_blank" rel="noopener" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:10px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:.04em;transition:.2s;margin-top:auto;" onmouseover="this.style.background='#2D9CDB';this.style.color='#fff'" onmouseout="this.style.background='rgba(45,156,219,0.12)';this.style.color='#56CCF2'" data-es="Lo quiero →" data-en="I want it →">Lo quiero →</a>
       </div>
       <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(45,156,219,0.12);border-radius:16px;padding:24px 20px;transition:.3s;display:flex;flex-direction:column;" onmouseover="this.style.borderColor='#2D9CDB';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(45,156,219,0.12)';this.style.transform='translateY(0)'">
         <div style="margin-bottom:12px;width:44px;height:44px;background:rgba(45,156,219,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2D9CDB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16" r="1" fill="#2D9CDB"/></svg></div>
-        <h4 style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:8px;color:#fff;">Bot WhatsApp 24/7</h4>
-        <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:16px;">Respuestas automáticas, catálogo, etiquetado y enrutamiento a humano.</p>
+        <h4 style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:8px;color:#fff;" data-es="Bot WhatsApp 24/7" data-en="WhatsApp Bot 24/7">Bot WhatsApp 24/7</h4>
+        <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:16px;" data-es="Respuestas automáticas, catálogo, etiquetado y enrutamiento a humano." data-en="Automated replies, catalog, tagging and human routing.">Respuestas automáticas, catálogo, etiquetado y enrutamiento a humano.</p>
         <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#2D9CDB;margin-bottom:16px;" data-price-usd="260">$260</div>
-        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Bot%20WhatsApp%2024%2F7%20a%20260%20USD" target="_blank" rel="noopener" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:10px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:.04em;transition:.2s;margin-top:auto;" onmouseover="this.style.background='#2D9CDB';this.style.color='#fff'" onmouseout="this.style.background='rgba(45,156,219,0.12)';this.style.color='#56CCF2'">Lo quiero →</a>
+        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Bot%20WhatsApp%2024%2F7%20a%20260%20USD" target="_blank" rel="noopener" style="display:block;text-align:center;background:rgba(45,156,219,0.12);border:1px solid rgba(45,156,219,0.4);color:#56CCF2;padding:10px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:.04em;transition:.2s;margin-top:auto;" onmouseover="this.style.background='#2D9CDB';this.style.color='#fff'" onmouseout="this.style.background='rgba(45,156,219,0.12)';this.style.color='#56CCF2'" data-es="Lo quiero →" data-en="I want it →">Lo quiero →</a>
       </div>
     </div>
 
     <!-- COMBOS -->
-    <p style="text-align:center;font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#2D9CDB;margin-bottom:24px;">🔥 Combos con descuento</p>
+    <p style="text-align:center;font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#2D9CDB;margin-bottom:24px;" data-es="🔥 Combos con descuento" data-en="🔥 Discounted bundles">🔥 Combos con descuento</p>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;">
       <div style="background:linear-gradient(135deg,rgba(45,156,219,0.1),rgba(86,204,242,0.05));border:1px solid rgba(45,156,219,0.3);border-radius:16px;padding:24px;text-align:center;">
         <div style="font-size:22px;margin-bottom:8px;">🥇</div>
         <h4 style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:6px;">Combo #1</h4>
-        <p style="font-size:12px;color:rgba(255,255,255,0.5);margin-bottom:12px;">Creación Google + Actualizaciones Web</p>
+        <p style="font-size:12px;color:rgba(255,255,255,0.5);margin-bottom:12px;" data-es="Creación Google + Actualizaciones Web" data-en="Google Setup + Website Updates">Creación Google + Actualizaciones Web</p>
         <div style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:#56CCF2;" data-price-usd="210">$210</div>
-        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20Combo%201%20a%20210%20USD" target="_blank" style="display:inline-block;margin-top:14px;background:#2D9CDB;color:#fff;padding:10px 24px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;transition:.2s;" onmouseover="this.style.background='#56CCF2'" onmouseout="this.style.background='#2D9CDB'">Lo quiero →</a>
+        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20Combo%201%20a%20210%20USD" target="_blank" style="display:inline-block;margin-top:14px;background:#2D9CDB;color:#fff;padding:10px 24px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;transition:.2s;" onmouseover="this.style.background='#56CCF2'" onmouseout="this.style.background='#2D9CDB'" data-es="Lo quiero →" data-en="I want it →">Lo quiero →</a>
       </div>
       <div style="background:linear-gradient(135deg,rgba(45,156,219,0.1),rgba(86,204,242,0.05));border:1px solid rgba(45,156,219,0.3);border-radius:16px;padding:24px;text-align:center;">
         <div style="font-size:22px;margin-bottom:8px;">🌟</div>
         <h4 style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:6px;">Combo #2</h4>
-        <p style="font-size:12px;color:rgba(255,255,255,0.5);margin-bottom:12px;">Bot WhatsApp + Integraciones Web</p>
+        <p style="font-size:12px;color:rgba(255,255,255,0.5);margin-bottom:12px;" data-es="Bot WhatsApp + Integraciones Web" data-en="WhatsApp Bot + Website Integrations">Bot WhatsApp + Integraciones Web</p>
         <div style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:#56CCF2;" data-price-usd="340">$340</div>
-        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20Combo%202%20a%20340%20USD" target="_blank" style="display:inline-block;margin-top:14px;background:#2D9CDB;color:#fff;padding:10px 24px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;transition:.2s;" onmouseover="this.style.background='#56CCF2'" onmouseout="this.style.background='#2D9CDB'">Lo quiero →</a>
+        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20Combo%202%20a%20340%20USD" target="_blank" style="display:inline-block;margin-top:14px;background:#2D9CDB;color:#fff;padding:10px 24px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;transition:.2s;" onmouseover="this.style.background='#56CCF2'" onmouseout="this.style.background='#2D9CDB'" data-es="Lo quiero →" data-en="I want it →">Lo quiero →</a>
       </div>
       <div style="background:linear-gradient(135deg,rgba(45,156,219,0.1),rgba(86,204,242,0.05));border:1px solid rgba(45,156,219,0.3);border-radius:16px;padding:24px;text-align:center;">
         <div style="font-size:22px;margin-bottom:8px;">🚀</div>
         <h4 style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:6px;">Combo #3</h4>
-        <p style="font-size:12px;color:rgba(255,255,255,0.5);margin-bottom:12px;">SEO + Impulso de Tráfico</p>
+        <p style="font-size:12px;color:rgba(255,255,255,0.5);margin-bottom:12px;" data-es="SEO + Impulso de Tráfico" data-en="SEO + Traffic Boost">SEO + Impulso de Tráfico</p>
         <div style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:#56CCF2;" data-price-usd="569">$569</div>
-        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20Combo%203%20a%20569%20USD" target="_blank" style="display:inline-block;margin-top:14px;background:#2D9CDB;color:#fff;padding:10px 24px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;transition:.2s;" onmouseover="this.style.background='#56CCF2'" onmouseout="this.style.background='#2D9CDB'">Lo quiero →</a>
+        <a href="https://wa.me/573186471571?text=Hola%2C%20me%20interesa%20el%20Combo%203%20a%20569%20USD" target="_blank" style="display:inline-block;margin-top:14px;background:#2D9CDB;color:#fff;padding:10px 24px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;transition:.2s;" onmouseover="this.style.background='#56CCF2'" onmouseout="this.style.background='#2D9CDB'" data-es="Lo quiero →" data-en="I want it →">Lo quiero →</a>
       </div>
     </div>
   </div>
@@ -1916,22 +1953,51 @@ function globalSetCurrency(currency) {
   <!-- Value props -->
   <div class="cta-props reveal">
     <div class="cta-prop">
-      <span class="cta-prop-icon">⏱</span>
+      <!-- Reloj / timer minimalista -->
+      <span class="cta-prop-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#56CCF2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="9"/>
+          <polyline points="12 7 12 12 15 14"/>
+          <line x1="12" y1="3" x2="12" y2="1" stroke-width="2"/>
+          <line x1="12" y1="23" x2="12" y2="21" stroke-width="2"/>
+        </svg>
+      </span>
       <strong data-es="30 min" data-en="30 min">30 min</strong>
       <span data-es="Sesión express" data-en="Express session">Sesión express</span>
     </div>
     <div class="cta-prop">
-      <span class="cta-prop-icon">🎯</span>
+      <!-- Escáner / diagnóstico -->
+      <span class="cta-prop-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#56CCF2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 7V5a2 2 0 0 1 2-2h2"/>
+          <path d="M17 3h2a2 2 0 0 1 2 2v2"/>
+          <path d="M21 17v2a2 2 0 0 1-2 2h-2"/>
+          <path d="M7 21H5a2 2 0 0 1-2-2v-2"/>
+          <line x1="7" y1="12" x2="17" y2="12" stroke="#2D9CDB" stroke-width="2.2"/>
+          <line x1="12" y1="9" x2="12" y2="15" stroke-width="1.4" stroke="#56CCF2" opacity=".5"/>
+        </svg>
+      </span>
       <strong data-es="Diagnóstico" data-en="Diagnosis">Diagnóstico</strong>
       <span data-es="Personalizado" data-en="Personalized">Personalizado</span>
     </div>
     <div class="cta-prop">
-      <span class="cta-prop-icon">💡</span>
+      <!-- Rayo / plan de acción -->
+      <span class="cta-prop-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#56CCF2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="rgba(45,156,219,0.15)"/>
+        </svg>
+      </span>
       <strong data-es="Plan de acción" data-en="Action plan">Plan de acción</strong>
       <span data-es="Listo para aplicar" data-en="Ready to apply">Listo para aplicar</span>
     </div>
     <div class="cta-prop">
-      <span class="cta-prop-icon">✅</span>
+      <!-- Check / shield tech -->
+      <span class="cta-prop-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#56CCF2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2L3 7v5c0 5.25 3.75 10.14 9 11.29C17.25 22.14 21 17.25 21 12V7l-9-5z" fill="rgba(45,156,219,0.12)"/>
+          <polyline points="9 12 11 14 15 10" stroke="#56CCF2" stroke-width="2"/>
+        </svg>
+      </span>
       <strong data-es="100% gratis" data-en="100% free">100% gratis</strong>
       <span data-es="Sin letra pequeña" data-en="No fine print">Sin letra pequeña</span>
     </div>
