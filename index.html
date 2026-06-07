@@ -99,6 +99,8 @@
     --gray: #888;
     --border: rgba(255,255,255,0.07);
   }
+
+
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   html{
     scroll-behavior:auto;
@@ -155,6 +157,13 @@
     26%{transform:translateY(0) scale(1);}
     40%{transform:translateY(-4px) scale(1.02);}
     54%{transform:translateY(0) scale(1);}
+  }
+  @keyframes submitBtnBounce{
+    0%,100%{transform:translateY(0) scale(1);}
+    15%{transform:translateY(-6px) scale(1.03);}
+    30%{transform:translateY(0) scale(1);}
+    45%{transform:translateY(-3px) scale(1.015);}
+    60%{transform:translateY(0) scale(1);}
   }
   .hero-cta-bounce:hover{animation:none!important;transform:translateY(-2px) scale(1.03);}
   .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
@@ -843,8 +852,8 @@
     .about-text{order:0}
     .about-img-wrap{order:1}
     .portfolio-grid{grid-template-columns:1fr 1fr}
-    .stats-bar{flex-wrap:wrap;gap:16px;padding:32px 5%}
-    .stat{flex:1 1 calc(50% - 16px);min-width:120px;padding:0 16px}
+    .stats-bar{flex-wrap:nowrap;gap:0;padding:32px 3%;justify-content:space-between;}
+    .stat{flex:1 1 0;min-width:0;padding:0 12px;}
     .hero-services{gap:20px}
     .hero-content{padding:0 5% 60px}
     .footer-grid{grid-template-columns:1fr 1fr;gap:32px}
@@ -1126,7 +1135,8 @@
     border-bottom:1px solid rgba(45,156,219,0.2);
     display:flex;align-items:center;justify-content:center;
     gap:0;
-    overflow:hidden;
+    overflow:visible;
+    clip-path:none;
   }
   /* separador vertical entre bloques */
   .ibar-sep{
@@ -1198,26 +1208,83 @@
   .ibar-rotate-item strong{color:#fff;font-weight:700;}
   /* iPad Air / Tablet (769–1024px) */
   @media(min-width:769px) and (max-width:1024px){
-    /* Nav en tablet sigue siendo la versión desktop (links visibles).
-       Nav real: ~74px. Barra incentivo: 32px → total offset: 106px
-       Añadimos un poco de aire para que no quede pegado: 120px */
+    nav{padding:14px 3%;}
+    .nav-links{gap:16px;}
+    .nav-links a{font-size:11.5px;letter-spacing:.03em;}
+    .nav-cta{padding:8px 16px;font-size:12px;}
+    .nav-logo img{height:34px;}
     #incentivo-bar{
-      top:74px;            /* siempre pegado debajo de la nav */
+      top:63px;
       height:32px;
       gap:0;
       padding:0 24px;
-      overflow:hidden;
+      overflow:visible;
       justify-content:center;
     }
     #hero{
-      padding-top:140px;   /* nav(74px) + barra(32px) + aire(34px) */
+      padding-top:148px;
     }
     .ibar-block{font-size:11px;gap:6px;flex-shrink:0;white-space:nowrap;}
     .ibar-block .ibar-val{font-size:14px;}
     .ibar-sep{margin:0 20px;flex-shrink:0;}
-    /* En tablet solo mostramos los 2 contadores, nada más */
     .ibar-block-3{display:none!important;}
     .ibar-sep.ibar-hide-mobile{display:none!important;}
+    /* Pricing: 3 columnas compactas en tablet */
+    #panel-web > div,
+    #panel-brand > div,
+    #panel-extra > div {
+      grid-template-columns: repeat(3, 1fr) !important;
+      gap: 14px !important;
+      max-width: 100% !important;
+    }
+    #panel-web > div > div,
+    #panel-brand > div > div,
+    #panel-extra > div > div {
+      padding: 24px 18px !important;
+    }
+    #panel-web > div > div [style*="font-size:56px"],
+    #panel-brand > div > div [style*="font-size:56px"],
+    #panel-extra > div > div [style*="font-size:56px"] {
+      font-size: 42px !important;
+    }
+    #panel-web, #panel-brand, #panel-extra {
+      max-width: 100% !important;
+      padding: 0 2%;
+    }
+  }
+
+  /* iPad Air específico (820px) */
+  @media(min-width:810px) and (max-width:830px){
+    nav{
+      padding:14px 3%;
+    }
+    .nav-links{gap:14px;}
+    .nav-links a{font-size:11px;letter-spacing:.03em;}
+    .nav-cta{padding:8px 14px;font-size:11px;}
+    .nav-logo img{height:32px;}
+    #incentivo-bar{
+      top:61px;
+      height:32px;
+      overflow:visible;
+    }
+    #hero{
+      padding-top:145px;
+    }
+    /* Pricing 3 cols compacto */
+    #panel-web > div,
+    #panel-brand > div,
+    #panel-extra > div {
+      grid-template-columns: repeat(3, 1fr) !important;
+      gap: 12px !important;
+    }
+    #panel-web > div > div,
+    #panel-brand > div > div,
+    #panel-extra > div > div {
+      padding: 22px 14px !important;
+    }
+    /* Stats en una fila */
+    .stats-bar{ flex-wrap:nowrap !important; }
+    .stat{ flex:1 1 0 !important; min-width:0 !important; padding:0 8px !important; }
   }
 
   /* Mobile */
@@ -2526,9 +2593,9 @@ function globalSetCurrency(currency) {
 <section id="contact" style="padding:100px 5%;background:transparent;">
   <div class="sec-icon-wrap reveal"><div class="sec-icon"><span class="sec-icon-dot"></span><svg class="sec-icon-svg" width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#2D9CDB" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.63 3.35 2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.73a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16z" fill="rgba(45,156,219,0.08)"/></svg></div></div>
   <div style="max-width:700px;margin:0 auto;text-align:center;">
-    <span class="section-tag reveal">Contáctanos</span>
-    <h2 class="section-title reveal" style="margin-bottom:16px;">CUÉNTANOS TU <span>PROYECTO</span></h2>
-    <p class="section-desc reveal" style="margin:0 auto 48px;">Completa el formulario y te respondemos en menos de 1 hora por WhatsApp o email. Sin compromisos.</p>
+    <span class="section-tag reveal" data-es="Contáctanos" data-en="Contact Us">Contáctanos</span>
+    <h2 class="section-title reveal" style="margin-bottom:16px;" data-es="CUÉNTANOS TU <span>PROYECTO</span>" data-en="TELL US ABOUT YOUR <span>PROJECT</span>">CUÉNTANOS TU <span>PROYECTO</span></h2>
+    <p class="section-desc reveal" style="margin:0 auto 48px;" data-es="Completa el formulario y te respondemos en menos de 1 hora por WhatsApp o email. Sin compromisos." data-en="Fill out the form and we'll get back to you in less than 1 hour via WhatsApp or email. No commitments.">Completa el formulario y te respondemos en menos de 1 hora por WhatsApp o email. Sin compromisos.</p>
   </div>
 
   <div style="max-width:680px;margin:0 auto;background:rgba(255,255,255,0.03);border:1px solid rgba(45,156,219,0.15);border-radius:20px;padding:48px 40px;backdrop-filter:blur(12px);">
@@ -2536,13 +2603,13 @@ function globalSetCurrency(currency) {
 
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;" class="form-row-2col">
         <div style="display:flex;flex-direction:column;gap:8px;">
-          <label style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,0.6);">Nombre *</label>
-          <input type="text" name="nombre" required placeholder="Tu nombre completo"
+          <label id="label-nombre" style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,0.6);" data-es="Nombre *" data-en="Name *">Nombre *</label>
+          <input type="text" name="nombre" required id="input-nombre" placeholder="Tu nombre completo" data-placeholder-es="Tu nombre completo" data-placeholder-en="Your full name"
             style="background:rgba(255,255,255,0.05);border:1px solid rgba(45,156,219,0.2);border-radius:10px;padding:14px 16px;color:#fff;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;transition:.2s;"
             onfocus="this.style.borderColor='#2D9CDB'" onblur="this.style.borderColor='rgba(45,156,219,0.2)'">
         </div>
         <div style="display:flex;flex-direction:column;gap:8px;">
-          <label style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,0.6);">WhatsApp / Teléfono *</label>
+          <label id="label-phone" style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,0.6);" data-es="WhatsApp / Teléfono *" data-en="WhatsApp / Phone *">WhatsApp / Teléfono *</label>
           <input type="tel" name="telefono" required placeholder="+57 o +1..."
             style="background:rgba(255,255,255,0.05);border:1px solid rgba(45,156,219,0.2);border-radius:10px;padding:14px 16px;color:#fff;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;transition:.2s;"
             onfocus="this.style.borderColor='#2D9CDB'" onblur="this.style.borderColor='rgba(45,156,219,0.2)'">
@@ -2550,33 +2617,33 @@ function globalSetCurrency(currency) {
       </div>
 
       <div style="display:flex;flex-direction:column;gap:8px;">
-        <label style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,0.6);">Email *</label>
+        <label style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,0.6);" data-es="Email *" data-en="Email *">Email *</label>
         <input type="email" name="email" required placeholder="tucorreo@email.com"
           style="background:rgba(255,255,255,0.05);border:1px solid rgba(45,156,219,0.2);border-radius:10px;padding:14px 16px;color:#fff;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;transition:.2s;"
           onfocus="this.style.borderColor='#2D9CDB'" onblur="this.style.borderColor='rgba(45,156,219,0.2)'">
       </div>
 
       <div style="display:flex;flex-direction:column;gap:8px;">
-        <label style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,0.6);">¿Qué servicio necesitas? *</label>
-        <select name="servicio" required
+        <label id="label-servicio" style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,0.6);" data-es="¿Qué servicio necesitas? *" data-en="What service do you need? *">¿Qué servicio necesitas? *</label>
+        <select name="servicio" required id="select-servicio"
           style="background:rgba(10,10,10,0.9);border:1px solid rgba(45,156,219,0.2);border-radius:10px;padding:14px 16px;color:#fff;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;transition:.2s;cursor:pointer;"
           onfocus="this.style.borderColor='#2D9CDB'" onblur="this.style.borderColor='rgba(45,156,219,0.2)'">
-          <option value="" disabled selected>Selecciona un servicio...</option>
-          <option value="Desarrollo de Página Web">🌐 Desarrollo de Página Web</option>
-          <option value="Marketing Digital">📣 Marketing Digital</option>
-          <option value="Branding e Identidad Visual">🎨 Branding e Identidad Visual</option>
-          <option value="Community Manager">📱 Community Manager</option>
-          <option value="Diseño Gráfico">✏️ Diseño Gráfico</option>
-          <option value="Ecosistema Google (SEO/Ads)">🔍 Ecosistema Google (SEO/Ads)</option>
-          <option value="Fotografía Profesional">📷 Fotografía Profesional</option>
-          <option value="Paquete Completo">🚀 Paquete Completo</option>
-          <option value="Otro">💬 Otro / No sé por dónde empezar</option>
+          <option value="" disabled selected data-es="Selecciona un servicio..." data-en="Select a service...">Selecciona un servicio...</option>
+          <option value="Desarrollo de Página Web" data-es="🌐 Desarrollo de Página Web" data-en="🌐 Website Development">🌐 Desarrollo de Página Web</option>
+          <option value="Marketing Digital" data-es="📣 Marketing Digital" data-en="📣 Digital Marketing">📣 Marketing Digital</option>
+          <option value="Branding e Identidad Visual" data-es="🎨 Branding e Identidad Visual" data-en="🎨 Branding & Visual Identity">🎨 Branding e Identidad Visual</option>
+          <option value="Community Manager" data-es="📱 Community Manager" data-en="📱 Community Manager">📱 Community Manager</option>
+          <option value="Diseño Gráfico" data-es="✏️ Diseño Gráfico" data-en="✏️ Graphic Design">✏️ Diseño Gráfico</option>
+          <option value="Ecosistema Google (SEO/Ads)" data-es="🔍 Ecosistema Google (SEO/Ads)" data-en="🔍 Google Ecosystem (SEO/Ads)">🔍 Ecosistema Google (SEO/Ads)</option>
+          <option value="Fotografía Profesional" data-es="📷 Fotografía Profesional" data-en="📷 Professional Photography">📷 Fotografía Profesional</option>
+          <option value="Paquete Completo" data-es="🚀 Paquete Completo" data-en="🚀 Full Package">🚀 Paquete Completo</option>
+          <option value="Otro" data-es="💬 Otro / No sé por dónde empezar" data-en="💬 Other / Not sure where to start">💬 Otro / No sé por dónde empezar</option>
         </select>
       </div>
 
       <div style="display:flex;flex-direction:column;gap:8px;">
-        <label style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,0.6);">Cuéntanos sobre tu proyecto</label>
-        <textarea name="mensaje" rows="4" placeholder="Describe brevemente tu negocio y lo que necesitas..."
+        <label style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,0.6);" data-es="Cuéntanos sobre tu proyecto" data-en="Tell us about your project">Cuéntanos sobre tu proyecto</label>
+        <textarea name="mensaje" rows="4" id="textarea-mensaje" placeholder="Describe brevemente tu negocio y lo que necesitas..." data-placeholder-es="Describe brevemente tu negocio y lo que necesitas..." data-placeholder-en="Briefly describe your business and what you need..."
           style="background:rgba(255,255,255,0.05);border:1px solid rgba(45,156,219,0.2);border-radius:10px;padding:14px 16px;color:#fff;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;resize:vertical;transition:.2s;"
           onfocus="this.style.borderColor='#2D9CDB'" onblur="this.style.borderColor='rgba(45,156,219,0.2)'"></textarea>
       </div>
@@ -2586,8 +2653,12 @@ function globalSetCurrency(currency) {
       <input type="hidden" name="_next" value="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/#contact">
 
       <button type="submit" id="submitBtn"
-        style="background:linear-gradient(135deg,#2D9CDB,#56CCF2);color:#fff;border:none;border-radius:10px;padding:18px 32px;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:700;cursor:pointer;letter-spacing:.04em;transition:.3s;display:flex;align-items:center;justify-content:center;gap:10px;">
-        📩 Enviar mensaje — te respondemos hoy
+        style="background:linear-gradient(135deg,#2D9CDB,#56CCF2);color:#fff;border:none;border-radius:10px;padding:18px 32px;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:700;cursor:pointer;letter-spacing:.04em;transition:.3s;display:flex;align-items:center;justify-content:center;gap:10px;animation:submitBtnBounce 1.8s ease-in-out infinite;"
+        onmouseover="this.style.animation='none';this.style.transform='translateY(-2px) scale(1.03)'"
+        onmouseout="this.style.animation='submitBtnBounce 1.8s ease-in-out infinite';this.style.transform=''"
+        data-es="Enviar mensaje — te respondemos hoy" data-en="Send message — we reply today">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        <span data-es="Enviar mensaje — te respondemos hoy" data-en="Send message — we reply today">Enviar mensaje — te respondemos hoy</span>
       </button>
 
       <p id="formMsg" style="display:none;text-align:center;font-size:14px;color:#56CCF2;font-weight:600;"></p>
@@ -2597,13 +2668,13 @@ function globalSetCurrency(currency) {
     <!-- Info rápida debajo del form -->
     <div style="display:flex;justify-content:center;gap:32px;margin-top:32px;flex-wrap:wrap;">
       <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(255,255,255,0.5);">
-        <span style="color:#25D366;">●</span> Respuesta en menos de 1 hora
+        <span style="color:#25D366;">●</span> <span data-es="Respuesta en menos de 1 hora" data-en="Response in less than 1 hour">Respuesta en menos de 1 hora</span>
       </div>
       <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(255,255,255,0.5);">
-        <span style="color:#2D9CDB;">●</span> Colombia y Estados Unidos
+        <span style="color:#2D9CDB;">●</span> <span data-es="Colombia y Estados Unidos" data-en="Colombia and United States">Colombia y Estados Unidos</span>
       </div>
       <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(255,255,255,0.5);">
-        <span style="color:#2D9CDB;">●</span> Sin compromisos
+        <span style="color:#2D9CDB;">●</span> <span data-es="Sin compromisos" data-en="No commitments">Sin compromisos</span>
       </div>
     </div>
   </div>
@@ -2619,7 +2690,10 @@ function globalSetCurrency(currency) {
 
   form.addEventListener('submit', async function(e){
     e.preventDefault();
-    btn.textContent = 'Enviando...';
+    const isEn = document.documentElement.lang === 'en';
+    const btnSpan = btn.querySelector('span');
+    btn.style.animation = 'none';
+    if(btnSpan) btnSpan.textContent = isEn ? 'Sending...' : 'Enviando...';
     btn.style.opacity = '0.7';
     btn.disabled = true;
 
@@ -2632,18 +2706,19 @@ function globalSetCurrency(currency) {
       if(res.ok){
         btn.style.display = 'none';
         msg.style.display = 'block';
-        msg.textContent = '✅ ¡Mensaje enviado! Te contactamos en menos de 1 hora.';
+        msg.textContent = isEn ? '✅ Message sent! We\'ll contact you within 1 hour.' : '✅ ¡Mensaje enviado! Te contactamos en menos de 1 hora.';
         form.reset();
       } else {
         throw new Error();
       }
     } catch {
-      btn.textContent = '📩 Enviar mensaje — te respondemos hoy';
+      if(btnSpan) btnSpan.textContent = isEn ? 'Send message — we reply today' : 'Enviar mensaje — te respondemos hoy';
+      btn.style.animation = 'submitBtnBounce 1.8s ease-in-out infinite';
       btn.style.opacity = '1';
       btn.disabled = false;
       msg.style.display = 'block';
       msg.style.color = '#ff7070';
-      msg.textContent = '❌ Error al enviar. Escríbenos directo al WhatsApp.';
+      msg.textContent = isEn ? '❌ Send error. Write to us directly on WhatsApp.' : '❌ Error al enviar. Escríbenos directo al WhatsApp.';
     }
   });
 })();
@@ -2862,6 +2937,14 @@ function setLang(lang) {
   // Translate all elements with data-es / data-en
   document.querySelectorAll('[data-es]').forEach(el => {
     el.innerHTML = lang === 'en' ? el.dataset.en : el.dataset.es;
+  });
+  // Translate select options
+  document.querySelectorAll('option[data-es]').forEach(opt => {
+    opt.textContent = lang === 'en' ? opt.dataset.en : opt.dataset.es;
+  });
+  // Translate placeholders
+  document.querySelectorAll('[data-placeholder-es]').forEach(el => {
+    el.placeholder = lang === 'en' ? el.dataset.placeholderEn : el.dataset.placeholderEs;
   });
   // Re-apply active filter so portfolio filter text matches new lang
   const activeBtn = document.querySelector('.filter-btn.active');
