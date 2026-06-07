@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -235,9 +234,16 @@
 </script>
 
 <link rel="sitemap" type="application/xml" href="https://digimasterpro.com/sitemap.xml">
+<!-- 
+  PERFORMANCE NOTE: Para resolver "Usa tiempos de almacenamiento en caché eficientes",
+  agrega estas reglas en tu servidor/Cloudflare:
+  Cache-Control: public, max-age=31536000, immutable (para JS/CSS/imágenes estáticas)
+  Cache-Control: public, max-age=3600 (para HTML)
+-->
 <link rel="preload" as="image" href="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/portadadigimasterproCEO.jpg" fetchpriority="high">
 <link rel="dns-prefetch" href="https://wa.me">
 <link rel="dns-prefetch" href="https://digimasterpro.github.io">
+<link rel="preconnect" href="https://digimasterpro.github.io" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@700;800&family=DM+Sans:wght@400;500&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -246,6 +252,10 @@
   @font-face{font-family:'DM Sans';font-display:swap;}
   @font-face{font-family:'Syne';font-display:swap;}
   @font-face{font-family:'Bebas Neue';font-display:swap;}
+  /* FIX: Disable heavy backdrop-filter on mobile for GPU performance */
+  @media(prefers-reduced-motion:reduce){
+    *{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important;}
+  }
   :root {
     --black: #050505;
     --dark: #0a0a0a;
@@ -261,20 +271,23 @@
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   html{
     scroll-behavior:auto;
+    overflow:hidden;
+    height:100%;
+  }
+  /* Custom scrollbar lives on body only — prevents double scrollbar */
+  body::-webkit-scrollbar{width:6px;}
+  body::-webkit-scrollbar-track{background:transparent;}
+  body::-webkit-scrollbar-thumb{background:rgba(45,156,219,0.3);border-radius:3px;}
+  body{
+    background:var(--black);color:var(--white);font-family:'DM Sans',sans-serif;
     overflow-x:hidden;
     overflow-y:auto;
     scrollbar-width:thin;
     scrollbar-color:rgba(45,156,219,0.3) transparent;
-  }
-  html::-webkit-scrollbar{width:6px;}
-  html::-webkit-scrollbar-track{background:transparent;}
-  html::-webkit-scrollbar-thumb{background:rgba(45,156,219,0.3);border-radius:3px;}
-  body{
-    background:var(--black);color:var(--white);font-family:'DM Sans',sans-serif;
-    overflow:hidden;
     position:relative;
     width:100%;
-    min-height:100vh;
+    min-height:100%;
+    height:100%;
   }
 
   /* NAV */
@@ -283,9 +296,14 @@
     will-change:transform;transform:translateZ(0);
     display:flex;align-items:center;justify-content:space-between;
     padding:18px 5%;
-    background:rgba(5,5,5,0.7);
-    backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+    background:rgba(5,5,5,0.88);
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
     border-bottom:1px solid var(--border);
+  }
+  /* FIX: Disable expensive backdrop-filter on mobile where GPU is limited */
+  @media(max-width:768px){
+    nav{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(5,5,5,0.95);}
+    .neon-btn,.nav-cta{backdrop-filter:none;-webkit-backdrop-filter:none;}
   }
   .nav-logo img{height:38px;width:auto;mix-blend-mode:lighten}
   .nav-links{display:flex;gap:32px;list-style:none}
@@ -1241,9 +1259,9 @@
     .reviews-grid{grid-template-columns:1fr 1fr}
     .review-card:nth-child(2n){border-right:none}
     .review-card:nth-child(3n){border-right:1px solid var(--border)}
-    /* ── Fix horizontal scroll on iPad ── */
-    html{overflow-x:hidden;overflow-y:auto;}
-    body{overflow:hidden;}
+    /* ── Fix horizontal scroll on iPad — FIX: prevent double scrollbar ── */
+    html{overflow:hidden;}
+    body{overflow-x:hidden;overflow-y:auto;}
     img,video,canvas,iframe{max-width:100%;}
     /* NOTE: No ponemos *{max-width:100%} porque rompe flex en #incentivo-bar */
     #about{grid-template-columns:1fr;gap:32px}
@@ -1450,12 +1468,12 @@
   /* Mobile stability: animated background, no side scroll */
   @media(max-width:768px){
     html{
+      overflow:hidden;
+    }
+    body{
       overflow-x:hidden;
       overflow-y:auto;
       -webkit-overflow-scrolling:touch;
-    }
-    body{
-      overflow:hidden;
       touch-action:pan-y;
     }
     section,nav,footer,.mobile-menu{max-width:100%;overflow-x:clip;}
@@ -1495,7 +1513,6 @@
 
   /* Prevent scroll: body.intro-active */
   body.intro-active{overflow:hidden!important;}
-  html:has(body.intro-active){overflow:hidden!important;}
 
   /* Respect user preference for reduced motion */
   @media(prefers-reduced-motion:reduce){
@@ -1844,7 +1861,7 @@
     .sec-emoji-item .emoji-label{font-size:7px;letter-spacing:.06em;}
   }
 </style>
-<link rel="preload" as="image" href="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/portadadigimasterproCEO.jpg" fetchpriority="high">
+
 <link rel="preload" as="image" href="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/LogoDigimaster.png">
 </head>
 <body>
@@ -3472,7 +3489,7 @@ function setLang(lang) {
   const CYAN = '86,204,242';
   let isMobileMotion = window.matchMedia('(max-width: 768px)').matches;
   const connectDist = () => isMobileMotion ? 120 : 180;
-  const particleCount = () => isMobileMotion ? 28 : 90;
+  const particleCount = () => isMobileMotion ? 15 : 90; // FIX: reduced mobile particles
   const particleSpeed = () => isMobileMotion ? .16 : .45;
 
   let W, H;
@@ -3766,8 +3783,10 @@ function setLang(lang) {
 
 })();
 
-// ── 2. CURSOR TRAIL ────────────────────────────────────
+// ── 2. CURSOR TRAIL — Only on non-touch devices ────────────────────────────────────
 (function(){
+  // Skip on touch devices (mobile) — saves continuous rAF loop
+  if('ontouchstart' in window || navigator.maxTouchPoints > 0) return;
   const trail = document.getElementById('cursorTrail');
   const glow  = document.getElementById('cursorGlow');
   if(!trail || !glow) return;
@@ -3775,7 +3794,7 @@ function setLang(lang) {
   document.addEventListener('mousemove', e=>{
     tx=e.clientX; ty=e.clientY;
     trail.style.left=tx+'px'; trail.style.top=ty+'px';
-  });
+  },{passive:true});
   function animGlow(){
     gx += (tx-gx)*.12; gy += (ty-gy)*.12;
     glow.style.left=gx+'px'; glow.style.top=gy+'px';
@@ -3937,13 +3956,14 @@ function setLang(lang) {
   }
   drawIntro();
 
-  // Secuencia de salida
+  // Secuencia de salida — FIX: shorter on mobile for better FCP
+  const _introDelay = ('ontouchstart' in window || navigator.maxTouchPoints > 0) ? 800 : 3000;
   setTimeout(()=>{
     overlay.classList.add('hide');
     document.body.classList.remove('intro-active');
     introRunning = false;
-    setTimeout(()=>overlay.remove(), 650);
-  }, 3000);
+    setTimeout(()=>overlay.remove(), 400);
+  }, _introDelay);
 })();
 </script>
 
@@ -3980,20 +4000,21 @@ function setLang(lang) {
   }
   setTimeout(tickQuotes, 7000);
 
-  // ── Texto rotativo ──
+  // ── Texto rotativo — FIX: cache widths to avoid forced reflow ──
   const wrap = document.getElementById('ibarRotateWrap');
   if(wrap){
     const items = wrap.querySelectorAll('.ibar-rotate-item');
     let cur = 0;
+    // Cache all widths in one batch read BEFORE any writes
+    const widths = Array.from(items).map(el => el.scrollWidth);
+    wrap.style.width = widths[0]+'px';
     setInterval(()=>{
       items[cur].classList.remove('active');
       cur = (cur+1)%items.length;
       items[cur].classList.add('active');
-      // auto-size the wrap to the active item width
-      wrap.style.width = items[cur].scrollWidth+'px';
+      // Use cached width — no forced reflow
+      wrap.style.width = widths[cur]+'px';
     }, 3800);
-    // init wrap width
-    wrap.style.width = items[0].scrollWidth+'px';
   }
 })();
 
@@ -4128,7 +4149,7 @@ function setLang(lang) {
 
 
 <script>
-/* ══ PORTFOLIO SLIDESHOW ══ */
+/* ══ PORTFOLIO SLIDESHOW — pauses when off-screen for performance ══ */
 (function(){
   document.querySelectorAll('.pf-slideshow').forEach(function(item){
     var slides = item.querySelectorAll('.pf-slide');
@@ -4136,14 +4157,26 @@ function setLang(lang) {
     var links  = (item.dataset.links || '').split(',');
     if(slides.length < 2) return;
     var cur = 0;
-    setInterval(function(){
+    var timer = null;
+    function nextSlide(){
       slides[cur].classList.remove('active');
       dots[cur].classList.remove('active');
       cur = (cur + 1) % slides.length;
       slides[cur].classList.add('active');
       dots[cur].classList.add('active');
       if(links[cur]) item.href = links[cur];
-    }, 2800);
+    }
+    if('IntersectionObserver' in window){
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if(e.isIntersecting && !timer){ timer = setInterval(nextSlide, 2800); }
+          else if(!e.isIntersecting && timer){ clearInterval(timer); timer = null; }
+        });
+      }, {threshold:0.1});
+      io.observe(item);
+    } else {
+      timer = setInterval(nextSlide, 2800);
+    }
   });
 })();
 </script>
