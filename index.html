@@ -35,10 +35,13 @@
 <meta property="og:url" content="https://digimasterpro.com/">
 <meta property="og:title" content="Digi Master Pro | Agencia de Marketing Digital, Páginas Web y Branding en Colombia y USA">
 <meta property="og:description" content="Agencia de marketing digital, diseño de páginas web y branding para marcas en Colombia y Estados Unidos. +7 años impulsando negocios online. ¡Cotiza gratis!">
-<meta property="og:image" content="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/portadadigimasterproCEO.jpg">
+<!-- OG IMAGE: 1200x630px para thumbnail en Google y redes sociales -->
+<meta property="og:image" content="https://digimasterpro.com/images/og-digimasterpro.jpg">
+<meta property="og:image:secure_url" content="https://digimasterpro.com/images/og-digimasterpro.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Digi Master Pro - Agencia de Marketing Digital en Colombia y USA">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:alt" content="Felipe Ferro - CEO Digi Master Pro | Agencia de Marketing Digital en Colombia y USA">
 <meta property="og:locale" content="es_CO">
 <meta property="og:locale:alternate" content="en_US">
 <meta property="og:site_name" content="Digi Master Pro">
@@ -49,9 +52,11 @@
 <meta name="twitter:creator" content="@digimasterpro">
 <meta name="twitter:title" content="Digi Master Pro | Marketing Digital, Páginas Web y Branding en Colombia y USA">
 <meta name="twitter:description" content="Agencia de marketing digital, diseño web y branding para marcas en Colombia y Estados Unidos. +7 años generando resultados.">
-<meta property="twitter:image" content="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/portadadigimasterproCEO.jpg">
+<meta property="twitter:image" content="https://digimasterpro.com/images/og-digimasterpro.jpg">
 
 <!-- ══ FAVICON ══ -->
+<!-- FAVICON CON FONDO NEGRO — el SVG es lo que Google muestra en resultados de búsqueda -->
+<link rel="icon" type="image/svg+xml" href="https://digimasterpro.com/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/LogoDigimaster.png">
 <link rel="icon" type="image/png" sizes="16x16" href="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/LogoDigimaster.png">
 <link rel="shortcut icon" href="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/LogoDigimaster.png">
@@ -70,11 +75,11 @@
   "url": "https://digimasterpro.com",
   "logo": {
     "@type": "ImageObject",
-    "url": "https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/LogoDigimaster.png",
+    "url": "https://digimasterpro.com/images/LogoDigimaster.png",
     "width": 180,
     "height": 180
   },
-  "image": "https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/portadadigimasterproCEO.jpg",
+  "image": "https://digimasterpro.com/images/og-digimasterpro.jpg",
   "foundingDate": "2017",
   "priceRange": "$$",
   "currenciesAccepted": "USD, COP",
@@ -218,7 +223,7 @@
   "@type": "Organization",
   "name": "Digi Master Pro",
   "url": "https://digimasterpro.com",
-  "logo": "https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/LogoDigimaster.png",
+  "logo": "https://digimasterpro.com/images/LogoDigimaster.png",
   "foundingDate": "2017",
   "numberOfEmployees": {"@type": "QuantitativeValue", "value": 10},
   "sameAs": [
@@ -240,6 +245,7 @@
   Cache-Control: public, max-age=31536000, immutable (para JS/CSS/imágenes estáticas)
   Cache-Control: public, max-age=3600 (para HTML)
 -->
+<!-- Preload imagen hero — cuando tengas el WebP listo, agrega también el preload WebP -->
 <link rel="preload" as="image" href="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/portadadigimasterproCEO.jpg" fetchpriority="high">
 <link rel="dns-prefetch" href="https://wa.me">
 <link rel="dns-prefetch" href="https://digimasterpro.github.io">
@@ -486,7 +492,8 @@
   #hero .hero-bg{
     position:absolute;
     top:0; left:0; right:0; bottom:0;
-    background:url('https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/portadadigimasterproCEO.jpg') center top / cover no-repeat;
+    /* OPTIMIZACIÓN LCP: cuando tengas el WebP listo, reemplaza el src abajo */
+    background: url('https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/portadadigimasterproCEO.jpg') center top / cover no-repeat;
     pointer-events:none;
   }
   /* Dark gradient overlay — bottom heavy so text is readable */
@@ -1477,6 +1484,7 @@
       touch-action:pan-y;
     }
     section,nav,footer,.mobile-menu{max-width:100%;overflow-x:clip;}
+    #seo-footer-block{overflow:visible!important;padding-left:20px!important;padding-right:20px!important;}
     .stats-bar{display:flex;flex-direction:row!important;align-items:flex-start;justify-content:space-between;gap:0;max-width:100%;overflow:hidden;padding:28px 8px;}
     .stat{flex:1 1 25%;min-width:0;padding:0 3px;}
     .stat-num{font-size:clamp(30px,11vw,44px);white-space:nowrap;}
@@ -1975,7 +1983,19 @@
   </div>
   <div class="hero-img fade-up delay-2">
     <div class="hero-img-wrap">
-      <img src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/portadadigimasterproCEO.jpg" fetchpriority="high" loading="eager" decoding="async" alt="Felipe Ferro - CEO Digi Master Pro">
+      <!-- OPTIMIZACIÓN LCP: <picture> con WebP + fallback JPG -->
+      <picture>
+        <source srcset="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/portadadigimasterproCEO-mobile.webp" type="image/webp" media="(max-width:768px)">
+        <source srcset="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/portadadigimasterproCEO.webp" type="image/webp">
+        <source srcset="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/portadadigimasterproCEO.jpg" type="image/jpeg">
+        <img src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/portadadigimasterproCEO.jpg"
+             fetchpriority="high"
+             loading="eager"
+             decoding="sync"
+             width="1200"
+             height="1500"
+             alt="Felipe Ferro - CEO Digi Master Pro">
+      </picture>
       <div class="hero-badge">
         <div class="name">Felipe Ferro</div>
         <div class="role" data-es="CEO &amp; Desarrollador Web Principal" data-en="CEO &amp; Lead Web Developer">CEO & Desarrollador Web Principal</div>
@@ -3195,40 +3215,40 @@ function globalSetCurrency(currency) {
 <hr class="glowline">
 <!-- FOOTER -->
 <!-- ══ SEO CONTENT BLOCK ══ -->
-<section aria-label="Información sobre Digi Master Pro" style="background:#050505;padding:60px 5% 20px;border-top:1px solid rgba(255,255,255,0.05);">
-  <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:40px;">
-    <div>
+<div id="seo-footer-block" style="background:#050505;border-top:1px solid rgba(255,255,255,0.05);padding:60px 40px 20px;box-sizing:border-box;width:100%;">
+  <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:40px;box-sizing:border-box;">
+    <div style="min-width:0;overflow:hidden;">
       <h2 style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#2D9CDB;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px;">Agencia de Marketing Digital en Colombia</h2>
-      <p style="font-size:13px;color:rgba(255,255,255,0.45);line-height:1.7;">Digi Master Pro es una agencia de marketing digital con sede en Cartagena de Indias, Colombia, con más de 7 años de experiencia impulsando marcas en Colombia y Estados Unidos. Especializados en diseño y desarrollo de páginas web profesionales, branding, SEO, gestión de redes sociales y publicidad digital en Google Ads y Facebook Ads.</p>
+      <p style="font-size:13px;color:rgba(255,255,255,0.45);line-height:1.7;word-wrap:break-word;overflow-wrap:break-word;">Digi Master Pro es una agencia de marketing digital con sede en Cartagena de Indias, Colombia, con más de 7 años de experiencia impulsando marcas en Colombia y Estados Unidos. Especializados en diseño y desarrollo de páginas web profesionales, branding, SEO, gestión de redes sociales y publicidad digital en Google Ads y Facebook Ads.</p>
     </div>
-    <div>
+    <div style="min-width:0;overflow:hidden;">
       <h2 style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#2D9CDB;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px;">Diseño Web Profesional Colombia</h2>
-      <p style="font-size:13px;color:rgba(255,255,255,0.45);line-height:1.7;">Creamos páginas web profesionales, rápidas y optimizadas para SEO. Trabajamos con negocios de todos los sectores: restaurantes, hoteles, clínicas, tiendas online, agencias de viajes, marcas de moda y más. Entregamos sitios web listos para convertir visitas en clientes.</p>
+      <p style="font-size:13px;color:rgba(255,255,255,0.45);line-height:1.7;word-wrap:break-word;overflow-wrap:break-word;">Creamos páginas web profesionales, rápidas y optimizadas para SEO. Trabajamos con negocios de todos los sectores: restaurantes, hoteles, clínicas, tiendas online, agencias de viajes, marcas de moda y más. Entregamos sitios web listos para convertir visitas en clientes.</p>
     </div>
-    <div>
+    <div style="min-width:0;overflow:hidden;">
       <h2 style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#2D9CDB;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px;">Branding e Identidad Visual</h2>
-      <p style="font-size:13px;color:rgba(255,255,255,0.45);line-height:1.7;">Diseñamos identidades visuales poderosas que conectan con tu audiencia. Desde el logo hasta el manual de marca completo. Hemos creado branding para marcas en Cartagena, Bogotá, Medellín, Miami y Nueva York. Tu marca merece destacar en un mercado competitivo.</p>
+      <p style="font-size:13px;color:rgba(255,255,255,0.45);line-height:1.7;word-wrap:break-word;overflow-wrap:break-word;">Diseñamos identidades visuales poderosas que conectan con tu audiencia. Desde el logo hasta el manual de marca completo. Hemos creado branding para marcas en Cartagena, Bogotá, Medellín, Miami y Nueva York. Tu marca merece destacar en un mercado competitivo.</p>
     </div>
-    <div>
+    <div style="min-width:0;overflow:hidden;">
       <h2 style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#2D9CDB;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px;">Marketing Digital Cartagena</h2>
-      <p style="font-size:13px;color:rgba(255,255,255,0.45);line-height:1.7;">Si buscas una agencia de marketing digital en Cartagena de Indias, Digi Master Pro es tu mejor opción. Estrategias personalizadas de SEO, pauta digital, community management y diseño web para que tu negocio crezca online. Cotiza gratis hoy por WhatsApp.</p>
+      <p style="font-size:13px;color:rgba(255,255,255,0.45);line-height:1.7;word-wrap:break-word;overflow-wrap:break-word;">Si buscas una agencia de marketing digital en Cartagena de Indias, Digi Master Pro es tu mejor opción. Estrategias personalizadas de SEO, pauta digital, community management y diseño web para que tu negocio crezca online. Cotiza gratis hoy por WhatsApp.</p>
     </div>
   </div>
-  <nav aria-label="Mapa del sitio Digi Master Pro" style="margin-top:40px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.05);">
+  <nav aria-label="Mapa del sitio Digi Master Pro" style="display:block;position:static;background:none;backdrop-filter:none;-webkit-backdrop-filter:none;border:none;border-top:1px solid rgba(255,255,255,0.05);margin-top:40px;padding:24px 0 0;box-shadow:none;">
     <div style="max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:center;">
       <a href="https://digimasterpro.com/#services" style="font-size:12px;color:rgba(255,255,255,0.35);text-decoration:none;" title="Servicios de marketing digital">Servicios</a>
       <a href="https://digimasterpro.com/#precios" style="font-size:12px;color:rgba(255,255,255,0.35);text-decoration:none;" title="Precios de páginas web y marketing">Precios</a>
       <a href="https://digimasterpro.com/#portfolio" style="font-size:12px;color:rgba(255,255,255,0.35);text-decoration:none;" title="Portafolio de proyectos web y branding">Portafolio</a>
       <a href="https://digimasterpro.com/#about" style="font-size:12px;color:rgba(255,255,255,0.35);text-decoration:none;" title="Nosotros - Equipo Digi Master Pro">Nosotros</a>
       <a href="https://digimasterpro.com/#contact" style="font-size:12px;color:rgba(255,255,255,0.35);text-decoration:none;" title="Contacto agencia marketing digital">Contacto</a>
-      <a href="https://digimasterpro.com/sitemap.xml" style="font-size:12px;color:rgba(255,255,255,0.35);text-decoration:none;" title="Mapa del sitio">Sitemap</a>
+      <a href="https://digimasterpro.com/sitemap.xml" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;" title="Mapa del sitio" aria-hidden="true" tabindex="-1">Sitemap</a>
       <a href="https://www.instagram.com/digi_masterpro" target="_blank" rel="noopener" style="font-size:12px;color:rgba(255,255,255,0.35);text-decoration:none;" title="Instagram Digi Master Pro">Instagram</a>
       <a href="https://www.facebook.com/people/Digi-master-pro/61579261739007/" target="_blank" rel="noopener" style="font-size:12px;color:rgba(255,255,255,0.35);text-decoration:none;" title="Facebook Digi Master Pro">Facebook</a>
       <a href="https://www.youtube.com/@digi_masterpro" target="_blank" rel="noopener" style="font-size:12px;color:rgba(255,255,255,0.35);text-decoration:none;" title="YouTube Digi Master Pro">YouTube</a>
       <a href="https://www.tiktok.com/@digi.master.pro" target="_blank" rel="noopener" style="font-size:12px;color:rgba(255,255,255,0.35);text-decoration:none;" title="TikTok Digi Master Pro">TikTok</a>
     </div>
   </nav>
-</section>
+</div>
 
 <footer class="footer-minimal">
   <img src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/LogoDigimaster.png" loading="eager" decoding="async" fetchpriority="high" alt="Digi Master Pro - Agencia Marketing Digital Colombia" class="footer-logo-min">
@@ -4137,15 +4157,7 @@ function setLang(lang) {
 </script>
 
 
-<!-- SEO KEYWORDS BLOCK -->
-<div style="position:absolute;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none;" aria-hidden="true">
-  Digi Master Pro agencia de marketing digital en Colombia y Estados Unidos. 
-  Desarrollo de páginas web profesionales para empresas y emprendedores. 
-  Branding para marcas en Colombia, Cartagena, Bogotá, Medellín y toda Latinoamérica. 
-  Marketing digital en Estados Unidos para negocios hispanos. 
-  Diseño web, SEO, redes sociales, publicidad digital, branding e identidad visual.
-  Agencia digital con más de 7 años de experiencia generando resultados.
-</div>
+<!-- Bloque de keywords oculto eliminado: Google penaliza texto invisible -->
 
 
 <script>
