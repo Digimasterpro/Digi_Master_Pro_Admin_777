@@ -1,12 +1,4 @@
 User-agent: *
-Allow: /
-
-User-agent: Googlebot
-Allow: /
-Crawl-delay: 0
-
-User-agent: Bingbot
-Allow: /
-Crawl-delay: 1
+Disallow: /
 
 Sitemap: https://digimasterpro.com/sitemap.xml
