@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180">
-  <!-- Fondo negro -->
-  <rect width="180" height="180" fill="#050505" rx="20"/>
-  <!-- Logo: imagen del logo de Digi Master Pro sobre fondo negro -->
-  <image href="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/LogoDigimaster.png"
-         x="10" y="10" width="160" height="160"
-         preserveAspectRatio="xMidYMid meet"/>
-</svg>
