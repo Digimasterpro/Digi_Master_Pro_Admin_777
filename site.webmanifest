@@ -1,0 +1,23 @@
+{
+  "name": "Digi Master Pro",
+  "short_name": "DigiMaster",
+  "description": "Agencia de Marketing Digital, Páginas Web y Branding en Colombia y USA",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#050505",
+  "theme_color": "#050505",
+  "icons": [
+    {
+      "src": "https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/LogoDigimaster.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/LogoDigimaster.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
