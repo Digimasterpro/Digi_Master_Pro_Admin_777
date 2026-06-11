@@ -1335,11 +1335,8 @@
   .lang-float-btn{display:none!important;}
   .uf-sep{display:none!important;}
 
-  /* ══ TIDIO — dark theme + position izquierda en desktop ══ */
-  #tidio-chat-iframe,#tidio-chat{z-index:99000!important;}
-  @media(min-width:769px){
-    #tidio-chat{left:0!important;right:auto!important;}
-  }
+  /* ══ TIDIO — z-index base ══ */
+  #tidio-chat,#tidio-chat-iframe{z-index:99000!important;}
 
   /* WhatsApp float — subido para no chocar con Tidio */
   .wa-float{
@@ -1689,8 +1686,8 @@
     .services-track{max-width:100%;will-change:auto;}
     .btn-primary:hover,.service-card:hover,.portfolio-item:hover,.btn-wa-cta:hover,.wa-float:hover,.btn-hero-cta:hover{transform:none!important;}
     .btn-wa-cta{max-width:100%;padding:16px 24px;}
-    .wa-float{position:fixed!important;right:16px;bottom:80px;z-index:100001;width:56px;height:56px;display:flex!important;}
-    .lang-float{right:16px;bottom:148px;}
+    .wa-float{position:fixed!important;right:16px;bottom:16px;z-index:100001;width:56px;height:56px;display:flex!important;}
+    .lang-float{right:16px;bottom:84px;}
     .currency-float{left:16px;bottom:16px;}
   }
   @media(max-width:560px){
@@ -4679,21 +4676,35 @@ function openBookingModal(){
 
 <!-- ══ TIDIO CHAT WIDGET — Digi Master Pro ══ -->
 <style>
-  /* Posicionamiento Tidio: esquina inferior derecha, por debajo de WA y lang */
-  #tidio-chat{ z-index:99000!important; }
-  /* En mobile: asegurar que no tape los botones hero */
+  /* ── Tidio: ocultar texto del botón flotante, solo icono ── */
+  #tidio-chat iframe { z-index:99000!important; }
+
+  /* Esconder el label "Chatea con nosotros" del botón */
+  #tidio-chat [class*="chatButton"] span,
+  #tidio-chat [class*="chat-button"] span,
+  #tidio-chat [class*="button__label"],
+  #tidio-chat [class*="buttonLabel"],
+  #tidio-chat [class*="chatButtonText"],
+  #tidio-chat [data-testid="chat-button-text"] { display:none!important; }
+
+  /* Desktop: Tidio en esquina inferior IZQUIERDA para no chocar con WA */
+  @media(min-width:769px){
+    #tidio-chat { left:0!important; right:auto!important; }
+    #tidio-chat iframe { left:0!important; right:auto!important; }
+  }
+
+  /* Mobile: Tidio bien abajo, botones hero libres */
   @media(max-width:768px){
-    #tidio-chat{ bottom:0!important; }
+    #tidio-chat { bottom:0!important; right:0!important; left:auto!important; }
+    #tidio-chat iframe { bottom:0!important; }
   }
 </style>
 <script>
-  /* Configurar Tidio con tema oscuro antes de cargar */
   window.tidioChatLang = document.documentElement.lang === 'en' ? 'en' : 'es';
   document.addEventListener('tidioChat-ready', function(){
     if(window.tidioChatApi){
-      /* Paleta oscura de Digi Master Pro */
       window.tidioChatApi.colorSet({
-        color: '#2D9CDB',       /* Azul primario */
+        color: '#2D9CDB',
         colorButtons: '#2D9CDB',
         colorHeader: '#050505',
         colorHeaderText: '#ffffff',
@@ -4702,6 +4713,17 @@ function openBookingModal(){
         colorBubbleText: '#ffffff',
         colorBubbleBackground: '#111111'
       });
+      /* Ocultar texto del botón via API si está disponible */
+      try {
+        window.tidioChatApi.on('ready', function(){
+          var btn = document.querySelector('#tidio-chat iframe');
+          if(btn) {
+            var style = document.createElement('style');
+            style.textContent = 'span[class*="label"],span[class*="text"],div[class*="label"]{display:none!important}';
+            try{ btn.contentDocument.head.appendChild(style); }catch(e){}
+          }
+        });
+      } catch(e){}
     }
   });
 </script>
