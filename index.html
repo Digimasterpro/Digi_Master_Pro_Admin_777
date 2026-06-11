@@ -1316,7 +1316,7 @@
 
   /* ── Language float bubble (circular, matches WA) ── */
   .lang-float{
-    position:fixed;bottom:96px;right:28px;z-index:100000;
+    position:fixed;bottom:158px;right:28px;z-index:100000;
     width:56px;height:56px;border-radius:50%;
     background:rgba(10,10,10,0.92);
     border:1px solid rgba(45,156,219,0.4);
@@ -1335,9 +1335,15 @@
   .lang-float-btn{display:none!important;}
   .uf-sep{display:none!important;}
 
-  /* WhatsApp float */
+  /* ══ TIDIO — dark theme + position izquierda en desktop ══ */
+  #tidio-chat-iframe,#tidio-chat{z-index:99000!important;}
+  @media(min-width:769px){
+    #tidio-chat{left:0!important;right:auto!important;}
+  }
+
+  /* WhatsApp float — subido para no chocar con Tidio */
   .wa-float{
-    position:fixed;bottom:28px;right:28px;z-index:100000;
+    position:fixed;bottom:90px;right:28px;z-index:100000;
     contain:layout style;
     width:56px;height:56px;border-radius:50%;
     background:#25D366;display:flex;align-items:center;justify-content:center;
@@ -1683,8 +1689,8 @@
     .services-track{max-width:100%;will-change:auto;}
     .btn-primary:hover,.service-card:hover,.portfolio-item:hover,.btn-wa-cta:hover,.wa-float:hover,.btn-hero-cta:hover{transform:none!important;}
     .btn-wa-cta{max-width:100%;padding:16px 24px;}
-    .wa-float{position:fixed!important;right:16px;bottom:16px;z-index:100001;width:56px;height:56px;display:flex!important;}
-    .lang-float{right:16px;bottom:84px;}
+    .wa-float{position:fixed!important;right:16px;bottom:80px;z-index:100001;width:56px;height:56px;display:flex!important;}
+    .lang-float{right:16px;bottom:148px;}
     .currency-float{left:16px;bottom:16px;}
   }
   @media(max-width:560px){
@@ -4672,6 +4678,33 @@ function openBookingModal(){
 </script>
 
 <!-- ══ TIDIO CHAT WIDGET — Digi Master Pro ══ -->
+<style>
+  /* Posicionamiento Tidio: esquina inferior derecha, por debajo de WA y lang */
+  #tidio-chat{ z-index:99000!important; }
+  /* En mobile: asegurar que no tape los botones hero */
+  @media(max-width:768px){
+    #tidio-chat{ bottom:0!important; }
+  }
+</style>
+<script>
+  /* Configurar Tidio con tema oscuro antes de cargar */
+  window.tidioChatLang = document.documentElement.lang === 'en' ? 'en' : 'es';
+  document.addEventListener('tidioChat-ready', function(){
+    if(window.tidioChatApi){
+      /* Paleta oscura de Digi Master Pro */
+      window.tidioChatApi.colorSet({
+        color: '#2D9CDB',       /* Azul primario */
+        colorButtons: '#2D9CDB',
+        colorHeader: '#050505',
+        colorHeaderText: '#ffffff',
+        colorText: '#ffffff',
+        colorBackground: '#0a0a0a',
+        colorBubbleText: '#ffffff',
+        colorBubbleBackground: '#111111'
+      });
+    }
+  });
+</script>
 <script src="//code.tidio.co/rft9xdbb4sidnoe5uthcd9zvra7yzaxn.js" async></script>
 
 </body>
