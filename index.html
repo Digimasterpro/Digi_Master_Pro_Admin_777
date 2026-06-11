@@ -4674,9 +4674,9 @@ function openBookingModal(){
 })();
 </script>
 
-<!-- ══ TIDIO CHAT WIDGET — Digi Master Pro ══ -->
+<!-- ══ TIDIO + LYRO AI CHAT WIDGET — Digi Master Pro ══ -->
 <style>
-  /* ── Tidio: ocultar texto del botón flotante, solo icono ── */
+  /* ── Tidio: z-index general ── */
   #tidio-chat iframe { z-index:99000!important; }
 
   /* Esconder el label "Chatea con nosotros" del botón */
@@ -4701,6 +4701,152 @@ function openBookingModal(){
 </style>
 <script>
   window.tidioChatLang = document.documentElement.lang === 'en' ? 'en' : 'es';
+
+  /* ── Inyectar CSS oscuro dentro de los iframes de Tidio/Lyro ── */
+  function injectDarkThemeIntoIframe(iframe) {
+    try {
+      var doc = iframe.contentDocument || iframe.contentWindow.document;
+      if (!doc) return;
+      var style = doc.createElement('style');
+      style.id = 'dmp-dark-override';
+      style.textContent = `
+        /* Fondo principal del chat */
+        body, #root, [class*="App"], [class*="widget"], [class*="chat"],
+        [class*="container"], [class*="wrapper"], [class*="panel"],
+        [class*="window"], [class*="box"], [class*="frame"],
+        [class*="conversation"], [class*="messages"], [class*="content"],
+        [class*="lyro"], [class*="Lyro"], [class*="agent"],
+        [class*="chatWindow"], [class*="chatContainer"],
+        [class*="chatBody"], [class*="chatContent"] {
+          background-color: #0a0a0a !important;
+          background: #0a0a0a !important;
+          color: #ffffff !important;
+        }
+        /* Área de mensajes */
+        [class*="message"], [class*="Message"],
+        [class*="bubble"], [class*="Bubble"],
+        [class*="bot"], [class*="Bot"],
+        [class*="reply"], [class*="Reply"] {
+          background-color: #1a1a1a !important;
+          color: #ffffff !important;
+        }
+        /* Burbujas del agente IA */
+        [class*="operatorMessage"], [class*="botMessage"],
+        [class*="agentMessage"], [class*="lyroMessage"],
+        [class*="incomingMessage"] {
+          background-color: #111827 !important;
+          color: #ffffff !important;
+          border-color: #2D9CDB !important;
+        }
+        /* Burbujas del visitante */
+        [class*="visitorMessage"], [class*="clientMessage"],
+        [class*="outgoingMessage"], [class*="userMessage"] {
+          background-color: #2D9CDB !important;
+          color: #ffffff !important;
+        }
+        /* Header del chat */
+        [class*="header"], [class*="Header"],
+        [class*="topbar"], [class*="Topbar"],
+        [class*="navbar"], [class*="titleBar"] {
+          background-color: #050505 !important;
+          color: #ffffff !important;
+          border-bottom-color: #222 !important;
+        }
+        /* Input de texto */
+        [class*="input"], [class*="Input"],
+        [class*="textarea"], [class*="Textarea"],
+        input, textarea {
+          background-color: #1a1a1a !important;
+          color: #ffffff !important;
+          border-color: #333 !important;
+        }
+        input::placeholder, textarea::placeholder {
+          color: #888 !important;
+        }
+        /* Footer / barra inferior */
+        [class*="footer"], [class*="Footer"],
+        [class*="inputArea"], [class*="inputBar"],
+        [class*="inputWrapper"], [class*="inputContainer"],
+        [class*="bottomBar"], [class*="actionBar"] {
+          background-color: #111111 !important;
+          border-top-color: #222 !important;
+        }
+        /* Botones de acción rápida */
+        [class*="quickButton"], [class*="quickReply"],
+        [class*="actionButton"], [class*="chip"],
+        [class*="suggestionButton"] {
+          background-color: #1a1a1a !important;
+          color: #2D9CDB !important;
+          border-color: #2D9CDB !important;
+        }
+        /* Scrollbar oscura */
+        ::-webkit-scrollbar { background: #0a0a0a !important; }
+        ::-webkit-scrollbar-thumb { background: #333 !important; border-radius: 4px; }
+        /* Textos en general */
+        p, span, div, h1, h2, h3, h4, label, a {
+          color: inherit;
+        }
+        /* Forzar fondo blanco a transparente/oscuro */
+        [style*="background-color: white"],
+        [style*="background-color: #fff"],
+        [style*="background-color: #ffffff"],
+        [style*="background: white"],
+        [style*="background: #fff"],
+        [style*="background: #ffffff"] {
+          background-color: #0a0a0a !important;
+          background: #0a0a0a !important;
+        }
+        /* Colores de texto blanco forzados a negro — invertir */
+        [style*="color: black"],
+        [style*="color: #000"],
+        [style*="color: #333"],
+        [style*="color: #111"] {
+          color: #ffffff !important;
+        }
+      `;
+      /* Evitar duplicados */
+      var existing = doc.getElementById('dmp-dark-override');
+      if (existing) existing.remove();
+      doc.head.appendChild(style);
+    } catch(e) {
+      /* CORS puede bloquear en algunos entornos — es normal */
+    }
+  }
+
+  /* ── Observar cuando Tidio/Lyro crea iframes y aplicar el tema ── */
+  function watchTidioIframes() {
+    var observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        mutation.addedNodes.forEach(function(node) {
+          if (node.nodeName === 'IFRAME') {
+            node.addEventListener('load', function() {
+              injectDarkThemeIntoIframe(node);
+            });
+            /* Intentar inyectar de inmediato también */
+            injectDarkThemeIntoIframe(node);
+          }
+          /* Buscar iframes dentro del nodo añadido */
+          if (node.querySelectorAll) {
+            node.querySelectorAll('iframe').forEach(function(iframe) {
+              iframe.addEventListener('load', function() {
+                injectDarkThemeIntoIframe(iframe);
+              });
+              injectDarkThemeIntoIframe(iframe);
+            });
+          }
+        });
+      });
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    /* También aplicar a iframes ya existentes */
+    document.querySelectorAll('#tidio-chat iframe, #tidio-chat-iframe').forEach(function(iframe) {
+      iframe.addEventListener('load', function() { injectDarkThemeIntoIframe(iframe); });
+      injectDarkThemeIntoIframe(iframe);
+    });
+  }
+
+  /* ── API de colores de Tidio (tema global) ── */
   document.addEventListener('tidioChat-ready', function(){
     if(window.tidioChatApi){
       window.tidioChatApi.colorSet({
@@ -4713,19 +4859,21 @@ function openBookingModal(){
         colorBubbleText: '#ffffff',
         colorBubbleBackground: '#111111'
       });
-      /* Ocultar texto del botón via API si está disponible */
-      try {
-        window.tidioChatApi.on('ready', function(){
-          var btn = document.querySelector('#tidio-chat iframe');
-          if(btn) {
-            var style = document.createElement('style');
-            style.textContent = 'span[class*="label"],span[class*="text"],div[class*="label"]{display:none!important}';
-            try{ btn.contentDocument.head.appendChild(style); }catch(e){}
-          }
-        });
-      } catch(e){}
     }
+    /* Re-inyectar tras apertura del chat */
+    document.addEventListener('tidioChat-open', function(){
+      setTimeout(function(){
+        document.querySelectorAll('#tidio-chat iframe').forEach(injectDarkThemeIntoIframe);
+      }, 500);
+    });
   });
+
+  /* Iniciar el observador cuando el DOM esté listo */
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', watchTidioIframes);
+  } else {
+    watchTidioIframes();
+  }
 </script>
 <script src="//code.tidio.co/rft9xdbb4sidnoe5uthcd9zvra7yzaxn.js" async></script>
 
