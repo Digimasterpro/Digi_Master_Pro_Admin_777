@@ -940,6 +940,103 @@
   #cta > *{position:relative;z-index:2}
   #cta .section-title{font-size:clamp(48px,6vw,80px);margin-bottom:16px;line-height:.95}
   #cta .section-desc{margin:0 auto 48px;font-size:16px;max-width:500px}
+  /* ══ TARJETA DE RESERVA — GOOGLE CALENDAR ══ */
+  .calendar-embed{
+    position:relative;
+    width:100%; max-width:520px;
+    margin:36px auto 0;
+    background:linear-gradient(180deg,#0f1c2e 0%,#0c1622 100%);
+    border:1px solid rgba(45,156,219,0.35);
+    border-radius:16px;
+    box-shadow:0 20px 50px rgba(0,0,0,0.4), 0 0 0 1px rgba(86,204,242,0.08);
+    overflow:hidden;
+    display:flex; flex-direction:column;
+  }
+  .calendar-embed-header{
+    display:flex; align-items:center; justify-content:center;
+    gap:12px; padding:18px;
+    background:rgba(255,255,255,0.025);
+    border-bottom:1px solid rgba(86,204,242,0.12);
+  }
+  .calendar-embed-header-left{
+    display:flex; align-items:center; gap:12px; min-width:0;
+  }
+  .calendar-embed-header-icon{
+    flex-shrink:0; width:38px; height:38px; border-radius:10px;
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(45,156,219,0.12);
+    border:1px solid rgba(86,204,242,0.25);
+  }
+  .calendar-embed-header-text{
+    display:flex; flex-direction:column; gap:2px; min-width:0; text-align:left;
+  }
+  .calendar-embed-header-text strong{
+    color:#fff; font-size:15px; font-weight:700; letter-spacing:.01em;
+  }
+  .calendar-embed-header-text span{
+    color:rgba(255,255,255,0.5); font-size:12px;
+  }
+  .calendar-embed-body{
+    display:flex; align-items:center; justify-content:center;
+    padding:28px 18px;
+    min-height:90px;
+  }
+
+  /* ══ BOTÓN FUTURISTA — RESERVAR CON GOOGLE MEET ══ */
+  .meet-book-btn{
+    position:relative;
+    display:flex; align-items:center; gap:14px;
+    width:100%; max-width:420px;
+    padding:16px 22px;
+    border-radius:14px;
+    background:rgba(45,156,219,0.06);
+    border:1.5px solid rgba(86,204,242,0.45);
+    text-decoration:none;
+    overflow:hidden;
+    transition:transform .25s ease, border-color .25s ease, background .25s ease, box-shadow .25s ease;
+  }
+  .meet-book-btn::before{
+    content:'';
+    position:absolute; inset:0;
+    background:linear-gradient(120deg, transparent 0%, rgba(86,204,242,0.18) 50%, transparent 100%);
+    transform:translateX(-100%);
+    transition:transform .6s ease;
+  }
+  .meet-book-btn:hover::before{
+    transform:translateX(100%);
+  }
+  .meet-book-btn:hover{
+    border-color:#56CCF2;
+    background:rgba(45,156,219,0.12);
+    box-shadow:0 0 24px rgba(86,204,242,0.35);
+    transform:translateY(-2px);
+  }
+  .meet-book-icon{
+    flex-shrink:0; width:46px; height:46px; border-radius:12px;
+    display:flex; align-items:center; justify-content:center;
+    background:#1a1a1f;
+    border:1px solid rgba(255,255,255,0.08);
+  }
+  .meet-book-text{
+    display:flex; flex-direction:column; gap:3px; flex:1; min-width:0; text-align:left;
+  }
+  .meet-book-text strong{
+    color:#fff; font-size:15px; font-weight:800; letter-spacing:.01em;
+  }
+  .meet-book-text small{
+    color:rgba(255,255,255,0.5); font-size:12px;
+  }
+  .meet-book-arrow{
+    flex-shrink:0; color:#56CCF2; font-size:18px; font-weight:700;
+    transition:transform .25s ease;
+  }
+  .meet-book-btn:hover .meet-book-arrow{
+    transform:translateX(4px);
+  }
+  @media (max-width:640px){
+    .meet-book-btn{ max-width:100%; }
+  }
+
   /* ── CTA CALENDAR ICON ── */
   .cta-icon-wrap{
     position:relative;display:inline-flex;align-items:center;justify-content:center;
@@ -2772,16 +2869,93 @@ function globalSetCurrency(currency) {
     </div>
   </div>
 
-  <!-- CTA buttons -->
-  <div class="cta-btns reveal">
-    <a href="https://wa.me/573186471571?text=Hola%2C%20quiero%20agendar%20mi%20sesi%C3%B3n%20estrat%C3%A9gica%20gratuita%20con%20Digi%20Master%20Pro" target="_blank" rel="noopener" class="btn-wa-cta btn-book">
-      <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16 0C7.164 0 0 7.163 0 16c0 2.822.737 5.469 2.027 7.773L0 32l8.469-2.004A15.93 15.93 0 0 0 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.333a13.27 13.27 0 0 1-6.771-1.854l-.486-.289-5.027 1.189 1.214-4.902-.317-.503A13.257 13.257 0 0 1 2.667 16C2.667 8.636 8.636 2.667 16 2.667S29.333 8.636 29.333 16 23.364 29.333 16 29.333zm7.27-9.878c-.398-.2-2.355-1.162-2.72-1.294-.365-.133-.631-.2-.897.2-.265.398-1.029 1.294-1.262 1.56-.232.265-.465.298-.863.1-.398-.2-1.681-.62-3.2-1.977-1.183-1.057-1.981-2.362-2.213-2.76-.232-.398-.025-.613.175-.811.18-.178.398-.465.597-.697.2-.232.265-.398.398-.664.133-.265.067-.497-.033-.697-.1-.2-.897-2.162-1.229-2.96-.324-.778-.653-.672-.897-.685-.232-.012-.497-.015-.763-.015-.265 0-.697.1-1.063.497-.365.398-1.395 1.362-1.395 3.322s1.428 3.853 1.628 4.119c.2.265 2.81 4.29 6.808 6.019.952.41 1.694.655 2.273.839.955.304 1.825.261 2.513.158.767-.114 2.355-.963 2.687-1.893.332-.93.332-1.727.232-1.893-.1-.166-.365-.265-.763-.465z"/></svg>
-      <div class="wa-label">
-        <span data-es="📅 Agendar sesión gratis" data-en="📅 Book free session">📅 Agendar sesión gratis</span>
-        <small data-es="Respuesta en menos de 1 hora" data-en="Response in under 1 hour">Respuesta en menos de 1 hora</small>
+  <!-- Calendario de reservas — Google Calendar / Google Meet -->
+  <div class="calendar-embed reveal" id="calendarEmbed">
+    <div class="calendar-embed-header">
+      <div class="calendar-embed-header-left">
+        <span class="calendar-embed-header-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#56CCF2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="4" width="18" height="18" rx="3"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M9 16l2 2 4-4" stroke="#56CCF2"/></svg>
+        </span>
+        <div class="calendar-embed-header-text">
+          <strong data-es="Elige tu horario disponible" data-en="Pick your available time">Elige tu horario disponible</strong>
+          <span data-es="Digi Master Pro · Google Meet" data-en="Digi Master Pro · Google Meet">Digi Master Pro · Google Meet</span>
+        </div>
       </div>
-    </a>
+    </div>
+    <div class="calendar-embed-body">
+      <button onclick="openBookingModal()" class="meet-book-btn" style="width:100%;border:none;cursor:pointer;text-align:left;">
+        <span class="meet-book-icon">
+          <svg width="26" height="26" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="9" width="21" height="18" rx="4" fill="#FBBC04"/>
+            <path d="M23 16L33 10.5C33.7 10.1 34.5 10.6 34.5 11.4V24.6C34.5 25.4 33.7 25.9 33 25.5L23 20V16Z" fill="#FBBC04"/>
+          </svg>
+        </span>
+        <span class="meet-book-text">
+          <strong data-es="Reserva tu sesión gratis" data-en="Book your free session">Reserva tu sesión gratis</strong>
+          <small data-es="Conecta al instante con Google Meet" data-en="Connect instantly with Google Meet">Conecta al instante con Google Meet</small>
+        </span>
+        <span class="meet-book-arrow">→</span>
+      </button>
+    </div>
   </div>
+
+  <!-- ══ BOOKING MODAL ══ -->
+  <div id="bookingModal" style="display:none;position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center;background:rgba(3,8,20,0.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);"
+    onclick="if(event.target===this)this.style.display='none'">
+    <div style="width:min(720px,96vw);height:min(660px,92vh);display:flex;flex-direction:column;border-radius:18px;overflow:hidden;box-shadow:0 0 0 1px rgba(45,156,219,0.5),0 0 60px rgba(45,156,219,0.25),0 30px 80px rgba(0,0,0,0.7);">
+
+      <!-- Header oscuro -->
+      <div style="flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding:16px 22px;background:linear-gradient(135deg,#060e1f 0%,#0a1628 100%);border-bottom:1px solid rgba(45,156,219,0.3);">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:36px;height:36px;border-radius:10px;background:rgba(45,156,219,0.15);border:1px solid rgba(86,204,242,0.35);display:flex;align-items:center;justify-content:center;box-shadow:0 0 14px rgba(86,204,242,0.2);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#56CCF2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M9 16l2 2 4-4" stroke="#56CCF2"/></svg>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:2px;">
+            <span style="font-family:'Syne',sans-serif;font-size:14px;font-weight:800;color:#ffffff;letter-spacing:.04em;" data-es="Reserva tu sesión gratis" data-en="Book your free session">Reserva tu sesión gratis</span>
+            <span style="font-family:'DM Sans',sans-serif;font-size:11px;color:#56CCF2;letter-spacing:.08em;text-transform:uppercase;font-weight:600;" data-es="Digi Master Pro · Google Meet" data-en="Digi Master Pro · Google Meet">Digi Master Pro · Google Meet</span>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:14px;">
+          <div style="display:flex;align-items:center;gap:6px;">
+            <span style="width:7px;height:7px;border-radius:50%;background:#25D366;box-shadow:0 0 6px #25D366,0 0 12px rgba(37,211,102,0.6);display:inline-block;animation:livePulse 1.8s ease-in-out infinite;"></span>
+            <span style="font-family:'DM Sans',sans-serif;font-size:11px;color:rgba(255,255,255,0.55);font-weight:500;" data-es="100% gratis" data-en="100% free">100% gratis</span>
+          </div>
+          <button onclick="document.getElementById('bookingModal').style.display='none'"
+            style="width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);cursor:pointer;color:rgba(255,255,255,0.6);font-size:18px;line-height:1;display:flex;align-items:center;justify-content:center;transition:all .2s;"
+            onmouseover="this.style.background='rgba(255,255,255,0.14)';this.style.color='#fff'"
+            onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.color='rgba(255,255,255,0.6)'">&times;</button>
+        </div>
+      </div>
+
+      <!-- Cuerpo — fondo blanco para que Google Calendar se vea bien -->
+      <div style="flex:1;position:relative;background:#ffffff;overflow:hidden;">
+        <div id="bookingLoading" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:#f8faff;z-index:2;">
+          <div style="width:40px;height:40px;border:3px solid rgba(45,156,219,0.2);border-top-color:#2D9CDB;border-radius:50%;animation:spin360 .8s linear infinite;"></div>
+          <span style="font-family:'DM Sans',sans-serif;font-size:13px;color:#444;font-weight:500;">Cargando calendario…</span>
+          <span style="font-family:'DM Sans',sans-serif;font-size:11px;color:#999;">Digi Master Pro · Google Calendar</span>
+        </div>
+        <iframe
+          id="bookingIframe"
+          src="https://calendar.app.google/NmrmsEZszBhgYAVdA"
+          style="position:absolute;inset:0;width:100%;height:100%;border:none;display:block;"
+          onload="document.getElementById('bookingLoading').style.display='none'"
+          allow="camera;microphone;fullscreen"
+          loading="lazy">
+        </iframe>
+      </div>
+
+      <!-- Footer oscuro -->
+      <div style="flex-shrink:0;padding:10px 22px;background:linear-gradient(135deg,#060e1f 0%,#0a1628 100%);border-top:1px solid rgba(45,156,219,0.2);display:flex;align-items:center;justify-content:center;gap:8px;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#56CCF2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span style="font-family:'DM Sans',sans-serif;font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:.03em;" data-es="Sesión segura · Sin cargos · Puedes cancelar cuando quieras" data-en="Secure session · No charges · Cancel anytime">Sesión segura · Sin cargos · Puedes cancelar cuando quieras</span>
+      </div>
+
+    </div>
+  </div>
+  <style>
+    @keyframes spin360{to{transform:rotate(360deg)}}
+    @keyframes livePulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(1.3)}}
+  </style>
 
   <!-- Live visitors widget -->
   <div class="live-widget reveal" id="liveWidget">
@@ -3746,14 +3920,39 @@ function setLang(lang) {
       : ['Alta demanda — <strong>quedan pocas fechas esta semana</strong>','<strong>3 personas</strong> agendaron su sesión en la última hora','Solo <strong>2 slots disponibles</strong> para esta semana'];
     urgEl.innerHTML = msgs[Math.floor(Math.random()*msgs.length)];
   }
+  // El idioma del iframe se aplica al abrir el modal via openBookingModal()
   // Store
   localStorage.setItem('lang', lang);
+}
+
+// Open booking modal and set iframe language
+function openBookingModal(){
+  var modal = document.getElementById('bookingModal');
+  var iframe = document.getElementById('bookingIframe');
+  var loading = document.getElementById('bookingLoading');
+  if(!modal || !iframe) return;
+  var lang = document.documentElement.lang || localStorage.getItem('lang') || 'es';
+  var hlParam = lang === 'en' ? 'hl=en' : 'hl=es';
+  var newSrc = 'https://calendar.app.google/NmrmsEZszBhgYAVdA?' + hlParam;
+  // Reset loading state
+  if(loading) loading.style.display = 'flex';
+  iframe.src = 'about:blank';
+  setTimeout(function(){ iframe.src = newSrc; }, 60);
+  modal.style.display = 'flex';
 }
 // On load, apply stored lang
 (function(){
   const saved = localStorage.getItem('lang');
   if(saved && saved !== 'es') setLang(saved);
   else syncLangFloat('es');
+  // Sync iframe lang on page load
+  const biframe = document.getElementById('bookingIframe');
+  if(biframe && saved === 'en'){
+    biframe.setAttribute('data-loaded-lang', 'en');
+    biframe.src = 'https://calendar.app.google/NmrmsEZszBhgYAVdA?hl=en&t=' + Date.now();
+  } else if(biframe){
+    biframe.setAttribute('data-loaded-lang', 'es');
+  }
 })();
 </script>
 
@@ -4471,5 +4670,6 @@ function setLang(lang) {
   });
 })();
 </script>
+
 </body>
 </html>
