@@ -55,14 +55,15 @@
 <meta property="twitter:image" content="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/Imagen_ceo_google.png">
 
 <!-- ══ FAVICON ══ -->
-<link rel="icon" type="image/png" sizes="512x512" href="/favicon.png">
-<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon.png">
-<link rel="shortcut icon" type="image/png" href="/favicon.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/favicon.png">
-<link rel="manifest" href="/site.webmanifest">
-<meta name="msapplication-TileImage" content="/favicon.png">
+<link rel="icon" type="image/x-icon" href="https://digimasterpro.com/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/LogoDigimaster.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/LogoDigimaster.png">
+<link rel="icon" type="image/png" sizes="192x192" href="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/LogoDigimaster.png">
+<link rel="icon" type="image/png" sizes="512x512" href="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/LogoDigimaster.png">
+<link rel="shortcut icon" href="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/LogoDigimaster.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/LogoDigimaster.png">
+<link rel="manifest" href="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/site.webmanifest">
+<meta name="msapplication-TileImage" content="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/LogoDigimaster.png">
 <meta name="msapplication-TileColor" content="#050505">
 
 <!-- ══ SCHEMA 1 — MarketingAgency + LocalBusiness ══ -->
@@ -630,14 +631,13 @@
   .section-desc{color:rgba(255,255,255,0.55);font-size:15px;line-height:1.7;max-width:540px}
 
   /* SERVICES */
-  #services{background:transparent;text-align:center;content-visibility:auto;contain-intrinsic-size:0 700px}
+  #services{background:transparent;text-align:center}
   #services .section-desc{margin:0 auto 60px;}
   /* ── SERVICES CAROUSEL ── */
   .services-carousel-wrap{position:relative;overflow:hidden;margin-top:60px}
   .services-track{
     display:flex;gap:20px;
     transition:transform .6s cubic-bezier(.25,.46,.45,.94);
-    will-change:transform;
   }
   .service-card{
     background:rgba(8,8,8,0.85);
@@ -766,7 +766,7 @@
   .portfolio-cta{text-align:center;margin-top:44px}
 
   /* REVIEWS — Google iframe widget */
-  #reviews{background:transparent;padding:100px 5%;content-visibility:auto;contain-intrinsic-size:0 600px}
+  #reviews{background:transparent;padding:100px 5%}
   .reviews-header{text-align:center;margin-bottom:60px}
   .google-reviews-wrap{
     max-width:900px;margin:0 auto;
@@ -1339,16 +1339,14 @@
     width:8px;height:8px;border-radius:50%;
     background:var(--blue);
     box-shadow:0 0 16px 6px rgba(45,156,219,0.7);
-    top:-4px;left:-4px;
+    transform:translate(-50%,-50%);
     mix-blend-mode:screen;transition:opacity .3s;
-    will-change:transform;
   }
   .cursor-glow{
     position:fixed;pointer-events:none;z-index:9999;
     width:48px;height:48px;border-radius:50%;
     background:radial-gradient(circle,rgba(45,156,219,0.15) 0%,transparent 70%);
-    top:-24px;left:-24px;
-    will-change:transform;
+    transform:translate(-50%,-50%);
   }
 
   /* Reveal scroll */
@@ -1433,7 +1431,7 @@
   }
   #intro-overlay.hide{opacity:0;visibility:hidden;pointer-events:none;}
   .intro-bar-top,.intro-bar-bottom{display:none;}
-  #intro-canvas{position:absolute;inset:0;z-index:0;opacity:.78;will-change:transform;transform:translateZ(0);}
+  #intro-canvas{position:absolute;inset:0;z-index:0;opacity:.78;}
   .intro-content{position:relative;z-index:3;width:min(440px,82vw);display:flex;flex-direction:column;align-items:center;text-align:center;}
   .intro-content::before,.intro-content::after{
     content:'';position:absolute;left:50%;top:42%;width:220px;height:220px;
@@ -1874,10 +1872,7 @@
   }
 </style>
 
-<!-- ══ PRELOADS CRÍTICOS LCP ══ -->
 <link rel="preload" as="image" href="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/LogoDigimaster.png">
-<link rel="preload" as="image" fetchpriority="high" href="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/portadadigimasterproCEO.webp" type="image/webp" media="(min-width:769px)">
-<link rel="preload" as="image" fetchpriority="high" href="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/portadadigimasterproCEO-mobile.webp" type="image/webp" media="(max-width:768px)">
 </head>
 <body>
 
@@ -1903,7 +1898,7 @@
 <!-- NAV -->
 <nav>
   <a href="#hero" class="nav-logo" aria-label="Inicio">
-    <img src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/LogoDigimaster.png" loading="eager" decoding="async" fetchpriority="low" width="38" height="38" alt="Digi Master Pro">
+    <img src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/LogoDigimaster.png" loading="eager" decoding="async" fetchpriority="high" alt="Digi Master Pro">
   </a>
   <!-- Nombre agencia solo visible en móvil, centrado -->
   <span class="nav-mobile-name">Digi Master Pro Agency</span>
@@ -2054,39 +2049,39 @@
     <div class="brands-fade brands-fade-left"></div>
     <div class="brands-fade brands-fade-right"></div>
     <div class="brands-track">
-            <div class="brand-item"><img loading="lazy" decoding="async" width="120" height="60" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/Logo-Tienda-de-Indumentaria-Femenino-Rosa-y-Blanco-1-removebg-preview.png" alt="Logo cliente Digi Master Pro - Tienda de moda femenina Colombia"></div>
-      <div class="brand-item"><img loading="lazy" decoding="async" width="120" height="60" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/Logo-Tienda-de-Indumentaria-Femenino-Rosa-y-Blanco-2-removebg-preview.png" alt="Logo cliente Digi Master Pro - Moda femenina rosa y blanco"></div>
-      <div class="brand-item"><img loading="lazy" decoding="async" width="120" height="60" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/image-22.png" alt="Logo cliente agencia marketing digital Colombia"></div>
-      <div class="brand-item"><img loading="lazy" decoding="async" width="120" height="60" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/IMG-3707-removebg-preview.png" alt="Logo cliente branding Colombia Digi Master Pro"></div>
-      <div class="brand-item"><img loading="lazy" decoding="async" width="120" height="60" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/favicon-180x180.png" alt="Logo cliente diseño web Colombia"></div>
-      <div class="brand-item"><img loading="lazy" decoding="async" width="120" height="60" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/Captura-de-pantalla-2026-02-27-052715-removebg-preview-1.png" alt="Logo cliente marketing digital Cartagena"></div>
-      <div class="brand-item"><img loading="lazy" decoding="async" width="120" height="60" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/Captura-de-pantalla-2026-02-06-074303-removebg-preview-2.png" alt="Logo cliente páginas web profesionales Colombia"></div>
-      <div class="brand-item"><img loading="lazy" decoding="async" width="120" height="60" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/unnamed-4-1.png" alt="Logo cliente SEO y marketing digital Colombia"></div>
-      <div class="brand-item"><img loading="lazy" decoding="async" width="120" height="60" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/Gemini-Generated-Image-knpgetknpgetknpg-1.png" alt="Logo cliente identidad visual y branding Colombia"></div>
-      <div class="brand-item"><img loading="lazy" decoding="async" width="120" height="60" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/Captura-de-pantalla-2026-05-21-055242-removebg-preview.png" alt="Logo cliente agencia digital Colombia"></div>
-      <div class="brand-item"><img loading="lazy" decoding="async" width="120" height="60" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/Recurso-20re3413khjgfdVUYVXFBhg-removebg-preview.png" alt="Logo cliente posicionamiento web Colombia"></div>
-      <div class="brand-item"><img loading="lazy" decoding="async" width="120" height="60" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/307448779-5429246140499739-3551810560974368651-n-removebg-preview.png" alt="Logo cliente redes sociales Colombia"></div>
-      <div class="brand-item"><img loading="lazy" decoding="async" width="120" height="60" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/324249780-1357761718320854-6170841150940039372-n-removebg-preview.png" alt="Logo cliente publicidad digital Colombia"></div>
-      <div class="brand-item"><img loading="lazy" decoding="async" width="120" height="60" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/image.png" alt="Logo cliente marketing digital Digi Master Pro"></div>
-      <div class="brand-item"><img loading="lazy" decoding="async" width="120" height="60" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/logo cfeliz metales B.png" alt="C Feliz Metales"></div>
-      <div class="brand-item"><img loading="lazy" decoding="async" width="120" height="60" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/criss logo_Mesa de trabajo 1.png" alt="Criss"></div>
+            <div class="brand-item"><img loading="lazy" decoding="async" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/Logo-Tienda-de-Indumentaria-Femenino-Rosa-y-Blanco-1-removebg-preview.png" alt="Logo cliente Digi Master Pro - Tienda de moda femenina Colombia"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/Logo-Tienda-de-Indumentaria-Femenino-Rosa-y-Blanco-2-removebg-preview.png" alt="Logo cliente Digi Master Pro - Moda femenina rosa y blanco"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/image-22.png" alt="Logo cliente agencia marketing digital Colombia"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/IMG-3707-removebg-preview.png" alt="Logo cliente branding Colombia Digi Master Pro"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/favicon-180x180.png" alt="Logo cliente diseño web Colombia"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/Captura-de-pantalla-2026-02-27-052715-removebg-preview-1.png" alt="Logo cliente marketing digital Cartagena"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/Captura-de-pantalla-2026-02-06-074303-removebg-preview-2.png" alt="Logo cliente páginas web profesionales Colombia"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/unnamed-4-1.png" alt="Logo cliente SEO y marketing digital Colombia"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/Gemini-Generated-Image-knpgetknpgetknpg-1.png" alt="Logo cliente identidad visual y branding Colombia"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/Captura-de-pantalla-2026-05-21-055242-removebg-preview.png" alt="Logo cliente agencia digital Colombia"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/Recurso-20re3413khjgfdVUYVXFBhg-removebg-preview.png" alt="Logo cliente posicionamiento web Colombia"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/307448779-5429246140499739-3551810560974368651-n-removebg-preview.png" alt="Logo cliente redes sociales Colombia"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/324249780-1357761718320854-6170841150940039372-n-removebg-preview.png" alt="Logo cliente publicidad digital Colombia"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/image.png" alt="Logo cliente marketing digital Digi Master Pro"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/logo cfeliz metales B.png" alt="C Feliz Metales"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/criss logo_Mesa de trabajo 1.png" alt="Criss"></div>
       <!-- Duplicate set for seamless infinite loop -->
-            <div class="brand-item"><img loading="lazy" decoding="async" width="120" height="60" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/Logo-Tienda-de-Indumentaria-Femenino-Rosa-y-Blanco-1-removebg-preview.png" alt="Logo cliente Digi Master Pro - Tienda de moda femenina Colombia"></div>
-      <div class="brand-item"><img loading="lazy" decoding="async" width="120" height="60" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/Logo-Tienda-de-Indumentaria-Femenino-Rosa-y-Blanco-2-removebg-preview.png" alt="Logo cliente Digi Master Pro - Moda femenina rosa y blanco"></div>
-      <div class="brand-item"><img loading="lazy" decoding="async" width="120" height="60" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/image-22.png" alt="Logo cliente agencia marketing digital Colombia"></div>
-      <div class="brand-item"><img loading="lazy" decoding="async" width="120" height="60" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/IMG-3707-removebg-preview.png" alt="Logo cliente branding Colombia Digi Master Pro"></div>
-      <div class="brand-item"><img loading="lazy" decoding="async" width="120" height="60" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/favicon-180x180.png" alt="Logo cliente diseño web Colombia"></div>
-      <div class="brand-item"><img loading="lazy" decoding="async" width="120" height="60" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/Captura-de-pantalla-2026-02-27-052715-removebg-preview-1.png" alt="Logo cliente marketing digital Cartagena"></div>
-      <div class="brand-item"><img loading="lazy" decoding="async" width="120" height="60" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/Captura-de-pantalla-2026-02-06-074303-removebg-preview-2.png" alt="Logo cliente páginas web profesionales Colombia"></div>
-      <div class="brand-item"><img loading="lazy" decoding="async" width="120" height="60" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/unnamed-4-1.png" alt="Logo cliente SEO y marketing digital Colombia"></div>
-      <div class="brand-item"><img loading="lazy" decoding="async" width="120" height="60" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/Gemini-Generated-Image-knpgetknpgetknpg-1.png" alt="Logo cliente identidad visual y branding Colombia"></div>
-      <div class="brand-item"><img loading="lazy" decoding="async" width="120" height="60" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/Captura-de-pantalla-2026-05-21-055242-removebg-preview.png" alt="Logo cliente agencia digital Colombia"></div>
-      <div class="brand-item"><img loading="lazy" decoding="async" width="120" height="60" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/Recurso-20re3413khjgfdVUYVXFBhg-removebg-preview.png" alt="Logo cliente posicionamiento web Colombia"></div>
-      <div class="brand-item"><img loading="lazy" decoding="async" width="120" height="60" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/307448779-5429246140499739-3551810560974368651-n-removebg-preview.png" alt="Logo cliente redes sociales Colombia"></div>
-      <div class="brand-item"><img loading="lazy" decoding="async" width="120" height="60" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/324249780-1357761718320854-6170841150940039372-n-removebg-preview.png" alt="Logo cliente publicidad digital Colombia"></div>
-      <div class="brand-item"><img loading="lazy" decoding="async" width="120" height="60" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/image.png" alt="Logo cliente marketing digital Digi Master Pro"></div>
-      <div class="brand-item"><img loading="lazy" decoding="async" width="120" height="60" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/logo cfeliz metales B.png" alt="C Feliz Metales"></div>
-      <div class="brand-item"><img loading="lazy" decoding="async" width="120" height="60" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/criss logo_Mesa de trabajo 1.png" alt="Criss"></div>
+            <div class="brand-item"><img loading="lazy" decoding="async" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/Logo-Tienda-de-Indumentaria-Femenino-Rosa-y-Blanco-1-removebg-preview.png" alt="Logo cliente Digi Master Pro - Tienda de moda femenina Colombia"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/Logo-Tienda-de-Indumentaria-Femenino-Rosa-y-Blanco-2-removebg-preview.png" alt="Logo cliente Digi Master Pro - Moda femenina rosa y blanco"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/image-22.png" alt="Logo cliente agencia marketing digital Colombia"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/IMG-3707-removebg-preview.png" alt="Logo cliente branding Colombia Digi Master Pro"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/favicon-180x180.png" alt="Logo cliente diseño web Colombia"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/Captura-de-pantalla-2026-02-27-052715-removebg-preview-1.png" alt="Logo cliente marketing digital Cartagena"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/Captura-de-pantalla-2026-02-06-074303-removebg-preview-2.png" alt="Logo cliente páginas web profesionales Colombia"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/unnamed-4-1.png" alt="Logo cliente SEO y marketing digital Colombia"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/Gemini-Generated-Image-knpgetknpgetknpg-1.png" alt="Logo cliente identidad visual y branding Colombia"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/Captura-de-pantalla-2026-05-21-055242-removebg-preview.png" alt="Logo cliente agencia digital Colombia"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/Recurso-20re3413khjgfdVUYVXFBhg-removebg-preview.png" alt="Logo cliente posicionamiento web Colombia"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/307448779-5429246140499739-3551810560974368651-n-removebg-preview.png" alt="Logo cliente redes sociales Colombia"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/324249780-1357761718320854-6170841150940039372-n-removebg-preview.png" alt="Logo cliente publicidad digital Colombia"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/image.png" alt="Logo cliente marketing digital Digi Master Pro"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/logo cfeliz metales B.png" alt="C Feliz Metales"></div>
+      <div class="brand-item"><img loading="lazy" decoding="async" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/criss logo_Mesa de trabajo 1.png" alt="Criss"></div>
     </div>
   </div>
 </div>
@@ -2716,7 +2711,7 @@ function globalSetCurrency(currency) {
       <span class="live-dot-red"></span>
       <div class="live-avatars" id="liveAvatars"></div>
       <div class="live-text">
-        <span class="live-count-wrap"><span id="liveCount">14</span>&nbsp;<span data-es="personas están viendo esto ahora" data-en="people are viewing this right now">personas están viendo esto ahora</span></span>
+        <span class="live-count-wrap"><span id="liveCount">23</span>&nbsp;<span data-es="personas están viendo esto ahora" data-en="people are viewing this right now">personas están viendo esto ahora</span></span>
       </div>
     </div>
     <div class="live-urgency" id="liveUrgency">
@@ -3225,20 +3220,20 @@ function globalSetCurrency(currency) {
 <div id="seo-footer-block" style="background:#050505;border-top:1px solid rgba(255,255,255,0.05);padding:60px 40px 20px;box-sizing:border-box;width:100%;">
   <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:40px;box-sizing:border-box;">
     <div style="min-width:0;overflow:hidden;">
-      <h2 style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#2D9CDB;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px;">Agencia de Marketing Digital en Colombia</h2>
-      <p style="font-size:13px;color:rgba(255,255,255,0.45);line-height:1.7;word-wrap:break-word;overflow-wrap:break-word;">Digi Master Pro es una agencia de marketing digital con sede en Cartagena de Indias, Colombia, con más de 7 años de experiencia impulsando marcas en Colombia y Estados Unidos. Especializados en diseño y desarrollo de páginas web profesionales, branding, SEO, gestión de redes sociales y publicidad digital en Google Ads y Facebook Ads.</p>
+      <h2 style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#2D9CDB;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px;" data-es="Agencia de Marketing Digital en Colombia" data-en="Digital Marketing Agency in Colombia">Agencia de Marketing Digital en Colombia</h2>
+      <p style="font-size:13px;color:rgba(255,255,255,0.45);line-height:1.7;word-wrap:break-word;overflow-wrap:break-word;" data-es="Digi Master Pro es una agencia de marketing digital con sede en Cartagena de Indias, Colombia, con más de 7 años de experiencia impulsando marcas en Colombia y Estados Unidos. Especializados en diseño y desarrollo de páginas web profesionales, branding, SEO, gestión de redes sociales y publicidad digital en Google Ads y Facebook Ads." data-en="Digi Master Pro is a digital marketing agency based in Cartagena de Indias, Colombia, with over 7 years of experience boosting brands in Colombia and the United States. Specialized in professional web design and development, branding, SEO, social media management, and digital advertising on Google Ads and Facebook Ads.">Digi Master Pro es una agencia de marketing digital con sede en Cartagena de Indias, Colombia, con más de 7 años de experiencia impulsando marcas en Colombia y Estados Unidos. Especializados en diseño y desarrollo de páginas web profesionales, branding, SEO, gestión de redes sociales y publicidad digital en Google Ads y Facebook Ads.</p>
     </div>
     <div style="min-width:0;overflow:hidden;">
-      <h2 style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#2D9CDB;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px;">Diseño Web Profesional Colombia</h2>
-      <p style="font-size:13px;color:rgba(255,255,255,0.45);line-height:1.7;word-wrap:break-word;overflow-wrap:break-word;">Creamos páginas web profesionales, rápidas y optimizadas para SEO. Trabajamos con negocios de todos los sectores: restaurantes, hoteles, clínicas, tiendas online, agencias de viajes, marcas de moda y más. Entregamos sitios web listos para convertir visitas en clientes.</p>
+      <h2 style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#2D9CDB;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px;" data-es="Diseño Web Profesional Colombia" data-en="Professional Web Design Colombia">Diseño Web Profesional Colombia</h2>
+      <p style="font-size:13px;color:rgba(255,255,255,0.45);line-height:1.7;word-wrap:break-word;overflow-wrap:break-word;" data-es="Creamos páginas web profesionales, rápidas y optimizadas para SEO. Trabajamos con negocios de todos los sectores: restaurantes, hoteles, clínicas, tiendas online, agencias de viajes, marcas de moda y más. Entregamos sitios web listos para convertir visitas en clientes." data-en="We create professional, fast, SEO-optimized websites. We work with businesses across all industries: restaurants, hotels, clinics, online stores, travel agencies, fashion brands, and more. We deliver websites ready to convert visitors into clients.">Creamos páginas web profesionales, rápidas y optimizadas para SEO. Trabajamos con negocios de todos los sectores: restaurantes, hoteles, clínicas, tiendas online, agencias de viajes, marcas de moda y más. Entregamos sitios web listos para convertir visitas en clientes.</p>
     </div>
     <div style="min-width:0;overflow:hidden;">
-      <h2 style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#2D9CDB;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px;">Branding e Identidad Visual</h2>
-      <p style="font-size:13px;color:rgba(255,255,255,0.45);line-height:1.7;word-wrap:break-word;overflow-wrap:break-word;">Diseñamos identidades visuales poderosas que conectan con tu audiencia. Desde el logo hasta el manual de marca completo. Hemos creado branding para marcas en Cartagena, Bogotá, Medellín, Miami y Nueva York. Tu marca merece destacar en un mercado competitivo.</p>
+      <h2 style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#2D9CDB;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px;" data-es="Branding e Identidad Visual" data-en="Branding &amp; Visual Identity">Branding e Identidad Visual</h2>
+      <p style="font-size:13px;color:rgba(255,255,255,0.45);line-height:1.7;word-wrap:break-word;overflow-wrap:break-word;" data-es="Diseñamos identidades visuales poderosas que conectan con tu audiencia. Desde el logo hasta el manual de marca completo. Hemos creado branding para marcas en Cartagena, Bogotá, Medellín, Miami y Nueva York. Tu marca merece destacar en un mercado competitivo." data-en="We design powerful visual identities that connect with your audience. From the logo to the complete brand manual. We have created branding for brands in Cartagena, Bogotá, Medellín, Miami, and New York. Your brand deserves to stand out in a competitive market.">Diseñamos identidades visuales poderosas que conectan con tu audiencia. Desde el logo hasta el manual de marca completo. Hemos creado branding para marcas en Cartagena, Bogotá, Medellín, Miami y Nueva York. Tu marca merece destacar en un mercado competitivo.</p>
     </div>
     <div style="min-width:0;overflow:hidden;">
-      <h2 style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#2D9CDB;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px;">Marketing Digital Cartagena</h2>
-      <p style="font-size:13px;color:rgba(255,255,255,0.45);line-height:1.7;word-wrap:break-word;overflow-wrap:break-word;">Si buscas una agencia de marketing digital en Cartagena de Indias, Digi Master Pro es tu mejor opción. Estrategias personalizadas de SEO, pauta digital, community management y diseño web para que tu negocio crezca online. Cotiza gratis hoy por WhatsApp.</p>
+      <h2 style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#2D9CDB;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px;" data-es="Marketing Digital Cartagena" data-en="Digital Marketing Cartagena">Marketing Digital Cartagena</h2>
+      <p style="font-size:13px;color:rgba(255,255,255,0.45);line-height:1.7;word-wrap:break-word;overflow-wrap:break-word;" data-es="Si buscas una agencia de marketing digital en Cartagena de Indias, Digi Master Pro es tu mejor opción. Estrategias personalizadas de SEO, pauta digital, community management y diseño web para que tu negocio crezca online. Cotiza gratis hoy por WhatsApp." data-en="If you are looking for a digital marketing agency in Cartagena de Indias, Digi Master Pro is your best option. Personalized strategies in SEO, digital advertising, community management, and web design to grow your business online. Get a free quote today on WhatsApp.">Si buscas una agencia de marketing digital en Cartagena de Indias, Digi Master Pro es tu mejor opción. Estrategias personalizadas de SEO, pauta digital, community management y diseño web para que tu negocio crezca online. Cotiza gratis hoy por WhatsApp.</p>
     </div>
   </div>
   <nav aria-label="Mapa del sitio Digi Master Pro" style="display:block;position:static;background:none;backdrop-filter:none;-webkit-backdrop-filter:none;border:none;border-top:1px solid rgba(255,255,255,0.05);margin-top:40px;padding:24px 0 0;box-shadow:none;">
@@ -3258,7 +3253,7 @@ function globalSetCurrency(currency) {
 </div>
 
 <footer class="footer-minimal">
-  <img src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/LogoDigimaster.png" loading="lazy" decoding="async" width="120" height="120" alt="Digi Master Pro - Agencia Marketing Digital Colombia" class="footer-logo-min">
+  <img src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/LogoDigimaster.png" loading="eager" decoding="async" fetchpriority="high" alt="Digi Master Pro - Agencia Marketing Digital Colombia" class="footer-logo-min">
   <div class="social-links" style="justify-content:center;margin:16px 0;gap:10px;">
     <!-- Instagram -->
     <a href="https://www.instagram.com/digi_masterpro" target="_blank" rel="noopener" class="social-link social-link-icon" aria-label="Instagram">
@@ -3322,12 +3317,15 @@ function globalSetCurrency(currency) {
   const observer = new IntersectionObserver((entries)=>{
     entries.forEach(e=>{
       if(e.isIntersecting){
-        e.target.classList.add('visible');
+        e.target.style.opacity='1';
+        e.target.style.transform='translateY(0)';
       }
     });
   },{threshold:0.1});
   document.querySelectorAll('.review-card,.portfolio-item,.stat').forEach(el=>{
-    el.classList.add('reveal');
+    el.style.opacity='0';
+    el.style.transform='translateY(20px)';
+    el.style.transition='opacity .6s ease, transform .6s ease';
     observer.observe(el);
   });
 </script>
@@ -3486,6 +3484,14 @@ function setLang(lang) {
       }
     });
   }
+  // Actualizar mensaje de urgencia del CTA al cambiar idioma
+  const urgEl = document.getElementById('liveUrgencyTxt');
+  if(urgEl){
+    const msgs = lang === 'en'
+      ? ['High demand — <strong>few spots left this week</strong>','<strong>3 people</strong> booked their session in the last hour','Only <strong>2 slots available</strong> this week']
+      : ['Alta demanda — <strong>quedan pocas fechas esta semana</strong>','<strong>3 personas</strong> agendaron su sesión en la última hora','Solo <strong>2 slots disponibles</strong> para esta semana'];
+    urgEl.innerHTML = msgs[Math.floor(Math.random()*msgs.length)];
+  }
   // Store
   localStorage.setItem('lang', lang);
 }
@@ -3513,7 +3519,7 @@ function setLang(lang) {
   const CYAN = '86,204,242';
   let isMobileMotion = window.matchMedia('(max-width: 768px)').matches;
   const connectDist = () => isMobileMotion ? 120 : 180;
-  const particleCount = () => isMobileMotion ? 10 : 90; // FIX: reduced mobile particles
+  const particleCount = () => isMobileMotion ? 15 : 90; // FIX: reduced mobile particles
   const particleSpeed = () => isMobileMotion ? .16 : .45;
 
   let W, H;
@@ -3817,11 +3823,11 @@ function setLang(lang) {
   let tx=0,ty=0,gx=0,gy=0;
   document.addEventListener('mousemove', e=>{
     tx=e.clientX; ty=e.clientY;
-    trail.style.transform=`translate(${tx}px,${ty}px)`;
+    trail.style.left=tx+'px'; trail.style.top=ty+'px';
   },{passive:true});
   function animGlow(){
     gx += (tx-gx)*.12; gy += (ty-gy)*.12;
-    glow.style.transform=`translate(${gx}px,${gy}px)`;
+    glow.style.left=gx+'px'; glow.style.top=gy+'px';
     requestAnimationFrame(animGlow);
   }
   animGlow();
@@ -3981,7 +3987,7 @@ function setLang(lang) {
   drawIntro();
 
   // Secuencia de salida — FIX: shorter on mobile for better FCP
-  const _introDelay = ('ontouchstart' in window || navigator.maxTouchPoints > 0) ? 600 : 1800;
+  const _introDelay = ('ontouchstart' in window || navigator.maxTouchPoints > 0) ? 800 : 3000;
   setTimeout(()=>{
     overlay.classList.add('hide');
     document.body.classList.remove('intro-active');
@@ -4060,8 +4066,11 @@ function setLang(lang) {
     {i:'K',c:'#4527a0'},{i:'T',c:'#00695c'},{i:'B',c:'#ad1457'},
   ];
 
-  let current = 14;
-  const MIN = 9, MAX = 23;
+  // liveCount se sincroniza con ibarViewers como fuente de verdad única
+  const ibarViewersEl = document.getElementById('ibarViewers');
+  function getSyncedBase(){ return ibarViewersEl ? (parseInt(ibarViewersEl.textContent)||14) : 14; }
+  let current = getSyncedBase();
+  const MIN = 9, MAX = 31;
 
   // Build initial avatar stack (5 visible)
   let activeAvatars = [...avatarPool].sort(()=>Math.random()-.5).slice(0,5);
@@ -4112,21 +4121,33 @@ function setLang(lang) {
   }
 
   // Urgency messages that rotate
-  const urgencyMsgs = [
-    'Alta demanda — <strong>quedan pocas fechas esta semana</strong>',
-    '<strong>3 personas</strong> agendaron su sesión en la última hora',
-    'Solo <strong>2 slots disponibles</strong> para esta semana',
-    '<strong>Demanda alta</strong> — agenda antes de que se llene',
-    'Última semana con <strong>consulta gratuita</strong>',
-  ];
+  // Mensajes de urgencia bilingües — detecta idioma activo
+  const urgencyMsgs = {
+    es: [
+      'Alta demanda — <strong>quedan pocas fechas esta semana</strong>',
+      '<strong>3 personas</strong> agendaron su sesión en la última hora',
+      'Solo <strong>2 slots disponibles</strong> para esta semana',
+      '<strong>Demanda alta</strong> — agenda antes de que se llene',
+      'Última semana con <strong>consulta gratuita</strong>',
+    ],
+    en: [
+      'High demand — <strong>few spots left this week</strong>',
+      '<strong>3 people</strong> booked their session in the last hour',
+      'Only <strong>2 slots available</strong> this week',
+      '<strong>High demand</strong> — book before it fills up',
+      'Last week with <strong>free consultation</strong>',
+    ]
+  };
+  function getCurrentLang(){ return document.documentElement.lang === 'en' || localStorage.getItem('lang') === 'en' ? 'en' : 'es'; }
   let urgIdx = 0;
 
-  // Main fluctuation loop
+  // Main fluctuation loop — sincronizado con ibarViewers (fuente de verdad)
   function fluctuate(){
-    // Change count by ±1 or ±2 randomly, biased to stay in range
-    const delta = Math.random() < 0.65 ? 1 : 2;
-    const direction = current >= MAX ? -1 : current <= MIN ? 1 : (Math.random() < 0.52 ? 1 : -1);
-    const next = Math.max(MIN, Math.min(MAX, current + direction * delta));
+    // Lee el valor real del header y lo adopta como base
+    const base = getSyncedBase();
+    // Pequeña variación ±1 para que no sean idénticos (más natural)
+    const offset = Math.random() < 0.4 ? (Math.random()<0.5?1:-1) : 0;
+    const next = Math.max(MIN, Math.min(MAX, base + offset));
 
     if(next !== current){
       current = next;
@@ -4137,8 +4158,8 @@ function setLang(lang) {
 
     // Rotate urgency text occasionally
     if(Math.random() < 0.25){
-      urgIdx = (urgIdx + 1) % urgencyMsgs.length;
-      if(urgEl) urgEl.innerHTML = urgencyMsgs[urgIdx];
+      urgIdx = (urgIdx + 1) % urgencyMsgs.es.length;
+      if(urgEl) urgEl.innerHTML = urgencyMsgs[getCurrentLang()][urgIdx];
     }
 
     // Next update in 3–8 seconds
