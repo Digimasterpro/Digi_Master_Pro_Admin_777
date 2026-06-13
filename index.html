@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -2924,6 +2923,13 @@ function globalSetCurrency(currency) {
             <span style="width:7px;height:7px;border-radius:50%;background:#25D366;box-shadow:0 0 6px #25D366,0 0 12px rgba(37,211,102,0.6);display:inline-block;animation:livePulse 1.8s ease-in-out infinite;"></span>
             <span style="font-family:'DM Sans',sans-serif;font-size:11px;color:rgba(255,255,255,0.55);font-weight:500;" data-es="100% gratis" data-en="100% free">100% gratis</span>
           </div>
+          <a id="bookingHeaderOpenLink" href="https://calendar.app.google/NmrmsEZszBhgYAVdA" target="_blank" rel="noopener"
+            style="display:flex;align-items:center;gap:5px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;color:rgba(255,255,255,0.55);text-decoration:none;border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:6px 10px;transition:all .2s;"
+            onmouseover="this.style.background='rgba(255,255,255,0.08)';this.style.color='#fff'"
+            onmouseout="this.style.background='transparent';this.style.color='rgba(255,255,255,0.55)'">
+            <span data-es="Abrir en pestaña" data-en="Open in tab">Abrir en pestaña</span>
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
           <button onclick="document.getElementById('bookingModal').style.display='none'"
             style="width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);cursor:pointer;color:rgba(255,255,255,0.6);font-size:18px;line-height:1;display:flex;align-items:center;justify-content:center;transition:all .2s;"
             onmouseover="this.style.background='rgba(255,255,255,0.14)';this.style.color='#fff'"
@@ -2940,11 +2946,27 @@ function globalSetCurrency(currency) {
         </div>
         <iframe
           id="bookingIframe"
-          src=""
+          src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ01yfNX7_t77DLL6GmXhHazdfURnIxYPgKZuqfIgqX1JvJOZVWNVjzthruX_T7HnEQHkaQget5N?gv=true"
           style="position:absolute;inset:0;width:100%;height:100%;border:none;display:block;"
-          onload="if(this.src && this.src!=='about:blank')document.getElementById('bookingLoading').style.display='none'"
+          onload="handleBookingIframeLoad()"
           allow="camera;microphone;fullscreen">
         </iframe>
+        <!-- Fallback: se muestra si el iframe no carga (iPad / tablets que bloquean el embed) -->
+        <div id="bookingFallback" style="display:none;position:absolute;inset:0;z-index:3;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:#f8faff;text-align:center;padding:32px;">
+          <div style="width:56px;height:56px;border-radius:14px;background:rgba(45,156,219,0.1);border:1px solid rgba(45,156,219,0.25);display:flex;align-items:center;justify-content:center;">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2D9CDB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M9 16l2 2 4-4"/></svg>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px;max-width:340px;">
+            <span style="font-family:'Syne',sans-serif;font-size:16px;font-weight:800;color:#0a1628;" data-es="Abre el calendario en una pestaña nueva" data-en="Open the calendar in a new tab">Abre el calendario en una pestaña nueva</span>
+            <span style="font-family:'DM Sans',sans-serif;font-size:13px;color:#667;line-height:1.5;" data-es="Tu dispositivo no permite mostrar el calendario aquí dentro, pero puedes reservar tu sesión gratis en la pestaña de Google Calendar." data-en="Your device doesn't allow showing the calendar here, but you can book your free session in the Google Calendar tab.">Tu dispositivo no permite mostrar el calendario aquí dentro, pero puedes reservar tu sesión gratis en la pestaña de Google Calendar.</span>
+          </div>
+          <a id="bookingFallbackLink" href="https://calendar.app.google/NmrmsEZszBhgYAVdA" target="_blank" rel="noopener"
+            style="font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#fff;text-decoration:none;background:linear-gradient(135deg,#2D9CDB,#56CCF2);padding:13px 28px;border-radius:10px;display:inline-flex;align-items:center;gap:8px;box-shadow:0 6px 20px rgba(45,156,219,0.35);transition:transform .2s,box-shadow .2s;"
+            onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 10px 26px rgba(45,156,219,0.45)'"
+            onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 6px 20px rgba(45,156,219,0.35)'">
+            <span data-es="Abrir calendario" data-en="Open calendar">Abrir calendario</span><span style="font-size:15px;">→</span>
+          </a>
+        </div>
       </div>
 
       <!-- Footer oscuro -->
@@ -2958,6 +2980,11 @@ function globalSetCurrency(currency) {
   <style>
     @keyframes spin360{to{transform:rotate(360deg)}}
     @keyframes livePulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(1.3)}}
+    @media(max-width:480px){
+      #bookingHeaderOpenLink span{display:none;}
+      #bookingHeaderOpenLink{padding:6px;}
+      #bookingModal [data-es="100% gratis"]{display:none;}
+    }
   </style>
 
   <!-- Live visitors widget -->
@@ -3928,36 +3955,82 @@ function setLang(lang) {
   localStorage.setItem('lang', lang);
 }
 
-// Open booking modal and set iframe language — iPad/Safari compatible
+var bookingFallbackTimer = null;
+
+function showBookingFallback(){
+  var loading = document.getElementById('bookingLoading');
+  var fallback = document.getElementById('bookingFallback');
+  var iframe = document.getElementById('bookingIframe');
+  if(bookingFallbackTimer){ clearTimeout(bookingFallbackTimer); bookingFallbackTimer = null; }
+  if(loading) loading.style.display = 'none';
+  if(iframe) iframe.style.display = 'none';
+  if(fallback) fallback.style.display = 'flex';
+}
+
+function handleBookingIframeLoad(){
+  var iframe = document.getElementById('bookingIframe');
+  var loading = document.getElementById('bookingLoading');
+  if(!iframe) return;
+  // Ignorar el "load" del about:blank intermedio que usamos para forzar la recarga
+  if(iframe.src === 'about:blank' || iframe.src === '') return;
+  if(bookingFallbackTimer){ clearTimeout(bookingFallbackTimer); bookingFallbackTimer = null; }
+  // Cuando el sitio embebido bloquea el iframe (X-Frame-Options / CSP frame-ancestors),
+  // el navegador carga un documento de error LOCAL (mismo origen), por lo que SÍ
+  // podemos acceder a su contenido y detectamos que está vacío. Si el calendario
+  // cargó correctamente (origen distinto), el acceso lanza una excepción de seguridad.
+  try {
+    var doc = iframe.contentDocument || (iframe.contentWindow && iframe.contentWindow.document);
+    if(doc && (!doc.body || doc.body.innerHTML.trim() === '')){
+      showBookingFallback();
+      return;
+    }
+  } catch(e) {
+    // Acceso cross-origin denegado => el calendario externo cargó correctamente
+  }
+  if(loading) loading.style.display = 'none';
+}
+
+// Open booking modal and set iframe language
 function openBookingModal(){
   var modal = document.getElementById('bookingModal');
   var iframe = document.getElementById('bookingIframe');
   var loading = document.getElementById('bookingLoading');
+  var fallback = document.getElementById('bookingFallback');
+  var fallbackLink = document.getElementById('bookingFallbackLink');
+  var headerLink = document.getElementById('bookingHeaderOpenLink');
   if(!modal || !iframe) return;
-  var lang = document.documentElement.lang || (typeof localStorage !== 'undefined' && localStorage.getItem('lang')) || 'es';
+  var lang = document.documentElement.lang || localStorage.getItem('lang') || 'es';
   var hlParam = lang === 'en' ? 'hl=en' : 'hl=es';
-  var newSrc = 'https://calendar.app.google/NmrmsEZszBhgYAVdA?' + hlParam + '&t=' + Date.now();
-  // Mostrar modal primero para que Safari pueda renderizar el iframe
+  var newSrc = 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ01yfNX7_t77DLL6GmXhHazdfURnIxYPgKZuqfIgqX1JvJOZVWNVjzthruX_T7HnEQHkaQget5N?gv=true&' + hlParam;
+  if(headerLink) headerLink.href = newSrc;
+
+  // Reset estado
+  if(bookingFallbackTimer){ clearTimeout(bookingFallbackTimer); bookingFallbackTimer = null; }
+  if(fallback) fallback.style.display = 'none';
+  if(fallbackLink) fallbackLink.href = newSrc;
   modal.style.display = 'flex';
-  // Reset loading state
+
   if(loading) loading.style.display = 'flex';
-  // En iPad/Safari: mostrar modal antes de asignar src para garantizar visibilidad
-  // Usar requestAnimationFrame + setTimeout para dar tiempo al layout
-  requestAnimationFrame(function(){
-    setTimeout(function(){
-      iframe.src = newSrc;
-    }, 120);
-  });
+  if(iframe) iframe.style.display = 'block';
+  iframe.src = 'about:blank';
+  setTimeout(function(){ iframe.src = newSrc; }, 60);
+
+  // Salvavidas: si el iframe no termina de cargar o el sitio embebido lo bloquea,
+  // mostramos el fallback tras unos segundos.
+  bookingFallbackTimer = setTimeout(showBookingFallback, 6000);
 }
 // On load, apply stored lang
 (function(){
   const saved = localStorage.getItem('lang');
   if(saved && saved !== 'es') setLang(saved);
   else syncLangFloat('es');
-  // Solo guardar el idioma preferido; el src se asigna al abrir el modal
+  // Sync iframe lang on page load
   const biframe = document.getElementById('bookingIframe');
-  if(biframe){
-    biframe.setAttribute('data-loaded-lang', (saved === 'en') ? 'en' : 'es');
+  if(biframe && saved === 'en'){
+    biframe.setAttribute('data-loaded-lang', 'en');
+    biframe.src = 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ01yfNX7_t77DLL6GmXhHazdfURnIxYPgKZuqfIgqX1JvJOZVWNVjzthruX_T7HnEQHkaQget5N?gv=true&hl=en&t=' + Date.now();
+  } else if(biframe){
+    biframe.setAttribute('data-loaded-lang', 'es');
   }
 })();
 </script>
