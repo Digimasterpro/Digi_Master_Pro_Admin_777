@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -2939,11 +2940,10 @@ function globalSetCurrency(currency) {
         </div>
         <iframe
           id="bookingIframe"
-          src="https://calendar.app.google/NmrmsEZszBhgYAVdA"
+          src=""
           style="position:absolute;inset:0;width:100%;height:100%;border:none;display:block;"
-          onload="document.getElementById('bookingLoading').style.display='none'"
-          allow="camera;microphone;fullscreen"
-          loading="lazy">
+          onload="if(this.src && this.src!=='about:blank')document.getElementById('bookingLoading').style.display='none'"
+          allow="camera;microphone;fullscreen">
         </iframe>
       </div>
 
@@ -3928,33 +3928,36 @@ function setLang(lang) {
   localStorage.setItem('lang', lang);
 }
 
-// Open booking modal and set iframe language
+// Open booking modal and set iframe language — iPad/Safari compatible
 function openBookingModal(){
   var modal = document.getElementById('bookingModal');
   var iframe = document.getElementById('bookingIframe');
   var loading = document.getElementById('bookingLoading');
   if(!modal || !iframe) return;
-  var lang = document.documentElement.lang || localStorage.getItem('lang') || 'es';
+  var lang = document.documentElement.lang || (typeof localStorage !== 'undefined' && localStorage.getItem('lang')) || 'es';
   var hlParam = lang === 'en' ? 'hl=en' : 'hl=es';
-  var newSrc = 'https://calendar.app.google/NmrmsEZszBhgYAVdA?' + hlParam;
+  var newSrc = 'https://calendar.app.google/NmrmsEZszBhgYAVdA?' + hlParam + '&t=' + Date.now();
+  // Mostrar modal primero para que Safari pueda renderizar el iframe
+  modal.style.display = 'flex';
   // Reset loading state
   if(loading) loading.style.display = 'flex';
-  iframe.src = 'about:blank';
-  setTimeout(function(){ iframe.src = newSrc; }, 60);
-  modal.style.display = 'flex';
+  // En iPad/Safari: mostrar modal antes de asignar src para garantizar visibilidad
+  // Usar requestAnimationFrame + setTimeout para dar tiempo al layout
+  requestAnimationFrame(function(){
+    setTimeout(function(){
+      iframe.src = newSrc;
+    }, 120);
+  });
 }
 // On load, apply stored lang
 (function(){
   const saved = localStorage.getItem('lang');
   if(saved && saved !== 'es') setLang(saved);
   else syncLangFloat('es');
-  // Sync iframe lang on page load
+  // Solo guardar el idioma preferido; el src se asigna al abrir el modal
   const biframe = document.getElementById('bookingIframe');
-  if(biframe && saved === 'en'){
-    biframe.setAttribute('data-loaded-lang', 'en');
-    biframe.src = 'https://calendar.app.google/NmrmsEZszBhgYAVdA?hl=en&t=' + Date.now();
-  } else if(biframe){
-    biframe.setAttribute('data-loaded-lang', 'es');
+  if(biframe){
+    biframe.setAttribute('data-loaded-lang', (saved === 'en') ? 'en' : 'es');
   }
 })();
 </script>
