@@ -66,16 +66,15 @@
 <meta property="twitter:image" content="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/Imagen_ceo_google.png">
 
 <!-- ══ FAVICON ══ -->
-<link rel="icon" type="image/x-icon" href="https://digimasterpro.com/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/LogoDigimaster.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/LogoDigimaster.png">
-<link rel="icon" type="image/png" sizes="192x192" href="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/LogoDigimaster.png">
-<link rel="icon" type="image/png" sizes="512x512" href="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/LogoDigimaster.png">
-<link rel="shortcut icon" href="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/LogoDigimaster.png">
-<link rel="apple-touch-icon" sizes="180x180" href="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/LogoDigimaster.png">
-<link rel="manifest" href="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/site.webmanifest">
-<meta name="msapplication-TileImage" content="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/LogoDigimaster.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="manifest" href="/site.webmanifest">
 <meta name="msapplication-TileColor" content="#050505">
+<meta name="theme-color" content="#050505">
 
 <!-- ══ SCHEMA 1 — MarketingAgency + LocalBusiness ══ -->
 <script type="application/ld+json">
@@ -88,9 +87,9 @@
   "url": "https://digimasterpro.com",
   "logo": {
     "@type": "ImageObject",
-    "url": "https://digimasterpro.com/images/LogoDigimaster.png",
-    "width": 180,
-    "height": 180
+    "url": "https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/Imagen_ceo_google.png",
+    "width": 1200,
+    "height": 630
   },
   "image": "https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/Imagen_ceo_google.png",
   "foundingDate": "2017",
@@ -2957,7 +2956,6 @@ function globalSetCurrency(currency) {
           id="bookingIframe"
           src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ01yfNX7_t77DLL6GmXhHazdfURnIxYPgKZuqfIgqX1JvJOZVWNVjzthruX_T7HnEQHkaQget5N?gv=true"
           style="position:absolute;inset:0;width:100%;height:100%;border:none;display:block;"
-          onload="handleBookingIframeLoad()"
           allow="camera;microphone;fullscreen">
         </iframe>
         <!-- Fallback: se muestra si el iframe no carga (iPad / tablets que bloquean el embed) -->
@@ -3998,6 +3996,20 @@ function handleBookingIframeLoad(){
   }
   if(loading) loading.style.display = 'none';
 }
+
+// Registrar el onload del iframe aquí (no inline en el HTML) para evitar
+// ReferenceError cuando el iframe carga antes de que el script sea leído.
+(function(){
+  var iframeEl = document.getElementById('bookingIframe');
+  if(iframeEl){
+    iframeEl.addEventListener('load', handleBookingIframeLoad);
+  } else {
+    document.addEventListener('DOMContentLoaded', function(){
+      var el = document.getElementById('bookingIframe');
+      if(el) el.addEventListener('load', handleBookingIframeLoad);
+    });
+  }
+})();
 
 // Open booking modal and set iframe language
 function openBookingModal(){
