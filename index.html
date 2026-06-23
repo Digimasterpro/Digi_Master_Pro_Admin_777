@@ -300,8 +300,9 @@ function goTo(idx) {
 const vis = getVisible();
 const max = Math.max(0, slides.length - vis);
 current = Math.max(0, Math.min(idx, max));
-const slideW = slides[0].getBoundingClientRect().width + 24;
-track.style.transform = 'translateX(-' + (current * slideW) + 'px)';
+const pct = (100 / vis) * current;
+const gapOffset = current * 24;
+track.style.transform = 'translateX(calc(-' + pct + '% - ' + gapOffset + 'px))';
 dots.forEach((d, i) => {
 d.style.width = i === current ? '24px' : '8px';
 d.style.borderRadius = i === current ? '4px' : '50%';
@@ -459,7 +460,7 @@ current = Math.max(0, Math.min(idx, maxIndex()));
 var gap   = 20;
 // Read DOM before write to batch and avoid forced reflow
 var pv    = perView();
-var wrap  = track.parentElement.getBoundingClientRect().width;
+var wrap  = track.parentElement.offsetWidth;
 var cardW = (wrap - gap*(pv-1)) / pv;
 track.style.transform = 'translateX(-' + current*(cardW+gap) + 'px)';
 dotsBox.querySelectorAll('.carousel-dot').forEach(function(d,i){
@@ -616,6 +617,7 @@ biframe.src = 'https://calendar.google.com/calendar/appointments/schedules/AcZss
 biframe.setAttribute('data-loaded-lang', 'es');
 }
 })();</script> <script>(function(){
+if(window.innerWidth <= 768) return; /* Skip heavy particles on mobile */
 const canvas = document.getElementById('particles-canvas');
 if(!canvas) return;
 const ctx = canvas.getContext('2d');
@@ -870,6 +872,7 @@ onTouch(e);
 if('ontouchstart' in window || navigator.maxTouchPoints > 0) return;
 const trail = document.getElementById('cursorTrail');
 const glow  = document.getElementById('cursorGlow');
+if(window.innerWidth <= 768) { if(trail) trail.style.display='none'; if(glow) glow.style.display='none'; return; }
 if(!trail || !glow) return;
 let tx=0,ty=0,gx=0,gy=0;
 document.addEventListener('mousemove', e=>{
@@ -964,7 +967,7 @@ const _isMob = ('ontouchstart' in window || navigator.maxTouchPoints > 0);
 if(!_isMob) document.body.classList.add('intro-active');
 const ic = document.getElementById('intro-canvas');
 if(!ic) return;
-if(_isMob){ ic.style.display='none'; }
+if(_isMob){ ic.style.display='none'; return; } /* Skip canvas loop entirely on mobile */
 const cx = ic.getContext('2d');
 if(!cx) return;
 ic.width = window.innerWidth;
@@ -1043,13 +1046,14 @@ const wrap = document.getElementById('ibarRotateWrap');
 if(wrap){
 const items = wrap.querySelectorAll('.ibar-rotate-item');
 let cur = 0;
+// Batch all reads first, then writes - prevents forced reflow
 const widths = Array.from(items).map(el => el.scrollWidth);
-wrap.style.width = widths[0]+'px';
+requestAnimationFrame(()=>{ wrap.style.width = widths[0]+'px'; });
 setInterval(()=>{
 items[cur].classList.remove('active');
 cur = (cur+1)%items.length;
 items[cur].classList.add('active');
-wrap.style.width = widths[cur]+'px';
+requestAnimationFrame(()=>{ wrap.style.width = widths[cur]+'px'; });
 }, 3800);
 }
 })();
