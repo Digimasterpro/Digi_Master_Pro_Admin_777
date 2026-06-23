@@ -12,14 +12,23 @@
 <meta name="google-site-verification" content="1f5729d6d54a5a71">
 
 <!-- ══ GOOGLE ANALYTICS 4 ══ -->
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-NXV1EHXQ2T"></script>
+<!-- Google tag (gtag.js) — lazy load para no bloquear FCP -->
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-NXV1EHXQ2T');
+  // Cargar el script de GA4 lazy (no bloquea render)
+  (function(){
+    function loadGA(){
+      var s=document.createElement('script');
+      s.src='https://www.googletagmanager.com/gtag/js?id=G-NXV1EHXQ2T';
+      s.async=true; document.head.appendChild(s);
+    }
+    if('requestIdleCallback' in window){
+      requestIdleCallback(loadGA, {timeout:2500});
+    } else { setTimeout(loadGA, 2000); }
+  })();
 </script>
 
 <!-- ══ SEO PRIMARIO ══ -->
@@ -74,7 +83,7 @@
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="manifest" href="/site.webmanifest">
 <meta name="msapplication-TileColor" content="#050505">
-<meta name="theme-color" content="#050505">
+
 
 <!-- ══ SCHEMA 1 — MarketingAgency + LocalBusiness ══ -->
 <script type="application/ld+json">
@@ -336,7 +345,9 @@
   Cache-Control: public, max-age=3600 (para HTML)
 -->
 <!-- Preload imagen hero — cuando tengas el WebP listo, agrega también el preload WebP -->
-<link rel="preload" as="image" href="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/portadadigimasterproCEO.jpg" fetchpriority="high">
+<link rel="preload" as="image" href="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/portadadigimasterproCEO.jpg" fetchpriority="high" type="image/jpeg">
+<link rel="preload" as="image" href="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/LogoDigimaster.png" fetchpriority="high">
+<link rel="preload" as="image" href="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/portadadigimasterproCEO-mobile.webp" media="(max-width:768px)" fetchpriority="high">
 <link rel="dns-prefetch" href="https://wa.me">
 <link rel="dns-prefetch" href="https://digimasterpro.github.io">
 <link rel="preconnect" href="https://digimasterpro.github.io" crossorigin>
@@ -366,10 +377,11 @@
 
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   html{
-    scroll-behavior:auto;
+    scroll-behavior:smooth;
     overflow:hidden;
     height:100%;
   }
+  @media(max-width:768px){html{scroll-behavior:auto;}}
   /* Custom scrollbar lives on body only — prevents double scrollbar */
   body::-webkit-scrollbar{width:6px;}
   body::-webkit-scrollbar-track{background:transparent;}
@@ -578,10 +590,16 @@
     padding:0;
     padding-top:130px; /* nav (74px) + ticker (32px) + extra breathing room */
   }
+  @media(max-width:768px){
+    #hero{min-height:100svh;padding-top:115px;}
+    .hero-title{font-size:clamp(44px,12vw,68px)!important;}
+    .hero-content{padding:0 5% 60px;}
+  }
   /* Background image fills entire hero — positioned so CEO face is fully visible */
   #hero .hero-bg{
     position:absolute;
     top:0; left:0; right:0; bottom:0;
+    content-visibility:auto;
     /* OPTIMIZACIÓN LCP: cuando tengas el WebP listo, reemplaza el src abajo */
     background: url('https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/portadadigimasterproCEO.jpg') center top / cover no-repeat;
     pointer-events:none;
@@ -603,6 +621,13 @@
     position:relative;z-index:2;
     width:100%;max-width:680px;
     padding:0 5% 80px;
+  }
+  @media(max-width:768px){
+    #hero .hero-bg{
+      background-image: url('https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/portadadigimasterproCEO-mobile.webp'), url('https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/portadadigimasterproCEO.jpg');
+      background-position: center top;
+      background-size: cover;
+    }
   }
   .hero-tag{
     display:inline-block;font-size:11px;font-weight:700;letter-spacing:.18em;
@@ -1681,8 +1706,8 @@
     .stat-label{font-size:clamp(8px,2.45vw,11px);line-height:1.25;margin-top:6px;letter-spacing:0;overflow-wrap:normal;}
     .stat-label{display:block;}
     /* Mobile: particles canvas very subtle (touch burst handles interaction) */
-    #particles-canvas{opacity:.35!important;}
-    .cursor-trail,.cursor-glow{display:none!important;}
+    #particles-canvas{opacity:.35!important;display:none!important;}
+    .cursor-trail,.cursor-glow{display:none!important;pointer-events:none!important;}
     #touch-burst-canvas{display:block;}
     .reveal,.reveal-left,.reveal-right{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease;}
     .reveal-left,.reveal-right{transform:translateY(18px);}
@@ -1695,6 +1720,8 @@
     .btn-primary::after,.section-tag::before{animation-duration:4.8s;}
     .services-track{max-width:100%;will-change:auto;}
     .btn-primary:hover,.service-card:hover,.portfolio-item:hover,.btn-wa-cta:hover,.wa-float:hover,.btn-hero-cta:hover{transform:none!important;}
+    #particles-canvas{will-change:auto!important;}
+    .reveal,.reveal-left,.reveal-right{will-change:auto!important;}
     .btn-wa-cta{max-width:100%;padding:16px 24px;}
     .wa-float{position:fixed!important;right:16px;bottom:16px;z-index:100001;width:56px;height:56px;display:flex!important;}
     .lang-float{right:16px;bottom:84px;}
@@ -1711,6 +1738,9 @@
 
   /* Prevent scroll: body.intro-active */
   body.intro-active{overflow:hidden!important;}
+  @media(max-width:768px){
+    body.intro-active{overflow:auto!important;} /* En mobile no bloquear scroll — FCP crítico */
+  }
 
   /* Respect user preference for reduced motion */
   @media(prefers-reduced-motion:reduce){
@@ -1721,7 +1751,7 @@
     }
     #particles-canvas{display:none!important;}
     #touch-burst-canvas{display:none!important;}
-    .cursor-trail,.cursor-glow{display:none!important;}
+    .cursor-trail,.cursor-glow{display:none!important;pointer-events:none!important;}
     html{scroll-behavior:auto!important;}
   }
 
@@ -2060,7 +2090,6 @@
   }
 </style>
 
-<link rel="preload" as="image" href="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/LogoDigimaster.png">
 </head>
 <body>
 
@@ -4072,7 +4101,7 @@ function openBookingModal(){
   const CYAN = '86,204,242';
   let isMobileMotion = window.matchMedia('(max-width: 768px)').matches;
   const connectDist = () => isMobileMotion ? 120 : 180;
-  const particleCount = () => isMobileMotion ? 15 : 90; // FIX: reduced mobile particles
+  const particleCount = () => isMobileMotion ? 0 : 90; // PERF: 0 particles on mobile saves O(n²) draw loop
   const particleSpeed = () => isMobileMotion ? .16 : .45;
 
   let W, H;
@@ -4118,6 +4147,8 @@ function openBookingModal(){
   document.addEventListener('mouseleave', ()=>{ mouse.x=-9999; mouse.y=-9999; });
 
   function draw(){
+    // Skip drawing entirely if no particles (mobile)
+    if(particles.length === 0){ requestAnimationFrame(draw); return; }
     ctx.clearRect(0, 0, W, H);
 
     // ── Conexiones tipo red neuronal ──
@@ -4223,7 +4254,8 @@ function openBookingModal(){
 
   const isTouchDevice = true;
 
-  // En touch: apagamos el canvas de partículas y lo reemplazamos con bursts
+  // En touch: skip bursts para ahorrar GPU en mobile
+  return; // PERF: desactivado en mobile para mejorar TBT
   const bgCanvas = document.getElementById('particles-canvas');
 
   // Crear canvas overlay SOLO para touch bursts (encima de todo, pointer-events:none)
@@ -4486,12 +4518,14 @@ function openBookingModal(){
   const overlay = document.getElementById('intro-overlay');
   if(!overlay) return;
 
-  // Bloquear scroll
-  document.body.classList.add('intro-active');
+  // Bloquear scroll — solo si no es mobile (en mobile skip directo)
+  const _isMob = ('ontouchstart' in window || navigator.maxTouchPoints > 0);
+  if(!_isMob) document.body.classList.add('intro-active');
 
-  // Canvas de partículas del intro
+  // Canvas de partículas del intro — skip en mobile para mejorar FCP
   const ic = document.getElementById('intro-canvas');
   if(!ic) return;
+  if(_isMob){ ic.style.display='none'; }
   const cx = ic.getContext('2d');
   if(!cx) return;
   ic.width = window.innerWidth;
@@ -4507,7 +4541,7 @@ function openBookingModal(){
       pulse:Math.random()*Math.PI*2, ps:.008+Math.random()*.012
     });
   }
-  let introRunning = true;
+  let introRunning = !_isMob;
   function drawIntro(){
     if(!introRunning) return;
     cx.clearRect(0,0,ic.width,ic.height);
@@ -4540,7 +4574,7 @@ function openBookingModal(){
   drawIntro();
 
   // Secuencia de salida — FIX: shorter on mobile for better FCP
-  const _introDelay = ('ontouchstart' in window || navigator.maxTouchPoints > 0) ? 800 : 3000;
+  const _introDelay = ('ontouchstart' in window || navigator.maxTouchPoints > 0) ? 0 : 2200;
   setTimeout(()=>{
     overlay.classList.add('hide');
     document.body.classList.remove('intro-active');
@@ -4560,7 +4594,7 @@ function openBookingModal(){
   const viewerEl = document.getElementById('ibarViewers');
   const quotesEl = document.getElementById('ibarQuotes');
 
-  function bump(el){ el.classList.remove('bump'); void el.offsetWidth; el.classList.add('bump'); setTimeout(()=>el.classList.remove('bump'),350); }
+  function bump(el){ el.classList.remove('bump'); setTimeout(()=>{ el.classList.add('bump'); setTimeout(()=>el.classList.remove('bump'),350); },10); }
 
   // Viewers: 17–31, fluctúa cada 4–9s
   let viewers = 23;
@@ -4667,7 +4701,7 @@ function openBookingModal(){
   // Animate the number with a flip/bump
   function setCount(n){
     countEl.classList.remove('bump');
-    void countEl.offsetWidth; // reflow
+    // void countEl.offsetWidth; // PERF: skip forced reflow — using timeout instead
     countEl.textContent = n;
     countEl.classList.add('bump');
     setTimeout(()=> countEl.classList.remove('bump'), 400);
@@ -4972,7 +5006,26 @@ function openBookingModal(){
     watchTidioIframes();
   }
 </script>
-<script src="//code.tidio.co/rft9xdbb4sidnoe5uthcd9zvra7yzaxn.js" async></script>
+<script>
+/* Carga Tidio lazy — solo después del primer user interaction */
+(function(){
+  var loaded = false;
+  function loadTidio(){
+    if(loaded) return; loaded=true;
+    var s=document.createElement('script');
+    s.src='//code.tidio.co/rft9xdbb4sidnoe5uthcd9zvra7yzaxn.js';
+    s.async=true;
+    document.head.appendChild(s);
+  }
+  // En desktop: cargar después de 4s
+  // En mobile: cargar después del primer touch
+  if('ontouchstart' in window || navigator.maxTouchPoints > 0){
+    document.addEventListener('touchstart', loadTidio, {once:true, passive:true});
+  } else {
+    setTimeout(loadTidio, 4000);
+  }
+})();
+</script>
 
 </body>
 </html>
