@@ -967,7 +967,7 @@ const _isMob = ('ontouchstart' in window || navigator.maxTouchPoints > 0);
 if(!_isMob) document.body.classList.add('intro-active');
 const ic = document.getElementById('intro-canvas');
 if(!ic) return;
-if(_isMob){ ic.style.display='none'; return; } /* Skip canvas loop entirely on mobile */
+if(_isMob){ ic.style.display='none'; overlay.classList.add('hide'); setTimeout(()=>overlay.remove(),400); return; } /* Skip canvas loop entirely on mobile */
 const cx = ic.getContext('2d');
 if(!cx) return;
 ic.width = window.innerWidth;
