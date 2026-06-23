@@ -480,6 +480,7 @@ for(var i=0;i<steps;i++){
 var d = document.createElement('button');
 d.className = 'carousel-dot' + (i===current?' active':'');
 d.setAttribute('data-i', i);
+d.setAttribute('aria-label', 'Ir al servicio ' + (i+1));
 d.addEventListener('click', function(){ goTo(+this.getAttribute('data-i')); });
 dotsBox.appendChild(d);
 }
