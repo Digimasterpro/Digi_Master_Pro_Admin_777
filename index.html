@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <!-- CSP: upgrade HTTP a HTTPS y permite origenes del sitio -->
-<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests; default-src 'self' https: https://digimasterpro.github.io; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://code.tidio.co https://fonts.googleapis.com https://digimasterpro.github.io; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' https://digimasterpro.com https://www.digimasterpro.com https://digimasterpro.github.io https: data: blob:; media-src 'self' https: https://digimasterpro.com https://digimasterpro.github.io; connect-src 'self' https: wss:; frame-src 'self' https: https://digimasterpro.com; object-src 'none';">
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests; default-src 'self' https: https://digimasterpro.github.io; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://code.tidio.co https://fonts.googleapis.com https://digimasterpro.github.io; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' https://digimasterpro.com https://www.digimasterpro.com https://digimasterpro.github.io https: http: data: blob:; media-src 'self' https: https://digimasterpro.com https://digimasterpro.github.io; connect-src 'self' https: wss:; frame-src 'self' https: https://digimasterpro.com; object-src 'none';">
 <!-- Seguridad adicional -->
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta http-equiv="x-content-type-options" content="nosniff">
@@ -13,11 +13,13 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"> <meta name="google-site-verification" content="1f5729d6d54a5a71"> <script>
-// Analytics - defer completely to after page load
+// Analytics - defer until after user interaction on mobile, idle on desktop
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 (function(){
+  var _gaLoaded = false;
   function loadGA(){
+    if(_gaLoaded) return; _gaLoaded = true;
     var s=document.createElement('script');
     s.src='https://www.googletagmanager.com/gtag/js?id=G-NXV1EHXQ2T';
     s.async=true;
@@ -25,9 +27,19 @@ function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-NXV1EHXQ2T', {send_page_view: true});
   }
-  if('requestIdleCallback' in window){
-    requestIdleCallback(loadGA, {timeout:3000});
-  } else { setTimeout(loadGA, 3000); }
+  var isMobile = /Mobi|Android/i.test(navigator.userAgent) || window.innerWidth <= 768;
+  if(isMobile) {
+    /* On mobile: wait for first real user interaction */
+    var events = ['touchstart','click','scroll','keydown'];
+    function onInteract(){ loadGA(); events.forEach(function(e){ document.removeEventListener(e,onInteract); }); }
+    events.forEach(function(e){ document.addEventListener(e, onInteract, {once:true, passive:true}); });
+    /* Fallback: load after 8s anyway */
+    setTimeout(loadGA, 8000);
+  } else {
+    if('requestIdleCallback' in window){
+      requestIdleCallback(loadGA, {timeout:3000});
+    } else { setTimeout(loadGA, 3000); }
+  }
 })();
 </script> <title>Digi Master Pro | Agencia de Marketing Digital en Cartagena Colombia y USA · Páginas Web Profesionales · Soluciones Digitales</title>
 <meta name="description" content="Agencia de marketing digital en Cartagena, Colombia. Diseñamos páginas web profesionales, branding, SEO y soluciones digitales completas para negocios en Colombia y USA. +7 años · +500 marcas. ¡Cotiza gratis hoy por WhatsApp!">
@@ -288,6 +300,117 @@ body {
   /* Disable float animation on wa-pulse for better battery */
   .wa-pulse {
     animation-duration: 4s !important;
+  }
+}
+</style>
+
+<style>
+/* Fix: Aspect ratio for brand logos */
+.brand-item img {
+  width: 120px !important;
+  height: 40px !important;
+  object-fit: contain !important;
+  object-position: center !important;
+}
+/* Fix: reviewer avatars */
+.reviewer-avatar {
+  width: 40px !important;
+  height: 40px !important;
+  object-fit: cover !important;
+  aspect-ratio: 1 / 1 !important;
+}
+/* Fix: footer logo aspect ratio */
+.footer-logo-min {
+  width: auto !important;
+  height: 34px !important;
+  aspect-ratio: auto !important;
+  object-fit: contain !important;
+}
+/* Fix: nav logo */
+.nav-logo img {
+  width: auto !important;
+  height: 38px !important;
+  object-fit: contain !important;
+}
+</style>
+
+<script>
+/* Fix forced reflow: batch DOM reads/writes in live counter updates */
+(function(){
+  var _origIbarUpdate = window._ibarUpdate;
+  // Patch all elements that animate via JS to use rAF
+  var _pendingWrites = [];
+  var _rafScheduled = false;
+  
+  function flushWrites() {
+    _rafScheduled = false;
+    _pendingWrites.forEach(function(fn){ fn(); });
+    _pendingWrites = [];
+  }
+  
+  window._scheduleWrite = function(fn) {
+    _pendingWrites.push(fn);
+    if (!_rafScheduled) {
+      _rafScheduled = true;
+      requestAnimationFrame(flushWrites);
+    }
+  };
+})();
+</script>
+
+<style>
+@media (max-width: 768px) {
+  /* Fix: Non-composited animations - Lighthouse flags 16 elements */
+  /* Only allow transform and opacity animations (GPU composited) */
+  .intro-logo {
+    animation: introLogoIn .8s cubic-bezier(.22,1,.36,1) .15s both !important;
+    /* Remove the pulse that animates box-shadow */
+  }
+  .intro-logo::before {
+    animation: introSpin 3s linear infinite !important;
+  }
+  .intro-content::before, .intro-content::after {
+    animation: none !important;
+    display: none !important;
+  }
+  /* Disable border-color animation on hero CTA (non-composited) */
+  .btn-hero-cta {
+    animation: none !important;
+    border-color: rgba(37,211,102,0.95) !important;
+  }
+  /* Disable urgency glow (box-shadow animation) */
+  .live-urgency {
+    animation: none !important;
+  }
+  /* Disable ibar pulse dots box-shadow animations */
+  .ibar-live-dot, .ibar-trend-dot {
+    animation: none !important;
+    opacity: 1;
+  }
+  /* Disable section dot pulse */
+  .section-tag::before {
+    animation: none !important;
+  }
+  /* Disable sec ring pulse */
+  .sec-icon::after {
+    animation: none !important;
+  }
+  /* Disable stat pop animation box-shadow */
+  .stat.visible .stat-num {
+    text-shadow: none !important;
+    animation: statPop .5s cubic-bezier(.22,1,.36,1) both !important;
+  }
+  /* Disable wa-pulse animation complexity */
+  .wa-pulse {
+    display: none !important;
+  }
+  /* Disable live dot red pulse */
+  .live-dot-red {
+    animation: none !important;
+  }
+  /* Disable cta-live-dot */
+  .cta-live-dot {
+    animation: none !important;
   }
 }
 </style>
@@ -1074,7 +1197,7 @@ if(Math.abs(diff) > 40) diff > 0 ? nfcNext() : nfcPrev();
 </script>
 
 <hr class="glowline"> <section id="portfolio"> <div class="sec-icon-wrap reveal"><div class="sec-icon"><span class="sec-icon-dot"></span><svg class="sec-icon-svg" width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#2D9CDB" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" fill="rgba(45,156,219,0.08)"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16" stroke="#56CCF2"/><line x1="10" y1="14" x2="14" y2="14" stroke="#56CCF2"/></svg></div></div> <div class="portfolio-header reveal"> <div> <span class="section-tag" data-es="Nuestros Trabajos" data-en="Our Work">Nuestros Trabajos</span> <h2 class="section-title" data-es="PROYECTOS QUE HABLAN<br><span>DE RESULTADOS</span>" data-en="PROJECTS THAT SPEAK<br><span>OF RESULTS</span>">PROYECTOS QUE HABLAN<br><span>DE RESULTADOS</span></h2> </div> </div> <div class="portfolio-grid"> <a class="portfolio-item pf-slideshow" data-cat="Sitios Web" href="https://vivamoscolombiatravel.com/" target="_blank" rel="noopener" style="text-decoration:none;overflow:hidden;" data-links="https://vivamoscolombiatravel.com/,https://autenticostravel.com/,https://ranchocariberd.com/,https://nexxtours.com/"> <div class="pf-slide active" style="background:url(https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/Proyectos%20web/web-vivamos-colombia.webp) center/cover no-repeat;"></div> <div class="pf-slide" style="background:url(https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/Proyectos%20web/WhatsApp-Image-2026-06-07-at-2.07.36-AM.webp) center/cover no-repeat;"></div> <div class="pf-slide" style="background:url(https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/Proyectos%20web/web-rancho-caribeno.webp) center/cover no-repeat;"></div> <div class="pf-slide" style="background:url(https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/Proyectos%20web/web-nexttours.webp) center/cover no-repeat;"></div> <div class="pf-dots"> <span class="pf-dot active"></span> <span class="pf-dot"></span> <span class="pf-dot"></span> <span class="pf-dot"></span> </div> <div class="overlay"> <h4 data-es="Diseño Web" data-en="Web Design">Diseño Web</h4> <span data-es="Sitios Web" data-en="Websites">Sitios Web</span> <span class="overlay-link" data-es="Ver proyecto" data-en="View project">Ver proyecto</span> </div> </a> <a class="portfolio-item pf-slideshow" data-cat="Diseño Gráfico" href="https://gotoart0101.myportfolio.com/diseno" target="_blank" rel="noopener" style="text-decoration:none;overflow:hidden;"> <div class="pf-slide active" style="background:url(https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/dise%C3%B1o%20graficos/Captura-de-pantalla-2026-06-07-024556.webp) center/cover no-repeat;"></div> <div class="pf-slide" style="background:url(https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/dise%C3%B1o%20graficos/Captura-de-pantalla-2026-06-07-024607.webp) center/cover no-repeat;"></div> <div class="pf-slide" style="background:url(https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/dise%C3%B1o%20graficos/Captura-de-pantalla-2026-06-07-024634.webp) center/cover no-repeat;"></div> <div class="pf-slide" style="background:url(https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/dise%C3%B1o%20graficos/seccion-diseno-minitura-youtube.webp) center/cover no-repeat;"></div> <div class="pf-slide" style="background:url(https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/dise%C3%B1o%20graficos/portada-de-diseno-grafico.webp) center/cover no-repeat;"></div> <div class="pf-slide" style="background:url(https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/dise%C3%B1o%20graficos/Captura-de-pantalla-2026-06-07-024751.webp) center/cover no-repeat;"></div> <div class="pf-dots"> <span class="pf-dot active"></span> <span class="pf-dot"></span> <span class="pf-dot"></span> <span class="pf-dot"></span> <span class="pf-dot"></span> <span class="pf-dot"></span> </div> <div class="overlay"> <h4 data-es="Diseño Gráfico" data-en="Graphic Design">Diseño Gráfico</h4> <span data-es="Identidad Visual" data-en="Visual Identity">Identidad Visual</span> <span class="overlay-link" data-es="Ver proyecto" data-en="View project">Ver proyecto</span> </div> </a> <a class="portfolio-item pf-slideshow" data-cat="Branding" href="https://heyzine.com/flip-book/267a1d8e4e.html" target="_blank" rel="noopener" style="text-decoration:none;overflow:hidden;"> <div class="pf-slide active" style="background:url(https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/rc%20perfumeria%20branding/portada-branding.webp) center/cover no-repeat;"></div> <div class="pf-slide" style="background:url(https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/rc%20perfumeria%20branding/brandingperfumeria.webp) center/cover no-repeat;"></div> <div class="pf-slide" style="background:url(https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/rc%20perfumeria%20branding/Captura-de-pantalla-2026-06-07-022752.webp) center/cover no-repeat;"></div> <div class="pf-slide" style="background:url(https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/rc%20perfumeria%20branding/Captura-de-pantalla-2026-06-07-022803.webp) center/cover no-repeat;"></div> <div class="pf-slide" style="background:url(https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/rc%20perfumeria%20branding/Captura-de-pantalla-2026-06-07-022815.webp) center/cover no-repeat;"></div> <div class="pf-slide" style="background:url(https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/rc%20perfumeria%20branding/Captura-de-pantalla-2026-06-07-022829.webp) center/cover no-repeat;"></div> <div class="pf-slide" style="background:url(https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/rc%20perfumeria%20branding/Captura-de-pantalla-2026-06-07-022845.webp) center/cover no-repeat;"></div> <div class="pf-dots"> <span class="pf-dot active"></span> <span class="pf-dot"></span> <span class="pf-dot"></span> <span class="pf-dot"></span> <span class="pf-dot"></span> <span class="pf-dot"></span> <span class="pf-dot"></span> </div> <div class="overlay"> <h4 data-es="Perfumería RC" data-en="Perfumería RC">Perfumería RC</h4> <span data-es="Branding" data-en="Branding">Branding</span> <span class="overlay-link" data-es="Ver proyecto" data-en="View project">Ver proyecto</span> </div> </a> <a class="portfolio-item pf-slideshow" data-cat="Branding" href="https://assets.adobe.com/id/urn:aaid:sc:US:ed698f68-8c66-4109-a81c-7921832c7d8f?view=published" target="_blank" rel="noopener" style="text-decoration:none;overflow:hidden;"> <div class="pf-slide active" style="background:url(https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/wimon%20tours%20branding/Captura-de-pantalla-2026-06-07-023911.webp) center/cover no-repeat;"></div> <div class="pf-slide" style="background:url(https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/wimon%20tours%20branding/Captura-de-pantalla-2026-06-07-024010.webp) center/cover no-repeat;"></div> <div class="pf-slide" style="background:url(https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/wimon%20tours%20branding/Captura-de-pantalla-2026-06-07-024001.webp) center/cover no-repeat;"></div> <div class="pf-slide" style="background:url(https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/wimon%20tours%20branding/Captura-de-pantalla-2026-06-07-023935.webp) center/cover no-repeat;"></div> <div class="pf-slide" style="background:url(https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/wimon%20tours%20branding/Captura-de-pantalla-2026-06-07-023949.webp) center/cover no-repeat;"></div> <div class="pf-slide" style="background:url(https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/wimon%20tours%20branding/Captura-de-pantalla-2026-06-07-023920.webp) center/cover no-repeat;"></div> <div class="pf-slide" style="background:url(https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/wimon%20tours%20branding/Captura-de-pantalla-2026-06-07-023911.webp) center/cover no-repeat;"></div> <div class="pf-dots"> <span class="pf-dot active"></span> <span class="pf-dot"></span> <span class="pf-dot"></span> <span class="pf-dot"></span> <span class="pf-dot"></span> <span class="pf-dot"></span> <span class="pf-dot"></span> </div> <div class="overlay"> <h4>Wimon Tours</h4> <span data-es="Branding" data-en="Branding">Branding</span> <span class="overlay-link" data-es="Ver proyecto" data-en="View project">Ver proyecto</span> </div> </a> <a class="portfolio-item pf-slideshow" data-cat="Fotografía" href="https://gotoart0101.myportfolio.com/work" target="_blank" rel="noopener" style="text-decoration:none;overflow:hidden;"> <div class="pf-slide active" style="background:url(https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/Fotografia/Captura-de-pantalla-2026-06-07-025124.webp) center/cover no-repeat;"></div> <div class="pf-slide" style="background:url(https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/Fotografia/Captura-de-pantalla-2026-06-07-025143.webp) center/cover no-repeat;"></div> <div class="pf-slide" style="background:url(https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/Fotografia/Captura-de-pantalla-2026-06-07-025502.webp) center/cover no-repeat;"></div> <div class="pf-slide" style="background:url(https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/Fotografia/Captura-de-pantalla-2026-06-07-025537.webp) center/cover no-repeat;"></div> <div class="pf-dots"> <span class="pf-dot active"></span> <span class="pf-dot"></span> <span class="pf-dot"></span> <span class="pf-dot"></span> </div> <div class="overlay"> <h4 data-es="Fotografía" data-en="Photography">Fotografía</h4> <span data-es="Marca &amp; Productos" data-en="Brand &amp; Products">Marca &amp; Productos</span> <span class="overlay-link" data-es="Ver proyecto" data-en="View project">Ver proyecto</span> </div> </a> <a class="portfolio-item pf-slideshow" data-cat="Fotografía" href="https://gotoart0101.myportfolio.com/portafolios" target="_blank" rel="noopener" style="text-decoration:none;overflow:hidden;"> <div class="pf-slide active" style="background:url(https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/Portafolios/Captura-de-pantalla-2026-06-07-030412.webp) center/cover no-repeat;"></div> <div class="pf-slide" style="background:url(https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/Portafolios/Captura-de-pantalla-2026-06-07-030629.webp) center/cover no-repeat;"></div> <div class="pf-slide" style="background:url(https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/Portafolios/Captura-de-pantalla-2026-06-07-030701.webp) center/cover no-repeat;"></div> <div class="pf-slide" style="background:url(https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/Portafolios/Captura-de-pantalla-2026-06-07-030842.webp) center/cover no-repeat;"></div> <div class="pf-slide" style="background:url(https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/Portafolios/Captura-de-pantalla-2026-06-07-030924.webp) center/cover no-repeat;"></div> <div class="pf-dots"> <span class="pf-dot active"></span> <span class="pf-dot"></span> <span class="pf-dot"></span> <span class="pf-dot"></span> <span class="pf-dot"></span> </div> <div class="overlay"> <h4 data-es="Portafolio" data-en="Portfolio">Portafolio</h4> <span data-es="Fotografía" data-en="Photography">Fotografía</span> <span class="overlay-link" data-es="Ver proyecto" data-en="View project">Ver proyecto</span> </div> </a> </div>
-</section> <hr class="glowline"> <section id="about"> <div class="sec-icon-wrap about-sec-icon reveal" style="grid-column:1/-1;margin-bottom:4px;"><div class="sec-icon"><span class="sec-icon-dot"></span><svg class="sec-icon-svg" width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#2D9CDB" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" fill="rgba(45,156,219,0.08)"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87" stroke="#56CCF2"/><path d="M16 3.13a4 4 0 0 1 0 7.75" stroke="#56CCF2"/></svg></div></div> <div class="about-img-wrap reveal-left"> <img width="600" height="500" loading="lazy" decoding="async" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/equipodigimasterpro/equipo-digimasterpro.webp" alt="Equipo Digi Master Pro" style="aspect-ratio:600/500;" onerror="this.src='https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/equipo-digimasterpro.png'" style="width:100%;height:auto;object-fit:cover;display:block;"> </div> <div class="about-text reveal-right"> <span class="section-tag" data-es="Sobre Nosotros" data-en="About Us">Sobre Nosotros</span> <h2 class="section-title" data-es="UN EQUIPO APASIONADO POR HACER <span>CRECER TU MARCA</span>" data-en="A PASSIONATE TEAM TO <span>GROW YOUR BRAND</span>">UN EQUIPO APASIONADO POR HACER <span>CRECER TU MARCA</span></h2> <p class="section-desc"><span data-es="En Digi Master Pro combinamos creatividad, tecnología y estrategia para ofrecer soluciones digitales a medida. Nos enfocamos en entender tu negocio y llevarlo al siguiente nivel." data-en="At Digi Master Pro we combine creativity, technology, and strategy to deliver custom digital solutions. We focus on understanding your business and taking it to the next level.">En Digi Master Pro combinamos creatividad, tecnología y estrategia para ofrecer soluciones digitales a medida. Nos enfocamos en entender tu negocio y llevarlo al siguiente nivel.</span></p> </div>
+</section> <hr class="glowline"> <section id="about"> <div class="sec-icon-wrap about-sec-icon reveal" style="grid-column:1/-1;margin-bottom:4px;"><div class="sec-icon"><span class="sec-icon-dot"></span><svg class="sec-icon-svg" width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#2D9CDB" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" fill="rgba(45,156,219,0.08)"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87" stroke="#56CCF2"/><path d="M16 3.13a4 4 0 0 1 0 7.75" stroke="#56CCF2"/></svg></div></div> <div class="about-img-wrap reveal-left"> <img width="600" height="500" loading="lazy" decoding="async" src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/equipodigimasterpro/equipo-digimasterpro.webp" alt="Equipo Digi Master Pro" sizes="(max-width:768px) 100vw, 50vw" style="aspect-ratio:600/500;" onerror="this.src='https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/equipo-digimasterpro.png'" style="width:100%;height:auto;object-fit:cover;display:block;"> </div> <div class="about-text reveal-right"> <span class="section-tag" data-es="Sobre Nosotros" data-en="About Us">Sobre Nosotros</span> <h2 class="section-title" data-es="UN EQUIPO APASIONADO POR HACER <span>CRECER TU MARCA</span>" data-en="A PASSIONATE TEAM TO <span>GROW YOUR BRAND</span>">UN EQUIPO APASIONADO POR HACER <span>CRECER TU MARCA</span></h2> <p class="section-desc"><span data-es="En Digi Master Pro combinamos creatividad, tecnología y estrategia para ofrecer soluciones digitales a medida. Nos enfocamos en entender tu negocio y llevarlo al siguiente nivel." data-en="At Digi Master Pro we combine creativity, technology, and strategy to deliver custom digital solutions. We focus on understanding your business and taking it to the next level.">En Digi Master Pro combinamos creatividad, tecnología y estrategia para ofrecer soluciones digitales a medida. Nos enfocamos en entender tu negocio y llevarlo al siguiente nivel.</span></p> </div>
 </section> <section id="contact" style="padding:100px 5%;background:transparent;"> <div class="sec-icon-wrap reveal"><div class="sec-icon"><span class="sec-icon-dot"></span><svg class="sec-icon-svg" width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#2D9CDB" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.63 3.35 2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.73a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16z" fill="rgba(45,156,219,0.08)"/></svg></div></div> <div style="max-width:700px;margin:0 auto;text-align:center;"> <span class="section-tag reveal" data-es="Contáctanos" data-en="Contact Us">Contáctanos</span> <h2 class="section-title reveal" style="margin-bottom:16px;" data-es="CUÉNTANOS TU <span>PROYECTO</span>" data-en="TELL US ABOUT YOUR <span>PROJECT</span>">CUÉNTANOS TU <span>PROYECTO</span></h2> <p class="section-desc reveal" style="margin:0 auto 48px;" data-es="Completa el formulario y te respondemos en menos de 1 hora por WhatsApp o email. Sin compromisos." data-en="Fill out the form and we'll get back to you in less than 1 hour via WhatsApp or email. No commitments.">Completa el formulario y te respondemos en menos de 1 hora por WhatsApp o email. Sin compromisos.</p> </div> <div style="max-width:680px;margin:0 auto;background:rgba(255,255,255,0.03);border:1px solid rgba(45,156,219,0.15);border-radius:20px;padding:48px 40px;backdrop-filter:blur(12px);"> <form action="https://formspree.io/f/digimasterpro777@gmail.com" method="POST" id="contactForm" style="display:flex;flex-direction:column;gap:20px;"> <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;" class="form-row-2col"> <div style="display:flex;flex-direction:column;gap:8px;"> <label id="label-nombre" style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,0.6);" data-es="Nombre *" data-en="Name *">Nombre *</label> <input type="text" name="nombre" required id="input-nombre" placeholder="Tu nombre completo" data-placeholder-es="Tu nombre completo" data-placeholder-en="Your full name"
             style="background:rgba(255,255,255,0.05);border:1px solid rgba(45,156,219,0.2);border-radius:10px;padding:14px 16px;color:#fff;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;transition:.2s;"
             onfocus="this.style.borderColor='#2D9CDB'" onblur="this.style.borderColor='rgba(45,156,219,0.2)'"> </div> <div style="display:flex;flex-direction:column;gap:8px;"> <label id="label-phone" style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,0.6);" data-es="WhatsApp / Teléfono *" data-en="WhatsApp / Phone *">WhatsApp / Teléfono *</label> <input type="tel" name="telefono" required placeholder="+57 o +1..."
