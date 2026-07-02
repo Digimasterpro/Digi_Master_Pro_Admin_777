@@ -2,14 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-
   <url>
     <loc>https://digimasterpro.com/</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-07-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="es" href="https://digimasterpro.com/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://digimasterpro.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://digimasterpro.com/en/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://digimasterpro.com/"/>
     <image:image>
       <image:loc>https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/portadadigimasterproCEO.jpg</image:loc>
@@ -21,24 +20,39 @@
       <image:title>Logo Digi Master Pro - Agencia Marketing Digital</image:title>
     </image:image>
   </url>
-
+  <url>
+    <loc>https://digimasterpro.com/en/</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://digimasterpro.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://digimasterpro.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://digimasterpro.com/"/>
+    <image:image>
+      <image:loc>https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/portadadigimasterproCEO.jpg</image:loc>
+      <image:title>Digi Master Pro - Digital Marketing Agency Colombia &amp; USA</image:title>
+      <image:caption>Digital marketing agency, website design and branding for brands in Colombia and the United States</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/images/LogoDigimaster.png</image:loc>
+      <image:title>Digi Master Pro Logo - Digital Marketing Agency</image:title>
+    </image:image>
+  </url>
   <url>
     <loc>https://digimasterpro.com/#services</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-07-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
-
   <url>
     <loc>https://digimasterpro.com/#precios</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-07-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
-
   <url>
     <loc>https://digimasterpro.com/#portfolio</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-07-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
     <image:image>
@@ -56,10 +70,9 @@
       <image:title>Branding Wimon Tours - Agencia de viajes Colombia</image:title>
     </image:image>
   </url>
-
   <url>
     <loc>https://digimasterpro.com/#about</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-07-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -67,12 +80,10 @@
       <image:title>Equipo Digi Master Pro - Agencia marketing digital Cartagena Colombia</image:title>
     </image:image>
   </url>
-
   <url>
     <loc>https://digimasterpro.com/#contact</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-07-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
 </urlset>
