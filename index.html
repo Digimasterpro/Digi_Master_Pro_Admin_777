@@ -649,6 +649,22 @@ input,select,textarea{font-size:13px!important}
   .brands-track{animation-duration:44s!important}
 }
 </style>
+<style id="touch-fix">
+/* ===== TOUCH FIX iOS: scroll nativo del viewport, sin romper estetica ===== */
+html{overflow-x:clip!important;overflow-y:visible!important;height:auto!important}
+body{overflow-x:clip!important;overflow-y:visible!important;height:auto!important;min-height:100%;touch-action:auto!important;-webkit-overflow-scrolling:auto}
+/* touch-action: pan-x en carruseles + pan-y en body = touch bloqueado. Se permite scroll vertical */
+.brands-track-wrap,.reviews-carousel,.services-carousel-wrap,#nfc-track,.iph-scene{touch-action:pan-y pinch-zoom!important}
+/* Respuesta inmediata al tap, sin retraso */
+a,button,[onclick],.faq-q,.carousel-btn,.carousel-dot,.nfc-dot,.filter-btn{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+@media(hover:none),(pointer:coarse){
+  /* El iframe del iPhone atrapaba el dedo: ahora la pagina sigue haciendo scroll sobre el mockup */
+  .iph-iframe{pointer-events:none!important}
+  /* Evita el doble toque de iOS (primer toque = hover) */
+  .portfolio-item .overlay{opacity:0!important;pointer-events:none!important}
+  .service-card:hover,.portfolio-item:hover,.why-card:hover,.cta-prop:hover{transform:none!important}
+}
+</style>
 </head>
 <body><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><symbol id="ic1" viewBox="0 0 24 24"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c-.013.076-.026.175-.041.254-.93 4.778-4.005 7.201-9.138 7.201h-2.19a.563.563 0 0 0-.556.479l-1.187 7.527h-.506l-.24 1.516a.56.56 0 0 0 .554.647h3.882c.46 0 .85-.334.922-.788.06-.26.76-4.852.816-5.09a.932.932 0 0 1 .923-.788h.58c3.76 0 6.705-1.528 7.565-5.946.36-1.847.174-3.388-.777-4.471z"/></symbol><symbol id="ic2" viewBox="0 0 32 32"><path d="M16 0C7.164 0 0 7.163 0 16c0 2.822.737 5.469 2.027 7.773L0 32l8.469-2.004A15.93 15.93 0 0 0 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm7.27 21.455c-.398-.2-2.355-1.162-2.72-1.294-.365-.133-.631-.2-.897.2-.265.398-1.029 1.294-1.262 1.56-.232.265-.465.298-.863.1-.398-.2-1.681-.62-3.2-1.977-1.183-1.057-1.981-2.362-2.213-2.76-.232-.398-.025-.613.175-.811.18-.178.398-.465.597-.697.2-.232.265-.398.398-.664.133-.265.067-.497-.033-.697-.1-.2-.897-2.162-1.229-2.96-.324-.778-.653-.672-.897-.685-.232-.012-.497-.015-.763-.015-.265 0-.697.1-1.063.497-.365.398-1.395 1.362-1.395 3.322s1.428 3.853 1.628 4.119c.2.265 2.81 4.29 6.808 6.019.952.41 1.694.655 2.273.839.955.304 1.825.261 2.513.158.767-.114 2.355-.963 2.687-1.893.332-.93.332-1.727.232-1.893-.1-.166-.365-.265-.763-.465z"/></symbol></defs></svg> <a href="#main-content" class="skip-link">Saltar al contenido</a>
 <div id="intro-overlay">
@@ -2585,6 +2601,24 @@ function load(c){c.querySelectorAll('.pf-slide[data-bg]').forEach(function(sl){s
 if(!('IntersectionObserver' in window)){cards.forEach(load);return;}
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){load(e.target);io.unobserve(e.target);}});},{rootMargin:'300px 0px'});
 cards.forEach(function(c){io.observe(c);});
+})();
+</script>
+<script type="text/javascript">
+/* Touch fix: swipe en carrusel de servicios + sin hover inline en tactiles */
+(function(){
+  var coarse=window.matchMedia&&window.matchMedia('(hover:none)').matches;
+  if(coarse){
+    document.querySelectorAll('[onmouseover],[onmouseout]').forEach(function(el){el.onmouseover=null;el.onmouseout=null;});
+  }
+  var wrap=document.querySelector('.services-carousel-wrap');
+  var next=document.getElementById('svcNext'),prev=document.getElementById('svcPrev');
+  if(!wrap||!next||!prev)return;
+  var x0=0,y0=0;
+  wrap.addEventListener('touchstart',function(e){x0=e.touches[0].clientX;y0=e.touches[0].clientY;},{passive:true});
+  wrap.addEventListener('touchend',function(e){
+    var dx=x0-e.changedTouches[0].clientX,dy=y0-e.changedTouches[0].clientY;
+    if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)*1.5){(dx>0?next:prev).click();}
+  },{passive:true});
 })();
 </script>
 </body>
