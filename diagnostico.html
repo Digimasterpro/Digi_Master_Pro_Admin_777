@@ -63,7 +63,15 @@ input:focus-visible{outline:2px solid var(--or)}
 @media(max-width:600px){.wa-float,.lang-float{right:16px}.glass{padding:20px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 @media print{nav,.wa-float,.lang-float,.cta .btn,#tidio-chat{display:none!important}}
-</style></head><body>
+</style><style id="liquid-glass">
+/* LIQUID GLASS (prueba): para quitarlo, borra este bloque <style id="liquid-glass"> */
+.btn,.o{background:linear-gradient(135deg,rgba(255,255,255,.24),rgba(255,255,255,.05) 48%,rgba(255,255,255,.13))!important;-webkit-backdrop-filter:blur(18px) saturate(185%) brightness(1.08)!important;backdrop-filter:blur(18px) saturate(185%) brightness(1.08)!important;border:1px solid rgba(255,255,255,.4)!important;border-radius:999px!important;box-shadow:inset 0 1.5px 1px rgba(255,255,255,.7),inset 0 -2px 3px rgba(255,255,255,.14),inset 0 0 22px rgba(255,255,255,.08),0 10px 30px rgba(20,0,40,.38),0 2px 6px rgba(0,0,0,.22)!important;text-shadow:0 1px 8px rgba(0,0,0,.4);transition:transform .4s cubic-bezier(.34,1.56,.64,1),box-shadow .3s,background .3s!important}
+.btn.main{background:linear-gradient(135deg,rgba(255,79,163,.62),rgba(255,160,46,.5) 60%,rgba(255,255,255,.18))!important}
+.btn:hover,.o:hover{transform:translateY(-2px) scale(1.035)!important;background:linear-gradient(135deg,rgba(255,255,255,.34),rgba(255,255,255,.1) 48%,rgba(255,255,255,.2))!important;box-shadow:inset 0 1.5px 1px rgba(255,255,255,.85),inset 0 -2px 3px rgba(255,255,255,.2),0 14px 38px rgba(255,79,163,.35),0 2px 6px rgba(0,0,0,.22)!important}
+.btn:active,.o:active{transform:scale(.96)!important}
+@media(prefers-reduced-motion:reduce){.btn,.o{transition:none!important}}
+</style>
+</head><body>
 <nav><a href="index.html" aria-label="Digi Master Pro"><img src="https://digimasterpro.github.io/Digi_Master_Pro_Admin_777/New_logo_digimasterpro.webp" alt="Digi Master Pro" width="140" height="38"></a>
 <a class="btn sm" href="index.html" data-es="← Volver al sitio" data-en="← Back to site">← Volver al sitio</a></nav>
 <main>
