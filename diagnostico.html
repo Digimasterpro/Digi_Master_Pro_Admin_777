@@ -150,7 +150,7 @@ r.vis=(W==='yes'?(A.idx==='yes'?40:A.idx==='unk'?15:0):0)+(gs?30:0)+(gb?30:0);M.
 r.meas=W==='no'?0:(ga?50:0)+(px?25:0)+(gt?25:0);M.meas=[];if(!ga)M.meas.push(['Google Analytics 4','Google Analytics 4']);if(!gt)M.meas.push(['Tag Manager','Tag Manager']);if(!px)M.meas.push(['Pixel de Meta','Meta Pixel']);
 var blind=ads&&(W!=='yes'||!(ga||gt));r.ads=!ads?0:({top:90,ok:70,low:40}[A.res]||20);if(blind)r.ads=Math.min(r.ads,25);M.ads=[];if(!ads)M.ads=[['Aún no pautas','No ads yet']];if(blind)M.ads.push(['Medición para saber qué anuncio vende','Tracking to know which ad sells']);if(ads&&(A.res==='unk'||A.res==='zero'||A.res==='low'))M.ads.push(['Optimización de campañas','Campaign optimization']);
 var tot=Math.round((r.brand+r.web+r.vis+r.meas+r.ads)/5);return{r:r,M:M,tot:tot,logo:logo,k:k,blind:blind,ads:ads}}
-function result(){var c=calc(),h='',col=c.tot<35?'var(--bad)':c.tot<70?'var(--mid)':'var(--ok)',lab=c.tot<35?['Base por construir','Foundation to build']:c.tot<70?['En construcción','In progress']:['Buena base, listo para escalar','Solid base, ready to scale'];
+function result(){window.sfx&&sfx("win");var c=calc(),h='',col=c.tot<35?'var(--bad)':c.tot<70?'var(--mid)':'var(--ok)',lab=c.tot<35?['Base por construir','Foundation to build']:c.tot<70?['En construcción','In progress']:['Buena base, listo para escalar','Solid base, ready to scale'];
 h+='<div class="glass"><span class="tag">'+T(['Tu diagnóstico','Your diagnosis'])+' · '+(A.biz||'').replace(/</g,'&lt;')+'</span><div class="score"><div class="ring"><svg width="150" height="150"><circle cx="75" cy="75" r="62" stroke="rgba(255,255,255,.1)"/><circle id="rc" cx="75" cy="75" r="62" stroke="'+col+'" stroke-dasharray="390" stroke-dashoffset="390" style="transition:stroke-dashoffset 1.4s"/></svg><b id="rn">0</b></div><div><h2>'+T(lab)+'</h2><p class="sub" style="margin:0">'+T(['Este puntaje mide qué tan listo está tu negocio para ser encontrado, recordado y elegido online.','This score measures how ready your business is to be found, remembered and chosen online.'])+'</p></div></div></div>';
 if(c.logo&&c.k===0)h+='<div class="alert"><h3>'+T(['Tienes un logo, pero todavía no una marca','You have a logo, but not yet a brand'])+'</h3><p>'+T(['Sin paleta, tipografías ni manual, tu logo es un dibujo suelto: cada pieza se ve distinta y el cliente no te reconoce. Una marca es lo que la gente siente al verte, no solo lo que ve.','Without a palette, typefaces or manual, your logo is a loose drawing: every piece looks different and customers don\'t recognize you. A brand is what people feel when they see you, not just what they see.'])+'</p></div>';
 if(A.web==='yes'&&(A.idx!=='yes'||!(has('eco','gsc')||has('eco','ga4'))))h+='<div class="alert"><h3>'+T(['Tu web existe, pero no está trabajando','Your site exists, but it isn\'t working'])+'</h3><p>'+T(['Una web que Google no indexa ni mide es un cartel pintado en un cuarto cerrado: nadie lo ve y tú no sabes quién entró. Sin Search Console y Analytics no hay visitas ni datos.','A site Google doesn\'t index or measure is a billboard painted in a locked room: nobody sees it and you don\'t know who came in. Without Search Console and Analytics there are no visits and no data.'])+'</p></div>';
@@ -177,4 +177,24 @@ $('lf').onclick=function(){setLang(lang==='es'?'en':'es')};$('lf').onkeydown=fun
 window.tidioChatLang=lang;if(lang==='en')setLang('en');
 (function(){var l=0;function t(){if(l)return;l=1;var s=document.createElement('script');s.src='https://code.tidio.co/rft9xdbb4sidnoe5uthcd9zvra7yzaxn.js';s.async=true;document.head.appendChild(s)}
 if('ontouchstart' in window||navigator.maxTouchPoints>0)document.addEventListener('touchstart',t,{once:true,passive:true});else setTimeout(t,4000)})();
-</script></body></html>
+</script><style id="sfx-css">.sfx-float{position:fixed;left:16px;bottom:16px;z-index:100000;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;background:rgba(30,8,52,.8);border:1px solid rgba(255,255,255,.3);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:inset 0 1px 1px rgba(255,255,255,.5),0 4px 18px rgba(0,0,0,.4);padding:0}.sfx-float svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.sfx-float.off .w{display:none}.sfx-float:not(.off) .x{display:none}@media(min-width:769px){.sfx-float{left:auto;right:28px;bottom:226px;width:56px;height:56px}}</style>
+<button class="sfx-float" id="sfxBtn" aria-label="Sonidos / Sound" title="Sonidos / Sound"><svg viewBox="0 0 24 24"><path d="M11 5 6 9H2v6h4l5 4z"/><path class="w" d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/><path class="x" d="m17 9 5 6m0-6-5 6"/></svg></button>
+<script id="sfx-js">
+(function(){var C=null,on=localStorage.getItem('sfx')!=='off',b=document.getElementById('sfxBtn');
+function ctx(){if(!C){var A=window.AudioContext||window.webkitAudioContext;if(!A)return null;C=new A()}if(C.state==='suspended')C.resume();return C}
+function tn(f,t,d,ty,v,f2){var c=C,o=c.createOscillator(),g=c.createGain();o.type=ty;o.frequency.setValueAtTime(f,c.currentTime+t);if(f2)o.frequency.exponentialRampToValueAtTime(f2,c.currentTime+t+d);g.gain.setValueAtTime(0.0001,c.currentTime+t);g.gain.exponentialRampToValueAtTime(v,c.currentTime+t+.008);g.gain.exponentialRampToValueAtTime(0.0001,c.currentTime+t+d);o.connect(g);g.connect(c.destination);o.start(c.currentTime+t);o.stop(c.currentTime+t+d+.02)}
+function bell(t,f){tn(f,t,.55,'sine',.07);tn(f*1.5,t,.4,'sine',.04);tn(f*2,t,.3,'sine',.03)}
+var S={click:function(){tn(660,0,.07,'square',.05,990);tn(1320,.03,.06,'triangle',.05)},
+back:function(){tn(520,0,.1,'square',.05,300)},
+select:function(){tn(880,0,.05,'square',.04);tn(1175,.05,.07,'square',.04)},
+confirm:function(){[523,659,784,1047].forEach(function(f,i){tn(f,i*.055,.09,'square',.045)});bell(.2,2093)},
+win:function(){[523,659,784,1047,1319,1568].forEach(function(f,i){tn(f,i*.08,.14,'square',.05);tn(f/2,i*.08,.14,'triangle',.05)});bell(.5,2093);bell(.6,2637);bell(.7,3136)}};
+window.sfx=function(n){if(!on||!ctx())return;try{S[n]()}catch(e){}};
+function up(){b.classList.toggle('off',!on)}up();
+b.addEventListener('click',function(e){e.stopPropagation();on=!on;localStorage.setItem('sfx',on?'on':'off');up();if(on){ctx();S.confirm()}});
+var PRI='.btn-hero-cta,.btn.main,.meet-book-btn,.wa-float,#nx,.neon-btn',ANY='button,.btn,.btn-outline,.btn-primary,.nav-cta,.btn-leave-review,.carousel-btn,.lang-float,.o,[role=button]';
+document.addEventListener('pointerdown',function(e){if(!on)return;var t=e.target.closest&&e.target.closest(ANY+','+PRI);if(!t||t===b||b.contains(t))return;
+var n=t.matches(PRI)?'confirm':t.id==='bk'?'back':t.classList.contains('o')?'select':'click';sfx(n)},true);
+})();
+</script>
+</body></html>
