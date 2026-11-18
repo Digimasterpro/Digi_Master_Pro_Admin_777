@@ -709,26 +709,63 @@ nav{padding-top:calc(18px + var(--safe-top))!important;padding-left:max(5%,var(-
   nav{justify-content:center!important;gap:clamp(28px,4vw,64px)}
   .nav-links{justify-content:center}
 }
+
+/* valores iniciales que ya incluyen la zona segura del iPhone (antes de que corra el JS) */
+@media(max-width:768px){:root{--nav-h:calc(var(--safe-top) + 80px);--bar-h:30px}}
+@media(max-width:900px){
+  #hero .hero-bg{top:calc(var(--hdr) + 6px)!important}
+  #hero{padding-top:calc(var(--hdr) + 6px + 100vw*1.0944 - 70px)!important}
+}
+.is-app #hero .hero-bg{overflow:visible!important}
 .mobile-menu{padding-top:calc(30px + var(--safe-top))!important}
 #nfc-wrap{-webkit-mask-image:none!important;mask-image:none!important}
 </style>
 <script id="header-fix-js">
 (function(){
-  var nav=document.querySelector('nav'),bar=document.getElementById('incentivo-bar'),r=document.documentElement,raf=0;
+  var r=document.documentElement,raf=0,nav=null,bar=null,ro=null;
+  if(window.navigator.standalone||(window.matchMedia&&matchMedia('(display-mode: standalone)').matches)) r.classList.add('is-app');
   function sync(){
-    raf=0; if(!nav) return;
-    r.style.setProperty('--nav-h',nav.offsetHeight+'px');
-    r.style.setProperty('--bar-h',(bar?bar.offsetHeight:32)+'px');
+    raf=0;
+    nav=nav||document.querySelector('nav'); bar=bar||document.getElementById('incentivo-bar');
+    if(!nav) return;
+    r.style.setProperty('--nav-h',nav.getBoundingClientRect().height+'px');
+    r.style.setProperty('--bar-h',(bar?bar.getBoundingClientRect().height:32)+'px');
+    if(!ro&&'ResizeObserver' in window){ ro=new ResizeObserver(q); ro.observe(nav); if(bar) ro.observe(bar); }
   }
   function q(){ if(!raf) raf=requestAnimationFrame(sync); }
-  sync();
+  document.addEventListener('DOMContentLoaded',sync);
+  window.addEventListener('load',function(){sync();var n=0,t=setInterval(function(){sync();if(++n>12)clearInterval(t)},250)});
   window.addEventListener('resize',q,{passive:true});
   window.addEventListener('orientationchange',function(){setTimeout(sync,250)});
-  window.addEventListener('load',sync);
+  window.addEventListener('pageshow',function(){setTimeout(sync,50)});
+  document.addEventListener('visibilitychange',function(){if(!document.hidden)setTimeout(sync,50)});
+  if(window.visualViewport) visualViewport.addEventListener('resize',q);
   if(document.fonts&&document.fonts.ready) document.fonts.ready.then(sync);
-  if('ResizeObserver' in window&&nav) new ResizeObserver(q).observe(nav);
 })();
 </script>
+
+<style id="menu-glass">
+/* ===== MENU MOVIL: imagen del hero borrosa estilo liquid glass ===== */
+.mobile-menu{background:radial-gradient(120% 70% at 15% 0%,#ff4fa3 0%,transparent 60%),radial-gradient(110% 70% at 100% 100%,#ffa02e 0%,transparent 60%),linear-gradient(160deg,#7d2de6 0%,#c2307f 55%,#ff7a5c 100%)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;overflow:hidden}
+.mobile-menu::before{content:"";position:absolute;inset:-40px;z-index:0;pointer-events:none;
+  background:url('Retrato%20Ne%C3%B3n%20de%20Miami%20Retro.webp?v=3') center top/cover no-repeat;
+  filter:blur(14px) saturate(1.5) brightness(1.08);-webkit-filter:blur(14px) saturate(1.5) brightness(1.08);transform:scale(1.12);opacity:.95}
+.mobile-menu::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(255,79,163,.28) 0%,rgba(255,79,163,.10) 45%,rgba(120,20,90,.35) 100%),
+             linear-gradient(135deg,rgba(255,255,255,.10),rgba(255,255,255,0) 40%)}
+.mobile-menu>*{position:relative;z-index:1}
+.mobile-menu .close-btn{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:28px;color:#fff;
+  background:linear-gradient(135deg,rgba(255,255,255,.26),rgba(255,255,255,.06) 50%,rgba(255,255,255,.14));
+  border:1px solid rgba(255,255,255,.4);-webkit-backdrop-filter:blur(14px) saturate(180%);backdrop-filter:blur(14px) saturate(180%);
+  box-shadow:inset 0 1.5px 1px rgba(255,255,255,.6),0 8px 24px rgba(20,0,40,.35)}
+.mobile-menu ul{gap:12px}
+.mobile-menu ul a{display:flex;align-items:center;gap:8px;padding:15px 22px;border-radius:999px;font-size:18px;color:#fff;
+  background:linear-gradient(135deg,rgba(255,255,255,.20),rgba(255,255,255,.05) 50%,rgba(255,255,255,.12));
+  border:1px solid rgba(255,255,255,.34);-webkit-backdrop-filter:blur(16px) saturate(180%);backdrop-filter:blur(16px) saturate(180%);
+  box-shadow:inset 0 1.5px 1px rgba(255,255,255,.55),inset 0 -2px 3px rgba(255,255,255,.08),0 8px 26px rgba(20,0,40,.32);
+  text-shadow:0 1px 8px rgba(0,0,0,.45);transition:transform .3s cubic-bezier(.34,1.56,.64,1),background .3s}
+.mobile-menu ul a:active{transform:scale(.97);background:linear-gradient(135deg,rgba(255,79,163,.45),rgba(255,160,46,.35))}
+</style>
 </head>
 <body><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><symbol id="ic1" viewBox="0 0 24 24"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c-.013.076-.026.175-.041.254-.93 4.778-4.005 7.201-9.138 7.201h-2.19a.563.563 0 0 0-.556.479l-1.187 7.527h-.506l-.24 1.516a.56.56 0 0 0 .554.647h3.882c.46 0 .85-.334.922-.788.06-.26.76-4.852.816-5.09a.932.932 0 0 1 .923-.788h.58c3.76 0 6.705-1.528 7.565-5.946.36-1.847.174-3.388-.777-4.471z"/></symbol><symbol id="ic2" viewBox="0 0 32 32"><path d="M16 0C7.164 0 0 7.163 0 16c0 2.822.737 5.469 2.027 7.773L0 32l8.469-2.004A15.93 15.93 0 0 0 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm7.27 21.455c-.398-.2-2.355-1.162-2.72-1.294-.365-.133-.631-.2-.897.2-.265.398-1.029 1.294-1.262 1.56-.232.265-.465.298-.863.1-.398-.2-1.681-.62-3.2-1.977-1.183-1.057-1.981-2.362-2.213-2.76-.232-.398-.025-.613.175-.811.18-.178.398-.465.597-.697.2-.232.265-.398.398-.664.133-.265.067-.497-.033-.697-.1-.2-.897-2.162-1.229-2.96-.324-.778-.653-.672-.897-.685-.232-.012-.497-.015-.763-.015-.265 0-.697.1-1.063.497-.365.398-1.395 1.362-1.395 3.322s1.428 3.853 1.628 4.119c.2.265 2.81 4.29 6.808 6.019.952.41 1.694.655 2.273.839.955.304 1.825.261 2.513.158.767-.114 2.355-.963 2.687-1.893.332-.93.332-1.727.232-1.893-.1-.166-.365-.265-.763-.465z"/></symbol></defs></svg> <a href="#main-content" class="skip-link">Saltar al contenido</a>
 <div id="intro-overlay">
