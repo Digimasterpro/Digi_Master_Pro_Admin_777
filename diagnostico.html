@@ -106,7 +106,7 @@ function render(){var s=ST[cur],h='<h2>'+T(s.t)+'</h2><div class="why">'+T(s.w)+
 s.f.forEach(function(f){if(f.if&&!f.if())return;h+='<label class="l">'+T(f.l)+(f.req?' *':'')+'</label>';
 if(f.ty==='text'||f.ty==='tel')h+='<input type="'+f.ty+'" data-k="'+f.k+'" value="'+(A[f.k]||'').replace(/"/g,'&quot;')+'" autocomplete="off">';
 else if(f.ty==='file'){var g=A.lg;h+='<label class="drop"><input type="file" id="fi" accept="image/*" class="hide">'+(g?'<img src="'+g.url+'" alt="Logo">':'')+'<span>'+(g?T(['Cambiar logo','Change logo']):T(['Toca para subir PNG, JPG, SVG o WebP (máx. 5 MB)','Tap to upload PNG, JPG, SVG or WebP (max 5 MB)']))+'</span></label>'+(g?'<div class="note">'+lgNote()+'</div>':'')}
-else{h+='<div class="opts">';f.o.forEach(function(o){var on=f.ty==='one'?A[f.k]===o[0]:has(f.k,o[0]);h+='<button type="button" class="o'+(f.ty==='multi'?' m':'')+'" aria-pressed="'+on+'" data-k="'+f.k+'" data-v="'+o[0]+'" data-x="'+(o[3]||0)+'" data-t="'+f.ty+'">'+T(o)+'</button>'});h+='</div>'}});
+else{h+='<div class="opts">';f.o.forEach(function(o){var on=f.ty==='one'?A[f.k]===o[0]:has(f.k,o[0]);h+='<button type="button" class="o'+(f.ty==='multi'?' m':'')+'" aria-pressed="'+on+'" data-k="'+f.k+'" data-v="'+o[0]+'" data-x="'+(o[3]||0)+'" data-t="'+f.ty+'">'+T(o.slice(1))+'</button>'});h+='</div>'}});
 $('step').innerHTML=h;$('cnt').textContent=T(['Paso ','Step '])+(cur+1)+' / '+ST.length;$('pb').style.width=((cur+1)/ST.length*100)+'%';
 $('bk').textContent=T(['Atrás','Back']);$('nx').textContent=cur===ST.length-1?T(['Ver mi diagnóstico','See my diagnosis']):T(['Continuar','Continue']);$('bk').style.visibility='visible';$('err').textContent='';
 var fi=$('fi');if(fi)fi.onchange=function(){up(fi.files[0])};
