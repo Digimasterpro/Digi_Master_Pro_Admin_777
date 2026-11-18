@@ -2649,6 +2649,12 @@ b.addEventListener('click',function(e){e.stopPropagation();on=!on;localStorage.s
 var PRI='.btn-hero-cta,.btn.main,.meet-book-btn,.wa-float,#nx,.neon-btn',ANY='button,.btn,.btn-outline,.btn-primary,.nav-cta,.btn-leave-review,.carousel-btn,.lang-float,.o,[role=button]';
 document.addEventListener('pointerdown',function(e){if(!on)return;var t=e.target.closest&&e.target.closest(ANY+','+PRI);if(!t||t===b||b.contains(t))return;
 var n=t.matches(PRI)?'confirm':t.id==='bk'?'back':t.classList.contains('o')?'select':'click';sfx(n)},true);
+S.intro=function(){tn(110,0,.5,'sawtooth',.03,440);[392,523,659,784,1047].forEach(function(f,i){tn(f,.35+i*.07,.12,'square',.04)});bell(.8,2093);bell(.9,3136)};
+var played=false,EV=['pointerdown','keydown','touchend','click'];
+function boot(){if(played||!on||!C||C.state!=='running')return;played=true;S.intro();EV.forEach(function(v){document.removeEventListener(v,arm,true)})}
+function arm(e){if(played||!on)return;var t=e&&e.target&&e.target.closest&&e.target.closest(ANY+','+PRI);if(t){played=true;EV.forEach(function(v){document.removeEventListener(v,arm,true)});return}var c=ctx();if(!c)return;(c.resume?c.resume():Promise.resolve()).then(boot,function(){})}
+EV.forEach(function(v){document.addEventListener(v,arm,true)});
+try{ctx();setTimeout(boot,400)}catch(e){}
 })();
 </script>
 </body>
