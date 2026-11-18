@@ -60,7 +60,7 @@ input:focus-visible{outline:2px solid var(--or)}
 .wa-float{bottom:90px;background:#25D366;box-shadow:0 4px 20px rgba(37,211,102,.45)}.wa-float svg{width:28px;height:28px;fill:#fff}
 .lang-float{bottom:158px;background:rgba(30,8,52,.92);border:1px solid rgba(255,79,163,.4);cursor:pointer}.lang-float img{width:32px;height:23px;border-radius:4px}
 @media(min-width:769px){#tidio-chat{left:0!important;right:auto!important}}
-@media(max-width:768px){.wa-float,.lang-float{right:16px}.wa-float{bottom:16px}.lang-float{bottom:84px}.glass{padding:20px}}
+@media(max-width:768px){.wa-float,.lang-float{right:16px}.wa-float{bottom:84px}.lang-float{bottom:152px}.glass{padding:20px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 @media print{nav,.wa-float,.lang-float,.cta .btn,#tidio-chat{display:none!important}}
 </style><style id="liquid-glass">
@@ -177,7 +177,7 @@ $('lf').onclick=function(){setLang(lang==='es'?'en':'es')};$('lf').onkeydown=fun
 window.tidioChatLang=lang;if(lang==='en')setLang('en');
 (function(){var l=0;function t(){if(l)return;l=1;var s=document.createElement('script');s.src='https://code.tidio.co/rft9xdbb4sidnoe5uthcd9zvra7yzaxn.js';s.async=true;document.head.appendChild(s)}
 if('ontouchstart' in window||navigator.maxTouchPoints>0)document.addEventListener('touchstart',t,{once:true,passive:true});else setTimeout(t,4000)})();
-</script><style id="sfx-css">.sfx-float{position:fixed;right:16px;bottom:152px;z-index:100000;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;background:rgba(30,8,52,.8);border:1px solid rgba(255,255,255,.3);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:inset 0 1px 1px rgba(255,255,255,.5),0 4px 18px rgba(0,0,0,.4);padding:0}.sfx-float svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.sfx-float.off .w{display:none}.sfx-float:not(.off) .x{display:none}@media(min-width:769px){.sfx-float{right:28px;bottom:226px}}</style>
+</script><style id="sfx-css">.sfx-float{position:fixed;right:16px;bottom:16px;z-index:100000;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;background:rgba(30,8,52,.8);border:1px solid rgba(255,255,255,.3);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:inset 0 1px 1px rgba(255,255,255,.5),0 4px 18px rgba(0,0,0,.4);padding:0}.sfx-float svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.sfx-float.off .w{display:none}.sfx-float:not(.off) .x{display:none}@media(min-width:769px){.sfx-float{right:28px;bottom:22px}}</style>
 <button class="sfx-float" id="sfxBtn" aria-label="Sonidos / Sound" title="Sonidos / Sound"><svg viewBox="0 0 24 24"><path d="M11 5 6 9H2v6h4l5 4z"/><path class="w" d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/><path class="x" d="m17 9 5 6m0-6-5 6"/></svg></button>
 <script id="sfx-js">
 (function(){var C=null,on=localStorage.getItem('sfx')!=='off',b=document.getElementById('sfxBtn');
